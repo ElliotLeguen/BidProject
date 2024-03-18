@@ -10,6 +10,7 @@ public class BidProApplication {
 		SpringApplication.run(BidProApplication.class, args);
 		System.out.println("Hello World");
 		System.out.println("Hola todos");
+		System.out.println("Hallo Gutentag");
 	}
 
 }
