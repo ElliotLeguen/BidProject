@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
+import projet.bid_pro.bll.EnchereService;
 import projet.bid_pro.exceptions.BusinessCode;
 import projet.bid_pro.exceptions.BusinessException;
 import jakarta.validation.Valid;
@@ -23,22 +24,16 @@ import jakarta.validation.Valid;
 @SessionAttributes({ "genresEnSession", "membreEnSession", "participantsEnSession" })
 public class EnchereController {
 
-	// Dépendance
-//	private Enche filmService;
-//
-//	public FilmController(FilmService filmService) {
-//		this.filmService = filmService;
-//	}
+	private EnchereService enchereService;
+	public EnchereController(EnchereService enchereService) {
+		this.enchereService = enchereService;
+	}
 
-	/**
-	 * La méthode réagit à l'url /films et la méthode Get du protocole HTTP
-	 *
-	 * @param model -- pour injecter des données à la vue
-	 * @return l'alias de la page à afficher
-	 */
-	@GetMapping
+	@GetMapping("/vendreArticle")
 	public String afficherEncheres(Model model) {
-		return "encheres";
+		var categories = enchereService.consulterCategories();
+		model.addAttribute("categorie", categories);
+		return "vendreArticle";
 	}
 
 //	@GetMapping("/detail")

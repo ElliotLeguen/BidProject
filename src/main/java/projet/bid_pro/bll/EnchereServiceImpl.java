@@ -1,32 +1,26 @@
-//package projet.bid_pro.bll;
-//
-//import java.util.List;
-//
-//import org.springframework.context.annotation.Primary;
-//import org.springframework.stereotype.Service;
-//
-//
-//
-//@Service
-//@Primary
-//public class EnchereServiceImpl implements EnchereService {
-//	// Injection des Repository
-//	private FilmDAO filmDAO;
-//	private GenreDAO genreDAO;
-//	private ParticipantDAO participantDAO;
-//	private AvisDAO avisDAO;
-//	private MembreDAO membreDAO;
-//
-//	public FilmServiceImpl(FilmDAO filmDAO, GenreDAO genreDAO, ParticipantDAO participantDAO, AvisDAO avisDAO,
-//			MembreDAO membreDAO) {
-//		this.filmDAO = filmDAO;
-//		this.genreDAO = genreDAO;
-//		this.participantDAO = participantDAO;
-//		this.avisDAO = avisDAO;
-//		this.membreDAO = membreDAO;
-//
-//	}
-//
+package projet.bid_pro.bll;
+
+import java.util.List;
+
+import org.springframework.context.annotation.Primary;
+import org.springframework.stereotype.Service;
+import projet.bid_pro.bo.Categorie;
+import projet.bid_pro.dal.CategoriesDAO;
+
+@Service
+@Primary
+public class EnchereServiceImpl implements EnchereService {
+	// Injection des Repository
+	private CategoriesDAO categoriesDAO;
+	public EnchereServiceImpl(CategoriesDAO categoriesDAO) {
+        this.categoriesDAO = categoriesDAO;
+	}
+
+    @Override
+    public List<Categorie> consulterCategories() {
+        return categoriesDAO.readCategories();
+    }
+
 //	@Override
 //	public List<Film> consulterFilms() {
 //		// Il faut remonter la liste des films
@@ -457,5 +451,4 @@
 //
 //		return true;
 //	}
-//
-//}
+}

@@ -9,5 +9,4 @@ class BidProApplicationTests {
 	@Test
 	void contextLoads() {
 	}
-
 }

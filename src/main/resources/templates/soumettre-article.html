@@ -14,21 +14,21 @@
 </th:block>
 <main>
     <div class="custom-form">
-        <h1>Nouvelle Vente</h1>
+        <h1>Detail Vente</h1>
         <table>
             <tbody>
-        <form action="/soumettre-article" method="post"
+            <form action="/soumettre-article" method="post"
             <label for="nom_article">Nom de l'article:</label><br>
             <input type="text" id="nom_article" name="nom_article" required><br>
 
             <label for="description">Description:</label><br>
             <textarea id="description" name="description" rows="4" cols="50" required></textarea><br>
 
-        <select>
-            <option th:each="category : ${categorie}" th:value="${category.noCategorie}" th:text="${category.libelle}"></option>
-        </select>
-        <br>
-        <br>
+            <select>
+                <option th:each="category : ${categorie}" th:value="${category.noCategorie}" th:text="${category.libelle}"></option>
+            </select>
+            <br>
+            <br>
 
             <label for="prix_initial">Prix initial:</label><br>
             <select id="prix_initial" name="prix_initial">
@@ -54,24 +54,24 @@
             <input type="text" id="ville" name="ville" required><br><br>
 
             <input type="submit" value="Soumettre">
-        </form>
-        <script>
-            // Générer les options pour la liste déroulante du prix initial
-            var selectPrixInitial = document.getElementById("prix_initial");
+            </form>
+            <script>
+                // Générer les options pour la liste déroulante du prix initial
+                var selectPrixInitial = document.getElementById("prix_initial");
 
-            for (var prix = 0; prix <= 100000; prix += 5 ) {
-                var option = document.createElement("option");
-                option.text = prix;
-                option.value = prix;
-                selectPrixInitial.appendChild(option);
+                for (var prix = 0; prix <= 100000; prix += 5 ) {
+                    var option = document.createElement("option");
+                    option.text = prix;
+                    option.value = prix;
+                    selectPrixInitial.appendChild(option);
 
-                var currentDate = new Date();
-                var currentDateString = currentDate.toISOString().split('T')[0]; // Format YYYY-MM-DD
+                    var currentDate = new Date();
+                    var currentDateString = currentDate.toISOString().split('T')[0]; // Format YYYY-MM-DD
 
-                document.getElementById("date_debut_encheres").value = currentDateString;
-                document.getElementById("date_fin_encheres").value = currentDateString;
-            }
-        </script>
+                    document.getElementById("date_debut_encheres").value = currentDateString;
+                    document.getElementById("date_fin_encheres").value = currentDateString;
+                }
+            </script>
             </tbody>
         </table>
     </div>
