@@ -3,10 +3,7 @@ package projet.bid_pro.controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
-import org.springframework.web.bind.annotation.SessionAttributes;
 import projet.bid_pro.bll.contexte.EnchereService;
 import projet.bid_pro.bo.Enchere;
 
@@ -14,14 +11,18 @@ import java.util.List;
 
 @Controller
 public class EnchereController {
+
 	private EnchereService enchereService;
+  
 	public EnchereController(EnchereService enchereService) {
 		this.enchereService = enchereService;
 	}
 
-	@GetMapping("/encheres")
+  	@GetMapping("/encheres")
 	public String afficherEncheres(Model model) {
 		List<Enchere> encheres = enchereService.consulterEncheres();
+		var categories = enchereService.consulterCategories();
+		model.addAttribute("categorie", categories);
 		model.addAttribute("encheres", encheres);
 		System.out.println(encheres);
 		return "encheres";

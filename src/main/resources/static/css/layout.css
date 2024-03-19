@@ -28,3 +28,14 @@ footer {
 nav li {	
 	font-size: 1.5em;
 }
+
+.custom-form {
+
+	align-items: center;
+	margin: 0;
+	width: 50%; /* Largeur du formulaire */
+	padding: 20px;
+	border: 1px solid #ccc;
+	border-radius: 5px;
+	background-color: #f9f9f9;
+}
