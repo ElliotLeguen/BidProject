@@ -21,7 +21,7 @@ public class UtilisateurServiceImpl implements UtilisateurService {
 
 	@Override
 	public void register(Utilisateur utilisateur) {
-		System.out.println(utilisateur);
+		utilisateurDAO.ajouterUtilisateur(utilisateur);
 	}
 
 

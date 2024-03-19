@@ -9,7 +9,7 @@
 <body>
 <main class="center-main">
     <div className='login-box'>
-        <h2>Bienvenue sur ENI Demo </h2>
+        <h3>Bienvenue sur ENI Demo </h3>
         <form
                 method="post"
                 role="form"
@@ -125,21 +125,9 @@
                 <p th:errors="*{motDePasse}" class="text-danger"
                    th:if="${#fields.hasErrors('motDePasse')}"></p>
             </div>
-            <div class="form-group mb-3">
-                <input
-                        class="form-control"
-                        id="credit"
-                        name="credit"
-                        placeholder="Enter credit"
-                        th:field="*{credit}"
-                        type="text"
-                />
-                <p th:errors="*{credit}" class="text-danger"
-                   th:if="${#fields.hasErrors('credit')}"></p>
-            </div>
             <div class="form-group">
                 <button class="btn btn-primary" type="submit">Register</button>
-                <span>Already registered? <a th:href="@{/login}">Login here</a></span>
+                <span>Déjà inscrit ? <a th:href="@{/login}">Se connecter ici</a></span>
             </div>
         </form>
     </div>
