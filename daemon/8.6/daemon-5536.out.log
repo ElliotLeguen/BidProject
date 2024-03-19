@@ -1,0 +1,1360 @@
+2024-03-18T14:27:59.653+0100 [DEBUG] [org.gradle.launcher.daemon.bootstrap.DaemonMain] Assuming the daemon was started with following jvm opts: [--add-opens=java.base/java.util=ALL-UNNAMED, --add-opens=java.base/java.lang=ALL-UNNAMED, --add-opens=java.base/java.lang.invoke=ALL-UNNAMED, --add-opens=java.prefs/java.util.prefs=ALL-UNNAMED, --add-opens=java.base/java.nio.charset=ALL-UNNAMED, --add-opens=java.base/java.net=ALL-UNNAMED, --add-opens=java.base/java.util.concurrent.atomic=ALL-UNNAMED, -XX:MaxMetaspaceSize=384m, -XX:+HeapDumpOnOutOfMemoryError, -Xms256m, -Xmx512m, -Dfile.encoding=windows-1252, -Duser.country=FR, -Duser.language=fr, -Duser.variant]
+2024-03-18T14:27:59.779+0100 [DEBUG] [org.gradle.internal.nativeintegration.services.NativeServices] Native-platform posix files integration is not available. Continuing with fallback.
+2024-03-18T14:27:59.791+0100 [INFO] [org.gradle.launcher.daemon.server.Daemon] start() called on daemon - DefaultDaemonContext[uid=480b5dcb-9c95-4a84-aa23-61453b79100e,javaHome=C:\Users\eleguen2023\Documents\tools\java17,daemonRegistryDir=C:\Users\eleguen2023\Documents\works\BidProject\daemon,pid=5536,idleTimeout=10800000,priority=NORMAL,applyInstrumentationAgent=true,daemonOpts=--add-opens=java.base/java.util=ALL-UNNAMED,--add-opens=java.base/java.lang=ALL-UNNAMED,--add-opens=java.base/java.lang.invoke=ALL-UNNAMED,--add-opens=java.prefs/java.util.prefs=ALL-UNNAMED,--add-opens=java.base/java.nio.charset=ALL-UNNAMED,--add-opens=java.base/java.net=ALL-UNNAMED,--add-opens=java.base/java.util.concurrent.atomic=ALL-UNNAMED,-XX:MaxMetaspaceSize=384m,-XX:+HeapDumpOnOutOfMemoryError,-Xms256m,-Xmx512m,-Dfile.encoding=windows-1252,-Duser.country=FR,-Duser.language=fr,-Duser.variant]
+2024-03-18T14:27:59.850+0100 [DEBUG] [org.gradle.internal.remote.internal.inet.InetAddresses] Adding IP addresses for network interface Software Loopback Interface 1
+2024-03-18T14:27:59.851+0100 [DEBUG] [org.gradle.internal.remote.internal.inet.InetAddresses] Is this a loopback interface? true
+2024-03-18T14:27:59.851+0100 [DEBUG] [org.gradle.internal.remote.internal.inet.InetAddresses] Adding loopback address /127.0.0.1
+2024-03-18T14:27:59.851+0100 [DEBUG] [org.gradle.internal.remote.internal.inet.InetAddresses] Adding loopback address /0:0:0:0:0:0:0:1
+2024-03-18T14:27:59.852+0100 [DEBUG] [org.gradle.internal.remote.internal.inet.InetAddresses] Adding IP addresses for network interface Microsoft 6to4 Adapter
+2024-03-18T14:27:59.853+0100 [DEBUG] [org.gradle.internal.remote.internal.inet.InetAddresses] Is this a loopback interface? false
+2024-03-18T14:27:59.854+0100 [DEBUG] [org.gradle.internal.remote.internal.inet.InetAddresses] Adding IP addresses for network interface Microsoft IP-HTTPS Platform Adapter
+2024-03-18T14:27:59.855+0100 [DEBUG] [org.gradle.internal.remote.internal.inet.InetAddresses] Is this a loopback interface? false
+2024-03-18T14:27:59.855+0100 [DEBUG] [org.gradle.internal.remote.internal.inet.InetAddresses] Adding IP addresses for network interface Microsoft Kernel Debug Network Adapter
+2024-03-18T14:27:59.856+0100 [DEBUG] [org.gradle.internal.remote.internal.inet.InetAddresses] Is this a loopback interface? false
+2024-03-18T14:27:59.856+0100 [DEBUG] [org.gradle.internal.remote.internal.inet.InetAddresses] Adding IP addresses for network interface Microsoft Teredo Tunneling Adapter
+2024-03-18T14:27:59.857+0100 [DEBUG] [org.gradle.internal.remote.internal.inet.InetAddresses] Is this a loopback interface? false
+2024-03-18T14:27:59.857+0100 [DEBUG] [org.gradle.internal.remote.internal.inet.InetAddresses] Adding IP addresses for network interface Realtek PCIe GbE Family Controller
+2024-03-18T14:27:59.858+0100 [DEBUG] [org.gradle.internal.remote.internal.inet.InetAddresses] Is this a loopback interface? false
+2024-03-18T14:27:59.859+0100 [DEBUG] [org.gradle.internal.remote.internal.inet.InetAddresses] Adding remote address /10.105.200.9
+2024-03-18T14:27:59.859+0100 [DEBUG] [org.gradle.internal.remote.internal.inet.InetAddresses] Adding remote address /fe80:0:0:0:bd21:5b2c:8fd6:3670%eth1
+2024-03-18T14:27:59.859+0100 [DEBUG] [org.gradle.internal.remote.internal.inet.InetAddresses] Adding IP addresses for network interface Realtek PCIe GbE Family Controller-WFP Native MAC Layer LightWeight Filter-0000
+2024-03-18T14:27:59.860+0100 [DEBUG] [org.gradle.internal.remote.internal.inet.InetAddresses] Is this a loopback interface? false
+2024-03-18T14:27:59.861+0100 [DEBUG] [org.gradle.internal.remote.internal.inet.InetAddresses] Adding IP addresses for network interface Realtek PCIe GbE Family Controller-QoS Packet Scheduler-0000
+2024-03-18T14:27:59.862+0100 [DEBUG] [org.gradle.internal.remote.internal.inet.InetAddresses] Is this a loopback interface? false
+2024-03-18T14:27:59.862+0100 [DEBUG] [org.gradle.internal.remote.internal.inet.InetAddresses] Adding IP addresses for network interface Realtek PCIe GbE Family Controller-WFP 802.3 MAC Layer LightWeight Filter-0000
+2024-03-18T14:27:59.863+0100 [DEBUG] [org.gradle.internal.remote.internal.inet.InetAddresses] Is this a loopback interface? false
+2024-03-18T14:27:59.868+0100 [DEBUG] [org.gradle.internal.remote.internal.inet.TcpIncomingConnector] Listening on [beb6dfc2-eb40-4c3d-a97a-d6727af204ee port:56160, addresses:[localhost/127.0.0.1]].
+2024-03-18T14:27:59.884+0100 [DEBUG] [org.gradle.launcher.daemon.server.Daemon] Daemon starting at: Mon Mar 18 14:27:59 CET 2024, with address: [beb6dfc2-eb40-4c3d-a97a-d6727af204ee port:56160, addresses:[localhost/127.0.0.1]]
+2024-03-18T14:27:59.884+0100 [INFO] [org.gradle.launcher.daemon.server.DaemonRegistryUpdater] Advertising the daemon address to the clients: [beb6dfc2-eb40-4c3d-a97a-d6727af204ee port:56160, addresses:[localhost/127.0.0.1]]
+2024-03-18T14:27:59.884+0100 [DEBUG] [org.gradle.launcher.daemon.server.DaemonRegistryUpdater] Advertised daemon context: DefaultDaemonContext[uid=480b5dcb-9c95-4a84-aa23-61453b79100e,javaHome=C:\Users\eleguen2023\Documents\tools\java17,daemonRegistryDir=C:\Users\eleguen2023\Documents\works\BidProject\daemon,pid=5536,idleTimeout=10800000,priority=NORMAL,applyInstrumentationAgent=true,daemonOpts=--add-opens=java.base/java.util=ALL-UNNAMED,--add-opens=java.base/java.lang=ALL-UNNAMED,--add-opens=java.base/java.lang.invoke=ALL-UNNAMED,--add-opens=java.prefs/java.util.prefs=ALL-UNNAMED,--add-opens=java.base/java.nio.charset=ALL-UNNAMED,--add-opens=java.base/java.net=ALL-UNNAMED,--add-opens=java.base/java.util.concurrent.atomic=ALL-UNNAMED,-XX:MaxMetaspaceSize=384m,-XX:+HeapDumpOnOutOfMemoryError,-Xms256m,-Xmx512m,-Dfile.encoding=windows-1252,-Duser.country=FR,-Duser.language=fr,-Duser.variant]
+2024-03-18T14:27:59.885+0100 [DEBUG] [org.gradle.launcher.daemon.registry.PersistentDaemonRegistry] Storing daemon address: [beb6dfc2-eb40-4c3d-a97a-d6727af204ee port:56160, addresses:[localhost/127.0.0.1]], context: DefaultDaemonContext[uid=480b5dcb-9c95-4a84-aa23-61453b79100e,javaHome=C:\Users\eleguen2023\Documents\tools\java17,daemonRegistryDir=C:\Users\eleguen2023\Documents\works\BidProject\daemon,pid=5536,idleTimeout=10800000,priority=NORMAL,applyInstrumentationAgent=true,daemonOpts=--add-opens=java.base/java.util=ALL-UNNAMED,--add-opens=java.base/java.lang=ALL-UNNAMED,--add-opens=java.base/java.lang.invoke=ALL-UNNAMED,--add-opens=java.prefs/java.util.prefs=ALL-UNNAMED,--add-opens=java.base/java.nio.charset=ALL-UNNAMED,--add-opens=java.base/java.net=ALL-UNNAMED,--add-opens=java.base/java.util.concurrent.atomic=ALL-UNNAMED,-XX:MaxMetaspaceSize=384m,-XX:+HeapDumpOnOutOfMemoryError,-Xms256m,-Xmx512m,-Dfile.encoding=windows-1252,-Duser.country=FR,-Duser.language=fr,-Duser.variant]
+2024-03-18T14:27:59.902+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Waiting to acquire exclusive lock on daemon addresses registry.
+2024-03-18T14:27:59.905+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Lock acquired on daemon addresses registry.
+2024-03-18T14:27:59.915+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Releasing lock on daemon addresses registry.
+2024-03-18T14:27:59.916+0100 [LIFECYCLE] [org.gradle.launcher.daemon.server.Daemon] Daemon server started.
+2024-03-18T14:27:59.917+0100 [DEBUG] [org.gradle.launcher.daemon.bootstrap.DaemonStartupCommunication] Completed writing the daemon greeting. Closing streams...
+2024-03-18T14:27:59.920+0100 [DEBUG] [org.gradle.launcher.daemon.server.Daemon] stopOnExpiration() called on daemon
+2024-03-18T14:27:59.921+0100 [DEBUG] [org.gradle.launcher.daemon.server.Daemon] awaitExpiration() called on daemon
+2024-03-18T14:27:59.921+0100 [DEBUG] [org.gradle.launcher.daemon.server.DaemonStateCoordinator] daemon is running. Sleeping until state changes.
+2024-03-18T14:27:59.928+0100 [DEBUG] [org.gradle.internal.remote.internal.inet.TcpIncomingConnector] Accepted connection from /127.0.0.1:56161 to /127.0.0.1:56160.
+2024-03-18T14:27:59.968+0100 [DEBUG] [org.gradle.launcher.daemon.server.SynchronizedDispatchConnection] thread 22: received class org.gradle.launcher.daemon.protocol.Build
+2024-03-18T14:27:59.968+0100 [DEBUG] [org.gradle.launcher.daemon.server.DefaultDaemonConnection] thread 22: Received non-IO message from client: Build{id=34c8fee1-15ea-4161-9fcb-3c4edd1400f9, currentDir=C:\Users\eleguen2023\Documents\works\BidProject}
+2024-03-18T14:27:59.968+0100 [INFO] [org.gradle.launcher.daemon.server.DefaultIncomingConnectionHandler] Received command: Build{id=34c8fee1-15ea-4161-9fcb-3c4edd1400f9, currentDir=C:\Users\eleguen2023\Documents\works\BidProject}.
+2024-03-18T14:27:59.968+0100 [DEBUG] [org.gradle.launcher.daemon.server.DefaultIncomingConnectionHandler] Starting executing command: Build{id=34c8fee1-15ea-4161-9fcb-3c4edd1400f9, currentDir=C:\Users\eleguen2023\Documents\works\BidProject} with connection: socket connection from /127.0.0.1:56160 to /127.0.0.1:56161.
+2024-03-18T14:27:59.970+0100 [DEBUG] [org.gradle.launcher.daemon.server.DaemonStateCoordinator] Command execution: started DaemonCommandExecution[command = Build{id=34c8fee1-15ea-4161-9fcb-3c4edd1400f9, currentDir=C:\Users\eleguen2023\Documents\works\BidProject}, connection = DefaultDaemonConnection: socket connection from /127.0.0.1:56160 to /127.0.0.1:56161] after 0.0 minutes of idle
+2024-03-18T14:27:59.970+0100 [INFO] [org.gradle.launcher.daemon.server.DaemonRegistryUpdater] Marking the daemon as busy, address: [beb6dfc2-eb40-4c3d-a97a-d6727af204ee port:56160, addresses:[localhost/127.0.0.1]]
+2024-03-18T14:27:59.970+0100 [DEBUG] [org.gradle.launcher.daemon.registry.PersistentDaemonRegistry] Marking busy by address: [beb6dfc2-eb40-4c3d-a97a-d6727af204ee port:56160, addresses:[localhost/127.0.0.1]]
+2024-03-18T14:27:59.971+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Waiting to acquire exclusive lock on daemon addresses registry.
+2024-03-18T14:27:59.971+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Lock acquired on daemon addresses registry.
+2024-03-18T14:27:59.972+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Releasing lock on daemon addresses registry.
+2024-03-18T14:27:59.973+0100 [DEBUG] [org.gradle.launcher.daemon.server.DaemonStateCoordinator] resetting idle timer
+2024-03-18T14:27:59.973+0100 [DEBUG] [org.gradle.launcher.daemon.server.DaemonStateCoordinator] daemon is running. Sleeping until state changes.
+2024-03-18T14:27:59.974+0100 [INFO] [org.gradle.launcher.daemon.server.exec.StartBuildOrRespondWithBusy] Daemon is about to start building Build{id=34c8fee1-15ea-4161-9fcb-3c4edd1400f9, currentDir=C:\Users\eleguen2023\Documents\works\BidProject}. Dispatching build started information...
+2024-03-18T14:27:59.974+0100 [DEBUG] [org.gradle.launcher.daemon.server.SynchronizedDispatchConnection] thread 24: dispatching org.gradle.launcher.daemon.protocol.BuildStarted@2e0f196a
+2024-03-18T14:27:59.975+0100 [DEBUG] [org.gradle.launcher.daemon.server.exec.EstablishBuildEnvironment] Configuring env variables: [USERDOMAIN_ROAMINGPROFILE, LOCALAPPDATA, MSMPI_BIN, PROCESSOR_LEVEL, IJ_RESTARTER_LOG, USERDOMAIN, LOGONSERVER, JAVA_HOME, SESSIONNAME, ALLUSERSPROFILE, PROCESSOR_ARCHITECTURE, PSModulePath, SystemDrive, PT8HOME, APPDATA, USERNAME, USERDNSDOMAIN, ProgramFiles(x86), CommonProgramFiles, Path, PATHEXT, DriverData, OS, COMPUTERNAME, PROCESSOR_REVISION, CommonProgramW6432, ComSpec, ProgramData, ProgramW6432, TEMP, HOMEPATH, SystemRoot, PROCESSOR_IDENTIFIER, HOMEDRIVE, USERPROFILE, TMP, CommonProgramFiles(x86), ProgramFiles, PUBLIC, windir, NUMBER_OF_PROCESSORS, =::, IDEA_INITIAL_DIRECTORY, MSMPI_BENCHMARKS]
+2024-03-18T14:27:59.978+0100 [DEBUG] [org.gradle.launcher.daemon.server.exec.LogToClient] About to start relaying all logs to the client via the connection.
+2024-03-18T14:27:59.978+0100 [INFO] [org.gradle.launcher.daemon.server.exec.LogToClient] The client will now receive all logging from the daemon (pid: 5536). The daemon log file: C:\Users\eleguen2023\Documents\works\BidProject\daemon\8.6\daemon-5536.out.log
+2024-03-18T14:27:59.979+0100 [INFO] [org.gradle.launcher.daemon.server.exec.LogAndCheckHealth] Starting build in new daemon [memory: 512 MiB]
+2024-03-18T14:27:59.980+0100 [DEBUG] [org.gradle.launcher.daemon.server.exec.ExecuteBuild] The daemon has started executing the build.
+2024-03-18T14:27:59.980+0100 [DEBUG] [org.gradle.launcher.daemon.server.exec.ExecuteBuild] Executing build with daemon context: DefaultDaemonContext[uid=480b5dcb-9c95-4a84-aa23-61453b79100e,javaHome=C:\Users\eleguen2023\Documents\tools\java17,daemonRegistryDir=C:\Users\eleguen2023\Documents\works\BidProject\daemon,pid=5536,idleTimeout=10800000,priority=NORMAL,applyInstrumentationAgent=true,daemonOpts=--add-opens=java.base/java.util=ALL-UNNAMED,--add-opens=java.base/java.lang=ALL-UNNAMED,--add-opens=java.base/java.lang.invoke=ALL-UNNAMED,--add-opens=java.prefs/java.util.prefs=ALL-UNNAMED,--add-opens=java.base/java.nio.charset=ALL-UNNAMED,--add-opens=java.base/java.net=ALL-UNNAMED,--add-opens=java.base/java.util.concurrent.atomic=ALL-UNNAMED,-XX:MaxMetaspaceSize=384m,-XX:+HeapDumpOnOutOfMemoryError,-Xms256m,-Xmx512m,-Dfile.encoding=windows-1252,-Duser.country=FR,-Duser.language=fr,-Duser.variant]
+C:\Users\eleguen2023\Documents\works\BidProject\src\main\java\projet\bid_pro\controller\ContexteController.java:7: error: package projet.bid_pro.bll.contexte does not exist
+import projet.bid_pro.bll.contexte.ContexteService;
+                                  ^
+C:\Users\eleguen2023\Documents\works\BidProject\src\main\java\projet\bid_pro\controller\ContexteController.java:16: error: cannot find symbol
+	private ContexteService service;
+	        ^
+  symbol:   class ContexteService
+  location: class ContexteController
+C:\Users\eleguen2023\Documents\works\BidProject\src\main\java\projet\bid_pro\controller\ContexteController.java:18: error: cannot find symbol
+	public ContexteController(ContexteService service) {
+	                          ^
+  symbol:   class ContexteService
+  location: class ContexteController
+C:\Users\eleguen2023\Documents\works\BidProject\src\main\java\projet\bid_pro\dal\AvisDAOImpl.java:8: error: package org.springframework.jdbc.core does not exist
+import org.springframework.jdbc.core.RowMapper;
+                                    ^
+C:\Users\eleguen2023\Documents\works\BidProject\src\main\java\projet\bid_pro\dal\AvisDAOImpl.java:9: error: package org.springframework.jdbc.core.namedparam does not exist
+import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
+                                               ^
+C:\Users\eleguen2023\Documents\works\BidProject\src\main\java\projet\bid_pro\dal\AvisDAOImpl.java:10: error: package org.springframework.jdbc.core.namedparam does not exist
+import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+                                               ^
+C:\Users\eleguen2023\Documents\works\BidProject\src\main\java\projet\bid_pro\dal\AvisDAOImpl.java:24: error: cannot find symbol
+	private NamedParameterJdbcTemplate jdbcTemplate;
+	        ^
+  symbol:   class NamedParameterJdbcTemplate
+  location: class AvisDAOImpl
+C:\Users\eleguen2023\Documents\works\BidProject\src\main\java\projet\bid_pro\dal\AvisDAOImpl.java:54: error: cannot find symbol
+	class AvisRowMapper implements RowMapper<Avis> {
+	                               ^
+  symbol:   class RowMapper
+  location: class AvisDAOImpl
+C:\Users\eleguen2023\Documents\works\BidProject\src\main\java\projet\bid_pro\dal\FilmDAOImpl.java:8: error: package org.springframework.jdbc.core does not exist
+import org.springframework.jdbc.core.RowMapper;
+                                    ^
+C:\Users\eleguen2023\Documents\works\BidProject\src\main\java\projet\bid_pro\dal\FilmDAOImpl.java:9: error: package org.springframework.jdbc.core.namedparam does not exist
+import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
+                                               ^
+C:\Users\eleguen2023\Documents\works\BidProject\src\main\java\projet\bid_pro\dal\FilmDAOImpl.java:10: error: package org.springframework.jdbc.core.namedparam does not exist
+import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+                                               ^
+C:\Users\eleguen2023\Documents\works\BidProject\src\main\java\projet\bid_pro\dal\FilmDAOImpl.java:11: error: package org.springframework.jdbc.support does not exist
+import org.springframework.jdbc.support.GeneratedKeyHolder;
+                                       ^
+C:\Users\eleguen2023\Documents\works\BidProject\src\main\java\projet\bid_pro\dal\FilmDAOImpl.java:12: error: package org.springframework.jdbc.support does not exist
+import org.springframework.jdbc.support.KeyHolder;
+                                       ^
+C:\Users\eleguen2023\Documents\works\BidProject\src\main\java\projet\bid_pro\dal\FilmDAOImpl.java:30: error: cannot find symbol
+	private NamedParameterJdbcTemplate jdbcTemplate;
+	        ^
+  symbol:   class NamedParameterJdbcTemplate
+  location: class FilmDAOImpl
+C:\Users\eleguen2023\Documents\works\BidProject\src\main\java\projet\bid_pro\dal\FilmDAOImpl.java:86: error: cannot find symbol
+	class FilmRowMapper implements RowMapper<Film> {
+	                               ^
+  symbol:   class RowMapper
+  location: class FilmDAOImpl
+C:\Users\eleguen2023\Documents\works\BidProject\src\main\java\projet\bid_pro\dal\GenreDAOImpl.java:6: error: package org.springframework.jdbc.core does not exist
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
+                                    ^
+C:\Users\eleguen2023\Documents\works\BidProject\src\main\java\projet\bid_pro\dal\GenreDAOImpl.java:7: error: package org.springframework.jdbc.core.namedparam does not exist
+import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
+                                               ^
+C:\Users\eleguen2023\Documents\works\BidProject\src\main\java\projet\bid_pro\dal\GenreDAOImpl.java:8: error: package org.springframework.jdbc.core.namedparam does not exist
+import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+                                               ^
+C:\Users\eleguen2023\Documents\works\BidProject\src\main\java\projet\bid_pro\dal\GenreDAOImpl.java:19: error: cannot find symbol
+	private NamedParameterJdbcTemplate jdbcTemplate;
+	        ^
+  symbol:   class NamedParameterJdbcTemplate
+  location: class GenreDAOImpl
+C:\Users\eleguen2023\Documents\works\BidProject\src\main\java\projet\bid_pro\dal\MembreDAOImpl.java:7: error: package org.springframework.jdbc.core does not exist
+import org.springframework.jdbc.core.RowMapper;
+                                    ^
+C:\Users\eleguen2023\Documents\works\BidProject\src\main\java\projet\bid_pro\dal\MembreDAOImpl.java:8: error: package org.springframework.jdbc.core.namedparam does not exist
+import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
+                                               ^
+C:\Users\eleguen2023\Documents\works\BidProject\src\main\java\projet\bid_pro\dal\MembreDAOImpl.java:9: error: package org.springframework.jdbc.core.namedparam does not exist
+import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+                                               ^
+C:\Users\eleguen2023\Documents\works\BidProject\src\main\java\projet\bid_pro\dal\MembreDAOImpl.java:21: error: cannot find symbol
+	private NamedParameterJdbcTemplate jdbcTemplate;
+	        ^
+  symbol:   class NamedParameterJdbcTemplate
+  location: class MembreDAOImpl
+C:\Users\eleguen2023\Documents\works\BidProject\src\main\java\projet\bid_pro\dal\MembreDAOImpl.java:40: error: cannot find symbol
+	class MembreRowMapper implements RowMapper<Membre> {
+	                                 ^
+  symbol:   class RowMapper
+  location: class MembreDAOImpl
+C:\Users\eleguen2023\Documents\works\BidProject\src\main\java\projet\bid_pro\dal\ParticipantDAOImpl.java:7: error: package org.springframework.jdbc.core does not exist
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
+                                    ^
+C:\Users\eleguen2023\Documents\works\BidProject\src\main\java\projet\bid_pro\dal\ParticipantDAOImpl.java:8: error: package org.springframework.jdbc.core.namedparam does not exist
+import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
+                                               ^
+C:\Users\eleguen2023\Documents\works\BidProject\src\main\java\projet\bid_pro\dal\ParticipantDAOImpl.java:9: error: package org.springframework.jdbc.core.namedparam does not exist
+import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+                                               ^
+C:\Users\eleguen2023\Documents\works\BidProject\src\main\java\projet\bid_pro\dal\ParticipantDAOImpl.java:10: error: package org.springframework.jdbc.core.namedparam does not exist
+import org.springframework.jdbc.core.namedparam.SqlParameterSource;
+                                               ^
+C:\Users\eleguen2023\Documents\works\BidProject\src\main\java\projet\bid_pro\dal\ParticipantDAOImpl.java:11: error: package org.springframework.jdbc.core.simple does not exist
+import org.springframework.jdbc.core.simple.SimpleJdbcCall;
+                                           ^
+C:\Users\eleguen2023\Documents\works\BidProject\src\main\java\projet\bid_pro\dal\ParticipantDAOImpl.java:24: error: cannot find symbol
+	private NamedParameterJdbcTemplate jdbcTemplate;
+	        ^
+  symbol:   class NamedParameterJdbcTemplate
+  location: class ParticipantDAOImpl
+C:\Users\eleguen2023\Documents\works\BidProject\src\main\java\projet\bid_pro\bll\FilmServiceImpl.java:169: error: cannot find symbol
+			} catch (DataAccessException e) {// Exception de la couche DAL
+			         ^
+  symbol:   class DataAccessException
+  location: class FilmServiceImpl
+C:\Users\eleguen2023\Documents\works\BidProject\src\main\java\projet\bid_pro\bll\FilmServiceImpl.java:280: error: cannot find symbol
+		} catch (DataAccessException e) {
+		         ^
+  symbol:   class DataAccessException
+  location: class FilmServiceImpl
+C:\Users\eleguen2023\Documents\works\BidProject\src\main\java\projet\bid_pro\bll\FilmServiceImpl.java:309: error: cannot find symbol
+		} catch (DataAccessException e) {
+		         ^
+  symbol:   class DataAccessException
+  location: class FilmServiceImpl
+C:\Users\eleguen2023\Documents\works\BidProject\src\main\java\projet\bid_pro\bll\FilmServiceImpl.java:337: error: cannot find symbol
+				} catch (DataAccessException e) {
+				         ^
+  symbol:   class DataAccessException
+  location: class FilmServiceImpl
+C:\Users\eleguen2023\Documents\works\BidProject\src\main\java\projet\bid_pro\bll\FilmServiceImpl.java:356: error: cannot find symbol
+		} catch (DataAccessException e) {
+		         ^
+  symbol:   class DataAccessException
+  location: class FilmServiceImpl
+C:\Users\eleguen2023\Documents\works\BidProject\src\main\java\projet\bid_pro\bll\FilmServiceImpl.java:428: error: cannot find symbol
+		} catch (DataAccessException e) {
+		         ^
+  symbol:   class DataAccessException
+  location: class FilmServiceImpl
+C:\Users\eleguen2023\Documents\works\BidProject\src\main\java\projet\bid_pro\bll\FilmServiceImpl.java:448: error: cannot find symbol
+		} catch (DataAccessException e) {
+		         ^
+  symbol:   class DataAccessException
+  location: class FilmServiceImpl
+C:\Users\eleguen2023\Documents\works\BidProject\src\main\java\projet\bid_pro\bll\FilmServiceImpl.java:464: error: cannot find symbol
+		} catch (DataAccessException e) {
+		         ^
+  symbol:   class DataAccessException
+  location: class FilmServiceImpl
+C:\Users\eleguen2023\Documents\works\BidProject\src\main\java\projet\bid_pro\dal\AvisDAOImpl.java:28: error: cannot find symbol
+		MapSqlParameterSource namedParameters = new MapSqlParameterSource();
+		^
+  symbol:   class MapSqlParameterSource
+  location: class AvisDAOImpl
+C:\Users\eleguen2023\Documents\works\BidProject\src\main\java\projet\bid_pro\dal\AvisDAOImpl.java:28: error: cannot find symbol
+		MapSqlParameterSource namedParameters = new MapSqlParameterSource();
+		                                            ^
+  symbol:   class MapSqlParameterSource
+  location: class AvisDAOImpl
+C:\Users\eleguen2023\Documents\works\BidProject\src\main\java\projet\bid_pro\dal\AvisDAOImpl.java:38: error: cannot find symbol
+		MapSqlParameterSource namedParameters = new MapSqlParameterSource();
+		^
+  symbol:   class MapSqlParameterSource
+  location: class AvisDAOImpl
+C:\Users\eleguen2023\Documents\works\BidProject\src\main\java\projet\bid_pro\dal\AvisDAOImpl.java:38: error: cannot find symbol
+		MapSqlParameterSource namedParameters = new MapSqlParameterSource();
+		                                            ^
+  symbol:   class MapSqlParameterSource
+  location: class AvisDAOImpl
+C:\Users\eleguen2023\Documents\works\BidProject\src\main\java\projet\bid_pro\dal\AvisDAOImpl.java:45: error: cannot find symbol
+		MapSqlParameterSource namedParameters = new MapSqlParameterSource();
+		^
+  symbol:   class MapSqlParameterSource
+  location: class AvisDAOImpl
+C:\Users\eleguen2023\Documents\works\BidProject\src\main\java\projet\bid_pro\dal\AvisDAOImpl.java:45: error: cannot find symbol
+		MapSqlParameterSource namedParameters = new MapSqlParameterSource();
+		                                            ^
+  symbol:   class MapSqlParameterSource
+  location: class AvisDAOImpl
+C:\Users\eleguen2023\Documents\works\BidProject\src\main\java\projet\bid_pro\dal\AvisDAOImpl.java:55: error: method does not override or implement a method from a supertype
+		@Override
+		^
+C:\Users\eleguen2023\Documents\works\BidProject\src\main\java\projet\bid_pro\dal\FilmDAOImpl.java:34: error: cannot find symbol
+		KeyHolder keyHolder = new GeneratedKeyHolder();
+		^
+  symbol:   class KeyHolder
+  location: class FilmDAOImpl
+C:\Users\eleguen2023\Documents\works\BidProject\src\main\java\projet\bid_pro\dal\FilmDAOImpl.java:34: error: cannot find symbol
+		KeyHolder keyHolder = new GeneratedKeyHolder();
+		                          ^
+  symbol:   class GeneratedKeyHolder
+  location: class FilmDAOImpl
+C:\Users\eleguen2023\Documents\works\BidProject\src\main\java\projet\bid_pro\dal\FilmDAOImpl.java:36: error: cannot find symbol
+		MapSqlParameterSource namedParameters = new MapSqlParameterSource();
+		^
+  symbol:   class MapSqlParameterSource
+  location: class FilmDAOImpl
+C:\Users\eleguen2023\Documents\works\BidProject\src\main\java\projet\bid_pro\dal\FilmDAOImpl.java:36: error: cannot find symbol
+		MapSqlParameterSource namedParameters = new MapSqlParameterSource();
+		                                            ^
+  symbol:   class MapSqlParameterSource
+  location: class FilmDAOImpl
+C:\Users\eleguen2023\Documents\works\BidProject\src\main\java\projet\bid_pro\dal\FilmDAOImpl.java:54: error: cannot find symbol
+		MapSqlParameterSource namedParameters = new MapSqlParameterSource();
+		^
+  symbol:   class MapSqlParameterSource
+  location: class FilmDAOImpl
+C:\Users\eleguen2023\Documents\works\BidProject\src\main\java\projet\bid_pro\dal\FilmDAOImpl.java:54: error: cannot find symbol
+		MapSqlParameterSource namedParameters = new MapSqlParameterSource();
+		                                            ^
+  symbol:   class MapSqlParameterSource
+  location: class FilmDAOImpl
+C:\Users\eleguen2023\Documents\works\BidProject\src\main\java\projet\bid_pro\dal\FilmDAOImpl.java:67: error: cannot find symbol
+		MapSqlParameterSource namedParameters = new MapSqlParameterSource();
+		^
+  symbol:   class MapSqlParameterSource
+  location: class FilmDAOImpl
+C:\Users\eleguen2023\Documents\works\BidProject\src\main\java\projet\bid_pro\dal\FilmDAOImpl.java:67: error: cannot find symbol
+		MapSqlParameterSource namedParameters = new MapSqlParameterSource();
+		                                            ^
+  symbol:   class MapSqlParameterSource
+  location: class FilmDAOImpl
+C:\Users\eleguen2023\Documents\works\BidProject\src\main\java\projet\bid_pro\dal\FilmDAOImpl.java:75: error: cannot find symbol
+		MapSqlParameterSource namedParameters = new MapSqlParameterSource();
+		^
+  symbol:   class MapSqlParameterSource
+  location: class FilmDAOImpl
+C:\Users\eleguen2023\Documents\works\BidProject\src\main\java\projet\bid_pro\dal\FilmDAOImpl.java:75: error: cannot find symbol
+		MapSqlParameterSource namedParameters = new MapSqlParameterSource();
+		                                            ^
+  symbol:   class MapSqlParameterSource
+  location: class FilmDAOImpl
+C:\Users\eleguen2023\Documents\works\BidProject\src\main\java\projet\bid_pro\dal\FilmDAOImpl.java:87: error: method does not override or implement a method from a supertype
+		@Override
+		^
+C:\Users\eleguen2023\Documents\works\BidProject\src\main\java\projet\bid_pro\dal\GenreDAOImpl.java:23: error: cannot find symbol
+		MapSqlParameterSource namedParameters = new MapSqlParameterSource();
+		^
+  symbol:   class MapSqlParameterSource
+  location: class GenreDAOImpl
+C:\Users\eleguen2023\Documents\works\BidProject\src\main\java\projet\bid_pro\dal\GenreDAOImpl.java:23: error: cannot find symbol
+		MapSqlParameterSource namedParameters = new MapSqlParameterSource();
+		                                            ^
+  symbol:   class MapSqlParameterSource
+  location: class GenreDAOImpl
+C:\Users\eleguen2023\Documents\works\BidProject\src\main\java\projet\bid_pro\dal\GenreDAOImpl.java:27: error: cannot find symbol
+				new BeanPropertyRowMapper<>(Genre.class));
+				    ^
+  symbol:   class BeanPropertyRowMapper
+  location: class GenreDAOImpl
+C:\Users\eleguen2023\Documents\works\BidProject\src\main\java\projet\bid_pro\dal\GenreDAOImpl.java:32: error: cannot find symbol
+		return jdbcTemplate.query(FIND_ALL, new BeanPropertyRowMapper<>(Genre.class));
+		                                        ^
+  symbol:   class BeanPropertyRowMapper
+  location: class GenreDAOImpl
+C:\Users\eleguen2023\Documents\works\BidProject\src\main\java\projet\bid_pro\dal\MembreDAOImpl.java:25: error: cannot find symbol
+		MapSqlParameterSource namedParameters = new MapSqlParameterSource();
+		^
+  symbol:   class MapSqlParameterSource
+  location: class MembreDAOImpl
+C:\Users\eleguen2023\Documents\works\BidProject\src\main\java\projet\bid_pro\dal\MembreDAOImpl.java:25: error: cannot find symbol
+		MapSqlParameterSource namedParameters = new MapSqlParameterSource();
+		                                            ^
+  symbol:   class MapSqlParameterSource
+  location: class MembreDAOImpl
+C:\Users\eleguen2023\Documents\works\BidProject\src\main\java\projet\bid_pro\dal\MembreDAOImpl.java:32: error: cannot find symbol
+		MapSqlParameterSource namedParameters = new MapSqlParameterSource();
+		^
+  symbol:   class MapSqlParameterSource
+  location: class MembreDAOImpl
+C:\Users\eleguen2023\Documents\works\BidProject\src\main\java\projet\bid_pro\dal\MembreDAOImpl.java:32: error: cannot find symbol
+		MapSqlParameterSource namedParameters = new MapSqlParameterSource();
+		                                            ^
+  symbol:   class MapSqlParameterSource
+  location: class MembreDAOImpl
+C:\Users\eleguen2023\Documents\works\BidProject\src\main\java\projet\bid_pro\dal\MembreDAOImpl.java:41: error: method does not override or implement a method from a supertype
+		@Override
+		^
+C:\Users\eleguen2023\Documents\works\BidProject\src\main\java\projet\bid_pro\dal\ParticipantDAOImpl.java:29: error: cannot find symbol
+		MapSqlParameterSource namedParameters = new MapSqlParameterSource();
+		^
+  symbol:   class MapSqlParameterSource
+  location: class ParticipantDAOImpl
+C:\Users\eleguen2023\Documents\works\BidProject\src\main\java\projet\bid_pro\dal\ParticipantDAOImpl.java:29: error: cannot find symbol
+		MapSqlParameterSource namedParameters = new MapSqlParameterSource();
+		                                            ^
+  symbol:   class MapSqlParameterSource
+  location: class ParticipantDAOImpl
+C:\Users\eleguen2023\Documents\works\BidProject\src\main\java\projet\bid_pro\dal\ParticipantDAOImpl.java:32: error: cannot find symbol
+		return jdbcTemplate.queryForObject(FIND_BY_ID, namedParameters, new BeanPropertyRowMapper<>(Participant.class));
+		                                                                    ^
+  symbol:   class BeanPropertyRowMapper
+  location: class ParticipantDAOImpl
+C:\Users\eleguen2023\Documents\works\BidProject\src\main\java\projet\bid_pro\dal\ParticipantDAOImpl.java:37: error: cannot find symbol
+		return jdbcTemplate.query(FIND_ALL, new BeanPropertyRowMapper<>(Participant.class));
+		                                        ^
+  symbol:   class BeanPropertyRowMapper
+  location: class ParticipantDAOImpl
+C:\Users\eleguen2023\Documents\works\BidProject\src\main\java\projet\bid_pro\dal\ParticipantDAOImpl.java:44: error: cannot find symbol
+		SimpleJdbcCall jdbcCall = new SimpleJdbcCall(jdbcTemplate.getJdbcTemplate())
+		^
+  symbol:   class SimpleJdbcCall
+  location: class ParticipantDAOImpl
+C:\Users\eleguen2023\Documents\works\BidProject\src\main\java\projet\bid_pro\dal\ParticipantDAOImpl.java:46: error: cannot find symbol
+					.returningResultSet("acteurs", new BeanPropertyRowMapper<Participant>(Participant.class));
+					                                   ^
+  symbol:   class BeanPropertyRowMapper
+  location: class ParticipantDAOImpl
+C:\Users\eleguen2023\Documents\works\BidProject\src\main\java\projet\bid_pro\dal\ParticipantDAOImpl.java:44: error: cannot find symbol
+		SimpleJdbcCall jdbcCall = new SimpleJdbcCall(jdbcTemplate.getJdbcTemplate())
+		                              ^
+  symbol:   class SimpleJdbcCall
+  location: class ParticipantDAOImpl
+C:\Users\eleguen2023\Documents\works\BidProject\src\main\java\projet\bid_pro\dal\ParticipantDAOImpl.java:48: error: cannot find symbol
+		SqlParameterSource in = new MapSqlParameterSource().addValue("idFilm", idFilm);
+		^
+  symbol:   class SqlParameterSource
+  location: class ParticipantDAOImpl
+C:\Users\eleguen2023\Documents\works\BidProject\src\main\java\projet\bid_pro\dal\ParticipantDAOImpl.java:48: error: cannot find symbol
+		SqlParameterSource in = new MapSqlParameterSource().addValue("idFilm", idFilm);
+		                            ^
+  symbol:   class MapSqlParameterSource
+  location: class ParticipantDAOImpl
+C:\Users\eleguen2023\Documents\works\BidProject\src\main\java\projet\bid_pro\dal\ParticipantDAOImpl.java:66: error: cannot find symbol
+		MapSqlParameterSource namedParameters = new MapSqlParameterSource();
+		^
+  symbol:   class MapSqlParameterSource
+  location: class ParticipantDAOImpl
+C:\Users\eleguen2023\Documents\works\BidProject\src\main\java\projet\bid_pro\dal\ParticipantDAOImpl.java:66: error: cannot find symbol
+		MapSqlParameterSource namedParameters = new MapSqlParameterSource();
+		                                            ^
+  symbol:   class MapSqlParameterSource
+  location: class ParticipantDAOImpl
+76 errors
+
+FAILURE: Build failed with an exception.
+
+* What went wrong:
+Execution failed for task ':compileJava'.
+> Compilation failed; see the compiler error output for details.
+
+* Try:
+> Run with --info option to get more log output.
+> Run with --scan to get full insights.
+
+BUILD FAILED in 6s
+1 actionable task: 1 executed
+2024-03-18T14:28:04.718+0100 [DEBUG] [org.gradle.launcher.daemon.server.exec.ExecuteBuild] The daemon has finished executing the build.
+2024-03-18T14:28:04.725+0100 [DEBUG] [org.gradle.launcher.daemon.server.DaemonStateCoordinator] daemon is running. Sleeping until state changes.
+2024-03-18T14:28:04.725+0100 [DEBUG] [org.gradle.launcher.daemon.server.DaemonStateCoordinator] Command execution: finished waiting for DaemonCommandExecution[command = Build{id=34c8fee1-15ea-4161-9fcb-3c4edd1400f9, currentDir=C:\Users\eleguen2023\Documents\works\BidProject}, connection = DefaultDaemonConnection: socket connection from /127.0.0.1:56160 to /127.0.0.1:56161]. Result org.gradle.launcher.daemon.server.DaemonStateCoordinator@57840389 with state Busy
+2024-03-18T14:28:04.726+0100 [DEBUG] [org.gradle.launcher.daemon.server.DaemonStateCoordinator] Command execution: completed DaemonCommandExecution[command = Build{id=34c8fee1-15ea-4161-9fcb-3c4edd1400f9, currentDir=C:\Users\eleguen2023\Documents\works\BidProject}, connection = DefaultDaemonConnection: socket connection from /127.0.0.1:56160 to /127.0.0.1:56161]
+2024-03-18T14:28:04.726+0100 [DEBUG] [org.gradle.launcher.daemon.server.DaemonStateCoordinator] resetting idle timer
+2024-03-18T14:28:04.726+0100 [INFO] [org.gradle.launcher.daemon.server.DaemonRegistryUpdater] Marking the daemon as idle, address: [beb6dfc2-eb40-4c3d-a97a-d6727af204ee port:56160, addresses:[localhost/127.0.0.1]]
+2024-03-18T14:28:04.726+0100 [DEBUG] [org.gradle.launcher.daemon.registry.PersistentDaemonRegistry] Marking busy by address: [beb6dfc2-eb40-4c3d-a97a-d6727af204ee port:56160, addresses:[localhost/127.0.0.1]]
+2024-03-18T14:28:04.727+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Waiting to acquire exclusive lock on daemon addresses registry.
+2024-03-18T14:28:04.727+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Lock acquired on daemon addresses registry.
+2024-03-18T14:28:04.728+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Releasing lock on daemon addresses registry.
+2024-03-18T14:28:04.728+0100 [DEBUG] [org.gradle.launcher.daemon.server.DaemonStateCoordinator] daemon is running. Sleeping until state changes.
+2024-03-18T14:28:04.728+0100 [DEBUG] [org.gradle.launcher.daemon.server.exec.ReturnResult] Daemon is dispatching the build result: Success[value=org.gradle.launcher.exec.BuildActionResult@431b54b3]
+2024-03-18T14:28:04.728+0100 [DEBUG] [org.gradle.launcher.daemon.server.SynchronizedDispatchConnection] thread 21: dispatching Success[value=org.gradle.launcher.exec.BuildActionResult@431b54b3]
+2024-03-18T14:28:04.734+0100 [DEBUG] [org.gradle.launcher.daemon.server.DefaultIncomingConnectionHandler] Finishing executing command: Build{id=34c8fee1-15ea-4161-9fcb-3c4edd1400f9, currentDir=C:\Users\eleguen2023\Documents\works\BidProject}
+2024-03-18T14:28:04.735+0100 [DEBUG] [org.gradle.launcher.daemon.server.SynchronizedDispatchConnection] thread 22: received class org.gradle.launcher.daemon.protocol.CloseInput
+2024-03-18T14:28:04.735+0100 [DEBUG] [org.gradle.launcher.daemon.server.DefaultDaemonConnection] thread 22: Received IO message from client: org.gradle.launcher.daemon.protocol.CloseInput@44cc740
+2024-03-18T14:28:04.736+0100 [DEBUG] [org.gradle.launcher.daemon.server.SynchronizedDispatchConnection] thread 22: received class org.gradle.launcher.daemon.protocol.Finished
+2024-03-18T14:28:04.736+0100 [DEBUG] [org.gradle.launcher.daemon.server.DefaultDaemonConnection] thread 22: Received non-IO message from client: org.gradle.launcher.daemon.protocol.Finished@3dafeb4b
+2024-03-18T14:28:04.736+0100 [DEBUG] [org.gradle.launcher.daemon.server.DefaultIncomingConnectionHandler] Received finished message: org.gradle.launcher.daemon.protocol.Finished@3dafeb4b
+2024-03-18T14:28:04.736+0100 [DEBUG] [org.gradle.launcher.daemon.server.SynchronizedDispatchConnection] thread 21: stopping connection
+2024-03-18T14:28:04.736+0100 [DEBUG] [org.gradle.internal.remote.internal.inet.SocketConnection] Discarding EOFException: java.io.EOFException
+2024-03-18T14:28:04.736+0100 [DEBUG] [org.gradle.launcher.daemon.server.SynchronizedDispatchConnection] thread 22: received null
+2024-03-18T14:28:04.736+0100 [DEBUG] [org.gradle.launcher.daemon.server.DefaultDaemonConnection] thread 22: Received end-of-input from client.
+2024-03-18T14:28:04.736+0100 [DEBUG] [org.gradle.launcher.daemon.server.SynchronizedDispatchConnection] thread 21: stopping connection
+2024-03-18T14:28:09.923+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Waiting to acquire shared lock on daemon addresses registry.
+2024-03-18T14:28:09.923+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Lock acquired on daemon addresses registry.
+2024-03-18T14:28:09.923+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Releasing lock on daemon addresses registry.
+2024-03-18T14:28:09.924+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Waiting to acquire shared lock on daemon addresses registry.
+2024-03-18T14:28:09.925+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Lock acquired on daemon addresses registry.
+2024-03-18T14:28:09.925+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Releasing lock on daemon addresses registry.
+2024-03-18T14:28:19.130+0100 [DEBUG] [org.gradle.internal.watch.vfs.impl.WatchingVirtualFileSystem] Handling VFS change REMOVED C:\Users\eleguen2023\Documents\works\BidProject\src\main\java\projet\bid_pro\bo\Avis.java
+2024-03-18T14:28:19.923+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Waiting to acquire shared lock on daemon addresses registry.
+2024-03-18T14:28:19.923+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Lock acquired on daemon addresses registry.
+2024-03-18T14:28:19.923+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Releasing lock on daemon addresses registry.
+2024-03-18T14:28:19.924+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Waiting to acquire shared lock on daemon addresses registry.
+2024-03-18T14:28:19.924+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Lock acquired on daemon addresses registry.
+2024-03-18T14:28:19.924+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Releasing lock on daemon addresses registry.
+2024-03-18T14:28:19.925+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Waiting to acquire shared lock on daemon addresses registry.
+2024-03-18T14:28:19.925+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Lock acquired on daemon addresses registry.
+2024-03-18T14:28:19.925+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Releasing lock on daemon addresses registry.
+2024-03-18T14:28:24.672+0100 [DEBUG] [org.gradle.internal.watch.vfs.impl.WatchingVirtualFileSystem] Handling VFS change REMOVED C:\Users\eleguen2023\Documents\works\BidProject\src\main\java\projet\bid_pro\bo\Film.java
+2024-03-18T14:28:24.674+0100 [DEBUG] [org.gradle.internal.watch.vfs.impl.WatchingVirtualFileSystem] Handling VFS change REMOVED C:\Users\eleguen2023\Documents\works\BidProject\src\main\java\projet\bid_pro\bo\Genre.java
+2024-03-18T14:28:24.676+0100 [DEBUG] [org.gradle.internal.watch.vfs.impl.WatchingVirtualFileSystem] Handling VFS change REMOVED C:\Users\eleguen2023\Documents\works\BidProject\src\main\java\projet\bid_pro\bo\Membre.java
+2024-03-18T14:28:24.678+0100 [DEBUG] [org.gradle.internal.watch.vfs.impl.WatchingVirtualFileSystem] Handling VFS change REMOVED C:\Users\eleguen2023\Documents\works\BidProject\src\main\java\projet\bid_pro\bo\Participant.java
+2024-03-18T14:28:24.680+0100 [DEBUG] [org.gradle.internal.watch.vfs.impl.WatchingVirtualFileSystem] Handling VFS change REMOVED C:\Users\eleguen2023\Documents\works\BidProject\src\main\java\projet\bid_pro\bo\Personne.java
+2024-03-18T14:28:29.922+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Waiting to acquire shared lock on daemon addresses registry.
+2024-03-18T14:28:29.922+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Lock acquired on daemon addresses registry.
+2024-03-18T14:28:29.923+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Releasing lock on daemon addresses registry.
+2024-03-18T14:28:29.923+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Waiting to acquire shared lock on daemon addresses registry.
+2024-03-18T14:28:29.923+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Lock acquired on daemon addresses registry.
+2024-03-18T14:28:29.924+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Releasing lock on daemon addresses registry.
+2024-03-18T14:28:29.924+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Waiting to acquire shared lock on daemon addresses registry.
+2024-03-18T14:28:29.924+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Lock acquired on daemon addresses registry.
+2024-03-18T14:28:29.924+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Releasing lock on daemon addresses registry.
+2024-03-18T14:28:39.923+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Waiting to acquire shared lock on daemon addresses registry.
+2024-03-18T14:28:39.923+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Lock acquired on daemon addresses registry.
+2024-03-18T14:28:39.923+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Releasing lock on daemon addresses registry.
+2024-03-18T14:28:39.924+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Waiting to acquire shared lock on daemon addresses registry.
+2024-03-18T14:28:39.924+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Lock acquired on daemon addresses registry.
+2024-03-18T14:28:39.924+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Releasing lock on daemon addresses registry.
+2024-03-18T14:28:39.925+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Waiting to acquire shared lock on daemon addresses registry.
+2024-03-18T14:28:39.925+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Lock acquired on daemon addresses registry.
+2024-03-18T14:28:39.925+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Releasing lock on daemon addresses registry.
+2024-03-18T14:28:49.923+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Waiting to acquire shared lock on daemon addresses registry.
+2024-03-18T14:28:49.923+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Lock acquired on daemon addresses registry.
+2024-03-18T14:28:49.923+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Releasing lock on daemon addresses registry.
+2024-03-18T14:28:49.924+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Waiting to acquire shared lock on daemon addresses registry.
+2024-03-18T14:28:49.924+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Lock acquired on daemon addresses registry.
+2024-03-18T14:28:49.924+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Releasing lock on daemon addresses registry.
+2024-03-18T14:28:49.925+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Waiting to acquire shared lock on daemon addresses registry.
+2024-03-18T14:28:49.925+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Lock acquired on daemon addresses registry.
+2024-03-18T14:28:49.925+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Releasing lock on daemon addresses registry.
+2024-03-18T14:28:59.922+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Waiting to acquire shared lock on daemon addresses registry.
+2024-03-18T14:28:59.923+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Lock acquired on daemon addresses registry.
+2024-03-18T14:28:59.923+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Releasing lock on daemon addresses registry.
+2024-03-18T14:28:59.924+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Waiting to acquire shared lock on daemon addresses registry.
+2024-03-18T14:28:59.924+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Lock acquired on daemon addresses registry.
+2024-03-18T14:28:59.924+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Releasing lock on daemon addresses registry.
+2024-03-18T14:28:59.924+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Waiting to acquire shared lock on daemon addresses registry.
+2024-03-18T14:28:59.925+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Lock acquired on daemon addresses registry.
+2024-03-18T14:28:59.925+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Releasing lock on daemon addresses registry.
+2024-03-18T14:29:09.924+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Waiting to acquire shared lock on daemon addresses registry.
+2024-03-18T14:29:09.924+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Lock acquired on daemon addresses registry.
+2024-03-18T14:29:09.925+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Releasing lock on daemon addresses registry.
+2024-03-18T14:29:09.928+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Waiting to acquire shared lock on daemon addresses registry.
+2024-03-18T14:29:09.929+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Lock acquired on daemon addresses registry.
+2024-03-18T14:29:09.930+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Releasing lock on daemon addresses registry.
+2024-03-18T14:29:09.932+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Waiting to acquire shared lock on daemon addresses registry.
+2024-03-18T14:29:09.932+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Lock acquired on daemon addresses registry.
+2024-03-18T14:29:09.933+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Releasing lock on daemon addresses registry.
+2024-03-18T14:29:19.922+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Waiting to acquire shared lock on daemon addresses registry.
+2024-03-18T14:29:19.922+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Lock acquired on daemon addresses registry.
+2024-03-18T14:29:19.922+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Releasing lock on daemon addresses registry.
+2024-03-18T14:29:19.923+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Waiting to acquire shared lock on daemon addresses registry.
+2024-03-18T14:29:19.923+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Lock acquired on daemon addresses registry.
+2024-03-18T14:29:19.923+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Releasing lock on daemon addresses registry.
+2024-03-18T14:29:19.923+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Waiting to acquire shared lock on daemon addresses registry.
+2024-03-18T14:29:19.923+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Lock acquired on daemon addresses registry.
+2024-03-18T14:29:19.924+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Releasing lock on daemon addresses registry.
+2024-03-18T14:29:29.922+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Waiting to acquire shared lock on daemon addresses registry.
+2024-03-18T14:29:29.923+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Lock acquired on daemon addresses registry.
+2024-03-18T14:29:29.923+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Releasing lock on daemon addresses registry.
+2024-03-18T14:29:29.924+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Waiting to acquire shared lock on daemon addresses registry.
+2024-03-18T14:29:29.924+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Lock acquired on daemon addresses registry.
+2024-03-18T14:29:29.924+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Releasing lock on daemon addresses registry.
+2024-03-18T14:29:29.925+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Waiting to acquire shared lock on daemon addresses registry.
+2024-03-18T14:29:29.925+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Lock acquired on daemon addresses registry.
+2024-03-18T14:29:29.925+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Releasing lock on daemon addresses registry.
+2024-03-18T14:29:39.922+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Waiting to acquire shared lock on daemon addresses registry.
+2024-03-18T14:29:39.922+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Lock acquired on daemon addresses registry.
+2024-03-18T14:29:39.922+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Releasing lock on daemon addresses registry.
+2024-03-18T14:29:39.923+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Waiting to acquire shared lock on daemon addresses registry.
+2024-03-18T14:29:39.923+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Lock acquired on daemon addresses registry.
+2024-03-18T14:29:39.923+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Releasing lock on daemon addresses registry.
+2024-03-18T14:29:39.923+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Waiting to acquire shared lock on daemon addresses registry.
+2024-03-18T14:29:39.924+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Lock acquired on daemon addresses registry.
+2024-03-18T14:29:39.924+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Releasing lock on daemon addresses registry.
+2024-03-18T14:29:49.923+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Waiting to acquire shared lock on daemon addresses registry.
+2024-03-18T14:29:49.924+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Lock acquired on daemon addresses registry.
+2024-03-18T14:29:49.924+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Releasing lock on daemon addresses registry.
+2024-03-18T14:29:49.925+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Waiting to acquire shared lock on daemon addresses registry.
+2024-03-18T14:29:49.925+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Lock acquired on daemon addresses registry.
+2024-03-18T14:29:49.925+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Releasing lock on daemon addresses registry.
+2024-03-18T14:29:49.926+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Waiting to acquire shared lock on daemon addresses registry.
+2024-03-18T14:29:49.926+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Lock acquired on daemon addresses registry.
+2024-03-18T14:29:49.926+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Releasing lock on daemon addresses registry.
+2024-03-18T14:29:59.924+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Waiting to acquire shared lock on daemon addresses registry.
+2024-03-18T14:29:59.924+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Lock acquired on daemon addresses registry.
+2024-03-18T14:29:59.924+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Releasing lock on daemon addresses registry.
+2024-03-18T14:29:59.924+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Waiting to acquire shared lock on daemon addresses registry.
+2024-03-18T14:29:59.925+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Lock acquired on daemon addresses registry.
+2024-03-18T14:29:59.925+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Releasing lock on daemon addresses registry.
+2024-03-18T14:29:59.925+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Waiting to acquire shared lock on daemon addresses registry.
+2024-03-18T14:29:59.925+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Lock acquired on daemon addresses registry.
+2024-03-18T14:29:59.925+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Releasing lock on daemon addresses registry.
+2024-03-18T14:30:09.922+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Waiting to acquire shared lock on daemon addresses registry.
+2024-03-18T14:30:09.922+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Lock acquired on daemon addresses registry.
+2024-03-18T14:30:09.923+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Releasing lock on daemon addresses registry.
+2024-03-18T14:30:09.923+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Waiting to acquire shared lock on daemon addresses registry.
+2024-03-18T14:30:09.923+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Lock acquired on daemon addresses registry.
+2024-03-18T14:30:09.924+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Releasing lock on daemon addresses registry.
+2024-03-18T14:30:09.924+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Waiting to acquire shared lock on daemon addresses registry.
+2024-03-18T14:30:09.924+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Lock acquired on daemon addresses registry.
+2024-03-18T14:30:09.924+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Releasing lock on daemon addresses registry.
+2024-03-18T14:30:19.923+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Waiting to acquire shared lock on daemon addresses registry.
+2024-03-18T14:30:19.923+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Lock acquired on daemon addresses registry.
+2024-03-18T14:30:19.923+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Releasing lock on daemon addresses registry.
+2024-03-18T14:30:19.924+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Waiting to acquire shared lock on daemon addresses registry.
+2024-03-18T14:30:19.924+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Lock acquired on daemon addresses registry.
+2024-03-18T14:30:19.924+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Releasing lock on daemon addresses registry.
+2024-03-18T14:30:19.925+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Waiting to acquire shared lock on daemon addresses registry.
+2024-03-18T14:30:19.925+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Lock acquired on daemon addresses registry.
+2024-03-18T14:30:19.925+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Releasing lock on daemon addresses registry.
+2024-03-18T14:30:29.923+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Waiting to acquire shared lock on daemon addresses registry.
+2024-03-18T14:30:29.923+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Lock acquired on daemon addresses registry.
+2024-03-18T14:30:29.923+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Releasing lock on daemon addresses registry.
+2024-03-18T14:30:29.924+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Waiting to acquire shared lock on daemon addresses registry.
+2024-03-18T14:30:29.924+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Lock acquired on daemon addresses registry.
+2024-03-18T14:30:29.924+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Releasing lock on daemon addresses registry.
+2024-03-18T14:30:29.924+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Waiting to acquire shared lock on daemon addresses registry.
+2024-03-18T14:30:29.924+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Lock acquired on daemon addresses registry.
+2024-03-18T14:30:29.924+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Releasing lock on daemon addresses registry.
+2024-03-18T14:30:39.923+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Waiting to acquire shared lock on daemon addresses registry.
+2024-03-18T14:30:39.923+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Lock acquired on daemon addresses registry.
+2024-03-18T14:30:39.923+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Releasing lock on daemon addresses registry.
+2024-03-18T14:30:39.924+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Waiting to acquire shared lock on daemon addresses registry.
+2024-03-18T14:30:39.924+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Lock acquired on daemon addresses registry.
+2024-03-18T14:30:39.924+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Releasing lock on daemon addresses registry.
+2024-03-18T14:30:39.925+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Waiting to acquire shared lock on daemon addresses registry.
+2024-03-18T14:30:39.925+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Lock acquired on daemon addresses registry.
+2024-03-18T14:30:39.925+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Releasing lock on daemon addresses registry.
+2024-03-18T14:30:49.921+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Waiting to acquire shared lock on daemon addresses registry.
+2024-03-18T14:30:49.922+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Lock acquired on daemon addresses registry.
+2024-03-18T14:30:49.922+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Releasing lock on daemon addresses registry.
+2024-03-18T14:30:49.922+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Waiting to acquire shared lock on daemon addresses registry.
+2024-03-18T14:30:49.923+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Lock acquired on daemon addresses registry.
+2024-03-18T14:30:49.923+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Releasing lock on daemon addresses registry.
+2024-03-18T14:30:49.923+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Waiting to acquire shared lock on daemon addresses registry.
+2024-03-18T14:30:49.923+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Lock acquired on daemon addresses registry.
+2024-03-18T14:30:49.923+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Releasing lock on daemon addresses registry.
+2024-03-18T14:30:59.923+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Waiting to acquire shared lock on daemon addresses registry.
+2024-03-18T14:30:59.923+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Lock acquired on daemon addresses registry.
+2024-03-18T14:30:59.923+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Releasing lock on daemon addresses registry.
+2024-03-18T14:30:59.924+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Waiting to acquire shared lock on daemon addresses registry.
+2024-03-18T14:30:59.924+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Lock acquired on daemon addresses registry.
+2024-03-18T14:30:59.924+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Releasing lock on daemon addresses registry.
+2024-03-18T14:30:59.924+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Waiting to acquire shared lock on daemon addresses registry.
+2024-03-18T14:30:59.925+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Lock acquired on daemon addresses registry.
+2024-03-18T14:30:59.925+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Releasing lock on daemon addresses registry.
+2024-03-18T14:31:09.923+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Waiting to acquire shared lock on daemon addresses registry.
+2024-03-18T14:31:09.923+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Lock acquired on daemon addresses registry.
+2024-03-18T14:31:09.924+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Releasing lock on daemon addresses registry.
+2024-03-18T14:31:09.924+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Waiting to acquire shared lock on daemon addresses registry.
+2024-03-18T14:31:09.924+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Lock acquired on daemon addresses registry.
+2024-03-18T14:31:09.924+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Releasing lock on daemon addresses registry.
+2024-03-18T14:31:09.925+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Waiting to acquire shared lock on daemon addresses registry.
+2024-03-18T14:31:09.925+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Lock acquired on daemon addresses registry.
+2024-03-18T14:31:09.925+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Releasing lock on daemon addresses registry.
+2024-03-18T14:31:19.921+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Waiting to acquire shared lock on daemon addresses registry.
+2024-03-18T14:31:19.921+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Lock acquired on daemon addresses registry.
+2024-03-18T14:31:19.921+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Releasing lock on daemon addresses registry.
+2024-03-18T14:31:19.922+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Waiting to acquire shared lock on daemon addresses registry.
+2024-03-18T14:31:19.922+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Lock acquired on daemon addresses registry.
+2024-03-18T14:31:19.923+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Releasing lock on daemon addresses registry.
+2024-03-18T14:31:19.923+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Waiting to acquire shared lock on daemon addresses registry.
+2024-03-18T14:31:19.923+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Lock acquired on daemon addresses registry.
+2024-03-18T14:31:19.924+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Releasing lock on daemon addresses registry.
+2024-03-18T14:31:29.922+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Waiting to acquire shared lock on daemon addresses registry.
+2024-03-18T14:31:29.923+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Lock acquired on daemon addresses registry.
+2024-03-18T14:31:29.923+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Releasing lock on daemon addresses registry.
+2024-03-18T14:31:29.923+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Waiting to acquire shared lock on daemon addresses registry.
+2024-03-18T14:31:29.923+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Lock acquired on daemon addresses registry.
+2024-03-18T14:31:29.924+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Releasing lock on daemon addresses registry.
+2024-03-18T14:31:29.924+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Waiting to acquire shared lock on daemon addresses registry.
+2024-03-18T14:31:29.924+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Lock acquired on daemon addresses registry.
+2024-03-18T14:31:29.924+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Releasing lock on daemon addresses registry.
+2024-03-18T14:31:39.921+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Waiting to acquire shared lock on daemon addresses registry.
+2024-03-18T14:31:39.921+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Lock acquired on daemon addresses registry.
+2024-03-18T14:31:39.922+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Releasing lock on daemon addresses registry.
+2024-03-18T14:31:39.922+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Waiting to acquire shared lock on daemon addresses registry.
+2024-03-18T14:31:39.922+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Lock acquired on daemon addresses registry.
+2024-03-18T14:31:39.922+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Releasing lock on daemon addresses registry.
+2024-03-18T14:31:39.923+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Waiting to acquire shared lock on daemon addresses registry.
+2024-03-18T14:31:39.923+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Lock acquired on daemon addresses registry.
+2024-03-18T14:31:39.923+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Releasing lock on daemon addresses registry.
+2024-03-18T14:31:49.921+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Waiting to acquire shared lock on daemon addresses registry.
+2024-03-18T14:31:49.921+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Lock acquired on daemon addresses registry.
+2024-03-18T14:31:49.921+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Releasing lock on daemon addresses registry.
+2024-03-18T14:31:49.922+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Waiting to acquire shared lock on daemon addresses registry.
+2024-03-18T14:31:49.922+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Lock acquired on daemon addresses registry.
+2024-03-18T14:31:49.922+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Releasing lock on daemon addresses registry.
+2024-03-18T14:31:49.923+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Waiting to acquire shared lock on daemon addresses registry.
+2024-03-18T14:31:49.923+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Lock acquired on daemon addresses registry.
+2024-03-18T14:31:49.923+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Releasing lock on daemon addresses registry.
+2024-03-18T14:31:59.921+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Waiting to acquire shared lock on daemon addresses registry.
+2024-03-18T14:31:59.921+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Lock acquired on daemon addresses registry.
+2024-03-18T14:31:59.921+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Releasing lock on daemon addresses registry.
+2024-03-18T14:31:59.922+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Waiting to acquire shared lock on daemon addresses registry.
+2024-03-18T14:31:59.922+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Lock acquired on daemon addresses registry.
+2024-03-18T14:31:59.922+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Releasing lock on daemon addresses registry.
+2024-03-18T14:31:59.923+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Waiting to acquire shared lock on daemon addresses registry.
+2024-03-18T14:31:59.923+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Lock acquired on daemon addresses registry.
+2024-03-18T14:31:59.923+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Releasing lock on daemon addresses registry.
+2024-03-18T14:32:09.922+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Waiting to acquire shared lock on daemon addresses registry.
+2024-03-18T14:32:09.922+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Lock acquired on daemon addresses registry.
+2024-03-18T14:32:09.922+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Releasing lock on daemon addresses registry.
+2024-03-18T14:32:09.923+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Waiting to acquire shared lock on daemon addresses registry.
+2024-03-18T14:32:09.923+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Lock acquired on daemon addresses registry.
+2024-03-18T14:32:09.923+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Releasing lock on daemon addresses registry.
+2024-03-18T14:32:09.924+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Waiting to acquire shared lock on daemon addresses registry.
+2024-03-18T14:32:09.924+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Lock acquired on daemon addresses registry.
+2024-03-18T14:32:09.924+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Releasing lock on daemon addresses registry.
+2024-03-18T14:32:19.922+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Waiting to acquire shared lock on daemon addresses registry.
+2024-03-18T14:32:19.922+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Lock acquired on daemon addresses registry.
+2024-03-18T14:32:19.923+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Releasing lock on daemon addresses registry.
+2024-03-18T14:32:19.923+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Waiting to acquire shared lock on daemon addresses registry.
+2024-03-18T14:32:19.923+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Lock acquired on daemon addresses registry.
+2024-03-18T14:32:19.923+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Releasing lock on daemon addresses registry.
+2024-03-18T14:32:19.924+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Waiting to acquire shared lock on daemon addresses registry.
+2024-03-18T14:32:19.924+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Lock acquired on daemon addresses registry.
+2024-03-18T14:32:19.924+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Releasing lock on daemon addresses registry.
+2024-03-18T14:32:29.922+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Waiting to acquire shared lock on daemon addresses registry.
+2024-03-18T14:32:29.922+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Lock acquired on daemon addresses registry.
+2024-03-18T14:32:29.922+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Releasing lock on daemon addresses registry.
+2024-03-18T14:32:29.923+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Waiting to acquire shared lock on daemon addresses registry.
+2024-03-18T14:32:29.923+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Lock acquired on daemon addresses registry.
+2024-03-18T14:32:29.923+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Releasing lock on daemon addresses registry.
+2024-03-18T14:32:29.923+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Waiting to acquire shared lock on daemon addresses registry.
+2024-03-18T14:32:29.923+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Lock acquired on daemon addresses registry.
+2024-03-18T14:32:29.923+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Releasing lock on daemon addresses registry.
+2024-03-18T14:32:39.921+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Waiting to acquire shared lock on daemon addresses registry.
+2024-03-18T14:32:39.922+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Lock acquired on daemon addresses registry.
+2024-03-18T14:32:39.922+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Releasing lock on daemon addresses registry.
+2024-03-18T14:32:39.922+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Waiting to acquire shared lock on daemon addresses registry.
+2024-03-18T14:32:39.923+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Lock acquired on daemon addresses registry.
+2024-03-18T14:32:39.923+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Releasing lock on daemon addresses registry.
+2024-03-18T14:32:39.923+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Waiting to acquire shared lock on daemon addresses registry.
+2024-03-18T14:32:39.923+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Lock acquired on daemon addresses registry.
+2024-03-18T14:32:39.923+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Releasing lock on daemon addresses registry.
+2024-03-18T14:32:49.921+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Waiting to acquire shared lock on daemon addresses registry.
+2024-03-18T14:32:49.922+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Lock acquired on daemon addresses registry.
+2024-03-18T14:32:49.922+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Releasing lock on daemon addresses registry.
+2024-03-18T14:32:49.923+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Waiting to acquire shared lock on daemon addresses registry.
+2024-03-18T14:32:49.923+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Lock acquired on daemon addresses registry.
+2024-03-18T14:32:49.923+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Releasing lock on daemon addresses registry.
+2024-03-18T14:32:49.923+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Waiting to acquire shared lock on daemon addresses registry.
+2024-03-18T14:32:49.923+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Lock acquired on daemon addresses registry.
+2024-03-18T14:32:49.923+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Releasing lock on daemon addresses registry.
+2024-03-18T14:32:59.921+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Waiting to acquire shared lock on daemon addresses registry.
+2024-03-18T14:32:59.921+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Lock acquired on daemon addresses registry.
+2024-03-18T14:32:59.921+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Releasing lock on daemon addresses registry.
+2024-03-18T14:32:59.922+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Waiting to acquire shared lock on daemon addresses registry.
+2024-03-18T14:32:59.922+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Lock acquired on daemon addresses registry.
+2024-03-18T14:32:59.922+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Releasing lock on daemon addresses registry.
+2024-03-18T14:32:59.922+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Waiting to acquire shared lock on daemon addresses registry.
+2024-03-18T14:32:59.922+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Lock acquired on daemon addresses registry.
+2024-03-18T14:32:59.922+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Releasing lock on daemon addresses registry.
+2024-03-18T14:33:09.922+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Waiting to acquire shared lock on daemon addresses registry.
+2024-03-18T14:33:09.922+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Lock acquired on daemon addresses registry.
+2024-03-18T14:33:09.923+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Releasing lock on daemon addresses registry.
+2024-03-18T14:33:09.924+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Waiting to acquire shared lock on daemon addresses registry.
+2024-03-18T14:33:09.924+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Lock acquired on daemon addresses registry.
+2024-03-18T14:33:09.924+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Releasing lock on daemon addresses registry.
+2024-03-18T14:33:09.925+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Waiting to acquire shared lock on daemon addresses registry.
+2024-03-18T14:33:09.925+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Lock acquired on daemon addresses registry.
+2024-03-18T14:33:09.926+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Releasing lock on daemon addresses registry.
+2024-03-18T14:33:19.920+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Waiting to acquire shared lock on daemon addresses registry.
+2024-03-18T14:33:19.920+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Lock acquired on daemon addresses registry.
+2024-03-18T14:33:19.920+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Releasing lock on daemon addresses registry.
+2024-03-18T14:33:19.921+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Waiting to acquire shared lock on daemon addresses registry.
+2024-03-18T14:33:19.921+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Lock acquired on daemon addresses registry.
+2024-03-18T14:33:19.921+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Releasing lock on daemon addresses registry.
+2024-03-18T14:33:19.922+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Waiting to acquire shared lock on daemon addresses registry.
+2024-03-18T14:33:19.922+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Lock acquired on daemon addresses registry.
+2024-03-18T14:33:19.923+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Releasing lock on daemon addresses registry.
+2024-03-18T14:33:25.913+0100 [DEBUG] [org.gradle.internal.watch.vfs.impl.WatchingVirtualFileSystem] Handling VFS change CREATED C:\Users\eleguen2023\Documents\works\BidProject\src\main\java\projet\bid_pro\controller\ContexteController.java~
+2024-03-18T14:33:25.914+0100 [DEBUG] [org.gradle.internal.watch.vfs.impl.WatchingVirtualFileSystem] Handling VFS change MODIFIED C:\Users\eleguen2023\Documents\works\BidProject\src\main\java\projet\bid_pro\controller\ContexteController.java
+2024-03-18T14:33:25.923+0100 [DEBUG] [org.gradle.internal.watch.vfs.impl.WatchingVirtualFileSystem] Handling VFS change CREATED C:\Users\eleguen2023\Documents\works\BidProject\src\main\java\projet\bid_pro\dal\ParticipantDAO.java~
+2024-03-18T14:33:25.924+0100 [DEBUG] [org.gradle.internal.watch.vfs.impl.WatchingVirtualFileSystem] Handling VFS change MODIFIED C:\Users\eleguen2023\Documents\works\BidProject\src\main\java\projet\bid_pro\dal\ParticipantDAO.java
+2024-03-18T14:33:25.934+0100 [DEBUG] [org.gradle.internal.watch.vfs.impl.WatchingVirtualFileSystem] Handling VFS change MODIFIED C:\Users\eleguen2023\Documents\works\BidProject\src\main\java\projet\bid_pro\controller\FilmController.java
+2024-03-18T14:33:25.955+0100 [DEBUG] [org.gradle.internal.watch.vfs.impl.WatchingVirtualFileSystem] Handling VFS change MODIFIED C:\Users\eleguen2023\Documents\works\BidProject\src\main\java\projet\bid_pro\dal\GenreDAOImpl.java
+2024-03-18T14:33:25.975+0100 [DEBUG] [org.gradle.internal.watch.vfs.impl.WatchingVirtualFileSystem] Handling VFS change MODIFIED C:\Users\eleguen2023\Documents\works\BidProject\src\main\java\projet\bid_pro\controller\AvisController.java
+2024-03-18T14:33:25.986+0100 [DEBUG] [org.gradle.internal.watch.vfs.impl.WatchingVirtualFileSystem] Handling VFS change MODIFIED C:\Users\eleguen2023\Documents\works\BidProject\src\main\java\projet\bid_pro\dal\AvisDAO.java
+2024-03-18T14:33:25.996+0100 [DEBUG] [org.gradle.internal.watch.vfs.impl.WatchingVirtualFileSystem] Handling VFS change CREATED C:\Users\eleguen2023\Documents\works\BidProject\src\main\java\projet\bid_pro\controller\converter\StringToParticipantConverter.java~
+2024-03-18T14:33:26.000+0100 [DEBUG] [org.gradle.internal.watch.vfs.impl.WatchingVirtualFileSystem] Handling VFS change MODIFIED C:\Users\eleguen2023\Documents\works\BidProject\src\main\java\projet\bid_pro\controller\converter\StringToParticipantConverter.java
+2024-03-18T14:33:26.014+0100 [DEBUG] [org.gradle.internal.watch.vfs.impl.WatchingVirtualFileSystem] Handling VFS change MODIFIED C:\Users\eleguen2023\Documents\works\BidProject\src\main\java\projet\bid_pro\dal\ParticipantDAOImpl.java
+2024-03-18T14:33:26.047+0100 [DEBUG] [org.gradle.internal.watch.vfs.impl.WatchingVirtualFileSystem] Handling VFS change MODIFIED C:\Users\eleguen2023\Documents\works\BidProject\src\main\java\projet\bid_pro\dal\FilmDAO.java
+2024-03-18T14:33:26.057+0100 [DEBUG] [org.gradle.internal.watch.vfs.impl.WatchingVirtualFileSystem] Handling VFS change MODIFIED C:\Users\eleguen2023\Documents\works\BidProject\src\main\java\projet\bid_pro\dal\AvisDAOImpl.java
+2024-03-18T14:33:26.068+0100 [DEBUG] [org.gradle.internal.watch.vfs.impl.WatchingVirtualFileSystem] Handling VFS change MODIFIED C:\Users\eleguen2023\Documents\works\BidProject\src\main\java\projet\bid_pro\dal\MembreDAOImpl.java
+2024-03-18T14:33:26.078+0100 [DEBUG] [org.gradle.internal.watch.vfs.impl.WatchingVirtualFileSystem] Handling VFS change MODIFIED C:\Users\eleguen2023\Documents\works\BidProject\src\main\java\projet\bid_pro\dal\GenreDAO.java
+2024-03-18T14:33:26.087+0100 [DEBUG] [org.gradle.internal.watch.vfs.impl.WatchingVirtualFileSystem] Handling VFS change CREATED C:\Users\eleguen2023\Documents\works\BidProject\src\main\java\projet\bid_pro\bll\FilmService.java~
+2024-03-18T14:33:26.088+0100 [DEBUG] [org.gradle.internal.watch.vfs.impl.WatchingVirtualFileSystem] Handling VFS change MODIFIED C:\Users\eleguen2023\Documents\works\BidProject\src\main\java\projet\bid_pro\bll\FilmService.java
+2024-03-18T14:33:26.098+0100 [DEBUG] [org.gradle.internal.watch.vfs.impl.WatchingVirtualFileSystem] Handling VFS change MODIFIED C:\Users\eleguen2023\Documents\works\BidProject\src\main\java\projet\bid_pro\dal\MembreDAO.java
+2024-03-18T14:33:26.117+0100 [DEBUG] [org.gradle.internal.watch.vfs.impl.WatchingVirtualFileSystem] Handling VFS change MODIFIED C:\Users\eleguen2023\Documents\works\BidProject\src\main\java\projet\bid_pro\dal\FilmDAOImpl.java
+2024-03-18T14:33:26.129+0100 [DEBUG] [org.gradle.internal.watch.vfs.impl.WatchingVirtualFileSystem] Handling VFS change MODIFIED C:\Users\eleguen2023\Documents\works\BidProject\src\main\java\projet\bid_pro\bll\FilmServiceImpl.java
+2024-03-18T14:33:26.140+0100 [DEBUG] [org.gradle.internal.watch.vfs.impl.WatchingVirtualFileSystem] Handling VFS change MODIFIED C:\Users\eleguen2023\Documents\works\BidProject\src\main\java\projet\bid_pro\controller\converter\StringToGenreConverter.java
+2024-03-18T14:33:26.265+0100 [DEBUG] [org.gradle.internal.remote.internal.inet.TcpIncomingConnector] Accepted connection from /127.0.0.1:56238 to /127.0.0.1:56160.
+2024-03-18T14:33:26.267+0100 [DEBUG] [org.gradle.internal.remote.internal.inet.TcpIncomingConnector] Accepted connection from /127.0.0.1:56239 to /127.0.0.1:56160.
+2024-03-18T14:33:26.270+0100 [DEBUG] [org.gradle.launcher.daemon.server.SynchronizedDispatchConnection] thread 187: received class org.gradle.launcher.daemon.protocol.Build
+2024-03-18T14:33:26.270+0100 [DEBUG] [org.gradle.launcher.daemon.server.DefaultDaemonConnection] thread 187: Received non-IO message from client: Build{id=231ba2f3-f089-453a-a017-e25936d5acef, currentDir=C:\Users\eleguen2023\Documents\works\BidProject}
+2024-03-18T14:33:26.271+0100 [INFO] [org.gradle.launcher.daemon.server.DefaultIncomingConnectionHandler] Received command: Build{id=231ba2f3-f089-453a-a017-e25936d5acef, currentDir=C:\Users\eleguen2023\Documents\works\BidProject}.
+2024-03-18T14:33:26.271+0100 [DEBUG] [org.gradle.launcher.daemon.server.DefaultIncomingConnectionHandler] Starting executing command: Build{id=231ba2f3-f089-453a-a017-e25936d5acef, currentDir=C:\Users\eleguen2023\Documents\works\BidProject} with connection: socket connection from /127.0.0.1:56160 to /127.0.0.1:56238.
+2024-03-18T14:33:26.271+0100 [DEBUG] [org.gradle.launcher.daemon.server.DaemonStateCoordinator] Command execution: started DaemonCommandExecution[command = Build{id=231ba2f3-f089-453a-a017-e25936d5acef, currentDir=C:\Users\eleguen2023\Documents\works\BidProject}, connection = DefaultDaemonConnection: socket connection from /127.0.0.1:56160 to /127.0.0.1:56238] after 5.0 minutes of idle
+2024-03-18T14:33:26.271+0100 [INFO] [org.gradle.launcher.daemon.server.DaemonRegistryUpdater] Marking the daemon as busy, address: [beb6dfc2-eb40-4c3d-a97a-d6727af204ee port:56160, addresses:[localhost/127.0.0.1]]
+2024-03-18T14:33:26.271+0100 [DEBUG] [org.gradle.launcher.daemon.registry.PersistentDaemonRegistry] Marking busy by address: [beb6dfc2-eb40-4c3d-a97a-d6727af204ee port:56160, addresses:[localhost/127.0.0.1]]
+2024-03-18T14:33:26.272+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Waiting to acquire exclusive lock on daemon addresses registry.
+2024-03-18T14:33:26.272+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Lock acquired on daemon addresses registry.
+2024-03-18T14:33:26.273+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Releasing lock on daemon addresses registry.
+2024-03-18T14:33:26.274+0100 [DEBUG] [org.gradle.launcher.daemon.server.DaemonStateCoordinator] resetting idle timer
+2024-03-18T14:33:26.274+0100 [DEBUG] [org.gradle.launcher.daemon.server.DaemonStateCoordinator] daemon is running. Sleeping until state changes.
+2024-03-18T14:33:26.274+0100 [INFO] [org.gradle.launcher.daemon.server.exec.StartBuildOrRespondWithBusy] Daemon is about to start building Build{id=231ba2f3-f089-453a-a017-e25936d5acef, currentDir=C:\Users\eleguen2023\Documents\works\BidProject}. Dispatching build started information...
+2024-03-18T14:33:26.274+0100 [DEBUG] [org.gradle.launcher.daemon.server.SynchronizedDispatchConnection] thread 191: dispatching org.gradle.launcher.daemon.protocol.BuildStarted@6c3283a9
+2024-03-18T14:33:26.275+0100 [DEBUG] [org.gradle.launcher.daemon.server.exec.EstablishBuildEnvironment] Configuring env variables: [USERDOMAIN_ROAMINGPROFILE, LOCALAPPDATA, MSMPI_BIN, PROCESSOR_LEVEL, IJ_RESTARTER_LOG, USERDOMAIN, LOGONSERVER, JAVA_HOME, SESSIONNAME, ALLUSERSPROFILE, PROCESSOR_ARCHITECTURE, PSModulePath, SystemDrive, PT8HOME, APPDATA, USERNAME, USERDNSDOMAIN, ProgramFiles(x86), CommonProgramFiles, Path, PATHEXT, DriverData, OS, COMPUTERNAME, PROCESSOR_REVISION, CommonProgramW6432, ComSpec, ProgramData, ProgramW6432, TEMP, HOMEPATH, SystemRoot, PROCESSOR_IDENTIFIER, HOMEDRIVE, USERPROFILE, TMP, CommonProgramFiles(x86), ProgramFiles, PUBLIC, windir, NUMBER_OF_PROCESSORS, =::, IDEA_INITIAL_DIRECTORY, MSMPI_BENCHMARKS]
+2024-03-18T14:33:26.276+0100 [DEBUG] [org.gradle.launcher.daemon.server.exec.LogToClient] About to start relaying all logs to the client via the connection.
+2024-03-18T14:33:26.276+0100 [INFO] [org.gradle.launcher.daemon.server.exec.LogToClient] The client will now receive all logging from the daemon (pid: 5536). The daemon log file: C:\Users\eleguen2023\Documents\works\BidProject\daemon\8.6\daemon-5536.out.log
+2024-03-18T14:33:26.277+0100 [DEBUG] [org.gradle.launcher.daemon.server.SynchronizedDispatchConnection] thread 189: received class org.gradle.launcher.daemon.protocol.InvalidateVirtualFileSystem
+2024-03-18T14:33:26.277+0100 [DEBUG] [org.gradle.launcher.daemon.server.DefaultDaemonConnection] thread 189: Received non-IO message from client: InvalidateVirtualFileSystem[id=8abf22e5-7ef3-41f4-ac75-339d1f05f1fb]
+2024-03-18T14:33:26.277+0100 [INFO] [org.gradle.launcher.daemon.server.DefaultIncomingConnectionHandler] Received command: InvalidateVirtualFileSystem[id=8abf22e5-7ef3-41f4-ac75-339d1f05f1fb].
+2024-03-18T14:33:26.277+0100 [DEBUG] [org.gradle.launcher.daemon.server.DefaultIncomingConnectionHandler] Starting executing command: InvalidateVirtualFileSystem[id=8abf22e5-7ef3-41f4-ac75-339d1f05f1fb] with connection: socket connection from /127.0.0.1:56160 to /127.0.0.1:56239.
+2024-03-18T14:33:26.278+0100 [INFO] [org.gradle.launcher.daemon.server.api.HandleInvalidateVirtualFileSystem] Invalidating [C:\Users\eleguen2023\Documents\works\BidProject\src\main\java\projet\bid_pro\dal\AvisDAOImpl.java, C:\Users\eleguen2023\Documents\works\BidProject\src\main\java\projet\bid_pro\bll\FilmServiceImpl.java, C:\Users\eleguen2023\Documents\works\BidProject\src\main\java\projet\bid_pro\bll\FilmService.java, C:\Users\eleguen2023\Documents\works\BidProject\src\main\java\projet\bid_pro\dal\MembreDAO.java, C:\Users\eleguen2023\Documents\works\BidProject\src\main\java\projet\bid_pro\controller\AvisController.java, C:\Users\eleguen2023\Documents\works\BidProject\src\main\java\projet\bid_pro\dal\ParticipantDAO.java, C:\Users\eleguen2023\Documents\works\BidProject\src\main\java\projet\bid_pro\dal\FilmDAO.java, C:\Users\eleguen2023\Documents\works\BidProject\src\main\java\projet\bid_pro\dal\MembreDAOImpl.java, C:\Users\eleguen2023\Documents\works\BidProject\src\main\java\projet\bid_pro\controller\converter\StringToParticipantConverter.java, C:\Users\eleguen2023\Documents\works\BidProject\src\main\java\projet\bid_pro\controller\FilmController.java, C:\Users\eleguen2023\Documents\works\BidProject\src\main\java\projet\bid_pro\bo\Retrait.java, C:\Users\eleguen2023\Documents\works\BidProject\src\main\java\projet\bid_pro\dal\GenreDAO.java, C:\Users\eleguen2023\Documents\works\BidProject\src\main\java\projet\bid_pro\dal\ParticipantDAOImpl.java, C:\Users\eleguen2023\Documents\works\BidProject\src\main\java\projet\bid_pro\bo\Categorie.java, C:\Users\eleguen2023\Documents\works\BidProject\src\main\java\projet\bid_pro\dal\FilmDAOImpl.java, C:\Users\eleguen2023\Documents\works\BidProject\src\main\java\projet\bid_pro\dal\AvisDAO.java, C:\Users\eleguen2023\Documents\works\BidProject\src\main\java\projet\bid_pro\dal\GenreDAOImpl.java, C:\Users\eleguen2023\Documents\works\BidProject\src\main\java\projet\bid_pro\controller\ContexteController.java, C:\Users\eleguen2023\Documents\works\BidProject\src\main\java\projet\bid_pro\bo\Utilisateur.java, C:\Users\eleguen2023\Documents\works\BidProject\src\main\java\projet\bid_pro\bo\ArticleVendu.java, C:\Users\eleguen2023\Documents\works\BidProject\src\main\java\projet\bid_pro\bo\Enchere.java, C:\Users\eleguen2023\Documents\works\BidProject\src\main\java\projet\bid_pro\controller\converter\StringToGenreConverter.java]
+2024-03-18T14:33:26.278+0100 [DEBUG] [org.gradle.internal.vfs.impl.AbstractVirtualFileSystem] Invalidating VFS paths: [C:\Users\eleguen2023\Documents\works\BidProject\src\main\java\projet\bid_pro\dal\AvisDAOImpl.java, C:\Users\eleguen2023\Documents\works\BidProject\src\main\java\projet\bid_pro\bll\FilmServiceImpl.java, C:\Users\eleguen2023\Documents\works\BidProject\src\main\java\projet\bid_pro\bll\FilmService.java, C:\Users\eleguen2023\Documents\works\BidProject\src\main\java\projet\bid_pro\dal\MembreDAO.java, C:\Users\eleguen2023\Documents\works\BidProject\src\main\java\projet\bid_pro\controller\AvisController.java, C:\Users\eleguen2023\Documents\works\BidProject\src\main\java\projet\bid_pro\dal\ParticipantDAO.java, C:\Users\eleguen2023\Documents\works\BidProject\src\main\java\projet\bid_pro\dal\FilmDAO.java, C:\Users\eleguen2023\Documents\works\BidProject\src\main\java\projet\bid_pro\dal\MembreDAOImpl.java, C:\Users\eleguen2023\Documents\works\BidProject\src\main\java\projet\bid_pro\controller\converter\StringToParticipantConverter.java, C:\Users\eleguen2023\Documents\works\BidProject\src\main\java\projet\bid_pro\controller\FilmController.java, C:\Users\eleguen2023\Documents\works\BidProject\src\main\java\projet\bid_pro\bo\Retrait.java, C:\Users\eleguen2023\Documents\works\BidProject\src\main\java\projet\bid_pro\dal\GenreDAO.java, C:\Users\eleguen2023\Documents\works\BidProject\src\main\java\projet\bid_pro\dal\ParticipantDAOImpl.java, C:\Users\eleguen2023\Documents\works\BidProject\src\main\java\projet\bid_pro\bo\Categorie.java, C:\Users\eleguen2023\Documents\works\BidProject\src\main\java\projet\bid_pro\dal\FilmDAOImpl.java, C:\Users\eleguen2023\Documents\works\BidProject\src\main\java\projet\bid_pro\dal\AvisDAO.java, C:\Users\eleguen2023\Documents\works\BidProject\src\main\java\projet\bid_pro\dal\GenreDAOImpl.java, C:\Users\eleguen2023\Documents\works\BidProject\src\main\java\projet\bid_pro\controller\ContexteController.java, C:\Users\eleguen2023\Documents\works\BidProject\src\main\java\projet\bid_pro\bo\Utilisateur.java, C:\Users\eleguen2023\Documents\works\BidProject\src\main\java\projet\bid_pro\bo\ArticleVendu.java, C:\Users\eleguen2023\Documents\works\BidProject\src\main\java\projet\bid_pro\bo\Enchere.java, C:\Users\eleguen2023\Documents\works\BidProject\src\main\java\projet\bid_pro\controller\converter\StringToGenreConverter.java]
+2024-03-18T14:33:26.279+0100 [DEBUG] [org.gradle.launcher.daemon.server.SynchronizedDispatchConnection] thread 188: dispatching Success[value=null]
+2024-03-18T14:33:26.279+0100 [INFO] [org.gradle.launcher.daemon.server.exec.LogAndCheckHealth] Starting 2nd build in daemon [uptime: 5 mins 26.584 secs, performance: 100%, GC rate: 0.00/s, heap usage: 0% of 512 MiB, non-heap usage: 16% of 384 MiB]
+2024-03-18T14:33:26.279+0100 [DEBUG] [org.gradle.launcher.daemon.server.DefaultIncomingConnectionHandler] Finishing executing command: InvalidateVirtualFileSystem[id=8abf22e5-7ef3-41f4-ac75-339d1f05f1fb]
+2024-03-18T14:33:26.279+0100 [DEBUG] [org.gradle.launcher.daemon.server.SynchronizedDispatchConnection] thread 189: received class org.gradle.launcher.daemon.protocol.Finished
+2024-03-18T14:33:26.279+0100 [DEBUG] [org.gradle.launcher.daemon.server.exec.ExecuteBuild] The daemon has started executing the build.
+2024-03-18T14:33:26.279+0100 [DEBUG] [org.gradle.launcher.daemon.server.DefaultDaemonConnection] thread 189: Received non-IO message from client: org.gradle.launcher.daemon.protocol.Finished@c562b5d
+2024-03-18T14:33:26.279+0100 [DEBUG] [org.gradle.launcher.daemon.server.exec.ExecuteBuild] Executing build with daemon context: DefaultDaemonContext[uid=480b5dcb-9c95-4a84-aa23-61453b79100e,javaHome=C:\Users\eleguen2023\Documents\tools\java17,daemonRegistryDir=C:\Users\eleguen2023\Documents\works\BidProject\daemon,pid=5536,idleTimeout=10800000,priority=NORMAL,applyInstrumentationAgent=true,daemonOpts=--add-opens=java.base/java.util=ALL-UNNAMED,--add-opens=java.base/java.lang=ALL-UNNAMED,--add-opens=java.base/java.lang.invoke=ALL-UNNAMED,--add-opens=java.prefs/java.util.prefs=ALL-UNNAMED,--add-opens=java.base/java.nio.charset=ALL-UNNAMED,--add-opens=java.base/java.net=ALL-UNNAMED,--add-opens=java.base/java.util.concurrent.atomic=ALL-UNNAMED,-XX:MaxMetaspaceSize=384m,-XX:+HeapDumpOnOutOfMemoryError,-Xms256m,-Xmx512m,-Dfile.encoding=windows-1252,-Duser.country=FR,-Duser.language=fr,-Duser.variant]
+2024-03-18T14:33:26.279+0100 [DEBUG] [org.gradle.launcher.daemon.server.DefaultIncomingConnectionHandler] Received finished message: org.gradle.launcher.daemon.protocol.Finished@c562b5d
+2024-03-18T14:33:26.279+0100 [DEBUG] [org.gradle.launcher.daemon.server.SynchronizedDispatchConnection] thread 188: stopping connection
+C:\Users\eleguen2023\Documents\works\BidProject\src\main\java\projet\bid_pro\bll\FilmService.java:6: error: cannot find symbol
+	List<Film> consulterFilms();
+	     ^
+  symbol:   class Film
+  location: interface FilmService
+C:\Users\eleguen2023\Documents\works\BidProject\src\main\java\projet\bid_pro\bll\FilmService.java:8: error: cannot find symbol
+	Film consulterFilmParId(long id);
+	^
+  symbol:   class Film
+  location: interface FilmService
+C:\Users\eleguen2023\Documents\works\BidProject\src\main\java\projet\bid_pro\bll\FilmService.java:10: error: cannot find symbol
+	List<Genre> consulterGenres();
+	     ^
+  symbol:   class Genre
+  location: interface FilmService
+C:\Users\eleguen2023\Documents\works\BidProject\src\main\java\projet\bid_pro\bll\FilmService.java:12: error: cannot find symbol
+	List<Participant> consulterParticipants();
+	     ^
+  symbol:   class Participant
+  location: interface FilmService
+C:\Users\eleguen2023\Documents\works\BidProject\src\main\java\projet\bid_pro\bll\FilmService.java:14: error: cannot find symbol
+	Genre consulterGenreParId(long id);
+	^
+  symbol:   class Genre
+  location: interface FilmService
+C:\Users\eleguen2023\Documents\works\BidProject\src\main\java\projet\bid_pro\bll\FilmService.java:16: error: cannot find symbol
+	Participant consulterParticipantParId(long id);
+	^
+  symbol:   class Participant
+  location: interface FilmService
+C:\Users\eleguen2023\Documents\works\BidProject\src\main\java\projet\bid_pro\bll\FilmService.java:18: error: cannot find symbol
+	void creerFilm(Film film);
+	               ^
+  symbol:   class Film
+  location: interface FilmService
+C:\Users\eleguen2023\Documents\works\BidProject\src\main\java\projet\bid_pro\bll\FilmService.java:22: error: cannot find symbol
+	void publierAvis(Avis avis, long idFilm);
+	                 ^
+  symbol:   class Avis
+  location: interface FilmService
+C:\Users\eleguen2023\Documents\works\BidProject\src\main\java\projet\bid_pro\bll\FilmService.java:24: error: cannot find symbol
+	List<Avis> consulterAvis(long idFilm);
+	     ^
+  symbol:   class Avis
+  location: interface FilmService
+C:\Users\eleguen2023\Documents\works\BidProject\src\main\java\projet\bid_pro\bll\FilmServiceImpl.java:37: error: cannot find symbol
+	public List<Film> consulterFilms() {
+	            ^
+  symbol:   class Film
+  location: class FilmServiceImpl
+C:\Users\eleguen2023\Documents\works\BidProject\src\main\java\projet\bid_pro\bll\FilmServiceImpl.java:52: error: cannot find symbol
+	public Film consulterFilmParId(long id) {
+	       ^
+  symbol:   class Film
+  location: class FilmServiceImpl
+C:\Users\eleguen2023\Documents\works\BidProject\src\main\java\projet\bid_pro\bll\FilmServiceImpl.java:84: error: cannot find symbol
+	private void chargerGenreEtRealisateur1Film(Film f) {
+	                                            ^
+  symbol:   class Film
+  location: class FilmServiceImpl
+C:\Users\eleguen2023\Documents\works\BidProject\src\main\java\projet\bid_pro\bll\FilmServiceImpl.java:92: error: cannot find symbol
+	public List<Genre> consulterGenres() {
+	            ^
+  symbol:   class Genre
+  location: class FilmServiceImpl
+C:\Users\eleguen2023\Documents\works\BidProject\src\main\java\projet\bid_pro\bll\FilmServiceImpl.java:97: error: cannot find symbol
+	public List<Participant> consulterParticipants() {
+	            ^
+  symbol:   class Participant
+  location: class FilmServiceImpl
+C:\Users\eleguen2023\Documents\works\BidProject\src\main\java\projet\bid_pro\bll\FilmServiceImpl.java:102: error: cannot find symbol
+	public Genre consulterGenreParId(long id) {
+	       ^
+  symbol:   class Genre
+  location: class FilmServiceImpl
+C:\Users\eleguen2023\Documents\works\BidProject\src\main\java\projet\bid_pro\bll\FilmServiceImpl.java:107: error: cannot find symbol
+	public Participant consulterParticipantParId(long id) {
+	       ^
+  symbol:   class Participant
+  location: class FilmServiceImpl
+C:\Users\eleguen2023\Documents\works\BidProject\src\main\java\projet\bid_pro\bll\FilmServiceImpl.java:113: error: cannot find symbol
+	public void creerFilm(Film film) {
+	                      ^
+  symbol:   class Film
+  location: class FilmServiceImpl
+C:\Users\eleguen2023\Documents\works\BidProject\src\main\java\projet\bid_pro\bll\FilmServiceImpl.java:150: error: cannot find symbol
+	public void publierAvis(Avis avis, long idFilm) {
+	                        ^
+  symbol:   class Avis
+  location: class FilmServiceImpl
+C:\Users\eleguen2023\Documents\works\BidProject\src\main\java\projet\bid_pro\bll\FilmServiceImpl.java:176: error: cannot find symbol
+	public List<Avis> consulterAvis(long idFilm) {
+	            ^
+  symbol:   class Avis
+  location: class FilmServiceImpl
+C:\Users\eleguen2023\Documents\works\BidProject\src\main\java\projet\bid_pro\bll\FilmServiceImpl.java:192: error: cannot find symbol
+	private void chargerMembre1Avis(Avis a) {
+	                                ^
+  symbol:   class Avis
+  location: class FilmServiceImpl
+C:\Users\eleguen2023\Documents\works\BidProject\src\main\java\projet\bid_pro\bll\FilmServiceImpl.java:200: error: cannot find symbol
+	private boolean validerFilm(Film f, BusinessException be) {
+	                            ^
+  symbol:   class Film
+  location: class FilmServiceImpl
+C:\Users\eleguen2023\Documents\works\BidProject\src\main\java\projet\bid_pro\bll\FilmServiceImpl.java:253: error: cannot find symbol
+	private boolean validerGenre(Genre genre, BusinessException be) {
+	                             ^
+  symbol:   class Genre
+  location: class FilmServiceImpl
+C:\Users\eleguen2023\Documents\works\BidProject\src\main\java\projet\bid_pro\bll\FilmServiceImpl.java:285: error: cannot find symbol
+	private boolean validerRealisateur(Participant participant, BusinessException be) {
+	                                   ^
+  symbol:   class Participant
+  location: class FilmServiceImpl
+C:\Users\eleguen2023\Documents\works\BidProject\src\main\java\projet\bid_pro\bll\FilmServiceImpl.java:314: error: cannot find symbol
+	private boolean validerActeurs(List<Participant> acteurs, BusinessException be) {
+	                                    ^
+  symbol:   class Participant
+  location: class FilmServiceImpl
+C:\Users\eleguen2023\Documents\works\BidProject\src\main\java\projet\bid_pro\bll\FilmServiceImpl.java:363: error: cannot find symbol
+	private boolean validerAvis(Avis a, BusinessException be) {
+	                            ^
+  symbol:   class Avis
+  location: class FilmServiceImpl
+C:\Users\eleguen2023\Documents\works\BidProject\src\main\java\projet\bid_pro\bll\FilmServiceImpl.java:394: error: cannot find symbol
+	private boolean validerMembre(Membre membre, BusinessException be) {
+	                              ^
+  symbol:   class Membre
+  location: class FilmServiceImpl
+C:\Users\eleguen2023\Documents\works\BidProject\src\main\java\projet\bid_pro\dal\MembreDAO.java:4: error: cannot find symbol
+	Membre read(long id);
+	^
+  symbol:   class Membre
+  location: interface MembreDAO
+C:\Users\eleguen2023\Documents\works\BidProject\src\main\java\projet\bid_pro\dal\MembreDAO.java:6: error: cannot find symbol
+	Membre read(String email);
+	^
+  symbol:   class Membre
+  location: interface MembreDAO
+C:\Users\eleguen2023\Documents\works\BidProject\src\main\java\projet\bid_pro\dal\AvisDAO.java:6: error: cannot find symbol
+	void create(Avis avis, long idFilm);
+	            ^
+  symbol:   class Avis
+  location: interface AvisDAO
+C:\Users\eleguen2023\Documents\works\BidProject\src\main\java\projet\bid_pro\dal\AvisDAO.java:8: error: cannot find symbol
+	List<Avis> findByFilm(long idFilm);
+	     ^
+  symbol:   class Avis
+  location: interface AvisDAO
+C:\Users\eleguen2023\Documents\works\BidProject\src\main\java\projet\bid_pro\dal\ParticipantDAO.java:7: error: cannot find symbol
+	Participant read(long id);
+	^
+  symbol:   class Participant
+  location: interface ParticipantDAO
+C:\Users\eleguen2023\Documents\works\BidProject\src\main\java\projet\bid_pro\dal\ParticipantDAO.java:9: error: cannot find symbol
+	List<Participant> findAll();
+	     ^
+  symbol:   class Participant
+  location: interface ParticipantDAO
+C:\Users\eleguen2023\Documents\works\BidProject\src\main\java\projet\bid_pro\dal\ParticipantDAO.java:11: error: cannot find symbol
+	List<Participant> findActeurs(long idFilm);
+	     ^
+  symbol:   class Participant
+  location: interface ParticipantDAO
+C:\Users\eleguen2023\Documents\works\BidProject\src\main\java\projet\bid_pro\dal\GenreDAO.java:6: error: cannot find symbol
+	Genre read(long id);
+	^
+  symbol:   class Genre
+  location: interface GenreDAO
+C:\Users\eleguen2023\Documents\works\BidProject\src\main\java\projet\bid_pro\dal\GenreDAO.java:8: error: cannot find symbol
+	List<Genre> findAll();
+	     ^
+  symbol:   class Genre
+  location: interface GenreDAO
+C:\Users\eleguen2023\Documents\works\BidProject\src\main\java\projet\bid_pro\dal\FilmDAO.java:6: error: cannot find symbol
+	void create(Film film);
+	            ^
+  symbol:   class Film
+  location: interface FilmDAO
+C:\Users\eleguen2023\Documents\works\BidProject\src\main\java\projet\bid_pro\dal\FilmDAO.java:8: error: cannot find symbol
+	Film read(long id);
+	^
+  symbol:   class Film
+  location: interface FilmDAO
+C:\Users\eleguen2023\Documents\works\BidProject\src\main\java\projet\bid_pro\dal\FilmDAO.java:10: error: cannot find symbol
+	List<Film> findAll();
+	     ^
+  symbol:   class Film
+  location: interface FilmDAO
+C:\Users\eleguen2023\Documents\works\BidProject\src\main\java\projet\bid_pro\controller\AvisController.java:33: error: cannot find symbol
+			@ModelAttribute("membreEnSession") Membre membreEnSession) {
+			                                   ^
+  symbol:   class Membre
+  location: class AvisController
+C:\Users\eleguen2023\Documents\works\BidProject\src\main\java\projet\bid_pro\controller\AvisController.java:53: error: cannot find symbol
+	public String creerAvis(@Valid @ModelAttribute("avis") Avis avis, BindingResult bindingResult,
+	                                                       ^
+  symbol:   class Avis
+  location: class AvisController
+C:\Users\eleguen2023\Documents\works\BidProject\src\main\java\projet\bid_pro\controller\AvisController.java:55: error: cannot find symbol
+			@ModelAttribute("membreEnSession") Membre membreEnSession, Model model) {
+			                                   ^
+  symbol:   class Membre
+  location: class AvisController
+C:\Users\eleguen2023\Documents\works\BidProject\src\main\java\projet\bid_pro\controller\ContexteController.java:15: error: cannot find symbol
+	public ContexteController(ContexteService service) {
+	                          ^
+  symbol:   class ContexteService
+  location: class ContexteController
+C:\Users\eleguen2023\Documents\works\BidProject\src\main\java\projet\bid_pro\controller\ContexteController.java:21: error: cannot find symbol
+	public Membre membreEnSession() {
+	       ^
+  symbol:   class Membre
+  location: class ContexteController
+C:\Users\eleguen2023\Documents\works\BidProject\src\main\java\projet\bid_pro\controller\ContexteController.java:27: error: cannot find symbol
+	public String connexion(@ModelAttribute("membreEnSession") Membre membreEnSession,
+	                                                           ^
+  symbol:   class Membre
+  location: class ContexteController
+C:\Users\eleguen2023\Documents\works\BidProject\src\main\java\projet\bid_pro\controller\converter\StringToGenreConverter.java:8: error: cannot find symbol
+public class StringToGenreConverter implements Converter<String, Genre> {
+                                                                 ^
+  symbol: class Genre
+C:\Users\eleguen2023\Documents\works\BidProject\src\main\java\projet\bid_pro\controller\converter\StringToGenreConverter.java:16: error: cannot find symbol
+	public Genre convert(String id) {
+	       ^
+  symbol:   class Genre
+  location: class StringToGenreConverter
+C:\Users\eleguen2023\Documents\works\BidProject\src\main\java\projet\bid_pro\controller\converter\StringToParticipantConverter.java:8: error: cannot find symbol
+public class StringToParticipantConverter implements Converter<String, Participant> {
+                                                                       ^
+  symbol: class Participant
+C:\Users\eleguen2023\Documents\works\BidProject\src\main\java\projet\bid_pro\controller\converter\StringToParticipantConverter.java:17: error: cannot find symbol
+	public Participant convert(String id) {
+	       ^
+  symbol:   class Participant
+  location: class StringToParticipantConverter
+C:\Users\eleguen2023\Documents\works\BidProject\src\main\java\projet\bid_pro\controller\FilmController.java:67: error: cannot find symbol
+	public List<Genre> chargerGenres() {
+	            ^
+  symbol:   class Genre
+  location: class FilmController
+C:\Users\eleguen2023\Documents\works\BidProject\src\main\java\projet\bid_pro\controller\FilmController.java:76: error: cannot find symbol
+	public String creerFilm(Model model, @ModelAttribute("membreEnSession") Membre membreEnSession) {
+	                                                                        ^
+  symbol:   class Membre
+  location: class FilmController
+C:\Users\eleguen2023\Documents\works\BidProject\src\main\java\projet\bid_pro\controller\FilmController.java:90: error: cannot find symbol
+	public String creerFilm(@Valid @ModelAttribute("film") Film film, BindingResult bindingResult,
+	                                                       ^
+  symbol:   class Film
+  location: class FilmController
+C:\Users\eleguen2023\Documents\works\BidProject\src\main\java\projet\bid_pro\controller\FilmController.java:91: error: cannot find symbol
+			@ModelAttribute("membreEnSession") Membre membreEnSession) {
+			                                   ^
+  symbol:   class Membre
+  location: class FilmController
+C:\Users\eleguen2023\Documents\works\BidProject\src\main\java\projet\bid_pro\controller\FilmController.java:124: error: cannot find symbol
+	public List<Participant> chargerParticipants() {
+	            ^
+  symbol:   class Participant
+  location: class FilmController
+C:\Users\eleguen2023\Documents\works\BidProject\src\main\java\projet\bid_pro\dal\AvisDAOImpl.java:8: error: package org.springframework.jdbc.core does not exist
+import org.springframework.jdbc.core.RowMapper;
+                                    ^
+C:\Users\eleguen2023\Documents\works\BidProject\src\main\java\projet\bid_pro\dal\AvisDAOImpl.java:9: error: package org.springframework.jdbc.core.namedparam does not exist
+import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
+                                               ^
+C:\Users\eleguen2023\Documents\works\BidProject\src\main\java\projet\bid_pro\dal\AvisDAOImpl.java:10: error: package org.springframework.jdbc.core.namedparam does not exist
+import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+                                               ^
+C:\Users\eleguen2023\Documents\works\BidProject\src\main\java\projet\bid_pro\dal\AvisDAOImpl.java:21: error: cannot find symbol
+	private NamedParameterJdbcTemplate jdbcTemplate;
+	        ^
+  symbol:   class NamedParameterJdbcTemplate
+  location: class AvisDAOImpl
+C:\Users\eleguen2023\Documents\works\BidProject\src\main\java\projet\bid_pro\dal\AvisDAOImpl.java:24: error: cannot find symbol
+	public void create(Avis avis, long idFilm) {
+	                   ^
+  symbol:   class Avis
+  location: class AvisDAOImpl
+C:\Users\eleguen2023\Documents\works\BidProject\src\main\java\projet\bid_pro\dal\AvisDAOImpl.java:34: error: cannot find symbol
+	public List<Avis> findByFilm(long idFilm) {
+	            ^
+  symbol:   class Avis
+  location: class AvisDAOImpl
+C:\Users\eleguen2023\Documents\works\BidProject\src\main\java\projet\bid_pro\dal\AvisDAOImpl.java:51: error: cannot find symbol
+	class AvisRowMapper implements RowMapper<Avis> {
+	                               ^
+  symbol:   class RowMapper
+  location: class AvisDAOImpl
+C:\Users\eleguen2023\Documents\works\BidProject\src\main\java\projet\bid_pro\dal\AvisDAOImpl.java:51: error: cannot find symbol
+	class AvisRowMapper implements RowMapper<Avis> {
+	                                         ^
+  symbol:   class Avis
+  location: class AvisDAOImpl
+C:\Users\eleguen2023\Documents\works\BidProject\src\main\java\projet\bid_pro\dal\AvisDAOImpl.java:53: error: cannot find symbol
+		public Avis mapRow(ResultSet rs, int rowNum) throws SQLException {
+		       ^
+  symbol:   class Avis
+  location: class AvisDAOImpl.AvisRowMapper
+C:\Users\eleguen2023\Documents\works\BidProject\src\main\java\projet\bid_pro\dal\FilmDAOImpl.java:8: error: package org.springframework.jdbc.core does not exist
+import org.springframework.jdbc.core.RowMapper;
+                                    ^
+C:\Users\eleguen2023\Documents\works\BidProject\src\main\java\projet\bid_pro\dal\FilmDAOImpl.java:9: error: package org.springframework.jdbc.core.namedparam does not exist
+import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
+                                               ^
+C:\Users\eleguen2023\Documents\works\BidProject\src\main\java\projet\bid_pro\dal\FilmDAOImpl.java:10: error: package org.springframework.jdbc.core.namedparam does not exist
+import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+                                               ^
+C:\Users\eleguen2023\Documents\works\BidProject\src\main\java\projet\bid_pro\dal\FilmDAOImpl.java:11: error: package org.springframework.jdbc.support does not exist
+import org.springframework.jdbc.support.GeneratedKeyHolder;
+                                       ^
+C:\Users\eleguen2023\Documents\works\BidProject\src\main\java\projet\bid_pro\dal\FilmDAOImpl.java:12: error: package org.springframework.jdbc.support does not exist
+import org.springframework.jdbc.support.KeyHolder;
+                                       ^
+C:\Users\eleguen2023\Documents\works\BidProject\src\main\java\projet\bid_pro\dal\FilmDAOImpl.java:26: error: cannot find symbol
+	private NamedParameterJdbcTemplate jdbcTemplate;
+	        ^
+  symbol:   class NamedParameterJdbcTemplate
+  location: class FilmDAOImpl
+C:\Users\eleguen2023\Documents\works\BidProject\src\main\java\projet\bid_pro\dal\FilmDAOImpl.java:29: error: cannot find symbol
+	public void create(Film film) {
+	                   ^
+  symbol:   class Film
+  location: class FilmDAOImpl
+C:\Users\eleguen2023\Documents\works\BidProject\src\main\java\projet\bid_pro\dal\FilmDAOImpl.java:49: error: cannot find symbol
+	public Film read(long id) {
+	       ^
+  symbol:   class Film
+  location: class FilmDAOImpl
+C:\Users\eleguen2023\Documents\works\BidProject\src\main\java\projet\bid_pro\dal\FilmDAOImpl.java:57: error: cannot find symbol
+	public List<Film> findAll() {
+	            ^
+  symbol:   class Film
+  location: class FilmDAOImpl
+C:\Users\eleguen2023\Documents\works\BidProject\src\main\java\projet\bid_pro\dal\FilmDAOImpl.java:82: error: cannot find symbol
+	class FilmRowMapper implements RowMapper<Film> {
+	                               ^
+  symbol:   class RowMapper
+  location: class FilmDAOImpl
+C:\Users\eleguen2023\Documents\works\BidProject\src\main\java\projet\bid_pro\dal\FilmDAOImpl.java:82: error: cannot find symbol
+	class FilmRowMapper implements RowMapper<Film> {
+	                                         ^
+  symbol:   class Film
+  location: class FilmDAOImpl
+C:\Users\eleguen2023\Documents\works\BidProject\src\main\java\projet\bid_pro\dal\FilmDAOImpl.java:84: error: cannot find symbol
+		public Film mapRow(ResultSet rs, int rowNum) throws SQLException {
+		       ^
+  symbol:   class Film
+  location: class FilmDAOImpl.FilmRowMapper
+C:\Users\eleguen2023\Documents\works\BidProject\src\main\java\projet\bid_pro\dal\GenreDAOImpl.java:6: error: package org.springframework.jdbc.core does not exist
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
+                                    ^
+C:\Users\eleguen2023\Documents\works\BidProject\src\main\java\projet\bid_pro\dal\GenreDAOImpl.java:7: error: package org.springframework.jdbc.core.namedparam does not exist
+import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
+                                               ^
+C:\Users\eleguen2023\Documents\works\BidProject\src\main\java\projet\bid_pro\dal\GenreDAOImpl.java:8: error: package org.springframework.jdbc.core.namedparam does not exist
+import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+                                               ^
+C:\Users\eleguen2023\Documents\works\BidProject\src\main\java\projet\bid_pro\dal\GenreDAOImpl.java:17: error: cannot find symbol
+	private NamedParameterJdbcTemplate jdbcTemplate;
+	        ^
+  symbol:   class NamedParameterJdbcTemplate
+  location: class GenreDAOImpl
+C:\Users\eleguen2023\Documents\works\BidProject\src\main\java\projet\bid_pro\dal\GenreDAOImpl.java:20: error: cannot find symbol
+	public Genre read(long id) {
+	       ^
+  symbol:   class Genre
+  location: class GenreDAOImpl
+C:\Users\eleguen2023\Documents\works\BidProject\src\main\java\projet\bid_pro\dal\GenreDAOImpl.java:29: error: cannot find symbol
+	public List<Genre> findAll() {
+	            ^
+  symbol:   class Genre
+  location: class GenreDAOImpl
+C:\Users\eleguen2023\Documents\works\BidProject\src\main\java\projet\bid_pro\dal\MembreDAOImpl.java:7: error: package org.springframework.jdbc.core does not exist
+import org.springframework.jdbc.core.RowMapper;
+                                    ^
+C:\Users\eleguen2023\Documents\works\BidProject\src\main\java\projet\bid_pro\dal\MembreDAOImpl.java:8: error: package org.springframework.jdbc.core.namedparam does not exist
+import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
+                                               ^
+C:\Users\eleguen2023\Documents\works\BidProject\src\main\java\projet\bid_pro\dal\MembreDAOImpl.java:9: error: package org.springframework.jdbc.core.namedparam does not exist
+import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+                                               ^
+C:\Users\eleguen2023\Documents\works\BidProject\src\main\java\projet\bid_pro\dal\MembreDAOImpl.java:19: error: cannot find symbol
+	private NamedParameterJdbcTemplate jdbcTemplate;
+	        ^
+  symbol:   class NamedParameterJdbcTemplate
+  location: class MembreDAOImpl
+C:\Users\eleguen2023\Documents\works\BidProject\src\main\java\projet\bid_pro\dal\MembreDAOImpl.java:22: error: cannot find symbol
+	public Membre read(long id) {
+	       ^
+  symbol:   class Membre
+  location: class MembreDAOImpl
+C:\Users\eleguen2023\Documents\works\BidProject\src\main\java\projet\bid_pro\dal\MembreDAOImpl.java:29: error: cannot find symbol
+	public Membre read(String email) {
+	       ^
+  symbol:   class Membre
+  location: class MembreDAOImpl
+C:\Users\eleguen2023\Documents\works\BidProject\src\main\java\projet\bid_pro\dal\MembreDAOImpl.java:38: error: cannot find symbol
+	class MembreRowMapper implements RowMapper<Membre> {
+	                                 ^
+  symbol:   class RowMapper
+  location: class MembreDAOImpl
+C:\Users\eleguen2023\Documents\works\BidProject\src\main\java\projet\bid_pro\dal\MembreDAOImpl.java:38: error: cannot find symbol
+	class MembreRowMapper implements RowMapper<Membre> {
+	                                           ^
+  symbol:   class Membre
+  location: class MembreDAOImpl
+C:\Users\eleguen2023\Documents\works\BidProject\src\main\java\projet\bid_pro\dal\MembreDAOImpl.java:40: error: cannot find symbol
+		public Membre mapRow(ResultSet rs, int rowNum) throws SQLException {
+		       ^
+  symbol:   class Membre
+  location: class MembreDAOImpl.MembreRowMapper
+C:\Users\eleguen2023\Documents\works\BidProject\src\main\java\projet\bid_pro\dal\ParticipantDAOImpl.java:7: error: package org.springframework.jdbc.core does not exist
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
+                                    ^
+C:\Users\eleguen2023\Documents\works\BidProject\src\main\java\projet\bid_pro\dal\ParticipantDAOImpl.java:8: error: package org.springframework.jdbc.core.namedparam does not exist
+import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
+                                               ^
+C:\Users\eleguen2023\Documents\works\BidProject\src\main\java\projet\bid_pro\dal\ParticipantDAOImpl.java:9: error: package org.springframework.jdbc.core.namedparam does not exist
+import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+                                               ^
+C:\Users\eleguen2023\Documents\works\BidProject\src\main\java\projet\bid_pro\dal\ParticipantDAOImpl.java:10: error: package org.springframework.jdbc.core.namedparam does not exist
+import org.springframework.jdbc.core.namedparam.SqlParameterSource;
+                                               ^
+C:\Users\eleguen2023\Documents\works\BidProject\src\main\java\projet\bid_pro\dal\ParticipantDAOImpl.java:11: error: package org.springframework.jdbc.core.simple does not exist
+import org.springframework.jdbc.core.simple.SimpleJdbcCall;
+                                           ^
+C:\Users\eleguen2023\Documents\works\BidProject\src\main\java\projet\bid_pro\dal\ParticipantDAOImpl.java:22: error: cannot find symbol
+	private NamedParameterJdbcTemplate jdbcTemplate;
+	        ^
+  symbol:   class NamedParameterJdbcTemplate
+  location: class ParticipantDAOImpl
+C:\Users\eleguen2023\Documents\works\BidProject\src\main\java\projet\bid_pro\dal\ParticipantDAOImpl.java:26: error: cannot find symbol
+	public Participant read(long id) {
+	       ^
+  symbol:   class Participant
+  location: class ParticipantDAOImpl
+C:\Users\eleguen2023\Documents\works\BidProject\src\main\java\projet\bid_pro\dal\ParticipantDAOImpl.java:34: error: cannot find symbol
+	public List<Participant> findAll() {
+	            ^
+  symbol:   class Participant
+  location: class ParticipantDAOImpl
+C:\Users\eleguen2023\Documents\works\BidProject\src\main\java\projet\bid_pro\dal\ParticipantDAOImpl.java:41: error: cannot find symbol
+	public List<Participant> findActeurs(long idFilm) {
+	            ^
+  symbol:   class Participant
+  location: class ParticipantDAOImpl
+C:\Users\eleguen2023\Documents\works\BidProject\src\main\java\projet\bid_pro\bll\FilmServiceImpl.java:39: error: cannot find symbol
+		List<Film> films = filmDAO.findAll();
+		     ^
+  symbol:   class Film
+  location: class FilmServiceImpl
+C:\Users\eleguen2023\Documents\works\BidProject\src\main\java\projet\bid_pro\bll\FilmServiceImpl.java:54: error: cannot find symbol
+		Film f = filmDAO.read(id);
+		^
+  symbol:   class Film
+  location: class FilmServiceImpl
+100 errors
+only showing the first 100 errors, of 186 total; use -Xmaxerrs if you would like to see more
+
+FAILURE: Build failed with an exception.
+
+* What went wrong:
+Execution failed for task ':compileJava'.
+> Compilation failed; see the compiler error output for details.
+
+* Try:
+> Run with --info option to get more log output.
+> Run with --scan to get full insights.
+
+BUILD FAILED in 1s
+1 actionable task: 1 executed
+2024-03-18T14:33:27.675+0100 [DEBUG] [org.gradle.launcher.daemon.server.exec.ExecuteBuild] The daemon has finished executing the build.
+2024-03-18T14:33:27.680+0100 [DEBUG] [org.gradle.launcher.daemon.server.DaemonStateCoordinator] daemon is running. Sleeping until state changes.
+2024-03-18T14:33:27.680+0100 [DEBUG] [org.gradle.launcher.daemon.server.DaemonStateCoordinator] Command execution: finished waiting for DaemonCommandExecution[command = Build{id=231ba2f3-f089-453a-a017-e25936d5acef, currentDir=C:\Users\eleguen2023\Documents\works\BidProject}, connection = DefaultDaemonConnection: socket connection from /127.0.0.1:56160 to /127.0.0.1:56238]. Result org.gradle.launcher.daemon.server.DaemonStateCoordinator@57840389 with state Busy
+2024-03-18T14:33:27.680+0100 [DEBUG] [org.gradle.launcher.daemon.server.DaemonStateCoordinator] Command execution: completed DaemonCommandExecution[command = Build{id=231ba2f3-f089-453a-a017-e25936d5acef, currentDir=C:\Users\eleguen2023\Documents\works\BidProject}, connection = DefaultDaemonConnection: socket connection from /127.0.0.1:56160 to /127.0.0.1:56238]
+2024-03-18T14:33:27.680+0100 [DEBUG] [org.gradle.launcher.daemon.server.DaemonStateCoordinator] resetting idle timer
+2024-03-18T14:33:27.680+0100 [INFO] [org.gradle.launcher.daemon.server.DaemonRegistryUpdater] Marking the daemon as idle, address: [beb6dfc2-eb40-4c3d-a97a-d6727af204ee port:56160, addresses:[localhost/127.0.0.1]]
+2024-03-18T14:33:27.680+0100 [DEBUG] [org.gradle.launcher.daemon.registry.PersistentDaemonRegistry] Marking busy by address: [beb6dfc2-eb40-4c3d-a97a-d6727af204ee port:56160, addresses:[localhost/127.0.0.1]]
+2024-03-18T14:33:27.681+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Waiting to acquire exclusive lock on daemon addresses registry.
+2024-03-18T14:33:27.681+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Lock acquired on daemon addresses registry.
+2024-03-18T14:33:27.682+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Releasing lock on daemon addresses registry.
+2024-03-18T14:33:27.682+0100 [DEBUG] [org.gradle.launcher.daemon.server.exec.ReturnResult] Daemon is dispatching the build result: Success[value=org.gradle.launcher.exec.BuildActionResult@24e389c5]
+2024-03-18T14:33:27.682+0100 [DEBUG] [org.gradle.launcher.daemon.server.DaemonStateCoordinator] daemon is running. Sleeping until state changes.
+2024-03-18T14:33:27.682+0100 [DEBUG] [org.gradle.launcher.daemon.server.SynchronizedDispatchConnection] thread 186: dispatching Success[value=org.gradle.launcher.exec.BuildActionResult@24e389c5]
+2024-03-18T14:33:27.685+0100 [DEBUG] [org.gradle.launcher.daemon.server.DefaultIncomingConnectionHandler] Finishing executing command: Build{id=231ba2f3-f089-453a-a017-e25936d5acef, currentDir=C:\Users\eleguen2023\Documents\works\BidProject}
+2024-03-18T14:33:27.692+0100 [DEBUG] [org.gradle.launcher.daemon.server.SynchronizedDispatchConnection] thread 187: received class org.gradle.launcher.daemon.protocol.CloseInput
+2024-03-18T14:33:27.692+0100 [DEBUG] [org.gradle.launcher.daemon.server.DefaultDaemonConnection] thread 187: Received IO message from client: org.gradle.launcher.daemon.protocol.CloseInput@60c9d2ba
+2024-03-18T14:33:27.692+0100 [DEBUG] [org.gradle.launcher.daemon.server.SynchronizedDispatchConnection] thread 187: received class org.gradle.launcher.daemon.protocol.Finished
+2024-03-18T14:33:27.692+0100 [DEBUG] [org.gradle.launcher.daemon.server.DefaultDaemonConnection] thread 187: Received non-IO message from client: org.gradle.launcher.daemon.protocol.Finished@6e0e20d3
+2024-03-18T14:33:27.692+0100 [DEBUG] [org.gradle.launcher.daemon.server.DefaultIncomingConnectionHandler] Received finished message: org.gradle.launcher.daemon.protocol.Finished@6e0e20d3
+2024-03-18T14:33:27.692+0100 [DEBUG] [org.gradle.launcher.daemon.server.SynchronizedDispatchConnection] thread 186: stopping connection
+2024-03-18T14:33:27.692+0100 [DEBUG] [org.gradle.internal.remote.internal.inet.SocketConnection] Discarding EOFException: java.io.EOFException
+2024-03-18T14:33:27.692+0100 [DEBUG] [org.gradle.launcher.daemon.server.SynchronizedDispatchConnection] thread 187: received null
+2024-03-18T14:33:27.692+0100 [DEBUG] [org.gradle.launcher.daemon.server.DefaultDaemonConnection] thread 187: Received end-of-input from client.
+2024-03-18T14:33:27.692+0100 [DEBUG] [org.gradle.launcher.daemon.server.SynchronizedDispatchConnection] thread 186: stopping connection
+2024-03-18T14:33:28.991+0100 [DEBUG] [org.gradle.cache.internal.LockOnDemandCrossProcessCacheAccess] Lock on journal cache (C:\Users\eleguen2023\Documents\works\BidProject\caches\journal-1) requested by another process - releasing lock.
+2024-03-18T14:33:28.991+0100 [DEBUG] [org.gradle.cache.internal.LockOnDemandCrossProcessCacheAccess] Releasing file lock for journal cache (C:\Users\eleguen2023\Documents\works\BidProject\caches\journal-1)
+2024-03-18T14:33:28.991+0100 [DEBUG] [org.gradle.cache.internal.btree.BTreePersistentIndexedCache] Closing cache file-access.bin (C:\Users\eleguen2023\Documents\works\BidProject\caches\journal-1\file-access.bin)
+2024-03-18T14:33:28.991+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Releasing lock on journal cache (C:\Users\eleguen2023\Documents\works\BidProject\caches\journal-1).
+2024-03-18T14:33:28.992+0100 [DEBUG] [org.gradle.cache.internal.locklistener.FileLockCommunicator] Confirming lock release to Gradle process at port 57748 for lock with id -5606158902037782549.
+2024-03-18T14:33:28.992+0100 [DEBUG] [org.gradle.cache.internal.locklistener.FileLockCommunicator] Confirming lock release to Gradle process at port 57748 for lock with id -5606158902037782549.
+2024-03-18T14:33:29.007+0100 [DEBUG] [org.gradle.cache.internal.LockOnDemandCrossProcessCacheAccess] Lock on file hash cache (C:\Users\eleguen2023\Documents\works\BidProject\caches\8.6\fileHashes) requested by another process - releasing lock.
+2024-03-18T14:33:29.007+0100 [DEBUG] [org.gradle.cache.internal.LockOnDemandCrossProcessCacheAccess] Releasing file lock for file hash cache (C:\Users\eleguen2023\Documents\works\BidProject\caches\8.6\fileHashes)
+2024-03-18T14:33:29.007+0100 [DEBUG] [org.gradle.cache.internal.btree.BTreePersistentIndexedCache] Closing cache fileHashes.bin (C:\Users\eleguen2023\Documents\works\BidProject\caches\8.6\fileHashes\fileHashes.bin)
+2024-03-18T14:33:29.007+0100 [DEBUG] [org.gradle.cache.internal.btree.BTreePersistentIndexedCache] Closing cache resourceHashesCache.bin (C:\Users\eleguen2023\Documents\works\BidProject\caches\8.6\fileHashes\resourceHashesCache.bin)
+2024-03-18T14:33:29.007+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Releasing lock on file hash cache (C:\Users\eleguen2023\Documents\works\BidProject\caches\8.6\fileHashes).
+2024-03-18T14:33:29.007+0100 [DEBUG] [org.gradle.cache.internal.locklistener.FileLockCommunicator] Confirming lock release to Gradle process at port 57748 for lock with id -6810102164343046899.
+2024-03-18T14:33:29.007+0100 [DEBUG] [org.gradle.cache.internal.locklistener.FileLockCommunicator] Confirming lock release to Gradle process at port 57748 for lock with id -6810102164343046899.
+2024-03-18T14:33:29.584+0100 [DEBUG] [org.gradle.cache.internal.LockOnDemandCrossProcessCacheAccess] Lock on file content cache (C:\Users\eleguen2023\Documents\works\BidProject\caches\8.6\fileContent) requested by another process - releasing lock.
+2024-03-18T14:33:29.584+0100 [DEBUG] [org.gradle.cache.internal.LockOnDemandCrossProcessCacheAccess] Releasing file lock for file content cache (C:\Users\eleguen2023\Documents\works\BidProject\caches\8.6\fileContent)
+2024-03-18T14:33:29.584+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Releasing lock on file content cache (C:\Users\eleguen2023\Documents\works\BidProject\caches\8.6\fileContent).
+2024-03-18T14:33:29.584+0100 [DEBUG] [org.gradle.cache.internal.locklistener.FileLockCommunicator] Confirming lock release to Gradle process at port 57748 for lock with id 8398697036991667559.
+2024-03-18T14:33:29.584+0100 [DEBUG] [org.gradle.cache.internal.locklistener.FileLockCommunicator] Confirming lock release to Gradle process at port 57748 for lock with id 8398697036991667559.
+2024-03-18T14:33:29.734+0100 [DEBUG] [org.gradle.cache.internal.LockOnDemandCrossProcessCacheAccess] Lock on jars (C:\Users\eleguen2023\Documents\works\BidProject\caches\jars-9) requested by another process - releasing lock.
+2024-03-18T14:33:29.734+0100 [DEBUG] [org.gradle.cache.internal.LockOnDemandCrossProcessCacheAccess] Releasing file lock for jars (C:\Users\eleguen2023\Documents\works\BidProject\caches\jars-9)
+2024-03-18T14:33:29.734+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Releasing lock on jars (C:\Users\eleguen2023\Documents\works\BidProject\caches\jars-9).
+2024-03-18T14:33:29.734+0100 [DEBUG] [org.gradle.cache.internal.locklistener.FileLockCommunicator] Confirming lock release to Gradle process at port 57748 for lock with id 728393975883168061.
+2024-03-18T14:33:29.734+0100 [DEBUG] [org.gradle.cache.internal.locklistener.FileLockCommunicator] Confirming lock release to Gradle process at port 57748 for lock with id 728393975883168061.
+2024-03-18T14:33:29.921+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Waiting to acquire shared lock on daemon addresses registry.
+2024-03-18T14:33:29.921+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Lock acquired on daemon addresses registry.
+2024-03-18T14:33:29.921+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Releasing lock on daemon addresses registry.
+2024-03-18T14:33:29.922+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Waiting to acquire shared lock on daemon addresses registry.
+2024-03-18T14:33:29.922+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Lock acquired on daemon addresses registry.
+2024-03-18T14:33:29.922+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Releasing lock on daemon addresses registry.
+2024-03-18T14:33:30.613+0100 [DEBUG] [org.gradle.cache.internal.LockOnDemandCrossProcessCacheAccess] Lock on artifact cache (C:\Users\eleguen2023\Documents\works\BidProject\caches\modules-2) requested by another process - releasing lock.
+2024-03-18T14:33:30.613+0100 [DEBUG] [org.gradle.cache.internal.LockOnDemandCrossProcessCacheAccess] Releasing file lock for artifact cache (C:\Users\eleguen2023\Documents\works\BidProject\caches\modules-2)
+2024-03-18T14:33:30.613+0100 [DEBUG] [org.gradle.cache.internal.btree.BTreePersistentIndexedCache] Closing cache module-artifact.bin (C:\Users\eleguen2023\Documents\works\BidProject\caches\modules-2\metadata-2.106\module-artifact.bin)
+2024-03-18T14:33:30.614+0100 [DEBUG] [org.gradle.cache.internal.btree.BTreePersistentIndexedCache] Closing cache module-metadata.bin (C:\Users\eleguen2023\Documents\works\BidProject\caches\modules-2\metadata-2.106\module-metadata.bin)
+2024-03-18T14:33:30.614+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Releasing lock on artifact cache (C:\Users\eleguen2023\Documents\works\BidProject\caches\modules-2).
+2024-03-18T14:33:30.614+0100 [DEBUG] [org.gradle.cache.internal.locklistener.FileLockCommunicator] Confirming lock release to Gradle process at port 57748 for lock with id 4375094534436675656.
+2024-03-18T14:33:30.614+0100 [DEBUG] [org.gradle.cache.internal.locklistener.FileLockCommunicator] Confirming lock release to Gradle process at port 57748 for lock with id 4375094534436675656.
+2024-03-18T14:33:31.439+0100 [DEBUG] [org.gradle.internal.watch.registry.impl.DefaultFileWatcherProbeRegistry] Triggering watch probe for C:\Users\eleguen2023\Documents\works\BidProject
+2024-03-18T14:33:31.439+0100 [DEBUG] [org.gradle.internal.watch.registry.impl.DefaultFileWatcherProbeRegistry] Triggering watch probe for C:\Users\eleguen2023\Documents\works\BidProject
+2024-03-18T14:33:32.154+0100 [DEBUG] [org.gradle.cache.internal.LockOnDemandCrossProcessCacheAccess] Lock on Java compile cache (C:\Users\eleguen2023\Documents\works\BidProject\caches\8.6\javaCompile) requested by another process - releasing lock.
+2024-03-18T14:33:32.155+0100 [DEBUG] [org.gradle.cache.internal.LockOnDemandCrossProcessCacheAccess] Releasing file lock for Java compile cache (C:\Users\eleguen2023\Documents\works\BidProject\caches\8.6\javaCompile)
+2024-03-18T14:33:32.155+0100 [DEBUG] [org.gradle.cache.internal.btree.BTreePersistentIndexedCache] Closing cache jarAnalysis.bin (C:\Users\eleguen2023\Documents\works\BidProject\caches\8.6\javaCompile\jarAnalysis.bin)
+2024-03-18T14:33:32.155+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Releasing lock on Java compile cache (C:\Users\eleguen2023\Documents\works\BidProject\caches\8.6\javaCompile).
+2024-03-18T14:33:32.155+0100 [DEBUG] [org.gradle.cache.internal.locklistener.FileLockCommunicator] Confirming lock release to Gradle process at port 57748 for lock with id -6581180756288901098.
+2024-03-18T14:33:32.155+0100 [DEBUG] [org.gradle.cache.internal.locklistener.FileLockCommunicator] Confirming lock release to Gradle process at port 57748 for lock with id -6581180756288901098.
+2024-03-18T14:33:39.921+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Waiting to acquire shared lock on daemon addresses registry.
+2024-03-18T14:33:39.921+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Lock acquired on daemon addresses registry.
+2024-03-18T14:33:39.921+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Releasing lock on daemon addresses registry.
+2024-03-18T14:33:39.922+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Waiting to acquire shared lock on daemon addresses registry.
+2024-03-18T14:33:39.922+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Lock acquired on daemon addresses registry.
+2024-03-18T14:33:39.922+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Releasing lock on daemon addresses registry.
+2024-03-18T14:33:39.922+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Waiting to acquire shared lock on daemon addresses registry.
+2024-03-18T14:33:39.923+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Lock acquired on daemon addresses registry.
+2024-03-18T14:33:39.923+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Releasing lock on daemon addresses registry.
+2024-03-18T14:33:39.923+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Waiting to acquire shared lock on daemon addresses registry.
+2024-03-18T14:33:39.923+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Lock acquired on daemon addresses registry.
+2024-03-18T14:33:39.923+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Releasing lock on daemon addresses registry.
+2024-03-18T14:33:39.923+0100 [DEBUG] [org.gradle.launcher.daemon.server.DaemonRegistryUpdater] Storing daemon stop event: other compatible daemons were started and after being idle for 0 minutes and not recently used
+2024-03-18T14:33:39.923+0100 [DEBUG] [org.gradle.launcher.daemon.registry.PersistentDaemonRegistry] Storing daemon stop event with timestamp 1710768819924
+2024-03-18T14:33:39.924+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Waiting to acquire exclusive lock on daemon addresses registry.
+2024-03-18T14:33:39.924+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Lock acquired on daemon addresses registry.
+2024-03-18T14:33:39.925+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Releasing lock on daemon addresses registry.
+2024-03-18T14:33:39.925+0100 [LIFECYCLE] [org.gradle.launcher.daemon.server.DaemonStateCoordinator] Daemon will be stopped at the end of the build other compatible daemons were started and after being idle for 0 minutes and not recently used
+2024-03-18T14:33:39.925+0100 [DEBUG] [org.gradle.launcher.daemon.server.DaemonStateCoordinator] Marking daemon stopped due to other compatible daemons were started and after being idle for 0 minutes and not recently used. The daemon is running a build: false
+2024-03-18T14:33:39.925+0100 [DEBUG] [org.gradle.launcher.daemon.server.DaemonStateCoordinator] daemon has stopped.
+2024-03-18T14:33:39.925+0100 [DEBUG] [org.gradle.launcher.daemon.server.Daemon] stop() called on daemon
+2024-03-18T14:33:39.925+0100 [INFO] [org.gradle.launcher.daemon.server.Daemon] Stop requested. Daemon is removing its presence from the registry...
+2024-03-18T14:33:39.925+0100 [DEBUG] [org.gradle.launcher.daemon.server.DaemonRegistryUpdater] Removing our presence to clients, eg. removing this address from the registry: [beb6dfc2-eb40-4c3d-a97a-d6727af204ee port:56160, addresses:[localhost/127.0.0.1]]
+2024-03-18T14:33:39.925+0100 [DEBUG] [org.gradle.launcher.daemon.registry.PersistentDaemonRegistry] Removing daemon address: [beb6dfc2-eb40-4c3d-a97a-d6727af204ee port:56160, addresses:[localhost/127.0.0.1]]
+2024-03-18T14:33:39.929+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Waiting to acquire exclusive lock on daemon addresses registry.
+2024-03-18T14:33:39.930+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Lock acquired on daemon addresses registry.
+2024-03-18T14:33:39.933+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Releasing lock on daemon addresses registry.
+2024-03-18T14:33:39.934+0100 [DEBUG] [org.gradle.launcher.daemon.server.DaemonRegistryUpdater] Address removed from registry.
+2024-03-18T14:33:39.936+0100 [DEBUG] [org.gradle.cache.internal.DefaultPersistentDirectoryStore] jars (C:\Users\eleguen2023\Documents\works\BidProject\caches\jars-9) has last been fully cleaned up 1 hours ago
+2024-03-18T14:33:39.936+0100 [DEBUG] [org.gradle.internal.watch.vfs.impl.WatchingVirtualFileSystem] Closing VFS, dropping state
+2024-03-18T14:33:39.937+0100 [DEBUG] [org.gradle.cache.internal.DefaultCacheCoordinator] Cache Generated Gradle JARs cache (C:\Users\eleguen2023\Documents\works\BidProject\caches\8.6\generated-gradle-jars) was closed 0 times.
+2024-03-18T14:33:39.937+0100 [DEBUG] [org.gradle.internal.watch.registry.impl.DefaultFileWatcherRegistry] Finished listening to file system change events
+2024-03-18T14:33:39.937+0100 [DEBUG] [org.gradle.cache.internal.DefaultPersistentDirectoryStore] Artifact transforms cache (C:\Users\eleguen2023\Documents\works\BidProject\caches\transforms-4) has last been fully cleaned up 1 hours ago
+2024-03-18T14:33:39.937+0100 [DEBUG] [org.gradle.cache.internal.DefaultCacheCoordinator] Cache Artifact transforms cache (C:\Users\eleguen2023\Documents\works\BidProject\caches\transforms-4) was closed 0 times.
+2024-03-18T14:33:39.937+0100 [DEBUG] [org.gradle.cache.internal.DefaultPersistentDirectoryStore] artifact cache (C:\Users\eleguen2023\Documents\works\BidProject\caches\modules-2) has last been fully cleaned up 1 hours ago
+Daemon vm is shutting down... The daemon has exited normally or was terminated in response to a user interrupt.
+2024-03-18T14:33:39.939+0100 [DEBUG] [org.gradle.launcher.daemon.registry.PersistentDaemonRegistry] Removing daemon address: [beb6dfc2-eb40-4c3d-a97a-d6727af204ee port:56160, addresses:[localhost/127.0.0.1]]
+2024-03-18T14:33:39.942+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Waiting to acquire exclusive lock on daemon addresses registry.
+2024-03-18T14:33:39.942+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Lock acquired on daemon addresses registry.
+2024-03-18T14:33:39.946+0100 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Releasing lock on daemon addresses registry.
