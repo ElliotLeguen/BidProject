@@ -1,0 +1,64 @@
+body {
+    font-family: sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.center-main {
+    margin: auto;
+    width: 80%;
+    padding: 20px;
+}
+
+h1 {
+    text-align: center;
+}
+
+h4 {
+    margin-bottom: 10px;
+}
+
+label {
+    margin-right: 10px;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+/* Style the filter section */
+.filters {
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+}
+
+.filters > * {
+    margin-right: 10px;
+}
+
+select, input[type="text"] {
+    width: 200px;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+input[type="checkbox"] {
+    margin-right: 5px;
+}
+
+button {
+    padding: 5px 10px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+/* Disable checkbox styles when disabled */
+input[type="checkbox"][disabled] {
+    opacity: 0.5;
+    cursor: not-allowed;
+}

@@ -24,7 +24,7 @@ public class UtilisateurDAOImpl implements UtilisateurDAO {
     private NamedParameterJdbcTemplate jdbcTemplate;
 
     @Override
-    public Utilisateur read(long id) {
+    public Utilisateur read(int id) {
         MapSqlParameterSource namedParameters = new MapSqlParameterSource();
         namedParameters.addValue("no_utilisateur", id);
         return jdbcTemplate.queryForObject(FIND_BY_ID, namedParameters, new UtilisateurRowMapper());
