@@ -10,13 +10,13 @@ public class ArticleVendu {
     private Date dateFinEncheres;
     private Integer prixInitial;
     private Integer prixVente;
-    private int noUtilisateur;
+    private Utilisateur noUtilisateur;
     private int noCategorie;
 
     // Constructeur
     public ArticleVendu(int noArticle, String nomArticle, String description, Date dateDebutEncheres,
                         Date dateFinEncheres, Integer prixInitial, Integer prixVente,
-                        int noUtilisateur, int noCategorie) {
+                        Utilisateur noUtilisateur, int noCategorie) {
         this.noArticle = noArticle;
         this.nomArticle = nomArticle;
         this.description = description;
@@ -26,6 +26,10 @@ public class ArticleVendu {
         this.prixVente = prixVente;
         this.noUtilisateur = noUtilisateur;
         this.noCategorie = noCategorie;
+    }
+
+    public ArticleVendu() {
+
     }
 
     // Getters et Setters
@@ -85,11 +89,11 @@ public class ArticleVendu {
         this.prixVente = prixVente;
     }
 
-    public int getNoUtilisateur() {
+    public Utilisateur getNoUtilisateur() {
         return noUtilisateur;
     }
 
-    public void setNoUtilisateur(int noUtilisateur) {
+    public void setNoUtilisateur(Utilisateur noUtilisateur) {
         this.noUtilisateur = noUtilisateur;
     }
 
