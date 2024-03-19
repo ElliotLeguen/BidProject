@@ -51,7 +51,7 @@ public class UtilisateurDAOImpl implements UtilisateurDAO {
             utilisateur.setVille(rs.getString("ville"));
             utilisateur.setMotDePasse(rs.getString("mot_de_passe"));
             utilisateur.setCredit(rs.getInt("credit"));
-            utilisateur.setAdministrateur(rs.getByte("administrateur"));
+            utilisateur.setAdministrateur(rs.getString("administrateur"));
             return utilisateur;
         }
     }

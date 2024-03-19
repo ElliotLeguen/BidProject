@@ -31,31 +31,6 @@ public class UtilisateurController {
 		return "profil";
 	}
 
-	@GetMapping("/oui")
-	public String connexion(@ModelAttribute("UtilisateurEnSession") Utilisateur UtilisateurEnSession,
-			@RequestParam(name = "email", required = false, defaultValue = "dupont@example.com") String email) {
-		Utilisateur aCharger = utilisateurService.charger(email);
 
-		if (aCharger != null) {
-            UtilisateurEnSession.setNoUtilisateur(aCharger.getNoUtilisateur());
-            UtilisateurEnSession.setNom(aCharger.getNom());
-            UtilisateurEnSession.setPrenom(aCharger.getPrenom());
-            UtilisateurEnSession.setPseudo(aCharger.getPseudo());
-            UtilisateurEnSession.setAdministrateur(aCharger.isAdministrateur());
-
-		} else {
-            UtilisateurEnSession.setNoUtilisateur(0);
-            UtilisateurEnSession.setNom(null);
-            UtilisateurEnSession.setPrenom(null);
-            UtilisateurEnSession.setPseudo(null);
-            UtilisateurEnSession.setAdministrateur(Byte.parseByte("1"));
-
-		}
-		System.out.println(UtilisateurEnSession);
-		// Evidemment on évite de mettre un mot de passe en session
-		// (surtout non chiffré)
-
-		return "redirect:/";
-	}
 
 }
