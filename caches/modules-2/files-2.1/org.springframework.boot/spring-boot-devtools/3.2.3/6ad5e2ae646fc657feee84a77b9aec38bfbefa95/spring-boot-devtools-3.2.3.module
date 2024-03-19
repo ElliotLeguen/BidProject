@@ -1,0 +1,188 @@
+{
+  "formatVersion": "1.1",
+  "component": {
+    "group": "org.springframework.boot",
+    "module": "spring-boot-devtools",
+    "version": "3.2.3",
+    "attributes": {
+      "org.gradle.status": "release"
+    }
+  },
+  "createdBy": {
+    "gradle": {
+      "version": "7.6.4"
+    }
+  },
+  "variants": [
+    {
+      "name": "apiElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.version": 17,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-api"
+      },
+      "dependencies": [
+        {
+          "group": "org.springframework.boot",
+          "module": "spring-boot",
+          "version": {
+            "requires": "3.2.3"
+          }
+        },
+        {
+          "group": "org.springframework.boot",
+          "module": "spring-boot-autoconfigure",
+          "version": {
+            "requires": "3.2.3"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "spring-boot-devtools-3.2.3.jar",
+          "url": "spring-boot-devtools-3.2.3.jar",
+          "size": 203110,
+          "sha512": "b469aad166fc9cd1112e900d23ea7666e868e4865e134c9797966fb72a87d1f6435f4ced5ffab3c947ccbec6826c24f3fa954a9aebca33141219630b63b78c03",
+          "sha256": "b44ff2007cd8fec7edf99301ec557db126a259d4ed018138b306b3aa42aa84c6",
+          "sha1": "b474cd30a54aae2152ff6bc8a31378ee40237407",
+          "md5": "d508653ee9c46849b23f067a827d43c6"
+        }
+      ]
+    },
+    {
+      "name": "runtimeElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.version": 17,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-runtime"
+      },
+      "dependencies": [
+        {
+          "group": "org.springframework.boot",
+          "module": "spring-boot",
+          "version": {
+            "requires": "3.2.3"
+          }
+        },
+        {
+          "group": "org.springframework.boot",
+          "module": "spring-boot-autoconfigure",
+          "version": {
+            "requires": "3.2.3"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "spring-boot-devtools-3.2.3.jar",
+          "url": "spring-boot-devtools-3.2.3.jar",
+          "size": 203110,
+          "sha512": "b469aad166fc9cd1112e900d23ea7666e868e4865e134c9797966fb72a87d1f6435f4ced5ffab3c947ccbec6826c24f3fa954a9aebca33141219630b63b78c03",
+          "sha256": "b44ff2007cd8fec7edf99301ec557db126a259d4ed018138b306b3aa42aa84c6",
+          "sha1": "b474cd30a54aae2152ff6bc8a31378ee40237407",
+          "md5": "d508653ee9c46849b23f067a827d43c6"
+        }
+      ]
+    },
+    {
+      "name": "mavenOptionalApiElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.version": 17,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-api"
+      },
+      "files": [
+        {
+          "name": "spring-boot-devtools-3.2.3.jar",
+          "url": "spring-boot-devtools-3.2.3.jar",
+          "size": 203110,
+          "sha512": "b469aad166fc9cd1112e900d23ea7666e868e4865e134c9797966fb72a87d1f6435f4ced5ffab3c947ccbec6826c24f3fa954a9aebca33141219630b63b78c03",
+          "sha256": "b44ff2007cd8fec7edf99301ec557db126a259d4ed018138b306b3aa42aa84c6",
+          "sha1": "b474cd30a54aae2152ff6bc8a31378ee40237407",
+          "md5": "d508653ee9c46849b23f067a827d43c6"
+        }
+      ],
+      "capabilities": [
+        {
+          "group": "org.springframework.boot",
+          "name": "spring-boot-devtools-maven-optional",
+          "version": "3.2.3"
+        }
+      ]
+    },
+    {
+      "name": "mavenOptionalRuntimeElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.version": 17,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-runtime"
+      },
+      "files": [
+        {
+          "name": "spring-boot-devtools-3.2.3.jar",
+          "url": "spring-boot-devtools-3.2.3.jar",
+          "size": 203110,
+          "sha512": "b469aad166fc9cd1112e900d23ea7666e868e4865e134c9797966fb72a87d1f6435f4ced5ffab3c947ccbec6826c24f3fa954a9aebca33141219630b63b78c03",
+          "sha256": "b44ff2007cd8fec7edf99301ec557db126a259d4ed018138b306b3aa42aa84c6",
+          "sha1": "b474cd30a54aae2152ff6bc8a31378ee40237407",
+          "md5": "d508653ee9c46849b23f067a827d43c6"
+        }
+      ],
+      "capabilities": [
+        {
+          "group": "org.springframework.boot",
+          "name": "spring-boot-devtools-maven-optional",
+          "version": "3.2.3"
+        }
+      ]
+    },
+    {
+      "name": "javadocElements",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "javadoc",
+        "org.gradle.usage": "java-runtime"
+      },
+      "files": [
+        {
+          "name": "spring-boot-devtools-3.2.3-javadoc.jar",
+          "url": "spring-boot-devtools-3.2.3-javadoc.jar",
+          "size": 346253,
+          "sha512": "4801f16692975c8095ec20ce86cbd43bd39853f9328b28fc3c68cc035c788952df8c77f8a4e77fd91e32cacf0302576b37fd4e2c9a658126d2c8cf49f827aa50",
+          "sha256": "c631617490234eed02b277f75f663197520a46c4f2bb1d9e181229903e33c5cc",
+          "sha1": "284f1a263f662d9f114285cc3348aa31603b8879",
+          "md5": "b3791764683493ad6e4c1e0a5dd12bee"
+        }
+      ]
+    },
+    {
+      "name": "sourcesElements",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "sources",
+        "org.gradle.usage": "java-runtime"
+      },
+      "files": [
+        {
+          "name": "spring-boot-devtools-3.2.3-sources.jar",
+          "url": "spring-boot-devtools-3.2.3-sources.jar",
+          "size": 139048,
+          "sha512": "1290482f0edd8c339643f80a440dc2e4b03ec7826317621a6ec470f85d8f86d21967659c3fe7c45a28edd6f1410f1df66a8c5ac500567912d8ac199dc24c04ee",
+          "sha256": "9cd4ca5f38b9bbd8d9c6cdf6a95d11673bd20ef8e3b893ff7c9b28d24e0bef2b",
+          "sha1": "198c8552e1a667dac5d7e362705df74bd80feefb",
+          "md5": "756a297212a3654e12145b658c7cbbff"
+        }
+      ]
+    }
+  ]
+}
