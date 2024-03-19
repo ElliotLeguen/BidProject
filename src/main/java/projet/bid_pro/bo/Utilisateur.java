@@ -12,7 +12,7 @@ public class Utilisateur {
     private String ville;
     private String motDePasse;
     private int credit;
-    private byte administrateur;
+    private String administrateur;
 
     public Utilisateur() {
 
@@ -21,7 +21,7 @@ public class Utilisateur {
     // Constructeur
     public Utilisateur(int noUtilisateur, String pseudo, String nom, String prenom, String email,
                        String telephone, String rue, String codePostal, String ville,
-                       String motDePasse, int credit, byte administrateur) {
+                       String motDePasse, int credit, String administrateur) {
         this.noUtilisateur = noUtilisateur;
         this.pseudo = pseudo;
         this.nom = nom;
@@ -125,11 +125,11 @@ public class Utilisateur {
         this.credit = credit;
     }
 
-    public byte isAdministrateur() {
+    public String isAdministrateur() {
         return administrateur;
     }
 
-    public void setAdministrateur(byte administrateur) {
+    public void setAdministrateur(String administrateur) {
         this.administrateur = administrateur;
     }
 
