@@ -1,22 +1,104 @@
 <!DOCTYPE html>
-<!-- Mise en place du layout -->
-<!-- Accueil comme titre de page -->
-<!-- la balise main définit par la classe de CSS 'center-main' comme paramètre contenuPage -->
 <html xmlns:th="http://www.thymeleaf.org"
       data-th-replace="~{layouts/layout :: layout-encheres(
 					titrePage=~{:: title},
 					contenuPage=~{:: main},
-					ressourcesSupp=~{})}">
+					ressourcesSupp=~{:: #resources-css})}">
 
 <head>
     <!-- Accueil comme titre de page -->
     <title data-th-text="#{index.title}"></title>
+    <th:block id="resources-css">
+        <link rel="stylesheet" data-th-href="@{/css/encheres.css}"/>
+    </th:block>
 </head>
 <body>
-<main class="center-main">
-    <section class="center-section">
-        <h1>Liste des enchères</h1>
-    </section>
+<main>
+    <h1>Liste des enchères</h1>
+    <div>
+        <h4>Filtres :</h4>
+        <form action="" method="get">
+            <input type="text" placeholder="Le nom de l'article contient"><br><br>
+            <label>Catégorie :</label>
+            <select name="categorie">
+                <option value="">Toutes</option>
+                <option value="Informatique">Informatique</option>
+                <option value="Ameublement">Ameublement</option>
+                <option value="Vetement">Vêtement</option>
+                <option value="Sport">Sport&Loisirs</option>
+            </select>
+            <br><br>
+            <div>
+                <input type="radio" id="radioAchats" name="radio" value="achat">
+                <label>Achats</label>
+                <input type="radio" id="radioVentes" name="radio" value="vente">
+                <label>Mes ventes</label>
+            </div>
+            <br>
+            <div>
+                <input type="checkbox" id="enchereOuverte" name="checkboxAchats">
+                <!-- accessible seulement si 'radioAchats' est selectionné -->
+                <label for="enchereOuverte">enchères ouvertes</label>
+                <input type="checkbox" id="mesEncheres" name="checkboxAchats">
+                <!-- accessible seulement si 'radioAchats' est selectionné -->
+                <label for="mesEncheres">mes enchères</label>
+                <input type="checkbox" id="mesEnchereRemportees" name="checkboxAchats">
+                <!-- accessible seulement si 'radioAchats' est selectionné -->
+                <label for="mesEnchereRemportees">mes enchères remportées</label>
+                <br><br>
+                <input type="checkbox" id="mesVentesEnCours" name="checkboxVentes">
+                <!-- accessible seulement si 'radioVentes' est selectionné -->
+                <label for="mesVentesEnCours">mes ventes en cours</label>
+                <input type="checkbox" id="ventesNonDebutees" name="checkboxVentes">
+                <!-- accessible seulement si 'radioVentes' est selectionné -->
+                <label for="ventesNonDebutees">ventes non débutées</label>
+                <input type="checkbox" id="ventesTerminees" name="checkboxVentes">
+                <!-- accessible seulement si 'radioVentes' est selectionné -->
+                <label for="ventesTerminees">ventes terminées</label>
+            </div>
+            <br>
+            <button>Rechercher</button>
+            <script>
+                const radioAchats = document.getElementById('radioAchats');
+                const radioVentes = document.getElementById('radioVentes');
+                const checkboxVentes = document.querySelectorAll('[name="checkboxVentes"]');
+                const checkboxAchats = document.querySelectorAll('[name="checkboxAchats"]');
+
+                function updateCheckbox() {
+                    const isAchatsSelected = radioAchats.checked;
+                    const isVentesSelected = radioVentes.checked;
+                    checkboxAchats.forEach(checkbox => {
+                        checkbox.disabled = !isAchatsSelected;
+                        if (!isAchatsSelected) {
+                            checkbox.checked = false;
+                        }
+                    });
+                    checkboxVentes.forEach(checkbox => {
+                        checkbox.disabled = !isVentesSelected;
+                        if (!isVentesSelected) {
+                            checkbox.checked = false;
+                        }
+                    });
+                }
+
+                // Ajout d'un écouteur d'événement sur les radios
+                radioVentes.addEventListener('change', updateCheckbox);
+                radioAchats.addEventListener('change', updateCheckbox);
+
+                // Appel de la fonction au chargement de la page
+                updateCheckbox();
+            </script>
+            <div>
+                <div data-th-each="enchere : ${encheres}">
+                    <div data-th-text="${enchere.noArticle.getNomArticle()}"></div>
+                    <div data-th-text="${enchere.montantEnchere}"></div>
+                    <div data-th-text="${enchere.dateEnchere}"></div>
+                    <div data-th-text="${enchere.noUtilisateur}"></div>
+                </div>
+            </div>
+        </form>
+    </div>
 </main>
+
 </body>
 </html>
