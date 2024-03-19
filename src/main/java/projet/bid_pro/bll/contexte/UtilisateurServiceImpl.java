@@ -18,4 +18,11 @@ public class UtilisateurServiceImpl implements UtilisateurService {
 	public Utilisateur charger(String email) {
 		return utilisateurDAO.read(email);
 	}
+
+	@Override
+	public void register(Utilisateur utilisateur) {
+		utilisateurDAO.ajouterUtilisateur(utilisateur);
+	}
+
+
 }

@@ -4,4 +4,6 @@ import projet.bid_pro.bo.Utilisateur;
 
 public interface UtilisateurService {
 	Utilisateur charger(String email);
+
+	void register(Utilisateur utilisateur);
 }

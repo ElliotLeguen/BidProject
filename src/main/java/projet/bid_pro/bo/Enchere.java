@@ -1,35 +1,47 @@
 package projet.bid_pro.bo;
 
+import projet.bid_pro.dal.UtilisateurDAO;
+
 import java.util.Date;
 
 public class Enchere {
-    private int noUtilisateur;
-    private int noArticle;
+    private Utilisateur noUtilisateur;
+    private ArticleVendu noArticle;
     private Date dateEnchere;
     private int montantEnchere;
 
     // Constructeur
     public Enchere(int noUtilisateur, int noArticle, Date dateEnchere, int montantEnchere) {
+        this.dateEnchere = dateEnchere;
+        this.montantEnchere = montantEnchere;
+    }
+
+    public Enchere(Utilisateur noUtilisateur, ArticleVendu noArticle, Date dateEnchere, int montantEnchere) {
         this.noUtilisateur = noUtilisateur;
         this.noArticle = noArticle;
         this.dateEnchere = dateEnchere;
         this.montantEnchere = montantEnchere;
     }
 
+    public Enchere() {
+
+    }
+
     // Getters et Setters
-    public int getNoUtilisateur() {
+
+    public Utilisateur getNoUtilisateur() {
         return noUtilisateur;
     }
 
-    public void setNoUtilisateur(int noUtilisateur) {
+    public void setNoUtilisateur(Utilisateur noUtilisateur) {
         this.noUtilisateur = noUtilisateur;
     }
 
-    public int getNoArticle() {
+    public ArticleVendu getNoArticle() {
         return noArticle;
     }
 
-    public void setNoArticle(int noArticle) {
+    public void setNoArticle(ArticleVendu noArticle) {
         this.noArticle = noArticle;
     }
 
