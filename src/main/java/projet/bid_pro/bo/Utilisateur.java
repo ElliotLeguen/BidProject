@@ -1,17 +1,53 @@
 package projet.bid_pro.bo;
 
+import jakarta.validation.constraints.*;
+
 public class Utilisateur {
+
+    @NotNull
     private int noUtilisateur;
+    @NotBlank
+    @NotNull
+    @Size(max = 30)
     private String pseudo;
+    @NotBlank
+    @NotNull
+    @Size(max = 30)
     private String nom;
+    @NotBlank
+    @NotNull
+    @Size(max = 30)
     private String prenom;
+    @NotBlank
+    @NotNull
+    @Size(max = 30)
+    @Email
     private String email;
+
+    @NotNull
+    @Size(max = 15)
     private String telephone;
+    @NotBlank
+    @NotNull
+    @Size(max = 30)
     private String rue;
+    @NotBlank
+    @NotNull
+    @Size(max = 10)
     private String codePostal;
+    @NotBlank
+    @NotNull
+    @Size(max = 30)
     private String ville;
+    @NotBlank
+    @NotNull
+    @Size(max = 100)
     private String motDePasse;
+    @NotNull
     private int credit;
+    @NotBlank
+    @NotNull
+    @Size(max = 50)
     private String administrateur;
 
     public Utilisateur() {

@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import projet.bid_pro.bll.contexte.UtilisateurService;
 import projet.bid_pro.bo.Utilisateur;
 
+import java.security.Principal;
+
 @Controller
 public class LoginController {
 
@@ -28,6 +30,8 @@ public class LoginController {
             Model model) {
         return "login";
     }
+    //LoginSuccessHandler
+
 
     @GetMapping("/register")
     public String register(Model model){
@@ -37,7 +41,13 @@ public class LoginController {
         return "register";
     }
 
-    @PostMapping("/register/save")
+    @GetMapping("/login-error")
+    public String loginError(Model model) {
+        model.addAttribute("loginError", true);
+        return "login";
+    }
+
+    @PostMapping("/register")
     public String registration(@Valid @ModelAttribute("user") Utilisateur userDto,
                                BindingResult result,
                                Model model){

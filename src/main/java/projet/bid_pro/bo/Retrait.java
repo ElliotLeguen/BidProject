@@ -1,6 +1,12 @@
 package projet.bid_pro.bo;
 
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
+
 public class Retrait {
+
+
+
     private int noArticle;
     private String rue;
     private String codePostal;

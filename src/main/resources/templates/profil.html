@@ -15,7 +15,14 @@
 <body>
 <main class="center-main">
     <section class="center-section">
-        <h1>Mon profil</h1>
+        <div>
+            <!-- Affichage des informations de l'utilisateur -->
+            <p>Nom: <span th:text="${UtilisateurEnSession.nom}"></span></p>
+            <p>Prénom: <span th:text="${UtilisateurEnSession.prenom}"></span></p>
+            <p>Email: <span th:text="${UtilisateurEnSession.email}"></span></p>
+            <!-- Ajoutez d'autres informations de l'utilisateur si nécessaire -->
+        </div>
+
     </section>
 </main>
 </body>

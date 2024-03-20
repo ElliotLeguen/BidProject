@@ -31,10 +31,24 @@
 <!--        			<li><a href="/contexte" data-th-text="#{frag-entete.a.contexte}"></a></li>-->
 
 <!--        		</ul>-->
+
         <ul>
-            <li><a href="/encheres" >Enchères</a></li>
-            <li><a href="/article" >Vendre un article</a></li>
-            <li><a href="/profil" >Mon profil</a></li>
+
+            <li sec:authorize="isAuthenticated()">
+                <!-- Affiche le nom d'utilisateur -->
+                <span sec:authentication="name"></span>
+            </li>
+            <!-- Affiche les liens uniquement si l'utilisateur est connecté -->
+            <li sec:authorize="isAuthenticated()">
+                <a href="/encheres">Enchères</a>
+            </li>
+            <li sec:authorize="isAuthenticated()">
+                <a href="/article">Vendre un article</a>
+            </li>
+            <li sec:authorize="isAuthenticated()">
+                <a href="/profil">Mon profil</a>
+            </li>
+
             <li sec:authorize="!isAuthenticated()"><a href="/login" >Se connecter</a></li>
             <li sec:authorize="!isAuthenticated()"><a href="/register" >S'inscrire</a></li>
             <li sec:authorize="isAuthenticated()"><a href="/logout" >Déconnexion</a></li>

@@ -4,12 +4,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import org.springframework.web.bind.annotation.SessionAttributes;
 import projet.bid_pro.bll.contexte.EnchereService;
 import projet.bid_pro.bo.Enchere;
 
 import java.util.List;
 
 @Controller
+@SessionAttributes({ "UtilisateurEnSession" })
 public class EnchereController {
 
 	private EnchereService enchereService;
