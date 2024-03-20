@@ -12,7 +12,6 @@
         <h2>Bienvenue sur ENI Demo </h2>
         <form th:action="@{/login}"  method="post">
             <div className="div_Input">
-                <br />
                 <ul class="flex-outer">
                     <li><label for="inputNom"></label>
                         <br />
@@ -26,18 +25,15 @@
                     </li>
                     <li data-th-if="${errorMessage}" data-th-text="${errorMessage}" class="error-message"></li>
                 </ul>
-                <br />
                 <button type="submit" name="SeConnecter" className='login-button' >
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                    <span></span>
                     Se Connecter
                 </button>
+                <p th:if="${loginError}" class="error">Informations incorrect</p>
                 <span>Pas encore inscrit ? <a th:href="@{/register}">S'inscrire ici</a></span>
             </div>
 
         </form>
+
     </div>
 </main>
 </body>
