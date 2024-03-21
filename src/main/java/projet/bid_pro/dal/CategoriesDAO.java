@@ -7,4 +7,6 @@ import java.util.List;
 public interface CategoriesDAO {
 
     List<Categorie> readCategories();
+
+    List<Categorie> consulterEncheresParCategorie(String nomCategorie);
 }

@@ -1,41 +1,46 @@
+/* Réinitialisation des styles de base */
 body {
-    font-family: sans-serif;
+    font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
+    background-color: #f2f2f2;
 }
 
+/* Conteneur principal centré */
 .center-main {
     margin: auto;
     width: 80%;
     padding: 20px;
 }
 
-h1 {
+/* Titres centrés */
+h1, h2 {
     text-align: center;
+    color: #333;
 }
 
-h4 {
-    margin-bottom: 10px;
-
+/* Espacement sous les titres de section */
+h2 {
+    text-align: left;
+    margin-bottom: 15px;
 }
 
+/* Espacement entre les étiquettes et les champs de formulaire */
 label {
     margin-right: 10px;
 }
 
+/* Espacement entre les groupes de formulaire */
 .form-group {
     margin-bottom: 15px;
 }
 
-/* Style the filter section */
+/* Style de la section de filtres */
 .filters {
     margin-bottom: 20px;
 }
 
-.filters > * {
-    margin-right: 10px;
-}
-
+/* Styles des champs de formulaire */
 select, input[type="text"] {
     width: 20%; /* Remplir la largeur du conteneur parent */
     padding: 10px;
@@ -45,23 +50,15 @@ select, input[type="text"] {
     background-color: #fff;
 }
 
-input[type="checkbox"] {
-    margin-right: 5px;
-}
-
+/* Style du bouton */
 button {
-    padding: 5px 10px;
+    padding: 10px 15px;
     background-color: #4CAF50;
     color: white;
     border: none;
     border-radius: 4px;
     cursor: pointer;
-}
-
-/* Disable checkbox styles when disabled */
-input[type="checkbox"][disabled] {
-    opacity: 0.5;
-    cursor: not-allowed;
+    font-size: 16px;
 }
 
 /* Conteneur des cartes */
@@ -75,8 +72,8 @@ input[type="checkbox"][disabled] {
 /* Style des cartes */
 .card {
     flex: 0 0 calc(20% - 20px); /* Taille des cartes avec espacement */
-    margin-bottom: 30px; /* Espacement entre les cartes */
-    padding: 10px;
+    margin-bottom: 60px; /* Espacement entre les cartes */
+    padding: 20px;
     border: 1px solid #ccc;
     border-radius: 4px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -94,9 +91,4 @@ input[type="checkbox"][disabled] {
 .card span {
     margin-top: 10px; /* Espacement du haut augmenté */
 
-}
-
-.card img {
-    margin-left: auto; /* Marge à droite automatique pour positionner l'image à droite */
-    margin-right: 70px; /* Augmenter la marge à droite pour déplacer l'image davantage */
 }

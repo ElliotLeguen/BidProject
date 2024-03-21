@@ -1,33 +1,108 @@
 package projet.bid_pro.controller;
 
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
-import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.annotation.RequestParam;
 import projet.bid_pro.bll.contexte.EnchereService;
 import projet.bid_pro.bo.Enchere;
 
 import java.util.List;
 
 @Controller
-@SessionAttributes({ "UtilisateurEnSession" })
 public class EnchereController {
 
 	private EnchereService enchereService;
-  
+
 	public EnchereController(EnchereService enchereService) {
 		this.enchereService = enchereService;
 	}
 
-  	@GetMapping("/encheres")
-	public String afficherEncheres(Model model) {
+	@GetMapping("/")
+	public String afficherAccueil(Model model){
 		List<Enchere> encheres = enchereService.consulterEncheres();
+		var categories = enchereService.consulterCategories();
+		model.addAttribute("categorie", categories);
+		model.addAttribute("encheres", encheres);
+		return "index";
+	}
+
+  	@GetMapping("/encheres")
+	public String afficherEncheres(HttpServletRequest request, @RequestParam(name = "nomArticle", required = false) String nomArticle,
+                                   @RequestParam(name = "categorie", required = false) String categorie,
+                                   @RequestParam(name = "radio", required = false) String radio,
+                                   @RequestParam(name = "dateDebut", required = false) String dateDebut,
+                                   @RequestParam(name = "dateFin", required = false) String dateFin,
+                                   Model model) {
+		List<Enchere> encheres;
+        boolean ventesEnCours = false;
+        boolean ventesNonDebutees = false;
+        boolean ventesTerminees = false;
+        if (request.getParameter("mesVentesEnCours") != null) {
+            ventesEnCours = true;
+        }
+        if (request.getParameter("ventesNonDebutees") != null) {
+            ventesNonDebutees = true;
+        }
+        if (request.getParameter("ventesTerminees") != null) {
+            ventesTerminees = true;
+        }
+        if (ventesEnCours && ventesNonDebutees && ventesTerminees) {
+            // Filtrer par toutes les types de ventes
+            // Appelez la méthode appropriée dans votre service pour obtenir toutes les types de ventes
+            // en fonction de l'utilisateur connecté
+            encheres = enchereService.getToutesVentes();
+        } else if (ventesEnCours && ventesNonDebutees) {
+            // Filtrer par les ventes en cours et non débutées
+            encheres = enchereService.getVentesEnCoursEtNonDebutees();
+        } else if (ventesEnCours && ventesTerminees) {
+            // Filtrer par les ventes en cours et terminées
+            encheres = enchereService.getVentesEnCoursEtTerminees();
+        } else if (ventesNonDebutees && ventesTerminees) {
+            // Filtrer par les ventes non débutées et terminées
+            encheres = enchereService.getVentesNonDebuteesEtTerminees();
+        } else if (ventesEnCours) {
+            // Filtrer par les ventes en cours uniquement
+            encheres = enchereService.getVentesEnCours();
+        } else if (ventesNonDebutees) {
+            // Filtrer par les ventes non débutées uniquement
+            encheres = enchereService.getVentesNonDebutees();
+        } else if (ventesTerminees) {
+            // Filtrer par les ventes terminées uniquement
+            encheres = enchereService.getVentesTerminees();
+        } else {
+            // Aucun filtre sélectionné, obtenir toutes les ventes
+            encheres = enchereService.getToutesVentes();
+        }
+
+        if (nomArticle != null && !nomArticle.isEmpty()) {
+            // Si un nom d'article est spécifié, filtrer les enchères par ce nom
+            encheres = enchereService.consulterEncheresParNomArticle(nomArticle);
+        }
+        else {
+            // Sinon, obtenir toutes les enchères
+            encheres = enchereService.consulterEncheres();
+        }
+
+
+//		if (categorie != null && !categorie.isEmpty()) {
+//			// Filtrer par catégorie si spécifié
+//			encheres = enchereService.consulterEncheresParCategorie(categorie);
+//		}
+
 		var categories = enchereService.consulterCategories();
 		model.addAttribute("categorie", categories);
 		model.addAttribute("encheres", encheres);
 		System.out.println(encheres);
 		return "encheres";
+	}
+
+
+	@GetMapping("/profilEnchere")
+	public String AfficherProfilEnchere(){
+		return "profilEnchere";
 	}
 
 	/*
