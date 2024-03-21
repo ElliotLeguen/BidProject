@@ -11,7 +11,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.JdbcUserDetailsManager;
 import org.springframework.security.provisioning.UserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler;
 import org.springframework.web.servlet.LocaleResolver;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
@@ -75,8 +74,7 @@ public class WebConfiguration implements WebMvcConfigurer {
 		http
 				.formLogin(form -> form
 						.loginPage("/login")
-						.successHandler(new SimpleUrlAuthenticationSuccessHandler("/loginSuccessHandler"))
-						.failureUrl("/login-error"))
+						.failureUrl("/login?loginError=true"))
 				.logout(logout -> logout
 						.logoutSuccessUrl("/")
 						.deleteCookies("JSESSIONID"));

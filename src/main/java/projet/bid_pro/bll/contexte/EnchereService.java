@@ -9,21 +9,13 @@ public interface EnchereService {
     List<Enchere> consulterEncheres();
     Enchere consulterEnchereParId(long id);
     void creerEnchere(Enchere enchere);
-
+    List<Enchere> consulterEncheresParNomArticle(String nomArticle);
     List<Categorie> consulterCategories();
-
-
-    //List<Genre> consulterGenres();
-
-    //List<Participant> consulterParticipants();
-
-    //Genre consulterGenreParId(long id);
-
-    //Participant consulterParticipantParId(long id);
-
-    //String consulterTitreFilm(long id);
-
-    //void publierAvis(Avis avis, long idFilm);
-
-    //List<Avis> consulterAvis(long idFilm);
+    List<Enchere> getToutesVentes();
+    List<Enchere> getVentesEnCoursEtNonDebutees();
+    List<Enchere> getVentesEnCoursEtTerminees();
+    List<Enchere> getVentesNonDebuteesEtTerminees();
+    List<Enchere> getVentesEnCours();
+    List<Enchere> getVentesNonDebutees();
+    List<Enchere> getVentesTerminees();
 }

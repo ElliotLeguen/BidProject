@@ -15,48 +15,41 @@
 <body>
 <main>
     <h1>Liste des enchères</h1>
-    <div>
-        <h4>Filtres :</h4>
-        <form action="" method="get">
-            <input type="text" placeholder="Le nom de l'article contient"><br><br>
-            <label>Catégorie :</label>
-            <select name="categorie">
-                <option value="">Toutes</option>
-                <option value="Informatique">Informatique</option>
-                <option value="Ameublement">Ameublement</option>
-                <option value="Vetement">Vêtement</option>
-                <option value="Sport">Sport&Loisirs</option>
-            </select>
-            <br><br>
-            <div>
-                <input type="radio" id="radioAchats" name="radio" value="achat">
-                <label>Achats</label>
-                <input type="radio" id="radioVentes" name="radio" value="vente">
-                <label>Mes ventes</label>
+    <div class="filters">
+        <h2>Filtres :</h2>
+        <form action="" method="get" class="filter-form">
+            <div class="form-group">
+                <br><input type="text" name="nomArticle" placeholder="Le nom de l'article contient" th:value="${param.nomArticle}">
             </div>
-            <br>
-            <div>
+            <div class="form-group">
+                <label>Catégorie :</label>
+                <select name="categorie">
+                    <option value="">Toutes</option>
+                    <option th:each="categorieItem : ${categorie}" th:value="${categorieItem.getNoCategorie()}" th:text="${categorieItem.getLibelle()}"></option>
+                </select>
+            </div>
+            <div class="form-group">
+                <input type="radio" id="radioAchats" name="radio" value="achat">
+                <label for="radioAchats">Achats</label>
+                <input type="radio" id="radioVentes" name="radio" value="vente">
+                <label for="radioVentes">Mes ventes</label>
+            </div>
+            <div class="form-group">
                 <input type="checkbox" id="enchereOuverte" name="checkboxAchats">
-                <!-- accessible seulement si 'radioAchats' est selectionné -->
                 <label for="enchereOuverte">enchères ouvertes</label>
                 <input type="checkbox" id="mesEncheres" name="checkboxAchats">
-                <!-- accessible seulement si 'radioAchats' est selectionné -->
-                <label for="mesEncheres">mes enchères</label>
+                <label for="mesEncheres">mes enchères en cours</label>
                 <input type="checkbox" id="mesEnchereRemportees" name="checkboxAchats">
-                <!-- accessible seulement si 'radioAchats' est selectionné -->
                 <label for="mesEnchereRemportees">mes enchères remportées</label>
-                <br><br>
+            </div>
+            <div class="form-group">
                 <input type="checkbox" id="mesVentesEnCours" name="checkboxVentes">
-                <!-- accessible seulement si 'radioVentes' est selectionné -->
                 <label for="mesVentesEnCours">mes ventes en cours</label>
                 <input type="checkbox" id="ventesNonDebutees" name="checkboxVentes">
-                <!-- accessible seulement si 'radioVentes' est selectionné -->
                 <label for="ventesNonDebutees">ventes non débutées</label>
                 <input type="checkbox" id="ventesTerminees" name="checkboxVentes">
-                <!-- accessible seulement si 'radioVentes' est selectionné -->
                 <label for="ventesTerminees">ventes terminées</label>
             </div>
-            <br>
             <button>Rechercher</button>
             <script>
                 const radioAchats = document.getElementById('radioAchats');
@@ -88,15 +81,16 @@
                 // Appel de la fonction au chargement de la page
                 updateCheckbox();
             </script>
-            <div>
-                <div data-th-each="enchere : ${encheres}">
-                    <div data-th-text="${enchere.noArticle.getNomArticle()}"></div>
-                    <div data-th-text="${enchere.montantEnchere}"></div>
-                    <div data-th-text="${enchere.dateEnchere}"></div>
-                    <div data-th-text="${enchere.noUtilisateur}"></div>
-                </div>
-            </div>
         </form>
+    </div>
+    <div class="card-container">
+        <div class="card" data-th-each="enchere : ${encheres}" th:if="${param.nomArticle == null or enchere.noArticle.getNomArticle().contains(param.nomArticle)}">
+            <u><a th:href="@{/detailEnchere/${enchere.no()}}"><span data-th-text="${enchere.noArticle.getNomArticle()}"></a></span></u>
+            <div><span>Prix : </span><span><span data-th-text="${enchere.montantEnchere}"></span> points</span></div>
+            <div><span>Fin de l'enchère : </span><span data-th-text="${enchere.dateEnchere}"></span></div>
+            <a th:href="@{/profilEnchere}"><span>Vendeur : </span><span data-th-text="${enchere.noUtilisateur.getNom()}"></span></a>
+            <img th:src="@{images/logoENI.png}" alt="">
+        </div>
     </div>
 </main>
 

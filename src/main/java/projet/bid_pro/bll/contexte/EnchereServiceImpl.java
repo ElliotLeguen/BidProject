@@ -19,17 +19,52 @@ public class EnchereServiceImpl implements EnchereService{
         this.enchereDAO = enchereDAO;
         this.categoriesDAO = categoriesDAO;
     }
-
     @Override
     public List<Enchere> consulterEncheres() {
         List<Enchere> encheres = enchereDAO.findAll();
         return encheres;
     }
-
     @Override
     public List<Categorie> consulterCategories() {
         return categoriesDAO.readCategories();
     }
+
+    @Override
+    public List<Enchere> getToutesVentes() {
+        return null;
+    }
+
+    @Override
+    public List<Enchere> getVentesEnCoursEtNonDebutees() {
+        return null;
+    }
+
+    @Override
+    public List<Enchere> getVentesEnCoursEtTerminees() {
+        return null;
+    }
+
+    @Override
+    public List<Enchere> getVentesNonDebuteesEtTerminees() {
+        return null;
+    }
+
+    @Override
+    public List<Enchere> getVentesEnCours() {
+        return null;
+    }
+
+    @Override
+    public List<Enchere> getVentesNonDebutees() {
+        return null;
+    }
+
+    @Override
+    public List<Enchere> getVentesTerminees() {
+        List<Enchere> encheres = enchereDAO.getVentesTerminees();
+        return encheres;
+    }
+
     @Override
     public Enchere consulterEnchereParId(long id) {
         return null;
@@ -37,6 +72,10 @@ public class EnchereServiceImpl implements EnchereService{
 
     @Override
     public void creerEnchere(Enchere enchere) {
+    }
 
+    @Override
+    public List<Enchere> consulterEncheresParNomArticle(String nomArticle) {
+        return enchereDAO.consulterEncheresParNomArticle(nomArticle);
     }
 }
