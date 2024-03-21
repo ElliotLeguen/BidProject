@@ -1,22 +1,26 @@
 package projet.bid_pro.bo;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.util.Date;
 
 public class ArticleVendu {
     private int noArticle;
     private String nomArticle;
     private String description;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date dateDebutEncheres;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date dateFinEncheres;
     private Integer prixInitial;
     private Integer prixVente;
-    private Utilisateur noUtilisateur;
-    private int noCategorie;
+    private Utilisateur utilisateur;
+    private Categorie categorie;
 
     // Constructeur
     public ArticleVendu(int noArticle, String nomArticle, String description, Date dateDebutEncheres,
                         Date dateFinEncheres, Integer prixInitial, Integer prixVente,
-                        Utilisateur noUtilisateur, int noCategorie) {
+                        Utilisateur utilisateur, Categorie categorie) {
         this.noArticle = noArticle;
         this.nomArticle = nomArticle;
         this.description = description;
@@ -24,8 +28,8 @@ public class ArticleVendu {
         this.dateFinEncheres = dateFinEncheres;
         this.prixInitial = prixInitial;
         this.prixVente = prixVente;
-        this.noUtilisateur = noUtilisateur;
-        this.noCategorie = noCategorie;
+        this.utilisateur = utilisateur;
+        this.categorie = categorie;
     }
 
     public ArticleVendu() {
@@ -89,20 +93,20 @@ public class ArticleVendu {
         this.prixVente = prixVente;
     }
 
-    public Utilisateur getNoUtilisateur() {
-        return noUtilisateur;
+    public Utilisateur getUtilisateur() {
+        return utilisateur;
     }
 
-    public void setNoUtilisateur(Utilisateur noUtilisateur) {
-        this.noUtilisateur = noUtilisateur;
+    public void setUtilisateur(Utilisateur utilisateur) {
+        this.utilisateur = utilisateur;
     }
 
-    public int getNoCategorie() {
-        return noCategorie;
+    public Categorie getCategorie() {
+        return categorie;
     }
 
-    public void setNoCategorie(int noCategorie) {
-        this.noCategorie = noCategorie;
+    public void setCategorie(Categorie noCategorie) {
+        this.categorie = noCategorie;
     }
 
     @Override
@@ -115,8 +119,8 @@ public class ArticleVendu {
                 ", dateFinEncheres=" + dateFinEncheres +
                 ", prixInitial=" + prixInitial +
                 ", prixVente=" + prixVente +
-                ", noUtilisateur=" + noUtilisateur +
-                ", noCategorie=" + noCategorie +
+                ", Utilisateur=" + utilisateur +
+                ", Categorie=" + categorie +
                 '}';
     }
 }
