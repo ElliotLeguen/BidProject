@@ -26,10 +26,7 @@ public class CategoriesDAOImpl implements CategoriesDAO{
 
     @Override
     public Categorie readById(int id) {
-        String sql = "SELECT * " +
-                "FROM CATEGORIES c " +
-                "INNER JOIN ARTICLES_VENDUS a ON c.no_categorie = a.no_categorie " +
-                "WHERE a.no_categorie = ?";
+        String sql = "SELECT * FROM CATEGORIES c WHERE c.no_categorie = ?";
         return jdbcTemplate.queryForObject(sql, new Object[]{id}, new CategorieRowMapper());
     }
 
