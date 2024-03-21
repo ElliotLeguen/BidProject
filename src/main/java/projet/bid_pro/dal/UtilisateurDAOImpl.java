@@ -20,6 +20,7 @@ public class UtilisateurDAOImpl implements UtilisateurDAO {
             + " WHERE email = :email";
     private final String AJOUTER_UTILISATEUR = "INSERT INTO UTILISATEURS (pseudo, nom, prenom, email, telephone, rue, code_postal, ville, mot_de_passe, credit, administrateur) VALUES (:pseudo, :nom, :prenom, :email, :telephone, :rue, :codePostal, :ville, :motDePasse, :credit, :administrateur);";
 
+    private final String MODIFIER_UTILISATEUR = "UPDATE UTILISATEURS SET pseudo = :pseudo, nom = :nom, prenom = :prenom, email = :email, telephone = :telephone, rue = :rue, code_postal = :codePostal, ville = :ville WHERE no_utilisateur = :no_utilisateur";
     @Autowired
     private NamedParameterJdbcTemplate jdbcTemplate;
 
@@ -38,7 +39,7 @@ public class UtilisateurDAOImpl implements UtilisateurDAO {
     }
 
     @Override
-    public void ajouterUtilisateur(Utilisateur utilisateur) {
+    public Utilisateur ajouterUtilisateur(Utilisateur utilisateur) {
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
         String motDePasseEncode = encoder.encode(utilisateur.getMotDePasse());
         KeyHolder keyHolder = new GeneratedKeyHolder();
@@ -63,6 +64,25 @@ public class UtilisateurDAOImpl implements UtilisateurDAO {
             // Mise à jour de l'identifiant du film auto-généré par la base
             utilisateur.setNoUtilisateur(keyHolder.getKey().intValue());
         }
+        return utilisateur;
+    }
+
+    @Override
+    public Utilisateur edit(Utilisateur utilisateur) {
+        MapSqlParameterSource namedParameters = new MapSqlParameterSource();
+        namedParameters.addValue("no_utilisateur", utilisateur.getNoUtilisateur());
+        namedParameters.addValue("pseudo", utilisateur.getPseudo());
+        namedParameters.addValue("nom", utilisateur.getNom());
+        namedParameters.addValue("prenom", utilisateur.getPrenom());
+        namedParameters.addValue("email", utilisateur.getEmail());
+        namedParameters.addValue("telephone", utilisateur.getTelephone());
+        namedParameters.addValue("rue", utilisateur.getRue());
+        namedParameters.addValue("codePostal", utilisateur.getCodePostal());
+        namedParameters.addValue("ville", utilisateur.getVille());
+
+        jdbcTemplate.update(MODIFIER_UTILISATEUR, namedParameters);
+
+        return utilisateur;
     }
 
     /**

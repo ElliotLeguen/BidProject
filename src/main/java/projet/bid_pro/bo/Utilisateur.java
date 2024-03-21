@@ -2,6 +2,7 @@ package projet.bid_pro.bo;
 
 import jakarta.validation.constraints.*;
 
+
 public class Utilisateur {
 
     @NotNull
@@ -45,9 +46,7 @@ public class Utilisateur {
     private String motDePasse;
     @NotNull
     private int credit;
-    @NotBlank
-    @NotNull
-    @Size(max = 50)
+
     private String administrateur;
 
     public Utilisateur() {
@@ -57,7 +56,7 @@ public class Utilisateur {
     // Constructeur
     public Utilisateur(int noUtilisateur, String pseudo, String nom, String prenom, String email,
                        String telephone, String rue, String codePostal, String ville,
-                       String motDePasse, int credit, String administrateur) {
+                       String motDePasse, int credit) {
         this.noUtilisateur = noUtilisateur;
         this.pseudo = pseudo;
         this.nom = nom;
@@ -72,6 +71,18 @@ public class Utilisateur {
         this.administrateur = administrateur;
     }
 
+    public Utilisateur(int noUtilisateur, String pseudo, String nom, String prenom, String email,
+                       String telephone, String rue, String codePostal, String ville) {
+        this.noUtilisateur = noUtilisateur;
+        this.pseudo = pseudo;
+        this.nom = nom;
+        this.prenom = prenom;
+        this.email = email;
+        this.telephone = telephone;
+        this.rue = rue;
+        this.codePostal = codePostal;
+        this.ville = ville;
+    }
     // Getters et Setters
     public int getNoUtilisateur() {
         return noUtilisateur;

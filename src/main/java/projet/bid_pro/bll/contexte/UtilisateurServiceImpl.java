@@ -20,8 +20,13 @@ public class UtilisateurServiceImpl implements UtilisateurService {
 	}
 
 	@Override
-	public void register(Utilisateur utilisateur) {
-		utilisateurDAO.ajouterUtilisateur(utilisateur);
+	public Utilisateur register(Utilisateur utilisateur) {
+		return utilisateurDAO.ajouterUtilisateur(utilisateur);
+	}
+
+	@Override
+	public Utilisateur edit(Utilisateur utilisateur) {
+		return utilisateurDAO.edit(utilisateur);
 	}
 
 
