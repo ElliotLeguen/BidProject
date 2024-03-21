@@ -31,8 +31,7 @@ public class EnchereServiceImpl implements EnchereService{
 
     @Override
     public List<Enchere> getToutesVentes() {
-        List<Enchere> encheres = enchereDAO.getToutesVentes();
-        return encheres;
+        return null;
     }
 
     @Override
@@ -62,7 +61,8 @@ public class EnchereServiceImpl implements EnchereService{
 
     @Override
     public List<Enchere> getVentesTerminees() {
-        return null;
+        List<Enchere> encheres = enchereDAO.getVentesTerminees();
+        return encheres;
     }
 
     @Override

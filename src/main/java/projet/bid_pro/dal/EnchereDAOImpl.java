@@ -27,7 +27,7 @@ public class EnchereDAOImpl implements EnchereDAO{
     private final String FIND_ALL = "SELECT *  FROM ENCHERES inner join ARTICLES_VENDUS on ENCHERES.no_article = ARTICLES_VENDUS.no_article inner join UTILISATEURS on ENCHERES.no_utilisateur = UTILISATEURS.no_utilisateur";
     private final String FIND_ENCHERES_BY_ARTICLE = "SELECT * FROM ARTICLES_VENDUS inner join ENCHERES on ARTICLES_VENDUS.no_article = ENCHERES.no_article";
     private final String FIND_ENCHERES_BY_CATEGORIE = "SELECT * FROM CATEGORIES inner join ARTICLES_VENDUS on CATEGORIES.no_categorie = ARTICLES_VENDUS.no_categorie inner join ENCHERES on ARTICLES_VENDUS.no_article = ENCHERES.no_article";
-    private final String FIND_VENTES_BY_ID = "SELECT * FROM CATEGORIES inner join ARTICLES_VENDUS on CATEGORIES.no_categorie = ARTICLES_VENDUS.no_categorie inner join ENCHERES on ARTICLES_VENDUS.no_article = ENCHERES.no_article";
+    private final String FIND_VENTES_BY_ID = "SELECT * FROM ENCHERES inner join ARTICLES_VENDUS on ENCHERES.no_article = ARTICLES_VENDUS.no_article inner join UTILISATEURS on ENCHERES.no_utilisateur = UTILISATEURS.no_utilisateur WHERE ARTICLES_VENDUS.prix_vente IS NOT NULL";
 
     @Autowired
     private NamedParameterJdbcTemplate jdbcTemplate;
@@ -51,7 +51,7 @@ public class EnchereDAOImpl implements EnchereDAO{
 
     @Override
     public List<Enchere> getToutesVentes() {
-        return jdbcTemplate.query(FIND_VENTES_BY_ID, new EnchereRowMapper());
+        return null;
     }
 
     @Override
@@ -81,7 +81,7 @@ public class EnchereDAOImpl implements EnchereDAO{
 
     @Override
     public List<Enchere> getVentesTerminees() {
-        return null;
+        return jdbcTemplate.query(FIND_VENTES_BY_ID, new EnchereRowMapper());
     }
 
     class EnchereRowMapper implements RowMapper<Enchere> {

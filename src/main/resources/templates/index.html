@@ -36,9 +36,8 @@
             <u><span data-th-text="${enchere.noArticle.getNomArticle()}"></span></u>
             <div><span>Prix : </span><span><span data-th-text="${enchere.montantEnchere}"></span> points</span></div>
             <div><span>Fin de l'enchère : </span><span data-th-text="${enchere.dateEnchere}"></span></div>
-            <a th:href="@{/profilEnchere}">
-                <span>Vendeur : </span><span data-th-text="${enchere.noUtilisateur.getNom()}"></span>
-            </a>
+            <a th:href="@{/profilEnchere}"><span>Vendeur : </span><span data-th-text="${enchere.noUtilisateur.getNom()}"></span></a>
+            <img th:src="@{images/logoENI.png}" alt="">
         </div>
     </div>
 </main>

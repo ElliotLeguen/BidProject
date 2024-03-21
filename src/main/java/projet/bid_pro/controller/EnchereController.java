@@ -33,10 +33,9 @@ public class EnchereController {
 	public String afficherEncheres(HttpServletRequest request, @RequestParam(name = "nomArticle", required = false) String nomArticle,
                                    @RequestParam(name = "categorie", required = false) String categorie,
                                    @RequestParam(name = "radio", required = false) String radio,
-                                   @RequestParam(name = "dateDebut", required = false) String dateDebut,
-                                   @RequestParam(name = "dateFin", required = false) String dateFin,
                                    Model model) {
 		List<Enchere> encheres;
+
         boolean ventesEnCours = false;
         boolean ventesNonDebutees = false;
         boolean ventesTerminees = false;
@@ -69,23 +68,22 @@ public class EnchereController {
         } else if (ventesNonDebutees) {
             // Filtrer par les ventes non débutées uniquement
             encheres = enchereService.getVentesNonDebutees();
-        } else if (ventesTerminees) {
-            // Filtrer par les ventes terminées uniquement
-            encheres = enchereService.getVentesTerminees();
-        } else {
+        }  else {
             // Aucun filtre sélectionné, obtenir toutes les ventes
             encheres = enchereService.getToutesVentes();
         }
 
+        encheres = enchereService.consulterEncheres();
         if (nomArticle != null && !nomArticle.isEmpty()) {
             // Si un nom d'article est spécifié, filtrer les enchères par ce nom
             encheres = enchereService.consulterEncheresParNomArticle(nomArticle);
+        } if ("radioVentes".equals(radio)) {
+            // Si "Mes ventes" est sélectionné
+            if (ventesTerminees) {
+                // Filtrer par les ventes terminées uniquement
+                encheres = enchereService.getVentesTerminees();
+            }
         }
-        else {
-            // Sinon, obtenir toutes les enchères
-            encheres = enchereService.consulterEncheres();
-        }
-
 
 //		if (categorie != null && !categorie.isEmpty()) {
 //			// Filtrer par catégorie si spécifié

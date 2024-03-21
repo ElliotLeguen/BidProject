@@ -75,7 +75,7 @@ input[type="checkbox"][disabled] {
 /* Style des cartes */
 .card {
     flex: 0 0 calc(20% - 20px); /* Taille des cartes avec espacement */
-    margin-bottom: 30px; /* Espacement entre les cartes */
+    margin-bottom: 25px; /* Espacement entre les cartes */
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 4px;

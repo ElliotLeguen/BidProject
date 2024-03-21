@@ -72,7 +72,7 @@ button {
 /* Style des cartes */
 .card {
     flex: 0 0 calc(20% - 20px); /* Taille des cartes avec espacement */
-    margin-bottom: 60px; /* Espacement entre les cartes */
+    margin-bottom: 25px; /* Espacement entre les cartes */
     padding: 20px;
     border: 1px solid #ccc;
     border-radius: 4px;
@@ -90,5 +90,9 @@ button {
 /* Style des éléments <span> dans les cartes */
 .card span {
     margin-top: 10px; /* Espacement du haut augmenté */
+}
 
+.card img {
+    margin-left: auto; /* Marge à droite automatique pour positionner l'image à droite */
+    margin-right: 70px; /* Augmenter la marge à droite pour déplacer l'image davantage */
 }
