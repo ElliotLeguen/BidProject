@@ -3,10 +3,11 @@ package projet.bid_pro.controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import projet.bid_pro.bll.contexte.EnchereService;
 
 @Controller
-// Injection de la liste des attributs en session
+@SessionAttributes({ "UtilisateurEnSession" })
 public class ArticleController {
 
 	private EnchereService enchereService;

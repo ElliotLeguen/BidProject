@@ -54,6 +54,13 @@
             <input type="text" id="ville" name="ville" required><br><br>
 
             <input type="submit" value="Soumettre">
+        <div>
+            <!-- Affichage des informations de l'utilisateur -->
+            <p>Nom: <span th:text="${UtilisateurEnSession.nom}"></span></p>
+            <p>Prénom: <span th:text="${UtilisateurEnSession.prenom}"></span></p>
+            <p>Email: <span th:text="${UtilisateurEnSession.email}"></span></p>
+            <!-- Ajoutez d'autres informations de l'utilisateur si nécessaire -->
+        </div>
         </form>
         <script>
             // Générer les options pour la liste déroulante du prix initial
