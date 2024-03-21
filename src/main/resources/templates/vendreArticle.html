@@ -49,13 +49,13 @@
 
             <h3>Informations de retrait</h3>
             <label for="rue">Rue:</label><br>
-            <input type="text" id="rue" name="rue" required th:field="${UtilisateurEnSession.rue}"><br>
+            <input type="text" id="rue" name="rue" required th:field="${userEdit.rue}"><br>
 
             <label for="code_postal">Code postal:</label><br>
-            <input type="text" id="code_postal" name="code_postal" required th:field="${UtilisateurEnSession.codePostal}"><br>
+            <input type="text" id="code_postal" name="code_postal" required th:field="${userEdit.codePostal}"><br>
 
             <label for="ville">Ville:</label><br>
-            <input type="text" id="ville" name="ville" required th:field="${UtilisateurEnSession.ville}"><br><br>
+            <input type="text" id="ville" name="ville" required th:field="${userEdit.ville}"><br><br>
             <input type="submit" value="Soumettre" >
             <input type="submit" value="enregister">
             <input type="submit" value="annuler">
