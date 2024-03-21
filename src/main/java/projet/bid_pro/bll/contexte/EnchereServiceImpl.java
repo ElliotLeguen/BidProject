@@ -67,8 +67,12 @@ public class EnchereServiceImpl implements EnchereService{
 
     @Override
     public List<Enchere> getVentesTerminees() {
-        List<Enchere> encheres = enchereDAO.getVentesTerminees();
-        return encheres;
+        return enchereDAO.getVentesTerminees();
+    }
+
+    @Override
+    public Categorie consulterCategorieParId(int id) {
+        return null;
     }
 
     @Override
@@ -79,17 +83,14 @@ public class EnchereServiceImpl implements EnchereService{
     @Override
     public void creerEnchere(Enchere enchere) {
     }
+
     @Override
-    public void creerArticle(ArticleVendu articleVendu){
-        articlesDAO.creerArticle(articleVendu);
-    }
+    public List<Enchere> consulterEncheresParNomArticle(String nomArticle) {
+        return null;
     }
 
     @Override
-    public Categorie consulterCategorieParId(int id) {
-        return categoriesDAO.readById(id);
-    @Override
-    public List<Enchere> consulterEncheresParNomArticle(String nomArticle) {
-        return enchereDAO.consulterEncheresParNomArticle(nomArticle);
+    public void creerArticle(ArticleVendu articleVendu){
+        articlesDAO.creerArticle(articleVendu);
     }
 }

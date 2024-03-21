@@ -14,8 +14,10 @@ import java.sql.SQLException;
 @Repository
 public class ArticleDAOImpl implements ArticleDAO{
     private UtilisateurDAO utilisateurDAO;
-    public ArticleDAOImpl(UtilisateurDAO utilisateurDAO) {
+    private CategoriesDAO categoriesDAO;
+    public ArticleDAOImpl(UtilisateurDAO utilisateurDAO, CategoriesDAO categoriesDAO) {
         this.utilisateurDAO = utilisateurDAO;
+        this.categoriesDAO = categoriesDAO;
     }
     private final String FIND_BY_ID = "SELECT * FROM ARTICLES_VENDUS WHERE no_article = :no_article";
 
@@ -39,8 +41,8 @@ public class ArticleDAOImpl implements ArticleDAO{
             articleVendu.setDateFinEncheres(rs.getDate("date_fin_encheres"));
             articleVendu.setPrixInitial(rs.getInt("prix_initial"));
             articleVendu.setPrixVente(rs.getInt("prix_vente"));
-            articleVendu.setNoUtilisateur(utilisateurDAO.read(rs.getInt("no_utilisateur")));
-            articleVendu.setNoArticle(rs.getInt("no_categorie"));
+            articleVendu.setUtilisateur(utilisateurDAO.read(rs.getInt("no_utilisateur")));
+            articleVendu.setCategorie(categoriesDAO.readById(rs.getInt("no_categorie")));
             return articleVendu;
         }
     }
