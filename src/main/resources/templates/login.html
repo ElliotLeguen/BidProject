@@ -1,10 +1,20 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<!-- Mise en place du layout -->
+<!-- Accueil comme titre de page -->
+<!-- la balise main définit par la classe de CSS 'center-main' comme paramètre contenuPage -->
+<html xmlns:th="http://www.thymeleaf.org"
+      data-th-replace="~{layouts/layout :: layout-encheres(
+					titrePage=~{:: title},
+					contenuPage=~{:: main},
+					ressourcesSupp=~{::#resources-css})}">
+
 <head>
-    <meta charset="UTF-8">
-    <title>Demo Spring Web</title>
-    <link rel="stylesheet" data-th-href="@{css/Login.css}">
-    <link rel="icon" data-th-href="@{/images/logoENI.png}" sizes="32x32">
+    <!-- Accueil comme titre de page -->
+    <title data-th-text="#{index.title}"></title>
+    <th:block id="resources-css">
+        <link rel="stylesheet" data-th-href="@{/css/login.css}">
+    </th:block>
+
 </head>
 <body>
 <main class="center-main">
@@ -12,7 +22,6 @@
         <h2>Bienvenue sur ENI Demo </h2>
         <form th:action="@{/login}"  method="post">
             <div className="div_Input">
-                <br />
                 <ul class="flex-outer">
                     <li><label for="inputNom"></label>
                         <br />
@@ -26,18 +35,15 @@
                     </li>
                     <li data-th-if="${errorMessage}" data-th-text="${errorMessage}" class="error-message"></li>
                 </ul>
-                <br />
                 <button type="submit" name="SeConnecter" className='login-button' >
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                    <span></span>
                     Se Connecter
                 </button>
+                <p th:if="${loginError}" class="error">Informations incorrect</p>
                 <span>Pas encore inscrit ? <a th:href="@{/register}">S'inscrire ici</a></span>
             </div>
 
         </form>
+
     </div>
 </main>
 </body>

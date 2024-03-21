@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<!-- Mise en place du layout -->
+<!-- Accueil comme titre de page -->
+<!-- la balise main définit par la classe de CSS 'center-main' comme paramètre contenuPage -->
+<html xmlns:th="http://www.thymeleaf.org"
+      data-th-replace="~{layouts/layout :: layout-encheres(
+					titrePage=~{:: title},
+					contenuPage=~{:: main},
+					ressourcesSupp=~{::#resources-css})}">
+
+<head>
+    <!-- Accueil comme titre de page -->
+    <title data-th-text="#{index.title}"></title>
+    <th:block id="resources-css">
+        <link rel="stylesheet" data-th-href="@{/css/login.css}">
+    </th:block>
+</head>
+<body>
+<main class="center-main">
+    <section class="center-section">
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <p class="form-control" id="pseudo" name="pseudo"  th:text="${userEdit.pseudo}" type="text"/>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <p class="form-control" id="nom" name="nom"  th:text="${userEdit.nom}" type="text"/>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <p class="form-control" id="prenom" name="prenom"  th:text="${userEdit.prenom}" type="text"/>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <p class="form-control" id="email" name="email"  th:text="${userEdit.email}" type="text"/>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <p class="form-control" id="telephone" name="telephone"   th:text="${userEdit.telephone}" type="text"/>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <p class="form-control" id="rue" name="rue"  th:text="${userEdit.rue}" type="text"/>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <p class="form-control" id="codePostal" name="codePostal"  th:text="${userEdit.codePostal}" type="text"/>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <p class="form-control" id="ville" name="ville"   th:text="${userEdit.ville}" type="text"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <a th:href="@{/profilEdit}" class="btn btn-primary">Modifier</a>
+            </div>
+    </section>
+</main>
+</body>
+</html>
