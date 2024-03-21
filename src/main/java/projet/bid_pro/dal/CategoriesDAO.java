@@ -5,6 +5,6 @@ import projet.bid_pro.bo.Categorie;
 import java.util.List;
 
 public interface CategoriesDAO {
-
     List<Categorie> readCategories();
+    Categorie readById(int id);
 }

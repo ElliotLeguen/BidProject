@@ -23,6 +23,16 @@ public class CategoriesDAOImpl implements CategoriesDAO{
         System.out.println(test);
         return test;
     }
+
+    @Override
+    public Categorie readById(int id) {
+        String sql = "SELECT * " +
+                "FROM CATEGORIES c " +
+                "INNER JOIN ARTICLES_VENDUS a ON c.no_categorie = a.no_categorie " +
+                "WHERE a.no_categorie = ?";
+        return jdbcTemplate.queryForObject(sql, new Object[]{id}, new CategorieRowMapper());
+    }
+
     public class CategorieRowMapper implements RowMapper<Categorie> {
         @Override
         public Categorie mapRow(ResultSet rs, int rowNum) throws SQLException {
