@@ -16,8 +16,8 @@
     flex: 0 0 calc(50% - 10px); /* 50% de largeur - 10px d'espacement */
     max-width: calc(50% - 10px); /* 50% de largeur - 10px d'espacement */
     padding: 2px 40px 2px 2px;
-
 }
+
 .form-group {
     margin-bottom: 20px;
 }
