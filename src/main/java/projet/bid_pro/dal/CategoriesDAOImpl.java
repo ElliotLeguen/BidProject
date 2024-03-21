@@ -13,6 +13,8 @@ import java.util.List;
 @Repository
 public class CategoriesDAOImpl implements CategoriesDAO{
 
+    private final String FIND_CATEGORIES = "SELECT * FROM CATEGORIES";
+
     @Autowired
     private JdbcTemplate jdbcTemplate;
 
@@ -28,6 +30,12 @@ public class CategoriesDAOImpl implements CategoriesDAO{
     public Categorie readById(int id) {
         String sql = "SELECT * FROM CATEGORIES c WHERE c.no_categorie = ?";
         return jdbcTemplate.queryForObject(sql, new Object[]{id}, new CategorieRowMapper());
+    }
+
+
+    @Override
+    public List<Categorie> consulterEncheresParCategorie(String nomCategorie) {
+        return jdbcTemplate.query(FIND_CATEGORIES, new CategorieRowMapper());
     }
 
     public class CategorieRowMapper implements RowMapper<Categorie> {

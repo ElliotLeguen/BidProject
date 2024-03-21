@@ -8,6 +8,7 @@ import projet.bid_pro.dal.ArticlesDAO;
 import projet.bid_pro.dal.ArticlesDAOImpl;
 import projet.bid_pro.dal.CategoriesDAO;
 import projet.bid_pro.dal.EnchereDAO;
+import projet.bid_pro.dal.UtilisateurDAO;
 
 import java.util.List;
 
@@ -33,6 +34,43 @@ public class EnchereServiceImpl implements EnchereService{
     public List<Categorie> consulterCategories() {
         return categoriesDAO.readCategories();
     }
+
+    @Override
+    public List<Enchere> getToutesVentes() {
+        return null;
+    }
+
+    @Override
+    public List<Enchere> getVentesEnCoursEtNonDebutees() {
+        return null;
+    }
+
+    @Override
+    public List<Enchere> getVentesEnCoursEtTerminees() {
+        return null;
+    }
+
+    @Override
+    public List<Enchere> getVentesNonDebuteesEtTerminees() {
+        return null;
+    }
+
+    @Override
+    public List<Enchere> getVentesEnCours() {
+        return null;
+    }
+
+    @Override
+    public List<Enchere> getVentesNonDebutees() {
+        return null;
+    }
+
+    @Override
+    public List<Enchere> getVentesTerminees() {
+        List<Enchere> encheres = enchereDAO.getVentesTerminees();
+        return encheres;
+    }
+
     @Override
     public Enchere consulterEnchereParId(long id) {
         return null;
@@ -45,9 +83,13 @@ public class EnchereServiceImpl implements EnchereService{
     public void creerArticle(ArticleVendu articleVendu){
         articlesDAO.creerArticle(articleVendu);
     }
+    }
 
     @Override
     public Categorie consulterCategorieParId(int id) {
         return categoriesDAO.readById(id);
+    @Override
+    public List<Enchere> consulterEncheresParNomArticle(String nomArticle) {
+        return enchereDAO.consulterEncheresParNomArticle(nomArticle);
     }
 }

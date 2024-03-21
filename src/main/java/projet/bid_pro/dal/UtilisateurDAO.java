@@ -8,5 +8,7 @@ public interface UtilisateurDAO {
 
 	Utilisateur read(String email);
 
-	void ajouterUtilisateur(Utilisateur utilisateur);
+	Utilisateur ajouterUtilisateur(Utilisateur utilisateur);
+
+	Utilisateur edit(Utilisateur utilisateur);
 }

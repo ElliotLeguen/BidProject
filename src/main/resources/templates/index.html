@@ -1,22 +1,45 @@
 <!DOCTYPE html>
-<!-- Mise en place du layout -->
-<!-- Accueil comme titre de page -->
-<!-- la balise main définit par la classe de CSS 'center-main' comme paramètre contenuPage -->
 <html xmlns:th="http://www.thymeleaf.org"
-	data-th-replace="~{layouts/layout :: layout-encheres(
+      data-th-replace="~{layouts/layout :: layout-encheres(
 					titrePage=~{:: title},
 					contenuPage=~{:: main},
-					ressourcesSupp=~{})}">
+					ressourcesSupp=~{:: #resources-css})}">
 
 <head>
-<!-- Accueil comme titre de page -->
-<title data-th-text="#{index.title}"></title>
+    <!-- Accueil comme titre de page -->
+    <title data-th-text="#{index.title}"></title>
+    <th:block id="resources-css">
+        <link rel="stylesheet" data-th-href="@{/css/accueil.css}"/>
+    </th:block>
 </head>
 <body>
-	<main class="center-main">
-		<section class="center-section">
-			<h1 style="text-align: center;" data-th-text="#{index.h1}"></h1>
-		</section>
-	</main>
+<main>
+    <h1>Liste des enchères</h1>
+        <h2>Filtres :</h2>
+        <form action="" method="get" class="filter-form">
+            <div class="form-group">
+                <input type="text" name="nomArticle" placeholder="Le nom de l'article contient"
+                       th:value="${param.nomArticle}">
+            </div>
+            <div class="form-group">
+                <label>Catégorie :</label>
+                <select name="categorie">
+                    <option value="">Toutes</option>
+                    <option th:each="categorieItem : ${categorie}" th:value="${categorieItem.getNoCategorie()}"
+                            th:text="${categorieItem.getLibelle()}"></option>
+                </select>
+            </div>
+            <button>Rechercher</button>
+        </form>
+    <div class="card-container">
+        <div class="card" data-th-each="enchere : ${encheres}" th:if="${param.nomArticle == null or enchere.noArticle.getNomArticle().contains(param.nomArticle)}">
+            <u><span data-th-text="${enchere.noArticle.getNomArticle()}"></span></u>
+            <div><span>Prix : </span><span><span data-th-text="${enchere.montantEnchere}"></span> points</span></div>
+            <div><span>Fin de l'enchère : </span><span data-th-text="${enchere.dateEnchere}"></span></div>
+            <a th:href="@{/profilEnchere}"><span>Vendeur : </span><span data-th-text="${enchere.noUtilisateur.getNom()}"></span></a>
+            <img th:src="@{images/logoENI.png}" alt="">
+        </div>
+    </div>
+</main>
 </body>
 </html>

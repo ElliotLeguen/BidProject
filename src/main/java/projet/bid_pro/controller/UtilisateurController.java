@@ -1,8 +1,10 @@
 package projet.bid_pro.controller;
 
+import jakarta.validation.Valid;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import projet.bid_pro.bll.contexte.UtilisateurService;
 import projet.bid_pro.bo.Utilisateur;
@@ -34,10 +36,29 @@ public class UtilisateurController {
 	}
 
 	@GetMapping("/profil")
-	public String afficherProfil() {
+	public String afficherProfil(Principal principal,Model model) {
+		var test = utilisateurService.charger(principal.getName());
+		model.addAttribute("userEdit", utilisateurService.charger(principal.getName()));
 		return "profil";
 	}
 
 
+	@GetMapping("/profilEdit")
+	public String afficherProfilEdit(Principal principal,Model model) {
+		var test = utilisateurService.charger(principal.getName());
+		model.addAttribute("userEdit", utilisateurService.charger(principal.getName()));
+		return "profilEdit";
+	}
+	@PostMapping("/profilEdit")
+	public String profilEdit(@Valid @ModelAttribute("userEdit") Utilisateur userEdit,
+							 BindingResult result,
+							 Model model) {
+		if(result.hasErrors()){
+			model.addAttribute("userEdit", userEdit);
+			return "/profilEdit";
+		}
+		utilisateurService.edit(userEdit);
+		return "profil";
+	}
 
 }

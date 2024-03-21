@@ -6,7 +6,7 @@
       data-th-replace="~{layouts/layout :: layout-encheres(
 					titrePage=~{:: title},
 					contenuPage=~{:: main},
-                        ressourcesSupp=~{::#resources-css})}">
+					ressourcesSupp=~{::#resources-css})}">
 
 <head>
     <!-- Accueil comme titre de page -->
@@ -14,66 +14,61 @@
     <th:block id="resources-css">
         <link rel="stylesheet" data-th-href="@{/css/login.css}">
     </th:block>
-
 </head>
 <body>
 <main class="center-main">
-    <div className='login-box'>
-        <h3>Bienvenue sur ENI Demo </h3>
-        <form method="post" role="form" th:action="@{/register}" th:object="${user}">
+    <section class="center-section">
+        <form method="post" role="form" th:action="@{/profilEdit}" th:object="${userEdit}">
             <div class="row">
                 <div class="col-md-6 mb-3">
-                    <input class="form-control" id="pseudo" name="pseudo" placeholder="Enter pseudo" th:field="*{pseudo}" type="text"/>
+                    <input class="form-control" id="pseudo" name="pseudo"  th:value="${userEdit.pseudo}" type="text"/>
                     <p th:errors="*{pseudo}" class="text-danger" th:if="${#fields.hasErrors('pseudo')}"></p>
                 </div>
                 <div class="col-md-6 mb-3">
-                    <input class="form-control" id="nom" name="nom" placeholder="Enter nom" th:field="*{nom}" type="text"/>
+                    <input class="form-control" id="nom" name="nom"  th:value="${userEdit.nom}" type="text"/>
                     <p th:errors="*{nom}" class="text-danger" th:if="${#fields.hasErrors('nom')}"></p>
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-6 mb-3">
-                    <input class="form-control" id="prenom" name="prenom" placeholder="Enter prenom" th:field="*{prenom}" type="text"/>
+                    <input class="form-control" id="prenom" name="prenom"  th:value="${userEdit.prenom}" type="text"/>
                     <p th:errors="*{prenom}" class="text-danger" th:if="${#fields.hasErrors('prenom')}"></p>
                 </div>
                 <div class="col-md-6 mb-3">
-                    <input class="form-control" id="email" name="email" placeholder="Enter email" th:field="*{email}" type="text"/>
+                    <input class="form-control" id="email" name="email"  th:value="${userEdit.email}" type="text"/>
                     <p th:errors="*{email}" class="text-danger" th:if="${#fields.hasErrors('email')}"></p>
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-6 mb-3">
-                    <input class="form-control" id="telephone" name="telephone" placeholder="Enter telephone" th:field="*{telephone}" type="text"/>
+                    <input class="form-control" id="telephone" name="telephone"   th:value="${userEdit.telephone}" type="text"/>
                     <p th:errors="*{telephone}" class="text-danger" th:if="${#fields.hasErrors('telephone')}"></p>
                 </div>
                 <div class="col-md-6 mb-3">
-                    <input class="form-control" id="rue" name="rue" placeholder="Enter last name" th:field="*{rue}" type="text"/>
+                    <input class="form-control" id="rue" name="rue"  th:value="${userEdit.rue}" type="text"/>
                     <p th:errors="*{rue}" class="text-danger" th:if="${#fields.hasErrors('rue')}"></p>
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-6 mb-3">
-                    <input class="form-control" id="codePostal" name="codePostal" placeholder="Enter codePostal" th:field="*{codePostal}" type="text"/>
+                    <input class="form-control" id="codePostal" name="codePostal"  th:value="${userEdit.codePostal}" type="text"/>
                     <p th:errors="*{codePostal}" class="text-danger" th:if="${#fields.hasErrors('codePostal')}"></p>
                 </div>
                 <div class="col-md-6 mb-3">
-                    <input class="form-control" id="ville" name="ville" placeholder="Enter ville" th:field="*{ville}" type="text"/>
+                    <input class="form-control" id="ville" name="ville"   th:value="${userEdit.ville}" type="text"/>
                     <p th:errors="*{ville}" class="text-danger" th:if="${#fields.hasErrors('ville')}"></p>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-md-6 mb-3">
-                    <input class="form-control" id="motDePasse" name="motDePasse" placeholder="Enter motDePasse" th:field="*{motDePasse}" type="text"/>
-                    <p th:errors="*{motDePasse}" class="text-danger" th:if="${#fields.hasErrors('motDePasse')}"></p>
-                </div>
+            <label for="credit">Crédit :</label>
+            <p name="credit" id="credit" th:text="${userEdit.credit}" ></p>
 
-            </div>
+            <input class="form-control" id="noUtilisateur" name="noUtilisateur"  th:value="${userEdit.noUtilisateur}" type="hidden"/>
+            <input class="form-control" id="motDePasse" name="motDePasse"  th:value="${userEdit.motDePasse}" type="hidden"/>
             <div class="form-group">
-                <button class="btn btn-primary" type="submit">S'inscrire</button>
-                <span>Déjà inscrit ? <a th:href="@{/login}">Se connecter ici</a></span>
+                <button class="btn btn-primary" type="submit">Modifier</button>
             </div>
         </form>
-    </div>
+    </section>
 </main>
 </body>
 </html>
