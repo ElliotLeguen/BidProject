@@ -13,7 +13,6 @@ import java.security.Principal;
 @Controller
 @SessionAttributes({ "UtilisateurEnSession" })
 public class ArticleController {
-
 	private EnchereService enchereService;
 	private UtilisateurService utilisateurService;
 	public ArticleController(EnchereService enchereService, UtilisateurService utilisateurService) {
@@ -21,10 +20,11 @@ public class ArticleController {
 		this.utilisateurService = utilisateurService;
 	}
 	@GetMapping("/article")
-	public String afficherEncheres(Model model) {
+	public String afficherEncheres(Model model, Principal principal) {
 		var categorie = enchereService.consulterCategories();
 		var article = new ArticleVendu();
 		model.addAttribute("categorie", categorie);
+		model.addAttribute("userEdit", utilisateurService.charger(principal.getName()));
 		model.addAttribute("article", article);
 		return "vendreArticle";
 	}

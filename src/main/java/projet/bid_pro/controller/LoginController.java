@@ -8,10 +8,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import projet.bid_pro.bll.contexte.UtilisateurService;
 import projet.bid_pro.bo.Utilisateur;
 import org.springframework.security.core.Authentication;
@@ -23,8 +20,8 @@ import java.util.List;
 import java.util.Objects;
 
 @Controller
+@SessionAttributes({ "UtilisateurEnSession" })
 public class LoginController {
-
     private UtilisateurService utilisateurService;
 
     public LoginController(UtilisateurService utilisateurService) {
