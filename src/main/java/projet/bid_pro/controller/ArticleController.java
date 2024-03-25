@@ -24,18 +24,29 @@ import java.security.Principal;
 @Controller
 @SessionAttributes({ "UtilisateurEnSession" })
 public class ArticleController {
-
 	private ArticleService articleService;
-	public ArticleController(ArticleService articleService) {
+	private  UtilisateurService utilisateurService;
+	public ArticleController(ArticleService articleService, UtilisateurService utilisateurService) {
 		this.articleService = articleService;
+		this.utilisateurService = utilisateurService;
 	}
+
 	@GetMapping("/article")
-	public String afficherEncheres(Model model) {
-		var categories = articleService.consulterCategories();
-		model.addAttribute("categorie", categories);
+	public String afficherEncheres(Model model, Principal principal) {
+		var categorie = articleService.consulterCategories();
+		var article = new ArticleVendu();
+		model.addAttribute("categorie", categorie);
+		model.addAttribute("userEdit", utilisateurService.charger(principal.getName()));
+		model.addAttribute("article", article);
 		return "vendreArticle";
 	}
-
+	@PostMapping("/soumettre")
+	public String ajouterArticle(@ModelAttribute("article") ArticleVendu article, Principal principal) {
+		article.setUtilisateur(utilisateurService.charger(principal.getName()));
+		article.setCategorie(articleService.consulterCategorieParId(article.getCategorie().getNoCategorie()));
+		articleService.creerArticle(article);
+		return "redirect:/article";
+	}
 	@GetMapping("/encheres")
 	public String afficherEncheres(HttpServletRequest request,
 								   @RequestParam(name = "nomArticle", required = false) String nomArticle,
@@ -48,7 +59,9 @@ public class ArticleController {
 								   @RequestParam(name = "mesEnchereRemportees", required = false) boolean mesEnchereRemportees,
 								   Principal principal, Model model) {
 		List<ArticleVendu> articleVendus;
-		String rqt = "SELECT * FROM ARTICLES_VENDUS inner join UTILISATEURS on ARTICLES_VENDUS.no_utilisateur = UTILISATEURS.no_utilisateur";
+		String rqt = "SELECT * FROM ARTICLES_VENDUS " +
+				"inner join UTILISATEURS on ARTICLES_VENDUS.no_utilisateur = UTILISATEURS.no_utilisateur" +
+				" inner join CATEGORIES on CATEGORIES.no_categorie = ARTICLES_VENDUS.no_categorie";
 		if (request.getParameter("mesVentesEnCours") != null || request.getParameter("ventesNonDebutees") != null || request.getParameter("ventesTerminees") != null || request.getParameter("enchereOuverte") != null || request.getParameter("mesEncheres") != null || request.getParameter("mesEnchereRemportees") != null) {
 			if (request.getParameter("mesVentesEnCours") != null) {
 				mesVentesEnCours = true;
@@ -111,26 +124,5 @@ public class ArticleController {
 		model.addAttribute("articleVendus", articleVendus);
 		System.out.println(articleVendus);
 		return "encheres";
-	private EnchereService enchereService;
-	private UtilisateurService utilisateurService;
-	public ArticleController(EnchereService enchereService, UtilisateurService utilisateurService) {
-		this.enchereService = enchereService;
-		this.utilisateurService = utilisateurService;
-	}
-	@GetMapping("/article")
-	public String afficherEncheres(Model model, Principal principal) {
-		var categorie = enchereService.consulterCategories();
-		var article = new ArticleVendu();
-		model.addAttribute("categorie", categorie);
-		model.addAttribute("userEdit", utilisateurService.charger(principal.getName()));
-		model.addAttribute("article", article);
-		return "vendreArticle";
-	}
-	@PostMapping("/soumettre")
-	public String ajouterArticle(@ModelAttribute("article") ArticleVendu article, Principal principal) {
-			article.setUtilisateur(utilisateurService.charger(principal.getName()));
-			article.setCategorie(enchereService.consulterCategorieParId(article.getCategorie().getNoCategorie()));
-		enchereService.creerArticle(article);
-		return "redirect:/article";
 	}
 }

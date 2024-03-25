@@ -5,20 +5,20 @@ import projet.bid_pro.dal.UtilisateurDAO;
 import java.util.Date;
 
 public class Enchere {
-    private Utilisateur noUtilisateur;
-    private ArticleVendu noArticle;
+    private Utilisateur Utilisateur;
+    private ArticleVendu Article;
     private Date dateEnchere;
     private int montantEnchere;
 
     // Constructeur
-    public Enchere(int noUtilisateur, int noArticle, Date dateEnchere, int montantEnchere) {
+    public Enchere(int Utilisateur, int Article, Date dateEnchere, int montantEnchere) {
         this.dateEnchere = dateEnchere;
         this.montantEnchere = montantEnchere;
     }
 
     public Enchere(Utilisateur noUtilisateur, ArticleVendu noArticle, Date dateEnchere, int montantEnchere) {
-        this.noUtilisateur = noUtilisateur;
-        this.noArticle = noArticle;
+        this.Utilisateur = noUtilisateur;
+        this.Article = noArticle;
         this.dateEnchere = dateEnchere;
         this.montantEnchere = montantEnchere;
     }
@@ -30,19 +30,19 @@ public class Enchere {
     // Getters et Setters
 
     public Utilisateur getNoUtilisateur() {
-        return noUtilisateur;
+        return Utilisateur;
     }
 
     public void setNoUtilisateur(Utilisateur noUtilisateur) {
-        this.noUtilisateur = noUtilisateur;
+        this.Utilisateur = noUtilisateur;
     }
 
     public ArticleVendu getNoArticle() {
-        return noArticle;
+        return Article;
     }
 
     public void setNoArticle(ArticleVendu noArticle) {
-        this.noArticle = noArticle;
+        this.Article = noArticle;
     }
 
     public Date getDateEnchere() {
@@ -64,8 +64,8 @@ public class Enchere {
     @Override
     public String toString() {
         return "Enchere{" +
-                "noUtilisateur=" + noUtilisateur +
-                ", noArticle=" + noArticle +
+                "noUtilisateur=" + Utilisateur +
+                ", noArticle=" + Article +
                 ", dateEnchere=" + dateEnchere +
                 ", montantEnchere=" + montantEnchere +
                 '}';

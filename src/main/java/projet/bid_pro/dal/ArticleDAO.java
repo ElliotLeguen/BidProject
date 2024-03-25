@@ -10,4 +10,6 @@ public interface ArticleDAO {
     List<ArticleVendu> getArticles(String rqt);
     List<ArticleVendu> consulterEncheresParNomArticle(String nomArticle);
     List<ArticleVendu> consulterEncheresParCategorie(String categorie);
+
+    ArticleVendu creerArticle(ArticleVendu articleVendu) ;
 }

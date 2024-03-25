@@ -7,7 +7,6 @@ import projet.bid_pro.dal.UtilisateurDAO;
 
 @Service
 public class UtilisateurServiceImpl implements UtilisateurService {
-
 	private UtilisateurDAO utilisateurDAO;
 
 	public UtilisateurServiceImpl(UtilisateurDAO utilisateurDAO) {

@@ -37,8 +37,6 @@ public class EnchereController {
         return "profilEnchere";
     }
 
-	/*
-
 	@GetMapping("/detail")
 	public String afficherUneEnchere(@RequestParam(name = "id", required = true) long id, Model model) {
 		if (id > 0) {
@@ -54,7 +52,4 @@ public class EnchereController {
 		}
 		return "redirect:/encheres/encheres"; // Redirection vers la page d'accueil des enchères
 	}
-
-	 */
-
 }
