@@ -21,9 +21,7 @@ public class CategoriesDAOImpl implements CategoriesDAO{
     @Override
     public List<Categorie> readCategories() {
         String sql = "SELECT * FROM CATEGORIES";
-        List<Categorie> test= jdbcTemplate.query(sql, new CategorieRowMapper());
-        System.out.println(test);
-        return test;
+        return jdbcTemplate.query(sql, new CategorieRowMapper());
     }
 
     @Override

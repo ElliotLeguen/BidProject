@@ -29,7 +29,7 @@
             <label for="description">Description:</label><br>
             <textarea id="description" name="description" rows="4" cols="50" required th:field="*{description}"></textarea><br>
         <select th:field="*{categorie.noCategorie}">
-            <option th:each="categorie : ${categorie}" th:value="${categorie.getNoCategorie()}" th:text="${categorie.getLibelle()}" th:field="*{categorie.noCategorie}"></option>
+            <option th:each="categorie : ${categories}" th:value="${categorie.getNoCategorie()}" th:text="${categorie.getLibelle()}" th:field="*{categorie.noCategorie}"></option>
         </select>
         <br>
         <br>

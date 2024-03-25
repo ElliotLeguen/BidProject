@@ -23,9 +23,6 @@ public class ArticleServiceImpl implements ArticleService{
         this.enchereDAO = enchereDAO;
     }
 
-    @Autowired
-    private NamedParameterJdbcTemplate jdbcTemplate;
-
     @Override
     public List<ArticleVendu> getVentes(String rqt) {
         return articleDAO.getArticles(rqt);
@@ -42,12 +39,22 @@ public class ArticleServiceImpl implements ArticleService{
 
     @Override
     public List<ArticleVendu> consulterEncheresParCategorie(String categorie) {
-        String requete = "SELECT * FROM CATEGORIES " +
-                "INNER JOIN ARTICLES_VENDUS ON CATEGORIES.no_categorie = ARTICLES_VENDUS.no_categorie " +
-                "INNER JOIN ENCHERES ON ARTICLES_VENDUS.no_article = ENCHERES.no_article " +
-                "WHERE CATEGORIES.libelle = :categorie";
-        MapSqlParameterSource parametres = new MapSqlParameterSource();
-        parametres.addValue("categorie", categorie);
-        return jdbcTemplate.query(requete, parametres, new ArticleDAOImpl.ArticleRowMapper());
+        return null;
     }
+
+    @Override
+    public void creerArticle(ArticleVendu articleVendu) {
+        articleDAO.creerArticle(articleVendu);
+    }
+
+    @Override
+    public Categorie consulterCategorieParId(int id) {
+       return categoriesDAO.readById(id);
+    }
+
+    @Override
+    public ArticleVendu consulterArticleParId(long id) {
+        return articleDAO.read(id);
+    }
+
 }
