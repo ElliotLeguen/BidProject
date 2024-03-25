@@ -61,6 +61,14 @@ public class LoginController {
             model.addAttribute("user", newUser);
             return "/register";
         }
+        if(!newUser.passwordsMatch()){
+            model.addAttribute("user", newUser);
+            result.rejectValue("confirmationMotDePasse", "error.user", "Veuillez renseignez les mêmes mots de passes");
+            return"/register";
+        }
+
+
+
         newUser.setCredit(100);
         Utilisateur registeredUser = utilisateurService.register(newUser);
         List<GrantedAuthority> authorities = new ArrayList<>();

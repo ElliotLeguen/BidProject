@@ -25,7 +25,7 @@
                 <label>Catégorie :</label>
                 <select name="categorie">
                     <option value="">Toutes</option>
-                    <option th:each="categorieItem : ${categorie}" th:value="${categorieItem.getNoCategorie()}" th:text="${categorieItem.getLibelle()}"></option>
+                        <option th:each="categorieItem : ${categorie}" th:value="${categorieItem.getNoCategorie()}" th:text="${categorieItem.getLibelle()}"></option>
                 </select>
             </div>
             <div class="form-group">
@@ -85,10 +85,13 @@
     </div>
     <div class="card-container">
         <div class="card" data-th-each="enchere : ${encheres}" th:if="${param.nomArticle == null or enchere.noArticle.getNomArticle().contains(param.nomArticle)}">
-            <u><a th:href="@{/detailEnchere/${enchere.no()}}"><span data-th-text="${enchere.noArticle.getNomArticle()}"></a></span></u>
+            <u><a th:href="@{/detailEnchere/${enchere.no()}}"><span data-th-text="${enchere.noArticle.getNomArticle()}"></span></a></u>
             <div><span>Prix : </span><span><span data-th-text="${enchere.montantEnchere}"></span> points</span></div>
             <div><span>Fin de l'enchère : </span><span data-th-text="${enchere.dateEnchere}"></span></div>
-            <a th:href="@{/profilEnchere}"><span>Vendeur : </span><span data-th-text="${enchere.noUtilisateur.getNom()}"></span></a>
+            <a th:href="@{'/profilEnchere?idUtilisateurEnchere=' + ${enchere.noUtilisateur.getNoUtilisateur()}}">
+                <span>Vendeur : </span>
+                <span data-th-text="${enchere.noUtilisateur.getNom()}"></span>
+            </a>
             <img th:src="@{images/logoENI.png}" alt="">
         </div>
     </div>

@@ -25,6 +25,7 @@ public class Utilisateur {
     @Email
     private String email;
 
+    @NotBlank
     @NotNull
     @Size(max = 15)
     private String telephone;
@@ -44,11 +45,14 @@ public class Utilisateur {
     @NotNull
     @Size(max = 100)
     private String motDePasse;
+
+    private String confirmationMotDePasse;
     @NotNull
-    private int credit;
+    private int credit = 100;
 
     private String administrateur;
 
+    private byte etat;
     public Utilisateur() {
 
     }
@@ -56,7 +60,7 @@ public class Utilisateur {
     // Constructeur
     public Utilisateur(int noUtilisateur, String pseudo, String nom, String prenom, String email,
                        String telephone, String rue, String codePostal, String ville,
-                       String motDePasse, int credit) {
+                       String motDePasse ,int credit,String confirmationMotDePasse,byte etat) {
         this.noUtilisateur = noUtilisateur;
         this.pseudo = pseudo;
         this.nom = nom;
@@ -68,11 +72,12 @@ public class Utilisateur {
         this.ville = ville;
         this.motDePasse = motDePasse;
         this.credit = credit;
-        this.administrateur = administrateur;
+        this.confirmationMotDePasse = confirmationMotDePasse;
+        this.etat=etat;
     }
 
     public Utilisateur(int noUtilisateur, String pseudo, String nom, String prenom, String email,
-                       String telephone, String rue, String codePostal, String ville) {
+                       String telephone, String rue, String codePostal, String ville,byte etat) {
         this.noUtilisateur = noUtilisateur;
         this.pseudo = pseudo;
         this.nom = nom;
@@ -82,6 +87,21 @@ public class Utilisateur {
         this.rue = rue;
         this.codePostal = codePostal;
         this.ville = ville;
+        this.etat = etat;
+    }
+    public Utilisateur(int noUtilisateur, String pseudo, String nom, String prenom, String email,
+                       String telephone, String rue, String codePostal, String ville,int credit,byte etat) {
+        this.noUtilisateur = noUtilisateur;
+        this.pseudo = pseudo;
+        this.nom = nom;
+        this.prenom = prenom;
+        this.email = email;
+        this.telephone = telephone;
+        this.rue = rue;
+        this.codePostal = codePostal;
+        this.ville = ville;
+        this.credit = credit;
+        this.etat = etat;
     }
     // Getters et Setters
     public int getNoUtilisateur() {
@@ -164,6 +184,13 @@ public class Utilisateur {
         this.motDePasse = motDePasse;
     }
 
+    public String getConfirmationMotDePasse() {
+        return confirmationMotDePasse;
+    }
+    public void setConfirmationMotDePasse(String confirmationMotDePasse) {
+        this.confirmationMotDePasse = confirmationMotDePasse;
+    }
+
     public int getCredit() {
         return credit;
     }
@@ -180,6 +207,14 @@ public class Utilisateur {
         this.administrateur = administrateur;
     }
 
+    public byte getEtat() {
+        return etat;
+    }
+
+    public void setEtat(byte etat) {
+        this.etat = etat;
+    }
+
     @Override
     public String toString() {
         return "Utilisateur{" +
@@ -193,8 +228,15 @@ public class Utilisateur {
                 ", codePostal='" + codePostal + '\'' +
                 ", ville='" + ville + '\'' +
                 ", motDePasse='" + motDePasse + '\'' +
+                ", confirmationMotDePasse='" + confirmationMotDePasse + '\'' +
                 ", credit=" + credit +
                 ", administrateur=" + administrateur +
+                ", etat=" + etat +
                 '}';
     }
+    public boolean passwordsMatch() {
+        // Vérifier si les deux champs de mot de passe correspondent
+        return motDePasse != null && motDePasse.equals(confirmationMotDePasse);
+    }
+
 }

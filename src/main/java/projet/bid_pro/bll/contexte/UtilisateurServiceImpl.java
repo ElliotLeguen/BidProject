@@ -5,6 +5,8 @@ import org.springframework.stereotype.Service;
 import projet.bid_pro.bo.Utilisateur;
 import projet.bid_pro.dal.UtilisateurDAO;
 
+import java.util.List;
+
 @Service
 public class UtilisateurServiceImpl implements UtilisateurService {
 
@@ -20,6 +22,11 @@ public class UtilisateurServiceImpl implements UtilisateurService {
 	}
 
 	@Override
+	public Utilisateur charger(int id) {
+		return utilisateurDAO.read(id);
+	}
+
+	@Override
 	public Utilisateur register(Utilisateur utilisateur) {
 		return utilisateurDAO.ajouterUtilisateur(utilisateur);
 	}
@@ -27,6 +34,21 @@ public class UtilisateurServiceImpl implements UtilisateurService {
 	@Override
 	public Utilisateur edit(Utilisateur utilisateur) {
 		return utilisateurDAO.edit(utilisateur);
+	}
+
+	@Override
+	public void delete(int id) {
+		utilisateurDAO.delete(id);
+	}
+
+	@Override
+	public List<Utilisateur> consulterUtilisateurs() {
+		return utilisateurDAO.listeUtilisateurs();
+	}
+
+	@Override
+	public void changeEtat(int id) {
+		utilisateurDAO.changeEtat(id);
 	}
 
 

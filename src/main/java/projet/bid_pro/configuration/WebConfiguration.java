@@ -62,6 +62,7 @@ public class WebConfiguration implements WebMvcConfigurer {
 			auth.requestMatchers(HttpMethod.GET,"/encheres/*").fullyAuthenticated();
 			auth.requestMatchers(HttpMethod.POST,"/encheres/*").fullyAuthenticated();
 			auth.requestMatchers(HttpMethod.GET,"/article/*").fullyAuthenticated();
+			auth.requestMatchers(HttpMethod.GET,"/profilEnchere").fullyAuthenticated();
 			auth.requestMatchers(HttpMethod.GET,"/").permitAll();
 			auth.requestMatchers("/css/*").permitAll();
 			auth.requestMatchers("/images/*").permitAll();
@@ -85,5 +86,6 @@ public class WebConfiguration implements WebMvcConfigurer {
 	public PasswordEncoder passwordEncoder() {
 		return new BCryptPasswordEncoder();
 	}
+
 
 }

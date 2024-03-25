@@ -8,7 +8,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import projet.bid_pro.bll.contexte.EnchereService;
+import projet.bid_pro.bll.contexte.UtilisateurService;
 import projet.bid_pro.bo.Enchere;
+import projet.bid_pro.bo.Utilisateur;
 
 import java.util.List;
 
@@ -17,9 +19,11 @@ import java.util.List;
 public class EnchereController {
 
 	private EnchereService enchereService;
+    private UtilisateurService utilisateurService;
 
-	public EnchereController(EnchereService enchereService) {
+	public EnchereController(EnchereService enchereService, UtilisateurService utilisateurService) {
 		this.enchereService = enchereService;
+        this.utilisateurService = utilisateurService;
 	}
 
 	@GetMapping("/")
@@ -100,10 +104,13 @@ public class EnchereController {
 	}
 
 
-	@GetMapping("/profilEnchere")
-	public String AfficherProfilEnchere(){
-		return "profilEnchere";
-	}
+    @GetMapping("/profilEnchere")
+    public String afficherProfilEnchere( @RequestParam(name = "idUtilisateurEnchere", required = true) int idUtilisateurEnchere,Model model) {
+        Utilisateur uti =  utilisateurService.charger(idUtilisateurEnchere);
+        System.out.println(uti);
+        model.addAttribute("utilisateur", utilisateurService.charger(idUtilisateurEnchere));
+        return "profilEnchere";
+    }
 
 	/*
 

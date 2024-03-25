@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      data-th-replace="~{layouts/layout :: layout-encheres(
+					titrePage=~{:: title},
+					contenuPage=~{:: main},
+					ressourcesSupp=~{:: #resources-css})}">
+
+<head>
+    <!-- Accueil comme titre de page -->
+    <title data-th-text="#{index.title}"></title>
+    <th:block id="resources-css">
+        <link rel="stylesheet" data-th-href="@{/css/gestionUtilisateur.css}"/>
+    </th:block>
+</head>
+<body>
+<main>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Prénom</th>
+            <th>Nom</th>
+            <th>Email</th>
+            <th>Désactivé/Activé</th>
+            <th>Désactivé/Activé</th>
+            <!-- Ajoutez d'autres en-têtes de colonne si nécessaire -->
+        </tr>
+        </thead>
+        <tbody>
+        <tr data-th-each="utilsateur : ${utilsateurs}">
+            <td data-th-text="${utilsateur.prenom}"></td>
+            <td data-th-text="${utilsateur.nom}"></td>
+            <td data-th-text="${utilsateur.email}"></td>
+            <td>
+                <a th:href="@{'/utilsateurEtat?idUtilisateur=' + ${utilsateur.noUtilisateur}}">oui</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</main>
+
+</body>
+</html>

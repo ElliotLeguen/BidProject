@@ -2,6 +2,7 @@ package projet.bid_pro.dal;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.RowMapper;
@@ -16,11 +17,22 @@ import projet.bid_pro.bo.Utilisateur;
 @Repository
 public class UtilisateurDAOImpl implements UtilisateurDAO {
     private final String FIND_BY_ID = "SELECT * from UTILISATEURS WHERE no_utilisateur = :no_utilisateur";
+    private final String FIND_ALL = "SELECT * from UTILISATEURS";
     private final String FIND_BY_EMAIL = "SELECT * from UTILISATEURS "
             + " WHERE email = :email";
     private final String AJOUTER_UTILISATEUR = "INSERT INTO UTILISATEURS (pseudo, nom, prenom, email, telephone, rue, code_postal, ville, mot_de_passe, credit, administrateur) VALUES (:pseudo, :nom, :prenom, :email, :telephone, :rue, :codePostal, :ville, :motDePasse, :credit, :administrateur);";
 
-    private final String MODIFIER_UTILISATEUR = "UPDATE UTILISATEURS SET pseudo = :pseudo, nom = :nom, prenom = :prenom, email = :email, telephone = :telephone, rue = :rue, code_postal = :codePostal, ville = :ville WHERE no_utilisateur = :no_utilisateur";
+    private final String MODIFIER_UTILISATEUR = "UPDATE UTILISATEURS SET pseudo = :pseudo, nom = :nom, prenom = :prenom, email = :email, telephone = :telephone, rue = :rue, code_postal = :codePostal, ville = :ville, mot_de_passe = :mot_de_passe WHERE no_utilisateur = :no_utilisateur";
+
+    private final String SUPPRIMER_ENCHERES = "DELETE FROM ENCHERES WHERE no_article IN (SELECT no_article FROM ARTICLES_VENDUS WHERE no_utilisateur = :no_utilisateur)";
+
+    private final String SUPPRIMER_RETRAITS = "DELETE FROM RETRAITS WHERE no_article IN (SELECT no_article FROM ARTICLES_VENDUS WHERE no_utilisateur = :no_utilisateur)";
+
+    private final String SUPPRIMER_ARTICLES_VENDUS = "DELETE FROM ARTICLES_VENDUS WHERE no_utilisateur = :no_utilisateur";
+
+    private final String SUPPRIMER_UTILISATEUR = "DELETE FROM UTILISATEURS WHERE no_utilisateur = :no_utilisateur";
+    private final String CHANGER_ETAT_UTILISATEUR = "UPDATE UTILISATEURS set etat = :etat WHERE no_utilisateur = :no_utilisateur";
+
     @Autowired
     private NamedParameterJdbcTemplate jdbcTemplate;
 
@@ -69,6 +81,8 @@ public class UtilisateurDAOImpl implements UtilisateurDAO {
 
     @Override
     public Utilisateur edit(Utilisateur utilisateur) {
+        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+        String motDePasseEncode = encoder.encode(utilisateur.getMotDePasse());
         MapSqlParameterSource namedParameters = new MapSqlParameterSource();
         namedParameters.addValue("no_utilisateur", utilisateur.getNoUtilisateur());
         namedParameters.addValue("pseudo", utilisateur.getPseudo());
@@ -79,10 +93,44 @@ public class UtilisateurDAOImpl implements UtilisateurDAO {
         namedParameters.addValue("rue", utilisateur.getRue());
         namedParameters.addValue("codePostal", utilisateur.getCodePostal());
         namedParameters.addValue("ville", utilisateur.getVille());
+        namedParameters.addValue("mot_de_passe", motDePasseEncode);
 
         jdbcTemplate.update(MODIFIER_UTILISATEUR, namedParameters);
 
         return utilisateur;
+    }
+
+    @Override
+    public void delete(int id) {
+        MapSqlParameterSource namedParameters = new MapSqlParameterSource();
+        namedParameters.addValue("no_utilisateur", id);
+        jdbcTemplate.update(SUPPRIMER_ENCHERES, namedParameters);
+        jdbcTemplate.update(SUPPRIMER_RETRAITS, namedParameters);
+        jdbcTemplate.update(SUPPRIMER_ARTICLES_VENDUS, namedParameters);
+        jdbcTemplate.update(SUPPRIMER_UTILISATEUR, namedParameters);
+    }
+
+    @Override
+    public List<Utilisateur> listeUtilisateurs() {
+        return jdbcTemplate.query(FIND_ALL, new UtilisateurRowMapper());
+    }
+
+    @Override
+    public void changeEtat(int id) {
+        MapSqlParameterSource namedParameters = new MapSqlParameterSource();
+        namedParameters.addValue("no_utilisateur", id);
+        Utilisateur utilisateur = jdbcTemplate.queryForObject(FIND_BY_ID, namedParameters, new UtilisateurRowMapper());
+        byte isActive = utilisateur.getEtat();
+        System.out.println(isActive);
+        if(isActive == 1){
+            namedParameters.addValue("etat", "0");
+            jdbcTemplate.update(CHANGER_ETAT_UTILISATEUR, namedParameters);
+        }
+        if(isActive == 0) {
+            namedParameters.addValue("etat", "1");
+            jdbcTemplate.update(CHANGER_ETAT_UTILISATEUR, namedParameters);
+        }
+
     }
 
     /**

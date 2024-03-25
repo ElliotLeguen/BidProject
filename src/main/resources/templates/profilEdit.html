@@ -59,6 +59,19 @@
                     <p th:errors="*{ville}" class="text-danger" th:if="${#fields.hasErrors('ville')}"></p>
                 </div>
             </div>
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <input class="form-control" name="motDePasseActuel" type="password"/>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <input class="form-control" id="motDePasseNouveau" name="motDePasseNouveau"  type="text"/>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <input class="form-control" id="motDePasseNouveauConfirm" name="motDePasseNouveauConfirm" type="text"/>
+                </div>
+            </div>
             <label for="credit">Crédit :</label>
             <p name="credit" id="credit" th:text="${userEdit.credit}" ></p>
 
@@ -66,6 +79,8 @@
             <input class="form-control" id="motDePasse" name="motDePasse"  th:value="${userEdit.motDePasse}" type="hidden"/>
             <div class="form-group">
                 <button class="btn btn-primary" type="submit">Modifier</button>
+                <a th:href="@{'/deleteUtilisateur?idUtilisateur=' + ${userEdit.noUtilisateur}}" class="btn btn-primary" id="delete" >Supprimer mon compte</a>
+
             </div>
         </form>
     </section>
