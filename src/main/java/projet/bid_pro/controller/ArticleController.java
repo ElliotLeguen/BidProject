@@ -136,7 +136,6 @@ public class ArticleController {
 		var categories = articleService.consulterCategories();
 		model.addAttribute("categorie", categories);
 		model.addAttribute("articleVendus", articleVendus);
-		System.out.println(articleVendus);
 		return "encheres";
 	}
 }
