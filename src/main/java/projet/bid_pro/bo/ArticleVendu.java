@@ -17,7 +17,6 @@ public class ArticleVendu {
     private Integer prixVente;
     private Utilisateur utilisateur;
     private Categorie categorie;
-
     private List<Enchere> enchereList;
 
     // Constructeur
@@ -108,8 +107,8 @@ public class ArticleVendu {
         return categorie;
     }
 
-    public void setCategorie(Categorie noCategorie) {
-        this.categorie = noCategorie;
+    public void setCategorie(Categorie Categorie) {
+        this.categorie = Categorie;
     }
 
     @Override

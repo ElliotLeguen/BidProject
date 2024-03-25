@@ -33,11 +33,9 @@ public class ArticleController {
 
 	@GetMapping("/article")
 	public String afficherEncheres(Model model, Principal principal) {
-		var categorie = articleService.consulterCategories();
-		var article = new ArticleVendu();
-		model.addAttribute("categorie", categorie);
+		model.addAttribute("categories", articleService.consulterCategories());
 		model.addAttribute("userEdit", utilisateurService.charger(principal.getName()));
-		model.addAttribute("article", article);
+		model.addAttribute("article", new ArticleVendu());
 		return "vendreArticle";
 	}
 	@PostMapping("/soumettre")
@@ -47,6 +45,22 @@ public class ArticleController {
 		articleService.creerArticle(article);
 		return "redirect:/article";
 	}
+	@GetMapping("/detail")
+	public String afficherUneEnchere(@RequestParam(name = "id", required = true) long id, Model model) {
+		if (id > 0) {
+			ArticleVendu articleVendu = articleService.consulterArticleParId(id);
+			if (articleVendu != null) {
+				model.addAttribute("articleVendu", articleVendu); // Correction de la variable ajoutée au modèle
+				return "detailEnchere"; // Correction de l'alias de la vue
+			} else {
+				System.out.println("Enchère inconnue!!");
+			}
+		} else {
+			System.out.println("Identifiant inconnu");
+		}
+		return "redirect:/encheres/encheres"; // Redirection vers la page d'accueil des enchères
+	}
+
 	@GetMapping("/encheres")
 	public String afficherEncheres(HttpServletRequest request,
 								   @RequestParam(name = "nomArticle", required = false) String nomArticle,

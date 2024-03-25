@@ -11,37 +11,31 @@ public class Enchere {
     private int montantEnchere;
 
     // Constructeur
-    public Enchere(int Utilisateur, int Article, Date dateEnchere, int montantEnchere) {
-        this.dateEnchere = dateEnchere;
-        this.montantEnchere = montantEnchere;
+    public Enchere(){
     }
 
-    public Enchere(Utilisateur noUtilisateur, ArticleVendu noArticle, Date dateEnchere, int montantEnchere) {
-        this.Utilisateur = noUtilisateur;
-        this.Article = noArticle;
+    public Enchere(Utilisateur utilisateur, ArticleVendu article, Date dateEnchere, int montantEnchere) {
+        this.Utilisateur = utilisateur;
+        this.Article = article;
         this.dateEnchere = dateEnchere;
         this.montantEnchere = montantEnchere;
-    }
-
-    public Enchere() {
-
     }
 
     // Getters et Setters
 
-    public Utilisateur getNoUtilisateur() {
+    public Utilisateur getUtilisateur() {
         return Utilisateur;
     }
 
-    public void setNoUtilisateur(Utilisateur noUtilisateur) {
-        this.Utilisateur = noUtilisateur;
+    public void setUtilisateur(Utilisateur Utilisateur) {
+        this.Utilisateur = Utilisateur;
     }
 
-    public ArticleVendu getNoArticle() {
+    public ArticleVendu getArticle() {
         return Article;
     }
 
-    public void setNoArticle(ArticleVendu noArticle) {
+    public void setArticle(ArticleVendu noArticle) {
         this.Article = noArticle;
     }
 
@@ -64,8 +58,8 @@ public class Enchere {
     @Override
     public String toString() {
         return "Enchere{" +
-                "noUtilisateur=" + Utilisateur +
-                ", noArticle=" + Article +
+                "Utilisateur=" + Utilisateur +
+                ", Article=" + Article +
                 ", dateEnchere=" + dateEnchere +
                 ", montantEnchere=" + montantEnchere +
                 '}';

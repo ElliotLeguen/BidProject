@@ -9,6 +9,7 @@ import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 import projet.bid_pro.bo.ArticleVendu;
 import projet.bid_pro.bo.Categorie;
+import projet.bid_pro.bo.Retrait;
 import projet.bid_pro.bo.Utilisateur;
 
 import java.sql.Date;
@@ -19,16 +20,11 @@ import java.util.List;
 
 @Repository
 public class ArticleDAOImpl implements ArticleDAO{
-    private final String FIND_BY_ID = "SELECT * FROM ARTICLES_VENDUS WHERE no_article = :no_article";
     private final String FIND_ENCHERES_BY_ARTICLE = "SELECT * FROM ARTICLES_VENDUS inner join ENCHERES on ARTICLES_VENDUS.no_article = ENCHERES.no_article";
 
     @Autowired
     private JdbcTemplate jdbcTemplate;
-    @Override
-    public ArticleVendu read(int id) {
-        String FIND_BY_ID = "SELECT * FROM ARTICLES_VENDUS WHERE no_article = ?";
-        return jdbcTemplate.queryForObject(FIND_BY_ID,new Object[]{id}, new ArticleRowMapper());
-    }
+
     @Override
     public ArticleVendu creerArticle(ArticleVendu article) {
         String sql = "INSERT INTO ARTICLES_VENDUS (nom_article, description, date_debut_encheres, date_fin_encheres, prix_initial, prix_vente, no_utilisateur, no_categorie) " +
@@ -51,6 +47,15 @@ public class ArticleDAOImpl implements ArticleDAO{
             article.setNoArticle(keyHolder.getKey().intValue());
             }
         return article;
+    }
+
+    @Override
+    public ArticleVendu read(long id) {
+        String FIND_BY_ID = "SELECT * FROM ARTICLES_VENDUS " +
+                " INNER JOIN UTILISATEURS ON UTILISATEURS.no_utilisateur = ARTICLES_VENDUS.no_utilisateur" +
+                " INNER JOIN CATEGORIES ON ARTICLES_VENDUS.no_categorie = CATEGORIES.no_categorie"+
+                " WHERE ARTICLES_VENDUS.no_article = ? ";
+        return jdbcTemplate.query(FIND_BY_ID, new Object[]{id}, new ArticleRowMapper()).get(0);
     }
 
     @Override

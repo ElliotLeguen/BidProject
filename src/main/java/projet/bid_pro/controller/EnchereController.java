@@ -36,20 +36,5 @@ public class EnchereController {
     public String AfficherProfilEnchere() {
         return "profilEnchere";
     }
-
-	@GetMapping("/detail")
-	public String afficherUneEnchere(@RequestParam(name = "id", required = true) long id, Model model) {
-		if (id > 0) {
-			Enchere enchere = enchereService.consulterEnchereParId(id);
-			if (enchere != null) {
-				model.addAttribute("encheres", enchere); // Correction de la variable ajoutée au modèle
-				return "detailEnchere"; // Correction de l'alias de la vue
-			} else {
-				System.out.println("Enchère inconnue!!");
-			}
-		} else {
-			System.out.println("Identifiant inconnu");
-		}
-		return "redirect:/encheres/encheres"; // Redirection vers la page d'accueil des enchères
-	}
 }
+

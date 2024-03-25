@@ -49,6 +49,12 @@ public class ArticleServiceImpl implements ArticleService{
 
     @Override
     public Categorie consulterCategorieParId(int id) {
-        return null;
+       return categoriesDAO.readById(id);
     }
+
+    @Override
+    public ArticleVendu consulterArticleParId(long id) {
+        return articleDAO.read(id);
+    }
+
 }

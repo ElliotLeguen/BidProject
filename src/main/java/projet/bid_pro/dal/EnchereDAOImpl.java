@@ -21,7 +21,6 @@ import java.util.List;
 @Repository
 public class EnchereDAOImpl implements EnchereDAO{
 
-    private final String FIND_BY_ID = "SELECT * FROM ENCHERES WHERE no_article = :no_article";
     private final String FIND_ALL = "SELECT *  FROM ENCHERES inner join ARTICLES_VENDUS on ENCHERES.no_article = ARTICLES_VENDUS.no_article inner join UTILISATEURS on ENCHERES.no_utilisateur = UTILISATEURS.no_utilisateur";
     private final String FIND_ENCHERES_BY_ARTICLE = "SELECT * FROM ARTICLES_VENDUS inner join ENCHERES on ARTICLES_VENDUS.no_article = ENCHERES.no_article";
     private final String FIND_ENCHERES_BY_CATEGORIE = "SELECT * FROM CATEGORIES inner join ARTICLES_VENDUS on CATEGORIES.no_categorie = ARTICLES_VENDUS.no_categorie inner join ENCHERES on ARTICLES_VENDUS.no_article = ENCHERES.no_article";
@@ -32,8 +31,10 @@ public class EnchereDAOImpl implements EnchereDAO{
 
     @Override
     public Enchere read(long id) {
-        MapSqlParameterSource namedParameters = new MapSqlParameterSource();
-        namedParameters.addValue("no_article", id);
+        String FIND_BY_ID = "SELECT * FROM ENCHERES " +
+                " INNER JOIN UTILISATEURS ON UTILISATEURS.no_utilisateur = ENCHERES.no_utilisateur" +
+                " INNER JOIN ARTICLES_VENDUS ON articleVendu.no_article = ENCHERES.no_article"+
+                " WHERE ENCHERES.no_article = ? ";
         return jdbcTemplate.queryForObject(FIND_BY_ID,new Object[]{id}, new EnchereRowMapper());
     }
     @Override
@@ -75,8 +76,9 @@ public class EnchereDAOImpl implements EnchereDAO{
             utilisateur.setCredit(rs.getInt("credit"));
             utilisateur.setAdministrateur(rs.getString("administrateur"));
 
-            enchere.setNoUtilisateur(utilisateur);
-            enchere.setNoArticle(articleVendu);
+            enchere.setUtilisateur(utilisateur);
+            enchere.setArticle(articleVendu);
+
             enchere.setDateEnchere(rs.getTimestamp("date_enchere"));
             enchere.setMontantEnchere(rs.getInt("montant_enchere"));
             return enchere;
