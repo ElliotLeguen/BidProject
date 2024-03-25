@@ -12,6 +12,7 @@ public interface EnchereService {
     void creerEnchere(Enchere enchere);
     List<Enchere> consulterEncheresParNomArticle(String nomArticle);
     List<Categorie> consulterCategories();
+    List<Enchere> consulterEncheresParCategorie(String categorie);
     List<Enchere> getToutesVentes();
     List<Enchere> getVentesEnCoursEtNonDebutees();
     List<Enchere> getVentesEnCoursEtTerminees();

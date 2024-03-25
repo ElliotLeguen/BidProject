@@ -10,16 +10,18 @@ import projet.bid_pro.bo.ArticleVendu;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 
 @Repository
 public class ArticleDAOImpl implements ArticleDAO{
-    private UtilisateurDAO utilisateurDAO;
+    private static UtilisateurDAO utilisateurDAO;
     private CategoriesDAO categoriesDAO;
     public ArticleDAOImpl(UtilisateurDAO utilisateurDAO, CategoriesDAO categoriesDAO) {
         this.utilisateurDAO = utilisateurDAO;
         this.categoriesDAO = categoriesDAO;
     }
     private final String FIND_BY_ID = "SELECT * FROM ARTICLES_VENDUS WHERE no_article = :no_article";
+    private final String FIND_ENCHERES_BY_ARTICLE = "SELECT * FROM ARTICLES_VENDUS inner join ENCHERES on ARTICLES_VENDUS.no_article = ENCHERES.no_article";
 
     @Autowired
     private NamedParameterJdbcTemplate jdbcTemplate;
@@ -30,7 +32,28 @@ public class ArticleDAOImpl implements ArticleDAO{
         return jdbcTemplate.queryForObject(FIND_BY_ID, namedParameters, new ArticleRowMapper());
     }
 
-    class ArticleRowMapper implements RowMapper<ArticleVendu> {
+    @Override
+    public List<ArticleVendu> getArticles(String rqt) {
+        return jdbcTemplate.query(rqt, new ArticleRowMapper());
+    }
+
+    @Override
+    public List<ArticleVendu> consulterEncheresParNomArticle(String nomArticle) {
+        return jdbcTemplate.query(FIND_ENCHERES_BY_ARTICLE, new ArticleRowMapper());
+    }
+
+    @Override
+    public List<ArticleVendu> consulterEncheresParCategorie(String categorie) {
+        String requete = "SELECT * FROM CATEGORIES " +
+                "INNER JOIN ARTICLES_VENDUS ON CATEGORIES.no_categorie = ARTICLES_VENDUS.no_categorie " +
+                "INNER JOIN ENCHERES ON ARTICLES_VENDUS.no_article = ENCHERES.no_article " +
+                "WHERE CATEGORIES.libelle = :categorie";
+        MapSqlParameterSource parametres = new MapSqlParameterSource();
+        parametres.addValue("categorie", categorie);
+        return jdbcTemplate.query(requete, parametres, new ArticleRowMapper());
+    }
+
+    public static class ArticleRowMapper implements RowMapper<ArticleVendu> {
         @Override
         public ArticleVendu mapRow(ResultSet rs, int rowNum) throws SQLException {
             ArticleVendu articleVendu = new ArticleVendu();
