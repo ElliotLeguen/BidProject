@@ -38,6 +38,7 @@ public class ArticleController {
 		model.addAttribute("article", new ArticleVendu());
 		return "vendreArticle";
 	}
+
 	@PostMapping("/soumettre")
 	public String ajouterArticle(@ModelAttribute("article") ArticleVendu article, Principal principal) {
 		article.setUtilisateur(utilisateurService.charger(principal.getName()));
@@ -60,65 +61,72 @@ public class ArticleController {
 		}
 		return "redirect:/encheres/encheres"; // Redirection vers la page d'accueil des enchères
 	}
+    @GetMapping("/encheres")
+    public String afficherEncheres(HttpServletRequest request,
+                                   @RequestParam(name = "nomArticle", required = false) String nomArticle,
+                                   @RequestParam(name = "categorie", required = false) String categorie,
+                                   @RequestParam(name = "mesVentesEnCours", required = false) boolean mesVentesEnCours,
+                                   @RequestParam(name = "ventesNonDebutees", required = false) boolean ventesNonDebutees,
+                                   @RequestParam(name = "ventesTerminees", required = false) boolean ventesTerminees,
+                                   @RequestParam(name = "enchereOuverte", required = false) boolean enchereOuverte,
+                                   @RequestParam(name = "mesEncheres", required = false) boolean mesEncheres,
+                                   @RequestParam(name = "mesEnchereRemportees", required = false) boolean mesEnchereRemportees,
+                                   Principal principal, Model model) {
+        var user = utilisateurService.charger(principal.getName());
+        List<ArticleVendu> articleVendus;
+        String rqt = "SELECT * FROM ARTICLES_VENDUS inner join UTILISATEURS on ARTICLES_VENDUS.no_utilisateur = UTILISATEURS.no_utilisateur inner join CATEGORIES on ARTICLES_VENDUS.no_categorie = CATEGORIES.no_categorie";
+        if (request.getParameter("mesVentesEnCours") != null || request.getParameter("ventesNonDebutees") != null || request.getParameter("ventesTerminees") != null || request.getParameter("enchereOuverte") != null || request.getParameter("mesEncheres") != null || request.getParameter("mesEnchereRemportees") != null) {
+            if (request.getParameter("mesVentesEnCours") != null) {
+                mesVentesEnCours = true;
+            }
+            if (request.getParameter("ventesNonDebutees") != null) {
+                ventesNonDebutees = true;
+            }
+            if (request.getParameter("ventesTerminees") != null) {
+                ventesTerminees = true;
+            }
+            if (request.getParameter("enchereOuverte") != null) {
+                enchereOuverte = true;
+            }
+            if (request.getParameter("mesEncheres") != null) {
+                mesEncheres = true;
+            }
+            if (request.getParameter("mesEnchereRemportees") != null) {
+                mesEnchereRemportees = true;
+            }
 
-	@GetMapping("/encheres")
-	public String afficherEncheres(HttpServletRequest request,
-								   @RequestParam(name = "nomArticle", required = false) String nomArticle,
-								   @RequestParam(name = "categorie", required = false) String categorie,
-								   @RequestParam(name = "mesVentesEnCours", required = false) boolean mesVentesEnCours,
-								   @RequestParam(name = "ventesNonDebutees", required = false) boolean ventesNonDebutees,
-								   @RequestParam(name = "ventesTerminees", required = false) boolean ventesTerminees,
-								   @RequestParam(name = "enchereOuverte", required = false) boolean enchereOuverte,
-								   @RequestParam(name = "mesEncheres", required = false) boolean mesEncheres,
-								   @RequestParam(name = "mesEnchereRemportees", required = false) boolean mesEnchereRemportees,
-								   Principal principal, Model model) {
-		List<ArticleVendu> articleVendus;
-		String rqt = "SELECT * FROM ARTICLES_VENDUS " +
-				"inner join UTILISATEURS on ARTICLES_VENDUS.no_utilisateur = UTILISATEURS.no_utilisateur" +
-				" inner join CATEGORIES on CATEGORIES.no_categorie = ARTICLES_VENDUS.no_categorie";
-		if (request.getParameter("mesVentesEnCours") != null || request.getParameter("ventesNonDebutees") != null || request.getParameter("ventesTerminees") != null || request.getParameter("enchereOuverte") != null || request.getParameter("mesEncheres") != null || request.getParameter("mesEnchereRemportees") != null) {
-			if (request.getParameter("mesVentesEnCours") != null) {
-				mesVentesEnCours = true;
-			}
-			if (request.getParameter("ventesNonDebutees") != null) {
-				ventesNonDebutees = true;
-			}
-			if (request.getParameter("ventesTerminees") != null) {
-				ventesTerminees = true;
-			}
-			if (request.getParameter("enchereOuverte") != null) {
-				enchereOuverte = true;
-			}
-			if (request.getParameter("mesEncheres") != null) {
-				mesEncheres = true;
-			}
-			if (request.getParameter("mesEnchereRemportees") != null) {
-				mesEnchereRemportees = true;
-			}
-
-			if (nomArticle != null && !nomArticle.isEmpty()) {
-				articleVendus = articleService.consulterEncheresParNomArticle(nomArticle);
-			}
-			if (categorie != null && !categorie.isEmpty()) {
-				articleVendus = articleService.consulterEncheresParCategorie(categorie);
-			}
-			int cpt = 0;
-//            if (mesVentesEnCours) {
-//                cpt++;
-//                rqt += " WHERE prix_vente IS NULL AND date_fin_encheres > GETDATE()";
-//            }
-//            if (ventesTerminees) {
-//                if (cpt == 1) {
-//                    rqt += " AND prix_vente IS NULL AND date_fin_encheres < GETDATE()";
-//                } else rqt += " WHERE prix_vente IS NULL AND date_fin_encheres < GETDATE()";
-//                if (ventesNonDebutees) {
-//                    cpt++;
-//                    if (cpt == 2) {
-//                        rqt += " prix_initial IS NOT NULL AND date_debut_encheres > GETDATE()";
-//                    } else rqt += " WHERE prix_initial IS NOT NULL AND date_debut_encheres > GETDATE()";
-//
-//                }
-//            }
+            if (nomArticle != null && !nomArticle.isEmpty()) {
+                articleVendus = articleService.consulterEncheresParNomArticle(nomArticle);
+            }
+            if (categorie != null && !categorie.isEmpty()) {
+                articleVendus = articleService.consulterEncheresParCategorie(categorie);
+            }
+            int cpt = 0;
+            if (mesVentesEnCours) {
+                cpt++;
+                rqt += " WHERE ARTICLES_VENDUS.no_utilisateur = " + user.getNoUtilisateur() + " AND (prix_vente IS NULL AND date_debut_encheres <= GETDATE() AND date_fin_encheres >= GETDATE())";
+            }if (ventesTerminees) {
+                if (cpt > 0) {
+                    rqt += " OR (prix_vente IS NOT NULL AND date_fin_encheres <= GETDATE()) AND ARTICLES_VENDUS.no_utilisateur = " + user.getNoUtilisateur() + ")";
+                } else {
+                    rqt += " WHERE ARTICLES_VENDUS.no_utilisateur = " + user.getNoUtilisateur() + " AND (prix_vente IS NOT NULL AND date_fin_encheres <= GETDATE())";
+                }
+            }if (ventesNonDebutees) {
+                if (cpt > 0 || ventesTerminees) {
+                    rqt += " OR (prix_initial IS NOT NULL AND date_debut_encheres >= GETDATE() AND ARTICLES_VENDUS.no_utilisateur = " + user.getNoUtilisateur() + ")";
+                } else {
+                    rqt += " WHERE ARTICLES_VENDUS.no_utilisateur = " + user.getNoUtilisateur() + " AND (prix_initial IS NOT NULL AND date_debut_encheres >= GETDATE())";
+                }
+            }if(mesVentesEnCours && ventesTerminees && ventesNonDebutees){
+                String rqt2 = "SELECT * \n" +
+                        "FROM ARTICLES_VENDUS \n" +
+                        "inner join UTILISATEURS on ARTICLES_VENDUS.no_utilisateur = UTILISATEURS.no_utilisateur\n" +
+                        "WHERE ARTICLES_VENDUS.no_utilisateur = 2 \n" +
+                        "AND (prix_vente IS NULL AND date_debut_encheres <= GETDATE() AND date_fin_encheres >= GETDATE()) \n" +
+                        "OR (prix_vente IS NOT NULL AND date_fin_encheres <= GETDATE()) ";
+                articleVendus = articleService.getVentes(rqt2);
+            }
+            System.out.println(rqt);
 //            if (enchereOuverte) {
 //                rqt += " WHERE date_enchere > GETDATE() AND date_fin_encheres < GETDATE()";
 //            }
@@ -128,14 +136,12 @@ public class ArticleController {
 //            if (mesEnchereRemportees) {
 //                rqt += " WHERE date_enchere < GETDATE()"; // à faire
 //            }
-		}
-		// Vérification des cases à cocher cochées dans le formulaire
+        }
+        // Vérification des cases à cocher cochées dans le formulaire
 
-		articleVendus = articleService.getVentes(rqt);
-
-		var categories = articleService.consulterCategories();
-		model.addAttribute("categorie", categories);
-		model.addAttribute("articleVendus", articleVendus);
+		model.addAttribute("categories", articleService.consulterCategories());
+		model.addAttribute("userEdit", utilisateurService.charger(principal.getName()));
+		model.addAttribute("article", articleService.getVentes(rqt));
 		return "encheres";
 	}
 }

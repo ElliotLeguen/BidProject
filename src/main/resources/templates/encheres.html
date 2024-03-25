@@ -25,7 +25,7 @@
                 <label>Catégorie :</label>
                 <select name="categorie">
                     <option value="">Toutes</option>
-                    <option th:each="categorieItem : ${categorie}" th:value="${categorieItem.getNoCategorie()}" th:text="${categorieItem.getLibelle()}"></option>
+                    <option th:each="categorieItem : ${categories}" th:value="${categorieItem.getNoCategorie()}" th:text="${categorieItem.getLibelle()}"></option>
                 </select>
             </div>
             <div class="form-group">
@@ -130,7 +130,7 @@
         </form>
     </div>
     <div class="card-container">
-        <div class="card" data-th-each="article : ${articleVendus}" th:if="${param.nomArticle == null or article.getNomArticle().contains(param.nomArticle)}">
+        <div class="card" data-th-each="article : ${article}" th:if="${param.nomArticle == null or article.getNomArticle().contains(param.nomArticle)}">
             <u><a th:href="@{/detail(id=${article.noArticle})}"><span data-th-text="${article.getNomArticle()}"></span></a></u>
             <div><span>Prix : </span><span><span data-th-text="${article.getPrixInitial()}"></span> points</span></div>
             <div><span>Fin de l'enchère : </span><span data-th-text="${article.dateFinEncheres}"></span></div>
