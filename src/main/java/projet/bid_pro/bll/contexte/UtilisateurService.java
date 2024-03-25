@@ -17,4 +17,6 @@ public interface UtilisateurService {
 	List<Utilisateur> consulterUtilisateurs();
 
 	void changeEtat(int id);
+
+	void ajouterCredit(Utilisateur utilisateur);
 }

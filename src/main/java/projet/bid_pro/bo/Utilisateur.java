@@ -227,8 +227,6 @@ public class Utilisateur {
                 ", rue='" + rue + '\'' +
                 ", codePostal='" + codePostal + '\'' +
                 ", ville='" + ville + '\'' +
-                ", motDePasse='" + motDePasse + '\'' +
-                ", confirmationMotDePasse='" + confirmationMotDePasse + '\'' +
                 ", credit=" + credit +
                 ", administrateur=" + administrateur +
                 ", etat=" + etat +

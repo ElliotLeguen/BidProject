@@ -7,8 +7,10 @@ import projet.bid_pro.bll.contexte.EnchereService;
 import projet.bid_pro.bll.contexte.UtilisateurService;
 import projet.bid_pro.bo.ArticleVendu;
 import projet.bid_pro.bo.Categorie;
+import projet.bid_pro.bo.Utilisateur;
 
 import java.security.Principal;
+import java.util.List;
 
 @Controller
 @SessionAttributes({ "UtilisateurEnSession" })
@@ -34,5 +36,12 @@ public class ArticleController {
 			article.setCategorie(enchereService.consulterCategorieParId(article.getCategorie().getNoCategorie()));
 		enchereService.creerArticle(article);
 		return "redirect:/article";
+	}
+
+	@GetMapping("/gestionCategorie")
+	public String gestionCategorie(Model model) {
+		List<Categorie> categories = enchereService.consulterCategories();
+		model.addAttribute("categories", categories);
+		return "admin/gestionCategorie";
 	}
 }

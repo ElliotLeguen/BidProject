@@ -78,9 +78,9 @@
             <input class="form-control" id="noUtilisateur" name="noUtilisateur"  th:value="${userEdit.noUtilisateur}" type="hidden"/>
             <input class="form-control" id="motDePasse" name="motDePasse"  th:value="${userEdit.motDePasse}" type="hidden"/>
             <div class="form-group">
-                <button class="btn btn-primary" type="submit">Modifier</button>
+                <a th:href="@{'/acheterCredits'}" class="btn btn-primary" >Acheter des crédits</a>
+                <button class="btn btn-primary" type="submit">Modifier mes informations</button>
                 <a th:href="@{'/deleteUtilisateur?idUtilisateur=' + ${userEdit.noUtilisateur}}" class="btn btn-primary" id="delete" >Supprimer mon compte</a>
-
             </div>
         </form>
     </section>

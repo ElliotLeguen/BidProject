@@ -92,15 +92,35 @@ public class UtilisateurController {
 
     @GetMapping("/gestionUtilisateur")
     public String gestionUtilisateur(Model model) {
-        List<Utilisateur> utilsateurs = utilisateurService.consulterUtilisateurs();
-        model.addAttribute("utilsateurs", utilsateurs);
+        List<Utilisateur> utilisateurs = utilisateurService.consulterUtilisateurs();
+        model.addAttribute("utilisateurs", utilisateurs);
         return "admin/gestionUtilisateur";
     }
 
-    @GetMapping("/utilsateurEtat")
+    @GetMapping("/utilisateurEtat")
     public String afficherProfilEnchere( @RequestParam(name = "idUtilisateur", required = true) int idUtilisateur,Model model) {
         utilisateurService.changeEtat(idUtilisateur);
         return "redirect:/gestionUtilisateur";
     }
 
+    @GetMapping("/utilisateurSupprimer")
+    public String utilisateurSupprimer( @RequestParam(name = "idUtilisateur", required = true) int idUtilisateur,Model model) {
+        utilisateurService.delete(idUtilisateur);
+        return "redirect:/gestionUtilisateur";
+    }
+
+    @GetMapping("/acheterCredits")
+    public String acheterCredits(Principal principal, Model model) {
+
+        model.addAttribute("userEdit", utilisateurService.charger(principal.getName()));
+        return "acheterCredits";
+    }
+
+    @PostMapping("/acheterCredits")
+    public String acheterCredits(@ModelAttribute("credit") int credit,Principal principal) {
+        Utilisateur utilisateur = utilisateurService.charger(principal.getName());
+        utilisateur.setCredit(utilisateur.getCredit()+credit);
+        utilisateurService.ajouterCredit(utilisateur);
+        return "redirect:/profil";
+    }
 }

@@ -19,24 +19,16 @@
         <tr>
             <th>Prénom</th>
             <th>Nom</th>
-            <th>Email</th>
-            <th>Désactiver/Activer</th>
             <th>Supprimer</th>
             <!-- Ajoutez d'autres en-têtes de colonne si nécessaire -->
         </tr>
         </thead>
         <tbody>
-        <tr data-th-each="utilisateur : ${utilisateurs}">
-            <td data-th-text="${utilisateur.prenom}"></td>
-            <td data-th-text="${utilisateur.nom}"></td>
-            <td data-th-text="${utilisateur.email}"></td>
+        <tr data-th-each="categorie : ${categories}">
+            <td data-th-text="${categorie.getNoCategorie()}"></td>
+            <td data-th-text="${categorie.getLibelle()}"></td>
             <td>
-                <a th:href="@{'/utilisateurEtat?idUtilisateur=' + ${utilisateur.noUtilisateur}}">
-                    <span th:text="${utilisateur.etat == 1 ? 'Activer' : 'Désactiver'}"></span>
-                </a>
-            </td>
-            <td>
-                <a th:href="@{'/utilisateurSupprimer?idUtilisateur=' + ${utilisateur.noUtilisateur}}">
+                <a th:href="@{'/utilisateurSupprimer?idUtilisateur=' + ${categorie.getNoCategorie()}}">
                     <span>Supprimer</span>
                 </a>
             </td>

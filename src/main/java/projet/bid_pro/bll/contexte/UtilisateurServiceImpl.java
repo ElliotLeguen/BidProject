@@ -51,5 +51,10 @@ public class UtilisateurServiceImpl implements UtilisateurService {
 		utilisateurDAO.changeEtat(id);
 	}
 
+	@Override
+	public void ajouterCredit(Utilisateur utilisateur) {
+		utilisateurDAO.ajouterCredit(utilisateur);
+	}
+
 
 }

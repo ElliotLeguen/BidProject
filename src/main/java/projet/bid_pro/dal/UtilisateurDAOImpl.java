@@ -32,6 +32,7 @@ public class UtilisateurDAOImpl implements UtilisateurDAO {
 
     private final String SUPPRIMER_UTILISATEUR = "DELETE FROM UTILISATEURS WHERE no_utilisateur = :no_utilisateur";
     private final String CHANGER_ETAT_UTILISATEUR = "UPDATE UTILISATEURS set etat = :etat WHERE no_utilisateur = :no_utilisateur";
+    private final String AJOUTER_CREDIT = "UPDATE UTILISATEURS set credit = :credit WHERE no_utilisateur = :no_utilisateur";
 
     @Autowired
     private NamedParameterJdbcTemplate jdbcTemplate;
@@ -124,13 +125,21 @@ public class UtilisateurDAOImpl implements UtilisateurDAO {
         System.out.println(isActive);
         if(isActive == 1){
             namedParameters.addValue("etat", "0");
-            jdbcTemplate.update(CHANGER_ETAT_UTILISATEUR, namedParameters);
         }
         if(isActive == 0) {
             namedParameters.addValue("etat", "1");
-            jdbcTemplate.update(CHANGER_ETAT_UTILISATEUR, namedParameters);
         }
+        jdbcTemplate.update(CHANGER_ETAT_UTILISATEUR, namedParameters);
+    }
 
+    @Override
+    public void ajouterCredit(Utilisateur utilisateur) {
+        MapSqlParameterSource namedParameters = new MapSqlParameterSource();
+        namedParameters.addValue("no_utilisateur", utilisateur.getNoUtilisateur());
+        namedParameters.addValue("credit", utilisateur.getCredit());
+
+
+        jdbcTemplate.update(AJOUTER_CREDIT, namedParameters);
     }
 
     /**
@@ -152,6 +161,7 @@ public class UtilisateurDAOImpl implements UtilisateurDAO {
             utilisateur.setMotDePasse(rs.getString("mot_de_passe"));
             utilisateur.setCredit(rs.getInt("credit"));
             utilisateur.setAdministrateur(rs.getString("administrateur"));
+            utilisateur.setEtat(rs.getByte("etat"));
             return utilisateur;
         }
     }

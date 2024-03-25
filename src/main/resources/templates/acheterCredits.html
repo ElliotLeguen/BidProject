@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<!-- Mise en place du layout -->
+<!-- Accueil comme titre de page -->
+<!-- la balise main définit par la classe de CSS 'center-main' comme paramètre contenuPage -->
+<html xmlns:th="http://www.thymeleaf.org"
+      data-th-replace="~{layouts/layout :: layout-encheres(
+					titrePage=~{:: title},
+					contenuPage=~{:: main},
+					ressourcesSupp=~{::#resources-css})}">
+
+<head>
+    <!-- Accueil comme titre de page -->
+    <title data-th-text="#{index.title}"></title>
+    <th:block id="resources-css">
+        <link rel="stylesheet" data-th-href="@{/css/login.css}">
+    </th:block>
+</head>
+<body>
+<main class="center-main">
+    <section class="center-section">
+        <form method="post" role="form" th:action="@{/acheterCredits}">
+            <label for="credit">Crédit :</label>
+            <input class="form-control" id="credit" name="credit" type="text"/>
+                <button class="btn btn-primary" type="submit">Confirmer l'achat</button>
+            </div>
+        </form>
+    </section>
+</main>
+</body>
+</html>

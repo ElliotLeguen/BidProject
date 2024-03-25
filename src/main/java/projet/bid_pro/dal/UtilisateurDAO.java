@@ -19,4 +19,6 @@ public interface UtilisateurDAO {
 	List<Utilisateur> listeUtilisateurs();
 
 	void changeEtat (int id);
+
+	void ajouterCredit(Utilisateur utilisateur);
 }
