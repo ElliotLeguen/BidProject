@@ -3,6 +3,7 @@ package projet.bid_pro.bo;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
+import java.util.List;
 
 public class ArticleVendu {
     private int noArticle;
@@ -16,6 +17,7 @@ public class ArticleVendu {
     private Integer prixVente;
     private Utilisateur utilisateur;
     private Categorie categorie;
+    private List<Enchere> enchereList;
 
     // Constructeur
     public ArticleVendu(int noArticle, String nomArticle, String description, Date dateDebutEncheres,
@@ -105,8 +107,8 @@ public class ArticleVendu {
         return categorie;
     }
 
-    public void setCategorie(Categorie noCategorie) {
-        this.categorie = noCategorie;
+    public void setCategorie(Categorie Categorie) {
+        this.categorie = Categorie;
     }
 
     @Override

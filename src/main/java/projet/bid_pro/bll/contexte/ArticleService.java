@@ -6,13 +6,12 @@ import projet.bid_pro.bo.Enchere;
 
 import java.util.List;
 
-public interface EnchereService {
-    List<Enchere> consulterEncheres();
-    Enchere consulterEnchereParId(long id);
-    void creerEnchere(ArticleVendu articleVendu);
-    List<Enchere> consulterEncheresParNomArticle(String nomArticle);
+public interface ArticleService {
+    List<ArticleVendu> getVentes(String rqt);
     List<Categorie> consulterCategories();
+    List<ArticleVendu> consulterEncheresParNomArticle(String nomArticle);
+    List<ArticleVendu> consulterEncheresParCategorie(String categorie);
     void creerArticle(ArticleVendu articleVendu);
     Categorie consulterCategorieParId(int id);
-
+    ArticleVendu consulterArticleParId(long id);
 }

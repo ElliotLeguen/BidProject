@@ -9,7 +9,6 @@ import java.util.List;
 
 @Service
 public class UtilisateurServiceImpl implements UtilisateurService {
-
 	private UtilisateurDAO utilisateurDAO;
 
 	public UtilisateurServiceImpl(UtilisateurDAO utilisateurDAO) {
