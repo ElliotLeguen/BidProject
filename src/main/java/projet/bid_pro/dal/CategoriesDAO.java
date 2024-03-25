@@ -9,4 +9,6 @@ public interface CategoriesDAO {
     List<Categorie> readCategories();
 
     List<Categorie> consulterEncheresParCategorie(String nomCategorie);
+
+    Categorie readById(int id);
 }

@@ -13,4 +13,13 @@ public interface EnchereService {
     List<Enchere> consulterEncheresParNomArticle(String nomArticle);
     List<Categorie> consulterCategories();
     List<Enchere> consulterEncheresParCategorie(String categorie);
+    List<Enchere> getToutesVentes();
+    List<Enchere> getVentesEnCoursEtNonDebutees();
+    List<Enchere> getVentesEnCoursEtTerminees();
+    List<Enchere> getVentesNonDebuteesEtTerminees();
+    List<Enchere> getVentesEnCours();
+    List<Enchere> getVentesNonDebutees();
+    List<Enchere> getVentesTerminees();
+    void creerArticle(ArticleVendu articleVendu);
+    Categorie consulterCategorieParId(int id);
 }
