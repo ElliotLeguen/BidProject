@@ -46,7 +46,8 @@ public class EnchereServiceImpl implements EnchereService{
     }
 
     @Override
-    public void creerEnchere(Enchere enchere) {
+    public void creerEnchere(ArticleVendu articleVendu){
+        enchereDAO.creationEnchere(articleVendu);
     }
 
     @Override

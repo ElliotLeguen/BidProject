@@ -13,6 +13,7 @@ import projet.bid_pro.bo.Categorie;
 import projet.bid_pro.bo.Enchere;
 import projet.bid_pro.bo.Utilisateur;
 
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
@@ -45,6 +46,25 @@ public class EnchereDAOImpl implements EnchereDAO{
     @Override
     public List<Enchere> consulterEncheresParNomArticle(String nomArticle) {
         return jdbcTemplate.query(FIND_ENCHERES_BY_ARTICLE, new EnchereRowMapper());
+    }
+
+    @Override
+    public ArticleVendu creationEnchere(ArticleVendu articleVendu) {
+        String sql ="INSERT INTO ARTICLES_VENDUS (no_utilisateur, no_article, date_enchere, montant_enchere) " +
+                "VALUES (?, ?, ?, ?)";
+        KeyHolder keyHolder = new GeneratedKeyHolder();
+        jdbcTemplate.update( connection -> {
+            PreparedStatement ps = connection.prepareStatement(sql, new String[]{"ID"});
+                ps.setInt(1,articleVendu.getUtilisateur().getNoUtilisateur());
+                ps.setInt(2,articleVendu.getNoArticle());
+                ps.setDate(3, new java.sql.Date(articleVendu.getDateFinEncheres().getTime()));
+                ps.setInt(4, articleVendu.getPrixInitial());
+                return ps;
+            }, keyHolder);
+        if (keyHolder.getKey() != null) {
+            articleVendu.setNoArticle(keyHolder.getKey().intValue());
+        }
+        return articleVendu;
     }
 
     public class EnchereRowMapper implements RowMapper<Enchere> {
