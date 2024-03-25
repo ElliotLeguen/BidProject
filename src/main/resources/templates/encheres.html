@@ -29,44 +29,80 @@
                 </select>
             </div>
             <div class="form-group">
-                <input type="radio" id="radioAchats" name="radio" value="achat">
+                <input type="radio" id="radioAchats" name="radioAchats" value="radioAchats">
                 <label for="radioAchats">Achats</label>
-                <input type="radio" id="radioVentes" name="radio" value="vente">
+                <input type="radio" id="radioVentes" name="radioVentes" value="radioVentes">
                 <label for="radioVentes">Mes ventes</label>
             </div>
             <div class="form-group">
-                <input type="checkbox" id="enchereOuverte" name="checkboxAchats">
-                <label for="enchereOuverte">enchères ouvertes</label>
-                <input type="checkbox" id="mesEncheres" name="checkboxAchats">
-                <label for="mesEncheres">mes enchères en cours</label>
-                <input type="checkbox" id="mesEnchereRemportees" name="checkboxAchats">
-                <label for="mesEnchereRemportees">mes enchères remportées</label>
+                <input type="checkbox" id="checkboxAchatsEnchereOuverte" name="enchereOuverte" th:checked="${enchereOuverte}">
+                <label for="checkboxAchatsEnchereOuverte">enchères ouvertes</label>
+                <input type="checkbox" id="checkboxAchatsMesEncheres" name="mesEncheres" th:checked="${mesEncheres}">
+                <label for="checkboxAchatsMesEncheres">mes enchères en cours</label>
+                <input type="checkbox" id="checkboxAchatsMesEnchereRemportees" name="mesEnchereRemportees" th:checked="${mesEnchereRemportees}">
+                <label for="checkboxAchatsMesEnchereRemportees">mes enchères remportées</label>
             </div>
             <div class="form-group">
-                <input type="checkbox" id="mesVentesEnCours" name="checkboxVentes">
-                <label for="mesVentesEnCours">mes ventes en cours</label>
-                <input type="checkbox" id="ventesNonDebutees" name="checkboxVentes">
-                <label for="ventesNonDebutees">ventes non débutées</label>
-                <input type="checkbox" id="ventesTerminees" name="checkboxVentes">
-                <label for="ventesTerminees">ventes terminées</label>
+                <input type="checkbox" id="checkboxVentesMesVentesEnCours" name="mesVentesEnCours" th:checked="${mesVentesEnCours}">
+                <label for="checkboxVentesMesVentesEnCours">mes ventes en cours</label>
+                <input type="checkbox" id="checkboxVentesVentesNonDebutees" name="ventesNonDebutees" th:checked="${ventesNonDebutees}">
+                <label for="checkboxVentesVentesNonDebutees">ventes non débutées</label>
+                <input type="checkbox" id="checkboxVentesVentesTerminees" name="ventesTerminees" th:checked="${ventesTerminees}">
+                <label for="checkboxVentesVentesTerminees">ventes terminées</label>
             </div>
             <button>Rechercher</button>
             <script>
                 const radioAchats = document.getElementById('radioAchats');
                 const radioVentes = document.getElementById('radioVentes');
-                const checkboxVentes = document.querySelectorAll('[name="checkboxVentes"]');
-                const checkboxAchats = document.querySelectorAll('[name="checkboxAchats"]');
+
+                const checkboxVentes1 = document.querySelectorAll('[id="checkboxVentesMesVentesEnCours"]');
+                const checkboxVentes2 = document.querySelectorAll('[id="checkboxVentesVentesNonDebutees"]');
+                const checkboxVentes3 = document.querySelectorAll('[id="checkboxVentesVentesTerminees"]');
+
+                const checkboxAchats1 = document.querySelectorAll('[id="checkboxAchatsEnchereOuverte"]');
+                const checkboxAchats2 = document.querySelectorAll('[id="checkboxAchatsMesEncheres"]');
+                const checkboxAchats3 = document.querySelectorAll('[id="checkboxAchatsMesEnchereRemportees"]');
 
                 function updateCheckbox() {
                     const isAchatsSelected = radioAchats.checked;
                     const isVentesSelected = radioVentes.checked;
-                    checkboxAchats.forEach(checkbox => {
+
+                    checkboxAchats1.forEach(checkbox => {
                         checkbox.disabled = !isAchatsSelected;
                         if (!isAchatsSelected) {
                             checkbox.checked = false;
                         }
                     });
-                    checkboxVentes.forEach(checkbox => {
+
+                    checkboxAchats2.forEach(checkbox => {
+                        checkbox.disabled = !isAchatsSelected;
+                        if (!isAchatsSelected) {
+                            checkbox.checked = false;
+                        }
+                    });
+
+                    checkboxAchats3.forEach(checkbox => {
+                        checkbox.disabled = !isAchatsSelected;
+                        if (!isAchatsSelected) {
+                            checkbox.checked = false;
+                        }
+                    });
+
+                    checkboxVentes1.forEach(checkbox => {
+                        checkbox.disabled = !isVentesSelected;
+                        if (!isVentesSelected) {
+                            checkbox.checked = false;
+                        }
+                    });
+
+                    checkboxVentes2.forEach(checkbox => {
+                        checkbox.disabled = !isVentesSelected;
+                        if (!isVentesSelected) {
+                            checkbox.checked = false;
+                        }
+                    });
+
+                    checkboxVentes3.forEach(checkbox => {
                         checkbox.disabled = !isVentesSelected;
                         if (!isVentesSelected) {
                             checkbox.checked = false;
@@ -75,8 +111,18 @@
                 }
 
                 // Ajout d'un écouteur d'événement sur les radios
-                radioVentes.addEventListener('change', updateCheckbox);
-                radioAchats.addEventListener('change', updateCheckbox);
+                radioVentes.addEventListener('change', function() {
+                    if (radioVentes.checked) {
+                        radioAchats.checked = false; // Décocher le bouton radio Achats si Ventes est sélectionné
+                        updateCheckbox();
+                    }
+                });
+                radioAchats.addEventListener('change', function() {
+                    if (radioAchats.checked) {
+                        radioVentes.checked = false; // Décocher le bouton radio Ventes si Achats est sélectionné
+                        updateCheckbox();
+                    }
+                });
 
                 // Appel de la fonction au chargement de la page
                 updateCheckbox();
@@ -84,11 +130,11 @@
         </form>
     </div>
     <div class="card-container">
-        <div class="card" data-th-each="enchere : ${encheres}" th:if="${param.nomArticle == null or enchere.noArticle.getNomArticle().contains(param.nomArticle)}">
-            <u><a th:href="@{/detailEnchere/${enchere.no()}}"><span data-th-text="${enchere.noArticle.getNomArticle()}"></a></span></u>
-            <div><span>Prix : </span><span><span data-th-text="${enchere.montantEnchere}"></span> points</span></div>
-            <div><span>Fin de l'enchère : </span><span data-th-text="${enchere.dateEnchere}"></span></div>
-            <a th:href="@{/profilEnchere}"><span>Vendeur : </span><span data-th-text="${enchere.noUtilisateur.getNom()}"></span></a>
+        <div class="card" data-th-each="article : ${articleVendus}" th:if="${param.nomArticle == null or article.getNomArticle().contains(param.nomArticle)}">
+            <u><a th:href="@{/detailEnchere/${article.getNoUtilisateur()}}"><span data-th-text="${article.getNomArticle()}"></span></a></u>
+            <div><span>Prix : </span><span><span data-th-text="${article.getPrixInitial()}"></span> points</span></div>
+            <div><span>Fin de l'enchère : </span><span data-th-text="${article.dateFinEncheres}"></span></div>
+            <a th:href="@{/profilEnchere}"><span>Vendeur : </span><span data-th-text="${article.noUtilisateur.getNom()}"></span></a>
             <img th:src="@{images/logoENI.png}" alt="">
         </div>
     </div>
