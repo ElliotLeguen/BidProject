@@ -1,7 +1,10 @@
 package projet.bid_pro.controller;
 
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -9,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 import projet.bid_pro.bll.contexte.UtilisateurService;
 import projet.bid_pro.bo.Utilisateur;
 import org.springframework.security.core.Authentication;
@@ -30,13 +34,17 @@ public class LoginController {
 
     @GetMapping("/login")
     public String login(
-            @RequestParam(name = "loginError", required = false, defaultValue = "false") boolean error,
+            @RequestParam(name = "loginError", required = false, defaultValue = "false") boolean loginError,
             @RequestParam(name = "logoutSuccess", required = false, defaultValue = "false") boolean logout,
             @RequestParam(name = "errorMessage", required = false) String errorMessage,
             Model model) {
         if (errorMessage != null) {
             model.addAttribute("errorMessage", errorMessage);
         }
+        if (loginError) {
+            model.addAttribute("loginError", true);
+        }
+
         return "login";
     }
     //LoginSuccessHandler
@@ -61,16 +69,18 @@ public class LoginController {
         return "register";
     }
 
-    @GetMapping("/login-error")
+    @GetMapping("/loginError")
     public String loginError(Model model) {
         model.addAttribute("loginError", true);
         return "login";
     }
 
+
     @PostMapping("/register")
     public String registration(@Valid @ModelAttribute("user") Utilisateur newUser,
                                BindingResult result,
                                Model model){
+
 
         if(result.hasErrors()){
             model.addAttribute("user", newUser);
@@ -81,6 +91,22 @@ public class LoginController {
             result.rejectValue("confirmationMotDePasse", "error.user", "Veuillez renseignez les mêmes mots de passes");
             return"/register";
         }
+        /*if(utilisateurService.chargerParPseudo(newUser.getPseudo()) != null){
+            model.addAttribute("user", newUser);
+            result.rejectValue("pseudo", "error.user", "Ce pseudo est déjà utilisé");
+            return "/register";
+        }
+        if(utilisateurService.charger(newUser.getEmail()) != null){
+            model.addAttribute("user", newUser);
+            result.rejectValue("email", "error.user", "Cet email est déjà utilisé");
+
+            return "/register";
+        }*/
+
+
+
+
+
 
 
 

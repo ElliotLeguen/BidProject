@@ -41,7 +41,10 @@ public class EnchereController {
     }
 
     @GetMapping("/profilEnchere")
-    public String AfficherProfilEnchere() {
+    public String afficherProfilEnchere( @RequestParam(name = "idUtilisateurEnchere", required = true) int idUtilisateurEnchere,Model model) {
+        Utilisateur uti =  utilisateurService.charger(idUtilisateurEnchere);
+        System.out.println(uti);
+        model.addAttribute("utilisateur", utilisateurService.charger(idUtilisateurEnchere));
         return "profilEnchere";
     }
 

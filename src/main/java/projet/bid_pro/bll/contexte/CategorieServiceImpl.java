@@ -26,4 +26,14 @@ public class CategorieServiceImpl implements CategorieService{
     public List<Categorie> consulterCategories() {
         return categoriesDAO.readCategories();
     }
+
+    @Override
+    public Categorie edit(Categorie categorie) {
+        return categoriesDAO.edit(categorie);
+    }
+
+    @Override
+    public void delete(int id) {
+        categoriesDAO.delete(id);
+    }
 }

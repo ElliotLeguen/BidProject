@@ -134,7 +134,10 @@
             <u><a th:href="@{/detail(id=${article.noArticle})}"><span data-th-text="${article.getNomArticle()}"></span></a></u>
             <div><span>Prix : </span><span><span data-th-text="${article.getPrixInitial()}"></span> points</span></div>
             <div><span>Fin de l'enchère : </span><span data-th-text="${article.dateFinEncheres}"></span></div>
-            <a th:href="@{/profilEnchere}"><span>Vendeur : </span><span data-th-text="${article.getUtilisateur().getNom()}"></span></a>
+            <a th:href="@{'/profilEnchere?idUtilisateurEnchere=' + ${article.getUtilisateur().getNoUtilisateur()}}">
+                <span>Vendeur : </span>
+                <span data-th-text="${article.getUtilisateur().getNom()}"></span>
+            </a>
             <img th:src="@{images/logoENI.png}" alt="">
         </div>
     </div>

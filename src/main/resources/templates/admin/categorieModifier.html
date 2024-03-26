@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<!-- Mise en place du layout -->
+<!-- Accueil comme titre de page -->
+<!-- la balise main définit par la classe de CSS 'center-main' comme paramètre contenuPage -->
+<html xmlns:th="http://www.thymeleaf.org"
+      data-th-replace="~{layouts/layout :: layout-encheres(
+					titrePage=~{:: title},
+					contenuPage=~{:: main},
+					ressourcesSupp=~{::#resources-css})}">
+
+<head>
+    <!-- Accueil comme titre de page -->
+    <title data-th-text="#{index.title}"></title>
+    <th:block id="resources-css">
+        <link rel="stylesheet" data-th-href="@{/css/login.css}">
+    </th:block>
+</head>
+<body>
+<main class="center-main">
+    <section class="center-section">
+        <form method="post" role="form" th:action="@{/profilEdit}" th:object="${categorieEdit}">
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <input class="form-control" id="libelle" name="libelle"  th:value="${libelle}" type="text"/>
+                    <p th:errors="*{pseudo}" class="text-danger" th:if="${#fields.hasErrors('pseudo')}"></p>
+                </div>
+            </div>
+            <div class="form-group">
+                <button class="btn btn-primary" type="submit">Modifier mes informations</button>
+            </div>
+        </form>
+    </section>
+</main>
+</body>
+</html>
