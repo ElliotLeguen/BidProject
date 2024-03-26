@@ -9,7 +9,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import projet.bid_pro.bll.contexte.CategorieService;
 import projet.bid_pro.bll.contexte.EnchereService;
+import projet.bid_pro.bll.contexte.UtilisateurService;
 import projet.bid_pro.bo.Enchere;
+import projet.bid_pro.bo.Utilisateur;
 
 import java.security.Principal;
 import java.util.List;
@@ -19,10 +21,12 @@ import java.util.List;
 public class EnchereController {
     private EnchereService enchereService;
     private CategorieService categorieService;
+    private UtilisateurService utilisateurService;
 
-    public EnchereController(EnchereService enchereService,  CategorieService categorieService) {
+    public EnchereController(EnchereService enchereService,  CategorieService categorieService, UtilisateurService utilisateurService) {
         this.enchereService = enchereService;
         this.categorieService = categorieService;
+        this.utilisateurService = utilisateurService;
     }
 
     @GetMapping("/")
@@ -35,7 +39,10 @@ public class EnchereController {
     }
 
     @GetMapping("/profilEnchere")
-    public String AfficherProfilEnchere() {
+    public String afficherProfilEnchere( @RequestParam(name = "idUtilisateurEnchere", required = true) int idUtilisateurEnchere,Model model) {
+        Utilisateur uti =  utilisateurService.charger(idUtilisateurEnchere);
+        System.out.println(uti);
+        model.addAttribute("utilisateur", utilisateurService.charger(idUtilisateurEnchere));
         return "profilEnchere";
     }
 }
