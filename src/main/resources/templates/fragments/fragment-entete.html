@@ -2,7 +2,7 @@
         data-th-fragment="frag-entete">
     <section id="nav-title">
         <h1>
-            <span data-th-text="#{nom-application}"></span>
+            <a data-th-text="ENI-Enchères" th:href="@{/encheres}"></a>
             <th:block
                     data-th-if="${membreEnSession != null && membreEnSession.id > 0}">
                 <span data-th-text="'['+ ${membreEnSession.prenom}+']'"></span>
@@ -10,9 +10,10 @@
 
         </h1>
         <div>
-            <a href="/?language=fr"><img alt="Français"
-                                         src="/images/French.webp"></a> <a href="/?language=en"><img
-                alt="English" src="/images/English.webp"></a>
+            <a href="#" onclick="history.back(); return false;"><img width="20px" th:src="@{/images/revenir.png}" alt="Revenir en arrière"></a>
+            <a href="#" onclick="location.reload(); return false;"><img width="20px" th:src="@{/images/reload.png}" alt="Reload"></a>
+            <a href="/?language=fr"><img alt="Français" src="/images/French.webp"></a>
+            <a href="/?language=en"><img alt="English" src="/images/English.webp"></a>
         </div>
     </section>
     <nav>
@@ -54,6 +55,9 @@
             <li sec:authorize="!isAuthenticated()"><a href="/login" >Se connecter</a></li>
             <li sec:authorize="!isAuthenticated()"><a href="/register" >S'inscrire</a></li>
             <li sec:authorize="isAuthenticated()"><a href="/logout" >Déconnexion</a></li>
+
+
+
 
 
         </ul>
