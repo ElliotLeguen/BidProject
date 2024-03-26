@@ -3,16 +3,13 @@ package projet.bid_pro.dal;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
-import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 import projet.bid_pro.bo.ArticleVendu;
 import projet.bid_pro.bo.Categorie;
-import projet.bid_pro.bo.Retrait;
 import projet.bid_pro.bo.Utilisateur;
 
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -27,8 +24,8 @@ public class ArticleDAOImpl implements ArticleDAO{
 
     @Override
     public ArticleVendu creerArticle(ArticleVendu article) {
-        String sql = "INSERT INTO ARTICLES_VENDUS (nom_article, description, date_debut_encheres, date_fin_encheres, prix_initial, prix_vente, no_utilisateur, no_categorie) " +
-                "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO ARTICLES_VENDUS (nom_article, description, date_debut_encheres, date_fin_encheres, prix_initial, prix_vente, no_utilisateur, no_categorie, image) " +
+                "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
         KeyHolder keyHolder = new GeneratedKeyHolder();
         jdbcTemplate.update(
                 connection -> {
@@ -41,6 +38,7 @@ public class ArticleDAOImpl implements ArticleDAO{
             ps.setInt(6, article.getPrixVente() == null ? 0 : article.getPrixVente());
             ps.setInt(7, article.getUtilisateur().getNoUtilisateur());
             ps.setInt(8, article.getCategorie().getNoCategorie());
+            ps.setString(9, article.getImage());
                     return ps;
                 }, keyHolder);
         if (keyHolder.getKey() != null) {
@@ -73,9 +71,11 @@ public class ArticleDAOImpl implements ArticleDAO{
         String requete = "SELECT * FROM CATEGORIES " +
                 "INNER JOIN ARTICLES_VENDUS ON CATEGORIES.no_categorie = ARTICLES_VENDUS.no_categorie " +
                 "INNER JOIN UTILISATEURS ON UTILISATEURS.no_utilisateur = ARTICLES_VENDUS.no_utilisateur " +
-                "WHERE CATEGORIES.libelle = :categorie";
+                "WHERE CATEGORIES.no_categorie = ? " +
+                "ORDER BY CATEGORIES.libelle";
         return jdbcTemplate.query(requete, new Object[]{categorie}, new ArticleRowMapper());
     }
+
 
     public static class ArticleRowMapper implements RowMapper<ArticleVendu> {
         @Override

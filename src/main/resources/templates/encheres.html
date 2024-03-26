@@ -22,10 +22,10 @@
                 <br><input type="text" name="nomArticle" placeholder="Le nom de l'article contient" th:value="${param.nomArticle}">
             </div>
             <div class="form-group">
-                <label>Catégorie :</label>
-                <select name="categorie">
+                <label for="categorie">Catégorie :</label>
+                <select id="categorie" name="categorie">
                     <option value="">Toutes</option>
-                    <option th:each="categorieItem : ${categories}" th:value="${categorieItem.getNoCategorie()}" th:text="${categorieItem.getLibelle()}"></option>
+                    <option th:each="categorieItem : ${categories}" th:value="${categorieItem.noCategorie}" th:text="${categorieItem.libelle}"></option>
                 </select>
             </div>
             <div class="form-group">
@@ -130,7 +130,7 @@
         </form>
     </div>
     <div class="card-container">
-        <div class="card" data-th-each="article : ${article}" th:if="${param.nomArticle == null or article.getNomArticle().contains(param.nomArticle)}">
+        <div class="card" data-th-each="article : ${article}" th:if="${param.nomArticle == null or article.nomArticle.contains(param.nomArticle)}">
             <u><a th:href="@{/detail(id=${article.noArticle})}"><span data-th-text="${article.getNomArticle()}"></span></a></u>
             <div><span>Prix : </span><span><span data-th-text="${article.getPrixInitial()}"></span> points</span></div>
             <div><span>Fin de l'enchère : </span><span data-th-text="${article.dateFinEncheres}"></span></div>
@@ -138,6 +138,14 @@
             <img th:src="@{images/logoENI.png}" alt="">
         </div>
     </div>
+
+    <script th:inline="javascript">
+        /*<![CDATA[*/
+        var votreJson = /*[[${votreJson}]]*/ '[]'; // Accédez à votre JSON
+        // Maintenant vous pouvez manipuler votreJson comme vous le souhaitez
+        console.log(votreJson);
+        /*]]>*/
+    </script>
 </main>
 
 </body>
