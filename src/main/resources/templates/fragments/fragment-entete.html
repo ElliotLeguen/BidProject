@@ -48,7 +48,9 @@
             <li sec:authorize="isAuthenticated()">
                 <a href="/profil">Mon profil</a>
             </li>
-
+            <li sec:authorize="hasRole('ROLE_ADMIN')">
+                <a href="/gestionUtilisateur">Gestion Utilisateur</a>
+            </li>
             <li sec:authorize="!isAuthenticated()"><a href="/login" >Se connecter</a></li>
             <li sec:authorize="!isAuthenticated()"><a href="/register" >S'inscrire</a></li>
             <li sec:authorize="isAuthenticated()"><a href="/logout" >Déconnexion</a></li>

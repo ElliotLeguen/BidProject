@@ -15,21 +15,15 @@ import java.util.List;
 public class ArticleServiceImpl implements ArticleService{
     private ArticleDAO articleDAO;
     private CategoriesDAO categoriesDAO;
-    private EnchereDAO enchereDAO;
 
-    public ArticleServiceImpl(ArticleDAO articleDAO, CategoriesDAO categoriesDAO, EnchereDAO enchereDAO) {
+    public ArticleServiceImpl(ArticleDAO articleDAO, CategoriesDAO categoriesDAO) {
         this.articleDAO = articleDAO;
         this.categoriesDAO = categoriesDAO;
-        this.enchereDAO = enchereDAO;
     }
 
     @Override
     public List<ArticleVendu> getVentes(String rqt) {
         return articleDAO.getArticles(rqt);
-    }
-    @Override
-    public List<Categorie> consulterCategories() {
-        return categoriesDAO.readCategories();
     }
 
     @Override
@@ -47,10 +41,6 @@ public class ArticleServiceImpl implements ArticleService{
         articleDAO.creerArticle(articleVendu);
     }
 
-    @Override
-    public Categorie consulterCategorieParId(int id) {
-       return categoriesDAO.readById(id);
-    }
 
     @Override
     public ArticleVendu consulterArticleParId(long id) {

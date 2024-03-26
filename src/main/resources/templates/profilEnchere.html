@@ -9,10 +9,45 @@
     <!-- Accueil comme titre de page -->
     <title data-th-text="#{index.title}"></title>
     <th:block id="resources-css">
-        <link rel="stylesheet" data-th-href="@{/css/encheres.css}"/>
+        <link rel="stylesheet" data-th-href="@{/css/login.css}"/>
     </th:block>
 </head>
 <body>
-
+<main class="center-main">
+    <section class="center-section">
+        <div class="row">
+            <div class="col-md-6 mb-3">
+                <p class="form-control" id="pseudo" name="pseudo"  th:text="${utilisateur.pseudo}" type="text"/>
+            </div>
+            <div class="col-md-6 mb-3">
+                <p class="form-control" id="nom" name="nom"  th:text="${utilisateur.nom}" type="text"/>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6 mb-3">
+                <p class="form-control" id="prenom" name="prenom"  th:text="${utilisateur.prenom}" type="text"/>
+            </div>
+            <div class="col-md-6 mb-3">
+                <p class="form-control" id="email" name="email"  th:text="${utilisateur.email}" type="text"/>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6 mb-3">
+                <p class="form-control" id="telephone" name="telephone"   th:text="${utilisateur.telephone}" type="text"/>
+            </div>
+            <div class="col-md-6 mb-3">
+                <p class="form-control" id="rue" name="rue"  th:text="${utilisateur.rue}" type="text"/>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6 mb-3">
+                <p class="form-control" id="codePostal" name="codePostal"  th:text="${utilisateur.codePostal}" type="text"/>
+            </div>
+            <div class="col-md-6 mb-3">
+                <p class="form-control" id="ville" name="ville"   th:text="${utilisateur.ville}" type="text"/>
+            </div>
+        </div>
+    </section>
+</main>
 </body>
 </html>

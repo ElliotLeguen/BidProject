@@ -11,8 +11,6 @@ public interface EnchereService {
     Enchere consulterEnchereParId(long id);
     void creerEnchere(ArticleVendu articleVendu);
     List<Enchere> consulterEncheresParNomArticle(String nomArticle);
-    List<Categorie> consulterCategories();
     void creerArticle(ArticleVendu articleVendu);
-    Categorie consulterCategorieParId(int id);
 
 }

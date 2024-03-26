@@ -1,5 +1,11 @@
 package projet.bid_pro.configuration;
+import java.io.IOException;
 import java.util.Locale;
+
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import org.apache.tomcat.util.net.openssl.ciphers.Authentication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -61,7 +67,10 @@ public class WebConfiguration implements WebMvcConfigurer {
 			//auth.requestMatchers(HttpMethod.GET,"/encheres").hasRole("ADMIN");
 			auth.requestMatchers(HttpMethod.GET,"/encheres/*").fullyAuthenticated();
 			auth.requestMatchers(HttpMethod.POST,"/encheres/*").fullyAuthenticated();
+			auth.requestMatchers(HttpMethod.GET,"/gestionUtilisateur").hasAnyRole("ADMIN");
+			auth.requestMatchers(HttpMethod.GET,"/utilisateurEtat").hasAnyRole("ADMIN");;
 			auth.requestMatchers(HttpMethod.GET,"/article/*").fullyAuthenticated();
+			auth.requestMatchers(HttpMethod.GET,"/profilEnchere").fullyAuthenticated();
 			auth.requestMatchers(HttpMethod.GET,"/").permitAll();
 			auth.requestMatchers("/css/*").permitAll();
 			auth.requestMatchers("/images/*").permitAll();
@@ -74,6 +83,7 @@ public class WebConfiguration implements WebMvcConfigurer {
 		http
 				.formLogin(form -> form
 						.loginPage("/login")
+						.defaultSuccessUrl("/verifActif")
 						.failureUrl("/login?loginError=true"))
 				.logout(logout -> logout
 						.logoutSuccessUrl("/")
@@ -84,6 +94,12 @@ public class WebConfiguration implements WebMvcConfigurer {
 	@Bean
 	public PasswordEncoder passwordEncoder() {
 		return new BCryptPasswordEncoder();
+	}
+
+	public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
+										Authentication authentication) throws IOException, ServletException {
+		// Rediriger l'utilisateur vers la route /verifEtat après une connexion réussie
+		response.sendRedirect("/verifEtat");
 	}
 
 }

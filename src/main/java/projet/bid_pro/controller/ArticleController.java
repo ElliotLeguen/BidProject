@@ -5,8 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import projet.bid_pro.bll.contexte.ArticleService;
-import projet.bid_pro.bll.contexte.EnchereService;
+import projet.bid_pro.bll.contexte.*;
 import projet.bid_pro.bo.ArticleVendu;
 import projet.bid_pro.bo.Enchere;
 
@@ -14,26 +13,23 @@ import java.security.Principal;
 import java.util.List;
 
 import org.springframework.web.bind.annotation.*;
-import projet.bid_pro.bll.contexte.EnchereService;
-import projet.bid_pro.bll.contexte.UtilisateurService;
-import projet.bid_pro.bo.ArticleVendu;
 import projet.bid_pro.bo.Categorie;
-
-import java.security.Principal;
 
 @Controller
 @SessionAttributes({ "UtilisateurEnSession" })
 public class ArticleController {
 	private ArticleService articleService;
 	private  UtilisateurService utilisateurService;
-	public ArticleController(ArticleService articleService, UtilisateurService utilisateurService) {
+    private CategorieService categorieService;
+	public ArticleController(ArticleService articleService, UtilisateurService utilisateurService, CategorieService categorieService) {
 		this.articleService = articleService;
 		this.utilisateurService = utilisateurService;
+        this.categorieService = categorieService;
 	}
 
 	@GetMapping("/article")
 	public String afficherEncheres(Model model, Principal principal) {
-		model.addAttribute("categories", articleService.consulterCategories());
+		model.addAttribute("categories", categorieService.consulterCategories());
 		model.addAttribute("userEdit", utilisateurService.charger(principal.getName()));
 		model.addAttribute("article", new ArticleVendu());
 		return "vendreArticle";
@@ -42,9 +38,16 @@ public class ArticleController {
 	@PostMapping("/soumettre")
 	public String ajouterArticle(@ModelAttribute("article") ArticleVendu article, Principal principal) {
 		article.setUtilisateur(utilisateurService.charger(principal.getName()));
-		article.setCategorie(articleService.consulterCategorieParId(article.getCategorie().getNoCategorie()));
+		article.setCategorie(categorieService.consulterCategorieParId(article.getCategorie().getNoCategorie()));
 		articleService.creerArticle(article);
 		return "redirect:/article";
+	}
+
+	@GetMapping("/gestionCategorie")
+	public String gestionCategorie(Model model) {
+		List<Categorie> categories = categorieService.consulterCategories();
+		model.addAttribute("categories", categories);
+		return "admin/gestionCategorie";
 	}
 	@GetMapping("/detail")
 	public String afficherUneEnchere(@RequestParam(name = "id", required = true) long id, Model model) {
@@ -139,7 +142,7 @@ public class ArticleController {
         }
         // Vérification des cases à cocher cochées dans le formulaire
 
-		model.addAttribute("categories", articleService.consulterCategories());
+		model.addAttribute("categories", categorieService.consulterCategories());
 		model.addAttribute("userEdit", utilisateurService.charger(principal.getName()));
 		model.addAttribute("article", articleService.getVentes(rqt));
 		return "encheres";

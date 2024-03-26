@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      data-th-replace="~{layouts/layout :: layout-encheres(
+					titrePage=~{:: title},
+					contenuPage=~{:: main},
+					ressourcesSupp=~{:: #resources-css})}">
+
+<head>
+    <!-- Accueil comme titre de page -->
+    <title data-th-text="#{index.title}"></title>
+    <th:block id="resources-css">
+        <link rel="stylesheet" data-th-href="@{/css/gestionUtilisateur.css}"/>
+    </th:block>
+</head>
+<body>
+<main>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Prénom</th>
+            <th>Nom</th>
+            <th>Supprimer</th>
+            <!-- Ajoutez d'autres en-têtes de colonne si nécessaire -->
+        </tr>
+        </thead>
+        <tbody>
+        <tr data-th-each="categorie : ${categories}">
+            <td data-th-text="${categorie.getNoCategorie()}"></td>
+            <td data-th-text="${categorie.getLibelle()}"></td>
+            <td>
+                <a th:href="@{'/utilisateurSupprimer?idUtilisateur=' + ${categorie.getNoCategorie()}}">
+                    <span>Supprimer</span>
+                </a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</main>
+
+</body>
+</html>

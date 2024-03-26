@@ -31,16 +31,6 @@ public class EnchereServiceImpl implements EnchereService{
     }
 
     @Override
-    public List<Categorie> consulterCategories() {
-        return categoriesDAO.readCategories();
-    }
-
-    @Override
-    public Categorie consulterCategorieParId(int id) {
-        return categoriesDAO.readById(id);
-    }
-
-    @Override
     public Enchere consulterEnchereParId(long id) {
         return enchereDAO.read(id);
     }

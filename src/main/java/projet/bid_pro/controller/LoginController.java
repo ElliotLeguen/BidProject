@@ -30,13 +30,28 @@ public class LoginController {
 
     @GetMapping("/login")
     public String login(
-            @RequestParam(name = "loginError", required = false,defaultValue = "false") boolean error,
-            @RequestParam(name = "logoutSuccess", required = false,defaultValue = "false") boolean logout,
+            @RequestParam(name = "loginError", required = false, defaultValue = "false") boolean error,
+            @RequestParam(name = "logoutSuccess", required = false, defaultValue = "false") boolean logout,
+            @RequestParam(name = "errorMessage", required = false) String errorMessage,
             Model model) {
+        if (errorMessage != null) {
+            model.addAttribute("errorMessage", errorMessage);
+        }
         return "login";
     }
     //LoginSuccessHandler
+    @GetMapping("/verifActif")
+    public String verifActif(Principal principal,HttpSession session) {
+        System.out.println(principal.getName());
+        Utilisateur utilisateur = utilisateurService.charger(principal.getName());
+        if(utilisateur.getEtat() == 1){
+            return "redirect:/";
+        }else{
+            session.invalidate();
+            return "redirect:/login?errorMessage=Votre+compte+n%27est+pas+actif.+Veuillez+contacter+l%27administrateur.";
+        }
 
+    }
 
     @GetMapping("/register")
     public String register(Model model){
@@ -61,6 +76,14 @@ public class LoginController {
             model.addAttribute("user", newUser);
             return "/register";
         }
+        if(!newUser.passwordsMatch()){
+            model.addAttribute("user", newUser);
+            result.rejectValue("confirmationMotDePasse", "error.user", "Veuillez renseignez les mêmes mots de passes");
+            return"/register";
+        }
+
+
+
         newUser.setCredit(100);
         Utilisateur registeredUser = utilisateurService.register(newUser);
         List<GrantedAuthority> authorities = new ArrayList<>();
