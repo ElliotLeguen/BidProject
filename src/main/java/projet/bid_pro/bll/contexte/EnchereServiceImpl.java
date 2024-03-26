@@ -25,6 +25,7 @@ public class EnchereServiceImpl implements EnchereService{
         this.articleDAO = articleDAO;
     }
 
+
     @Override
     public List<Enchere> consulterEncheres() {
         return enchereDAO.findAll();
@@ -36,8 +37,8 @@ public class EnchereServiceImpl implements EnchereService{
     }
 
     @Override
-    public void creerEnchere(ArticleVendu articleVendu){
-        enchereDAO.creationEnchere(articleVendu);
+    public void creerEnchere(Enchere enchere){
+        enchereDAO.creationEnchere(enchere);
     }
 
     @Override

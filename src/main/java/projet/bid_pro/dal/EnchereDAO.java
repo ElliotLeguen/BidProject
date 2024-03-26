@@ -9,5 +9,5 @@ public interface EnchereDAO {
     Enchere read(long id);
     List<Enchere> findAll();
     List<Enchere> consulterEncheresParNomArticle(String nomArticle);
-    ArticleVendu creationEnchere(ArticleVendu articleVendu);
+    Enchere creationEnchere(Enchere enchere);
 }

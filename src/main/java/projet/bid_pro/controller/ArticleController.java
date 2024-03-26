@@ -10,10 +10,13 @@ import projet.bid_pro.bo.ArticleVendu;
 import projet.bid_pro.bo.Enchere;
 
 import java.security.Principal;
+import java.sql.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.web.bind.annotation.*;
 import projet.bid_pro.bo.Categorie;
+import projet.bid_pro.dal.EnchereDAO;
 
 @Controller
 @SessionAttributes({ "UtilisateurEnSession" })
@@ -21,7 +24,7 @@ public class ArticleController {
 	private ArticleService articleService;
 	private  UtilisateurService utilisateurService;
     private CategorieService categorieService;
-	public ArticleController(ArticleService articleService, UtilisateurService utilisateurService, CategorieService categorieService) {
+    public ArticleController(ArticleService articleService, UtilisateurService utilisateurService, CategorieService categorieService) {
 		this.articleService = articleService;
 		this.utilisateurService = utilisateurService;
         this.categorieService = categorieService;
@@ -50,12 +53,19 @@ public class ArticleController {
 		return "admin/gestionCategorie";
 	}
 	@GetMapping("/detail")
-	public String afficherUneEnchere(@RequestParam(name = "id", required = true) long id, Model model) {
+	public String afficherUneEnchere(@RequestParam(name = "id", required = true) long id, Model model, Principal principal) {
 		if (id > 0) {
 			ArticleVendu articleVendu = articleService.consulterArticleParId(id);
 			if (articleVendu != null) {
-				model.addAttribute("articleVendu", articleVendu); // Correction de la variable ajoutée au modèle
-				return "detailEnchere"; // Correction de l'alias de la vue
+                Enchere enchere = new Enchere();
+                enchere.setMontantEnchere(articleVendu.getPrixInitial());
+                java.util.Date date = new java.util.Date();
+                enchere.setDateEnchere(date);
+                enchere.setUtilisateur(utilisateurService.charger(principal.getName()));
+                enchere.setArticle(articleVendu);
+                model.addAttribute("enchere", enchere);
+				model.addAttribute("articleVendu", articleVendu);
+                return "detailEnchere"; // Correction de l'alias de la vue
 			} else {
 				System.out.println("Enchère inconnue!!");
 			}
@@ -64,6 +74,7 @@ public class ArticleController {
 		}
 		return "redirect:/encheres/encheres"; // Redirection vers la page d'accueil des enchères
 	}
+
     @GetMapping("/encheres")
     public String afficherEncheres(HttpServletRequest request,
                                    @RequestParam(name = "nomArticle", required = false) String nomArticle,

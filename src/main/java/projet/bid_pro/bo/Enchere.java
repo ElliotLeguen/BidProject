@@ -1,5 +1,6 @@
 package projet.bid_pro.bo;
 
+import org.springframework.format.annotation.DateTimeFormat;
 import projet.bid_pro.dal.UtilisateurDAO;
 
 import java.util.Date;
@@ -7,6 +8,7 @@ import java.util.Date;
 public class Enchere {
     private Utilisateur Utilisateur;
     private ArticleVendu Article;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date dateEnchere;
     private int montantEnchere;
 
@@ -35,8 +37,8 @@ public class Enchere {
         return Article;
     }
 
-    public void setArticle(ArticleVendu noArticle) {
-        this.Article = noArticle;
+    public void setArticle(ArticleVendu article) {
+        this.Article = article;
     }
 
     public Date getDateEnchere() {

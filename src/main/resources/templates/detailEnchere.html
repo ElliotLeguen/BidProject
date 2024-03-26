@@ -1,10 +1,49 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html"
+      data-th-replace="~{layouts/layout :: layout-encheres(
+					titrePage=~{:: title},
+					contenuPage=~{:: main},
+					ressourcesSupp=~{:: #resources-css})}">
+
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <!-- Accueil comme titre de page -->
+    <title data-th-text="#{index.title}"></title>
+    <th:block id="resources-css">
+        <link rel="stylesheet" data-th-href="@{/css/login.css}"/>
+    </th:block>
 </head>
 <body>
-<h1>Détail enchère</h1>
+<main class="center-main">
+    <!--/*@thymesVar id="articleVendu" type="articleVendu"*/-->
+    <p type="text" id="nom_article" name="nom_article" th:text="*{articleVendu.getNomArticle()}" ></p><br>
+
+    <label for="description">Description:</label>
+    <p id="description" name="description" rows="4" cols="50" required th:text="*{articleVendu.getDescription()}"></p><br>
+
+    <label for="categorie">Categorie:</label>
+    <p type="text" name="categorie" id="categorie" th:text="*{articleVendu.getCategorie().libelle}"></p><br>
+
+    <label for="prix_initial">Mise à prix :</label>
+    <p id="prix_initial" name="prix_initial" th:text="*{articleVendu.getPrixInitial()}"></p><br>
+
+    <label for="date_fin_encheres">Date de fin des enchères:</label>
+    <p type="date" id="date_fin_encheres" name="date_fin_encheres" required  th:text="*{articleVendu.getDateFinEncheres()}"></p><br>
+    <h4>Informations de retrait</h4>
+    <p type="text" id="rue" name="rue" required th:text="${articleVendu.getUtilisateur().getRue()} "></p>
+    <p type="text" id="code_postal" th:text="${articleVendu.getUtilisateur().getCodePostal()} + ' ' + ${articleVendu.getUtilisateur().getVille()}"></p><br>
+        <p id="vendeur" name="prix_initial" th:text="*{articleVendu.getUtilisateur().getPseudo()}"></p><br>
+    <form
+            method="post"
+            role="form"
+            th:action="@{/encherir}"
+            th:object="${enchere}"
+    >
+        <input th:field="*{article.noArticle}" />
+        <input th:field="*{utilisateur.noUtilisateur}" />
+        <input th:field="*{dateEnchere}" />
+    <input id="ticketNum" type="number" name="ticketNum" th:field="*{montantEnchere}" />
+        <input type="submit" value="Encherir" />
+    </form>
+</main>
 </body>
 </html>

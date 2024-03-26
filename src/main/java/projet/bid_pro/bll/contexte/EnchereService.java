@@ -9,7 +9,7 @@ import java.util.List;
 public interface EnchereService {
     List<Enchere> consulterEncheres();
     Enchere consulterEnchereParId(long id);
-    void creerEnchere(ArticleVendu articleVendu);
+    void creerEnchere(Enchere enchere);
     List<Enchere> consulterEncheresParNomArticle(String nomArticle);
     void creerArticle(ArticleVendu articleVendu);
 
