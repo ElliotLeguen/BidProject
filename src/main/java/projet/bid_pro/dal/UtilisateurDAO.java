@@ -10,6 +10,8 @@ public interface UtilisateurDAO {
 
 	Utilisateur read(String email);
 
+	Utilisateur getByPseudo(String pseudo);
+
 	Utilisateur ajouterUtilisateur(Utilisateur utilisateur);
 
 	Utilisateur edit(Utilisateur utilisateur);
@@ -21,4 +23,12 @@ public interface UtilisateurDAO {
 	void changeEtat (int id);
 
 	void ajouterCredit(Utilisateur utilisateur);
+
+	Utilisateur findByResetPasswordToken(String token);
+
+	void updatePassword(Utilisateur utilisateur, String newPassword);
+
+	void updateResetPasswordToken(String token,String email);
+
+
 }

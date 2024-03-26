@@ -19,6 +19,7 @@
         <tr>
             <th>Prénom</th>
             <th>Nom</th>
+            <th>modifier</th>
             <th>Supprimer</th>
             <!-- Ajoutez d'autres en-têtes de colonne si nécessaire -->
         </tr>
@@ -27,6 +28,11 @@
         <tr data-th-each="categorie : ${categories}">
             <td data-th-text="${categorie.getNoCategorie()}"></td>
             <td data-th-text="${categorie.getLibelle()}"></td>
+            <td>
+                <a th:href="@{'/categorieCategorie?idCategorie=' + ${categorie.getNoCategorie()}}">
+                    <span>Modifier</span>
+                </a>
+            </td>
             <td>
                 <a th:href="@{'/utilisateurSupprimer?idUtilisateur=' + ${categorie.getNoCategorie()}}">
                     <span>Supprimer</span>
