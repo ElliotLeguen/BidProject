@@ -11,4 +11,7 @@ public interface CategoriesDAO {
     List<Categorie> consulterEncheresParCategorie(String nomCategorie);
 
     Categorie readById(int id);
+    Categorie edit(Categorie categorie);
+    void delete(int id);
+
 }

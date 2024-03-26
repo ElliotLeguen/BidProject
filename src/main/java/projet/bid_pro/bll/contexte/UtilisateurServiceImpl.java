@@ -21,6 +21,11 @@ public class UtilisateurServiceImpl implements UtilisateurService {
 	}
 
 	@Override
+	public Utilisateur chargerParPseudo(String pseudo) {
+		return utilisateurDAO.getByPseudo(pseudo);
+	}
+
+	@Override
 	public Utilisateur charger(int id) {
 		return utilisateurDAO.read(id);
 	}
@@ -53,6 +58,21 @@ public class UtilisateurServiceImpl implements UtilisateurService {
 	@Override
 	public void ajouterCredit(Utilisateur utilisateur) {
 		utilisateurDAO.ajouterCredit(utilisateur);
+	}
+
+	@Override
+	public Utilisateur findByResetPasswordToken(String token) {
+		return utilisateurDAO.findByResetPasswordToken(token);
+	}
+
+	@Override
+	public void updatePassword(Utilisateur utilisateur, String newPassword) {
+		utilisateurDAO.updatePassword(utilisateur,newPassword);
+	}
+
+	@Override
+	public void updateResetPasswordToken(String token, String email) {
+		utilisateurDAO.updateResetPasswordToken(token,email);
 	}
 
 

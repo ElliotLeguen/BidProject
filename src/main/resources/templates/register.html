@@ -25,7 +25,7 @@
                 <div class="col-md-6 mb-3">
                     <input class="form-control" id="pseudo" name="pseudo" placeholder="Enter pseudo" th:field="*{pseudo}" type="text"/>
                     <p th:errors="*{pseudo}" class="text-danger" th:if="${#fields.hasErrors('pseudo')}"></p>
-                </div>
+                 </div>
                 <div class="col-md-6 mb-3">
                     <input class="form-control" id="nom" name="nom" placeholder="Enter nom" th:field="*{nom}" type="text"/>
                     <p th:errors="*{nom}" class="text-danger" th:if="${#fields.hasErrors('nom')}"></p>

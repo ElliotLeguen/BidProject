@@ -6,17 +6,21 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.apache.tomcat.util.net.openssl.ciphers.Authentication;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.JdbcUserDetailsManager;
 import org.springframework.security.provisioning.UserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.rememberme.JdbcTokenRepositoryImpl;
+import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
 import org.springframework.web.servlet.LocaleResolver;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
@@ -28,6 +32,9 @@ import javax.sql.DataSource;
 @Configuration
 @EnableWebSecurity
 public class WebConfiguration implements WebMvcConfigurer {
+
+	@Autowired
+	private DataSource dataSource;
 	@Bean
 	LocaleResolver localeResolver() {
 		System.out.println("localeResolver");
@@ -80,16 +87,24 @@ public class WebConfiguration implements WebMvcConfigurer {
 		}).csrf(AbstractHttpConfigurer::disable);
 
 		//http.formLogin(Customizer.withDefaults());
-		http
-				.formLogin(form -> form
-						.loginPage("/login")
-						.defaultSuccessUrl("/verifActif")
-						.failureUrl("/login?loginError=true"))
-				.logout(logout -> logout
-						.logoutSuccessUrl("/")
-						.deleteCookies("JSESSIONID"));
+			http
+                    .formLogin(form -> form
+                            .loginPage("/login")
+                            .defaultSuccessUrl("/verifActif")
+                            .failureUrl("/login?loginError=true"))
+                    .logout(logout -> logout
+                            .logoutSuccessUrl("/")
+                            .deleteCookies("JSESSIONID"))
+					.rememberMe().tokenRepository(persistentTokenRepository());
 
-		return http.build();
+
+			return http.build();
+	}
+	@Bean
+	public PersistentTokenRepository persistentTokenRepository() {
+		JdbcTokenRepositoryImpl tokenRepo = new JdbcTokenRepositoryImpl();
+		tokenRepo.setDataSource(dataSource);
+		return tokenRepo;
 	}
 	@Bean
 	public PasswordEncoder passwordEncoder() {
@@ -101,5 +116,6 @@ public class WebConfiguration implements WebMvcConfigurer {
 		// Rediriger l'utilisateur vers la route /verifEtat après une connexion réussie
 		response.sendRedirect("/verifEtat");
 	}
+
 
 }

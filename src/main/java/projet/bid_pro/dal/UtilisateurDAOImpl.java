@@ -18,11 +18,16 @@ import projet.bid_pro.bo.Utilisateur;
 public class UtilisateurDAOImpl implements UtilisateurDAO {
     private final String FIND_BY_ID = "SELECT * from UTILISATEURS WHERE no_utilisateur = :no_utilisateur";
     private final String FIND_ALL = "SELECT * from UTILISATEURS";
-    private final String FIND_BY_EMAIL = "SELECT * from UTILISATEURS "
-            + " WHERE email = :email";
+    private final String FIND_BY_EMAIL = "SELECT * from UTILISATEURS " + " WHERE email = :email";
+
+    private final String FIND_BY_PSEUDO = "SELECT * from UTILISATEURS " + " WHERE pseudo = :pseudo";
+    private final String FIND_BY_TOKEN = "SELECT * from UTILISATEURS " + " WHERE reset_password_token = :reset_password_token";
+
     private final String AJOUTER_UTILISATEUR = "INSERT INTO UTILISATEURS (pseudo, nom, prenom, email, telephone, rue, code_postal, ville, mot_de_passe, credit, administrateur) VALUES (:pseudo, :nom, :prenom, :email, :telephone, :rue, :codePostal, :ville, :motDePasse, :credit, :administrateur);";
 
     private final String MODIFIER_UTILISATEUR = "UPDATE UTILISATEURS SET pseudo = :pseudo, nom = :nom, prenom = :prenom, email = :email, telephone = :telephone, rue = :rue, code_postal = :codePostal, ville = :ville, mot_de_passe = :mot_de_passe WHERE no_utilisateur = :no_utilisateur";
+    private final String MODIFIER_PASSWORD = "UPDATE UTILISATEURS SET mot_de_passe = :mot_de_passe WHERE no_utilisateur = :no_utilisateur";
+    private final String MODIFIER_UTILISATEUR_TOKEN = "UPDATE UTILISATEURS SET reset_password_token = :reset_password_token WHERE email = :email";
 
     private final String SUPPRIMER_ENCHERES = "DELETE FROM ENCHERES WHERE no_article IN (SELECT no_article FROM ARTICLES_VENDUS WHERE no_utilisateur = :no_utilisateur)";
 
@@ -49,6 +54,13 @@ public class UtilisateurDAOImpl implements UtilisateurDAO {
         MapSqlParameterSource namedParameters = new MapSqlParameterSource();
         namedParameters.addValue("email", email);
         return jdbcTemplate.queryForObject(FIND_BY_EMAIL, namedParameters, new UtilisateurRowMapper());
+    }
+
+    @Override
+    public Utilisateur getByPseudo(String pseudo) {
+        MapSqlParameterSource namedParameters = new MapSqlParameterSource();
+        namedParameters.addValue("pseudo", pseudo);
+        return jdbcTemplate.queryForObject(FIND_BY_PSEUDO, namedParameters, new UtilisateurRowMapper());
     }
 
     @Override
@@ -141,6 +153,36 @@ public class UtilisateurDAOImpl implements UtilisateurDAO {
 
         jdbcTemplate.update(AJOUTER_CREDIT, namedParameters);
     }
+
+    @Override
+    public Utilisateur findByResetPasswordToken(String token) {
+        MapSqlParameterSource namedParameters = new MapSqlParameterSource();
+        namedParameters.addValue("reset_password_token", token);
+        return jdbcTemplate.queryForObject(FIND_BY_TOKEN, namedParameters, new UtilisateurRowMapper());
+    }
+
+    @Override
+    public void updatePassword(Utilisateur utilisateur, String newPassword) {
+        MapSqlParameterSource namedParameters = new MapSqlParameterSource();
+        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+        String motDePasseEncode = encoder.encode(newPassword);
+        namedParameters.addValue("no_utilisateur", utilisateur.getNoUtilisateur());
+        namedParameters.addValue("mot_de_passe", motDePasseEncode);
+        jdbcTemplate.update(MODIFIER_PASSWORD, namedParameters);
+
+    }
+    @Override
+    public void updateResetPasswordToken(String token, String email) {
+        MapSqlParameterSource namedParameters = new MapSqlParameterSource();
+        namedParameters.addValue("email", email);
+        Utilisateur utilisateur = jdbcTemplate.queryForObject(FIND_BY_EMAIL, namedParameters, new UtilisateurRowMapper());
+        if (utilisateur != null) {
+            namedParameters.addValue("reset_password_token", token);
+            jdbcTemplate.update(MODIFIER_UTILISATEUR_TOKEN, namedParameters);
+        }
+    }
+
+
 
     /**
      * Classe de mapping pour gérer les noms des colonnes

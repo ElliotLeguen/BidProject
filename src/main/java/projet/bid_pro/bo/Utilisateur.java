@@ -53,6 +53,8 @@ public class Utilisateur {
     private String administrateur;
 
     private byte etat;
+
+    private String reset_password_token;
     public Utilisateur() {
 
     }
@@ -213,6 +215,14 @@ public class Utilisateur {
 
     public void setEtat(byte etat) {
         this.etat = etat;
+    }
+
+    public String getReset_password_token() {
+        return reset_password_token;
+    }
+
+    public void setReset_password_token(String reset_password_token) {
+        this.reset_password_token = reset_password_token;
     }
 
     @Override

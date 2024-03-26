@@ -7,6 +7,7 @@ import projet.bid_pro.bo.Utilisateur;
 import java.util.List;
 public interface UtilisateurService {
 	Utilisateur charger(String email);
+	Utilisateur chargerParPseudo(String pseudo);
 	Utilisateur charger(int id);
 
 	Utilisateur register(Utilisateur utilisateur);
@@ -19,4 +20,10 @@ public interface UtilisateurService {
 	void changeEtat(int id);
 
 	void ajouterCredit(Utilisateur utilisateur);
+
+	public Utilisateur findByResetPasswordToken(String token);
+
+	public void updatePassword(Utilisateur utilisateur, String newPassword);
+
+	void updateResetPasswordToken(String token,String email);
 }
