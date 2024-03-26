@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import projet.bid_pro.bll.contexte.*;
 import projet.bid_pro.bo.ArticleVendu;
+import projet.bid_pro.bo.Enchere;
 
 import java.awt.print.Pageable;
 import java.security.Principal;
@@ -16,19 +17,21 @@ import java.util.List;
 
 import org.springframework.web.bind.annotation.*;
 import projet.bid_pro.bo.Categorie;
+import projet.bid_pro.dal.EnchereDAO;
 
 @Controller
 @SessionAttributes({"UtilisateurEnSession"})
 public class ArticleController {
-    private ArticleService articleService;
-    private UtilisateurService utilisateurService;
+	private ArticleService articleService;
+	private UtilisateurService utilisateurService;
     private CategorieService categorieService;
-
-    public ArticleController(ArticleService articleService, UtilisateurService utilisateurService, CategorieService categorieService) {
-        this.articleService = articleService;
-        this.utilisateurService = utilisateurService;
+    private  EnchereService enchereService;
+    public ArticleController(ArticleService articleService, UtilisateurService utilisateurService, CategorieService categorieService, EnchereService enchereService) {
+		this.articleService = articleService;
+		this.utilisateurService = utilisateurService;
         this.categorieService = categorieService;
-    }
+        this.enchereService = enchereService;
+	}
 
     @GetMapping("/article")
     public String afficherEncheres(Model model, Principal principal) {
@@ -46,28 +49,32 @@ public class ArticleController {
         return "redirect:/article";
     }
 
-    @GetMapping("/gestionCategorie")
-    public String gestionCategorie(Model model) {
-        List<Categorie> categories = categorieService.consulterCategories();
-        model.addAttribute("categories", categories);
-        return "admin/gestionCategorie";
-    }
-
-    @GetMapping("/detail")
-    public String afficherUneEnchere(@RequestParam(name = "id", required = true) long id, Model model) {
-        if (id > 0) {
-            ArticleVendu articleVendu = articleService.consulterArticleParId(id);
-            if (articleVendu != null) {
-                model.addAttribute("articleVendu", articleVendu); // Correction de la variable ajoutée au modèle
+	@GetMapping("/gestionCategorie")
+	public String gestionCategorie(Model model) {
+		List<Categorie> categories = categorieService.consulterCategories();
+		model.addAttribute("categories", categories);
+		return "admin/gestionCategorie";
+	}
+	@GetMapping("/detail")
+	public String afficherUneEnchere(@RequestParam(name = "id", required = true) long id, Model model, Principal principal) {
+		if (id > 0) {
+			ArticleVendu articleVendu = articleService.consulterArticleParId(id);
+			if (articleVendu != null) {
+                Enchere enchere = new Enchere();
+                enchere.setMontantEnchere(articleVendu.getPrixInitial());
+                model.addAttribute("enchere", enchere);
+				model.addAttribute("articleVendu", articleVendu);
+                model.addAttribute("utilisteur", (utilisateurService.charger(principal.getName())));
                 return "detailEnchere"; // Correction de l'alias de la vue
-            } else {
-                System.out.println("Enchère inconnue!!");
-            }
-        } else {
-            System.out.println("Identifiant inconnu");
-        }
-        return "redirect:/encheres/encheres"; // Redirection vers la page d'accueil des enchères
-    }
+			} else {
+				System.out.println("Enchère inconnue!!");
+			}
+		} else {
+			System.out.println("Identifiant inconnu");
+		}
+		return "redirect:/encheres/encheres"; // Redirection vers la page d'accueil des enchères
+	}
+
 
     @GetMapping("/encheres")
     public String afficherEncheres(HttpServletRequest request,

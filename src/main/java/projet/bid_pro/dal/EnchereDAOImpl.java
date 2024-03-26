@@ -1,6 +1,7 @@
 package projet.bid_pro.dal;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
@@ -13,6 +14,7 @@ import projet.bid_pro.bo.Categorie;
 import projet.bid_pro.bo.Enchere;
 import projet.bid_pro.bo.Utilisateur;
 
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -32,11 +34,13 @@ public class EnchereDAOImpl implements EnchereDAO{
 
     @Override
     public Enchere read(long id) {
-        String FIND_BY_ID = "SELECT * FROM ENCHERES " +
-                " INNER JOIN UTILISATEURS ON UTILISATEURS.no_utilisateur = ENCHERES.no_utilisateur" +
-                " INNER JOIN ARTICLES_VENDUS ON articleVendu.no_article = ENCHERES.no_article"+
-                " WHERE ENCHERES.no_article = ? ";
-        return jdbcTemplate.queryForObject(FIND_BY_ID,new Object[]{id}, new EnchereRowMapper());
+        String FIND_BY_ID = "SELECT * FROM ENCHERES INNER JOIN UTILISATEURS ON UTILISATEURS.no_utilisateur = ENCHERES.no_utilisateur \n" +
+                "INNER JOIN ARTICLES_VENDUS on ARTICLES_VENDUS.no_article = ENCHERES.no_article WHERE ENCHERES.no_article = ? ";
+        try {
+            return jdbcTemplate.queryForObject(FIND_BY_ID, new Object[]{id},new EnchereRowMapper());
+        } catch (EmptyResultDataAccessException e) {
+            return null;
+        }
     }
     @Override
     public List<Enchere> findAll() {
@@ -49,22 +53,25 @@ public class EnchereDAOImpl implements EnchereDAO{
     }
 
     @Override
-    public ArticleVendu creationEnchere(ArticleVendu articleVendu) {
-        String sql ="INSERT INTO ARTICLES_VENDUS (no_utilisateur, no_article, date_enchere, montant_enchere) " +
+    public Enchere creationEnchere(Enchere enchere) {
+        String sql ="INSERT INTO ENCHERES (no_utilisateur, no_article, date_enchere, montant_enchere)" +
                 "VALUES (?, ?, ?, ?)";
-        KeyHolder keyHolder = new GeneratedKeyHolder();
         jdbcTemplate.update( connection -> {
             PreparedStatement ps = connection.prepareStatement(sql, new String[]{"ID"});
-                ps.setInt(1,articleVendu.getUtilisateur().getNoUtilisateur());
-                ps.setInt(2,articleVendu.getNoArticle());
-                ps.setDate(3, new java.sql.Date(articleVendu.getDateFinEncheres().getTime()));
-                ps.setInt(4, articleVendu.getPrixInitial());
+                ps.setInt(1,enchere.getUtilisateur().getNoUtilisateur());
+                ps.setInt(2,enchere.getArticle().getNoArticle());
+                ps.setDate(3,new Date(enchere.getDateEnchere().getTime()));
+                ps.setInt(4, enchere.getMontantEnchere());
                 return ps;
-            }, keyHolder);
-        if (keyHolder.getKey() != null) {
-            articleVendu.setNoArticle(keyHolder.getKey().intValue());
-        }
-        return articleVendu;
+            });
+        return enchere;
+    }
+
+    @Override
+    public Enchere updateEnchere(Enchere enchere) {
+        String sql = "UPDATE ENCHERES SET montant_enchere = ? WHERE no_article = ?";
+        jdbcTemplate.update(sql, enchere.getMontantEnchere(), enchere.getArticle().getNoArticle());
+        return enchere;
     }
 
     public class EnchereRowMapper implements RowMapper<Enchere> {

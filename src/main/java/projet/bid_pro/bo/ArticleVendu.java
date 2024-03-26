@@ -17,6 +17,15 @@ public class ArticleVendu {
     private Integer prixVente;
     private Utilisateur utilisateur;
     private Categorie categorie;
+
+    public List<Enchere> getEnchereList() {
+        return enchereList;
+    }
+
+    public void setEnchereList(List<Enchere> enchereList) {
+        this.enchereList = enchereList;
+    }
+
     private List<Enchere> enchereList;
     private String image;
 
