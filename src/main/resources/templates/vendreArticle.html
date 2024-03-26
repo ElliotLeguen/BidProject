@@ -8,8 +8,8 @@
 <link rel="stylesheet" th:href="@{/css/styles.css}">
 
 <th:block id="ressources-css">
-    <link rel="stylesheet" data-th-href="@{/css/demo-form.css}" />
-    <link rel="stylesheet" data-th-href="@{/css/demo-error.css}" />
+    <link rel="stylesheet" data-th-href="@{/css/demo-form.css}"/>
+    <link rel="stylesheet" data-th-href="@{/css/demo-error.css}"/>
     <link rel="stylesheet" data-th-href="@{/css/styles.css}">
 </th:block>
 <main>
@@ -17,66 +17,73 @@
         <h1>Nouvelle Vente</h1>
         <table>
             <tbody>
-            <form
-                    method="post"
-                    role="form"
-                    th:action="@{/soumettre}"
-                    th:object="${article}"
-            >
-            <label for="nom_article">Nom de l'article:</label><br>
-            <input type="text" id="nom_article" name="nom_article" th:field="*{nomArticle}" required ><br>
+            <form method="post" role="form" th:action="@{/soumettre}" enctype="multipart/form-data" th:object="${article}">
+                <label for="nom_article">Nom de l'article:</label><br>
+                <input type="text" id="nom_article" name="nom_article" th:field="*{nomArticle}" required><br>
 
-            <label for="description">Description:</label><br>
-            <textarea id="description" name="description" rows="4" cols="50" required th:field="*{description}"></textarea><br>
-        <select th:field="*{categorie.noCategorie}">
-            <option th:each="categorie : ${categories}" th:value="${categorie.getNoCategorie()}" th:text="${categorie.getLibelle()}" th:field="*{categorie.noCategorie}"></option>
-        </select>
-        <br>
-        <br>
+                <label for="description">Description:</label><br>
+                <textarea id="description" name="description" rows="4" cols="50" required
+                          th:field="*{description}"></textarea><br>
+                <label>
+                    <select th:field="*{categorie.noCategorie}">
+                        <option th:each="categorie : ${categories}" th:value="${categorie.getNoCategorie()}"
+                                th:text="${categorie.getLibelle()}" th:field="*{categorie.noCategorie}"></option>
+                    </select>
+                </label>
+                <br><br>
 
-            <label for="prix_initial">Prix initial:</label><br>
-            <select id="prix_initial" name="prix_initial" th:field="*{prixInitial}">
-                <!-- Options pour les prix initial générées dynamiquement par JavaScript -->
-            </select><br>
+                    <p th:text="${message}" th:if="${message ne null}" class="alert alert-primary"></p>
+                        <div class="form-group">
+                            <input type="file" name="image" id="image" accept="image/*" class="form-control-file">
+                        </div>
+                    <span th:if="${msg != null}" th:text="${msg}"></span>
 
-            <label for="date_debut_encheres">Date de début des enchères:</label><br>
-            <input type="date" id="date_debut_encheres" name="date_debut_encheres" required th:field="*{dateDebutEncheres}"><br>
+                <br>
+                <label for="prix_initial">Prix initial:</label><br>
+                <select id="prix_initial" name="prix_initial" th:field="*{prixInitial}">
+                    <!-- Options pour les prix initial générées dynamiquement par JavaScript -->
+                </select><br>
 
-            <label for="date_fin_encheres">Date de fin des enchères:</label><br>
-            <input type="date" id="date_fin_encheres" name="date_fin_encheres" required  th:field="*{dateFinEncheres}"><br>
+                <label for="date_debut_encheres">Date de début des enchères:</label><br>
+                <input type="date" id="date_debut_encheres" name="date_debut_encheres" required
+                       th:field="*{dateDebutEncheres}"><br>
 
-            <br>
+                <label for="date_fin_encheres">Date de fin des enchères:</label><br>
+                <input type="date" id="date_fin_encheres" name="date_fin_encheres" required
+                       th:field="*{dateFinEncheres}"><br>
 
-            <h3>Informations de retrait</h3>
-            <label for="rue">Rue:</label><br>
-            <input type="text" id="rue" name="rue" required th:field="${userEdit.rue}"><br>
+                <br>
 
-            <label for="code_postal">Code postal:</label><br>
-            <input type="text" id="code_postal" name="code_postal" required th:field="${userEdit.codePostal}"><br>
+                <h3>Informations de retrait</h3>
+                <label for="rue">Rue:</label><br>
+                <input type="text" id="rue" name="rue" required th:field="${userEdit.rue}"><br>
 
-            <label for="ville">Ville:</label><br>
-            <input type="text" id="ville" name="ville" required th:field="${userEdit.ville}"><br><br>
-            <input type="submit" value="Soumettre" >
-            <input type="submit" value="enregister">
-            <input type="submit" value="annuler">
-        </form>
-        <script>
-            // Générer les options pour la liste déroulante du prix initial
-            var selectPrixInitial = document.getElementById("prix_initial");
+                <label for="code_postal">Code postal:</label><br>
+                <input type="text" id="code_postal" name="code_postal" required th:field="${userEdit.codePostal}"><br>
 
-            for (var prix = 0; prix <= 100000; prix += 5 ) {
-                var option = document.createElement("option");
-                option.text = prix;
-                option.value = prix;
-                selectPrixInitial.appendChild(option);
+                <label for="ville">Ville:</label><br>
+                <input type="text" id="ville" name="ville" required th:field="${userEdit.ville}"><br><br>
+                <input type="submit" value="Soumettre">
+                <input type="submit" value="enregister">
+                <input type="submit" value="annuler">
+            </form>
+            <script>
+                // Générer les options pour la liste déroulante du prix initial
+                var selectPrixInitial = document.getElementById("prix_initial");
 
-                var currentDate = new Date();
-                var currentDateString = currentDate.toISOString().split('T')[0]; // Format YYYY-MM-DD
+                for (var prix = 0; prix <= 100000; prix += 5) {
+                    var option = document.createElement("option");
+                    option.text = prix;
+                    option.value = prix;
+                    selectPrixInitial.appendChild(option);
 
-                document.getElementById("date_debut_encheres").value = currentDateString;
-                document.getElementById("date_fin_encheres").value = currentDateString;
-            }
-        </script>
+                    var currentDate = new Date();
+                    var currentDateString = currentDate.toISOString().split('T')[0]; // Format YYYY-MM-DD
+
+                    document.getElementById("date_debut_encheres").value = currentDateString;
+                    document.getElementById("date_fin_encheres").value = currentDateString;
+                }
+            </script>
             </tbody>
         </table>
     </div>

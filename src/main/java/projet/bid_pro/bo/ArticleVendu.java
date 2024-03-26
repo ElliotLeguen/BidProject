@@ -27,6 +27,7 @@ public class ArticleVendu {
     }
 
     private List<Enchere> enchereList;
+    private String image;
 
     // Constructeur
     public ArticleVendu(int noArticle, String nomArticle, String description, Date dateDebutEncheres,
@@ -45,6 +46,10 @@ public class ArticleVendu {
 
     public ArticleVendu() {
 
+    }
+
+    public ArticleVendu(String image) {
+        this.image = image;
     }
 
     // Getters et Setters
@@ -118,6 +123,14 @@ public class ArticleVendu {
 
     public void setCategorie(Categorie Categorie) {
         this.categorie = Categorie;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 
     @Override

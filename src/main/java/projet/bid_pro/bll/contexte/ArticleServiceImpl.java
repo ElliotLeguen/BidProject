@@ -1,14 +1,10 @@
 package projet.bid_pro.bll.contexte;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
-import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Service;
 import projet.bid_pro.bo.ArticleVendu;
-import projet.bid_pro.bo.Categorie;
-import projet.bid_pro.bo.Enchere;
 import projet.bid_pro.dal.*;
 
+import java.awt.print.Pageable;
 import java.util.List;
 
 @Service
@@ -23,7 +19,7 @@ public class ArticleServiceImpl implements ArticleService{
 
     @Override
     public List<ArticleVendu> getVentes(String rqt) {
-        return articleDAO.getArticles(rqt);
+    return articleDAO.getArticles(rqt);
     }
 
     @Override
