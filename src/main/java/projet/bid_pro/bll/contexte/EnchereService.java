@@ -12,5 +12,7 @@ public interface EnchereService {
     void creerEnchere(Enchere enchere);
     List<Enchere> consulterEncheresParNomArticle(String nomArticle);
     void creerArticle(ArticleVendu articleVendu);
+    Enchere isNotAlreadyExisting(long idArticleVendu);
 
+    void updateEnchere(Enchere enchere);
 }

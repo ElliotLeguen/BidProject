@@ -22,12 +22,14 @@ import projet.bid_pro.dal.EnchereDAO;
 @SessionAttributes({ "UtilisateurEnSession" })
 public class ArticleController {
 	private ArticleService articleService;
-	private  UtilisateurService utilisateurService;
+	private UtilisateurService utilisateurService;
     private CategorieService categorieService;
-    public ArticleController(ArticleService articleService, UtilisateurService utilisateurService, CategorieService categorieService) {
+    private  EnchereService enchereService;
+    public ArticleController(ArticleService articleService, UtilisateurService utilisateurService, CategorieService categorieService, EnchereService enchereService) {
 		this.articleService = articleService;
 		this.utilisateurService = utilisateurService;
         this.categorieService = categorieService;
+        this.enchereService = enchereService;
 	}
 
 	@GetMapping("/article")
@@ -59,12 +61,9 @@ public class ArticleController {
 			if (articleVendu != null) {
                 Enchere enchere = new Enchere();
                 enchere.setMontantEnchere(articleVendu.getPrixInitial());
-                java.util.Date date = new java.util.Date();
-                enchere.setDateEnchere(date);
-                enchere.setUtilisateur(utilisateurService.charger(principal.getName()));
-                enchere.setArticle(articleVendu);
                 model.addAttribute("enchere", enchere);
 				model.addAttribute("articleVendu", articleVendu);
+                model.addAttribute("utilisteur", (utilisateurService.charger(principal.getName())));
                 return "detailEnchere"; // Correction de l'alias de la vue
 			} else {
 				System.out.println("Enchère inconnue!!");
@@ -74,6 +73,7 @@ public class ArticleController {
 		}
 		return "redirect:/encheres/encheres"; // Redirection vers la page d'accueil des enchères
 	}
+
 
     @GetMapping("/encheres")
     public String afficherEncheres(HttpServletRequest request,

@@ -10,4 +10,5 @@ public interface EnchereDAO {
     List<Enchere> findAll();
     List<Enchere> consulterEncheresParNomArticle(String nomArticle);
     Enchere creationEnchere(Enchere enchere);
+    Enchere updateEnchere(Enchere enchere);
 }

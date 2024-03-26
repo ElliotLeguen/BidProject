@@ -14,7 +14,7 @@
 </head>
 <body>
 <main class="center-main">
-    <!--/*@thymesVar id="articleVendu" type="articleVendu"*/-->
+    <form action="/encherir" method="post">
     <p type="text" id="nom_article" name="nom_article" th:text="*{articleVendu.getNomArticle()}" ></p><br>
 
     <label for="description">Description:</label>
@@ -32,17 +32,10 @@
     <p type="text" id="rue" name="rue" required th:text="${articleVendu.getUtilisateur().getRue()} "></p>
     <p type="text" id="code_postal" th:text="${articleVendu.getUtilisateur().getCodePostal()} + ' ' + ${articleVendu.getUtilisateur().getVille()}"></p><br>
         <p id="vendeur" name="prix_initial" th:text="*{articleVendu.getUtilisateur().getPseudo()}"></p><br>
-    <form
-            method="post"
-            role="form"
-            th:action="@{/encherir}"
-            th:object="${enchere}"
-    >
-        <input th:field="*{article.noArticle}" />
-        <input th:field="*{utilisateur.noUtilisateur}" />
-        <input th:field="*{dateEnchere}" />
-    <input id="ticketNum" type="number" name="ticketNum" th:field="*{montantEnchere}" />
-        <input type="submit" value="Encherir" />
+    <input hidden id="articleVendu" name="articleVendu" th:field="*{articleVendu.noArticle}" />
+        <input hidden id="utilisteur" name="utilisteur" th:field="*{utilisteur.noUtilisateur}" />
+        <input id="ticketNum" type="number" name="ticketNum" th:field="*{enchere.montantEnchere}" />
+        <input type="submit" value="articleVendu" />
     </form>
 </main>
 </body>

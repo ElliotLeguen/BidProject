@@ -50,4 +50,14 @@ public class EnchereServiceImpl implements EnchereService{
     public void creerArticle(ArticleVendu articleVendu){
         articleDAO.creerArticle(articleVendu);
     }
+
+    @Override
+    public Enchere isNotAlreadyExisting(long articleVendu) {
+        return enchereDAO.read(articleVendu);
+    }
+
+    @Override
+    public void updateEnchere(Enchere enchere) {
+        enchereDAO.updateEnchere(enchere);
+    }
 }

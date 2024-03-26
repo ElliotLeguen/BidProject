@@ -47,12 +47,24 @@ public class EnchereController {
 
     @PostMapping("/encherir")
     public String encherir(@ModelAttribute(name = "enchere") Enchere enchere,
-                           @ModelAttribute(name = "utilisateur")Utilisateur utilisateur,
-                           @ModelAttribute(name = "article") ArticleVendu articleVendu) {
-        enchere.setUtilisateur(utilisateurService.charger(utilisateur.getNoUtilisateur()));
-        enchere.setArticle(articleService.consulterArticleParId(articleVendu.getNoArticle()));
-        enchereService.creerEnchere(enchere);
+                           @ModelAttribute(name = "articleVendu") ArticleVendu articleVendu,
+                           @ModelAttribute(name = "utilisateur") Utilisateur utilisateur){
+        consultaionEnchere(articleVendu, utilisateur, enchere);
         return "encherir";
+    }
+
+    private void consultaionEnchere(ArticleVendu articleVendu, Utilisateur utilisateur, Enchere enchere){
+        if (enchereService.isNotAlreadyExisting(articleVendu.getNoArticle()) == null){
+            enchere.setDateEnchere(new java.util.Date());
+            enchere.setMontantEnchere(enchere.getMontantEnchere());
+            enchere.setUtilisateur(utilisateurService.charger(utilisateur.getNoUtilisateur()));
+            enchere.setArticle(articleService.consulterArticleParId(articleVendu.getNoArticle()));
+            enchereService.creerEnchere(enchere);
+        }else{
+            Enchere enchereS = (enchereService.consulterEnchereParId(articleVendu.getNoArticle()));
+            enchereS.setMontantEnchere(enchere.getMontantEnchere());
+            enchereService.updateEnchere(enchereS);
+        }
     }
 }
 
