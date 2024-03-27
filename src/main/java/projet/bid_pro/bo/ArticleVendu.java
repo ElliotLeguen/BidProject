@@ -1,5 +1,7 @@
 package projet.bid_pro.bo;
 
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
@@ -7,6 +9,7 @@ import java.util.List;
 
 public class ArticleVendu {
     private int noArticle;
+
     private String nomArticle;
     private String description;
     @DateTimeFormat(pattern = "yyyy-MM-dd")

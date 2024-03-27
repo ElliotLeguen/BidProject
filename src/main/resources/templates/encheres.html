@@ -11,6 +11,7 @@
     <th:block id="resources-css">
         <link rel="stylesheet" data-th-href="@{/css/encheres.css}"/>
     </th:block>
+
 </head>
 <body>
 <main>
@@ -52,6 +53,18 @@
             </div>
             <button>Rechercher</button>
             <script>
+                window.onload = onPageLoad();
+
+                function onPageLoad() {
+                    document.getElementById("radioAchats").checked = true;
+                    document.getElementById("checkboxAchatsEnchereOuverte").checked = true;
+                }
+                document.getElementById("radioVentes").onclick = function() {
+                    document.getElementById("checkboxVentesVentesNonDebutees").checked = true;
+                }
+                document.getElementById("radioAchats").onclick = function() {
+                    document.getElementById("checkboxAchatsEnchereOuverte").checked = true;
+                }
                 const radioAchats = document.getElementById('radioAchats');
                 const radioVentes = document.getElementById('radioVentes');
 
@@ -129,9 +142,43 @@
             </script>
         </form>
     </div>
-    <div class="card-container">
-        <div class="card" data-th-each="article : ${article}" th:if="${param.nomArticle == null or article.nomArticle.contains(param.nomArticle)}">
-            <u><a th:href="@{/detail(id=${article.noArticle})}"><span data-th-text="${article.getNomArticle()}"></span></a></u>
+    <div class="row card-container"  style="margin-bottom: 40px; width: 1580px">
+        <!-- Boucle sur chaque article pour créer une carte -->
+        <div class="col-4" data-th-each="article : ${articles}"  th:if="${param.nomArticle == null or article.nomArticle.contains(param.nomArticle)}" style="margin-bottom: 40px; width: 100px" >
+            <div class="card">
+                <div class="row no-gutters">
+                    <!-- Colonne pour l'image -->
+                    <div class="col-md-4" style="padding: 1em">
+                        <img th:src="@{images/logoENI.png}" class="card-img" alt="Image">
+                    </div>
+                    <!-- Colonne pour les informations -->
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <a th:if="${userEdit.noUtilisateur == article.utilisateur.noUtilisateur}"
+                               th:href="@{'/detailEdit?id=' + ${article.noArticle}}">
+                                <span th:text="${article.nomArticle}"></span>
+                            </a>
+                            <a th:unless="${userEdit.noUtilisateur == article.utilisateur.noUtilisateur}"
+                               th:href="@{'/detail?id=' + ${article.noArticle}}">
+                                <span th:text="${article.nomArticle}"></span>
+                            </a>
+                            <p class="card-text">Prix : <span data-th-text="${article.prixInitial}"></span> Points</p>
+                            <p class="card-text">Début de l'enchère: <span data-th-text="${article.dateDebutEncheres}"></span></p>
+                            <p class="card-text">Fin de l'enchère: <span data-th-text="${article.dateFinEncheres}"></span></p>
+                            <span>Vendeur: </span>
+                            <a th:href="@{'/profilEnchere?idUtilisateurEnchere=' + ${article.utilisateur.noUtilisateur}}">
+                                <span data-th-text="${article.utilisateur.prenom}"></span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Fin de la boucle -->
+    </div>
+
+        <!--<div class="card" data-th-each="article : ${article}" th:if="${param.nomArticle == null or article.nomArticle.contains(param.nomArticle)}">
+            <u><a th:href="@{/detail(id=${article.toString()})}"><span data-th-text="${article.getNomArticle()}"></span></a></u>
             <div><span>Prix : </span><span><span data-th-text="${article.getPrixInitial()}"></span> points</span></div>
             <div><span>Fin de l'enchère : </span><span data-th-text="${article.dateFinEncheres}"></span></div>
             <a th:href="@{'/profilEnchere?idUtilisateurEnchere=' + ${article.getUtilisateur().getNoUtilisateur()}}">
@@ -139,16 +186,10 @@
                 <span data-th-text="${article.getUtilisateur().getNom()}"></span>
             </a>
             <img th:src="@{images/logoENI.png}" alt="">
-        </div>
-    </div>
+        </div>!-->
 
-    <script th:inline="javascript">
-        /*<![CDATA[*/
-        var votreJson = /*[[${votreJson}]]*/ '[]'; // Accédez à votre JSON
-        // Maintenant vous pouvez manipuler votreJson comme vous le souhaitez
-        console.log(votreJson);
-        /*]]>*/
-    </script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </main>
 
 </body>

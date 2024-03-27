@@ -40,6 +40,34 @@
             <img th:src="@{images/logoENI.png}" alt="">
         </div>
     </div>
+    <div class="row card-container"  style="margin-bottom: 40px; width: 1580px">
+        <!-- Boucle sur chaque article pour créer une carte -->
+        <div class="col-4" data-th-each="enchere : ${encheres}"   th:if="${param.nomArticle == null or enchere.noArticle.getNomArticle().contains(param.nomArticle)}" style="margin-bottom: 40px; width: 100px" >
+            <div class="card">
+                <div class="row no-gutters">
+                    <!-- Colonne pour l'image -->
+                    <div class="col-md-4" style="padding: 1em">
+                        <img th:src="@{images/logoENI.png}" class="card-img" alt="Image">
+                    </div>
+                    <!-- Colonne pour les informations -->
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <p class="card-text">Fin de l'enchère: <span data-th-text="${enchere.article.nomArticle}"></span></p>
+                            <p class="card-text">Prix : <span data-th-text="${enchere.article.prixInitial}"></span> Points</p>
+                            <p class="card-text">Début de l'enchère: <span data-th-text="${enchere.article.dateDebutEncheres}"></span></p>
+                            <p class="card-text">Fin de l'enchère: <span data-th-text="${enchere.article.dateFinEncheres}"></span></p>
+                            <p class="card-text">Vendeur: <span data-th-text="${enchere.utilisateur.prenom}"></span></p>
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Fin de la boucle -->
+    </div>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </main>
 </body>
 </html>

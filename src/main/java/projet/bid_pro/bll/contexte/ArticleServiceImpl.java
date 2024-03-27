@@ -43,4 +43,9 @@ public class ArticleServiceImpl implements ArticleService{
         return articleDAO.read(id);
     }
 
+    @Override
+    public ArticleVendu EditArticle(ArticleVendu articleVendu) {
+        return articleDAO.editArticle(articleVendu);
+    }
+
 }
