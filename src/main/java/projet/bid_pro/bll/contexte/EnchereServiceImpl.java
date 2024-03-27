@@ -32,8 +32,8 @@ public class EnchereServiceImpl implements EnchereService{
     }
 
     @Override
-    public Enchere consulterEnchereParId(long id) {
-        return enchereDAO.read(id);
+    public Enchere consulterEnchereParId(long id, long idUtil) {
+        return enchereDAO.consulterEncheresParIdArticle(id, idUtil);
     }
 
     @Override
@@ -52,12 +52,12 @@ public class EnchereServiceImpl implements EnchereService{
     }
 
     @Override
-    public Enchere isNotAlreadyExisting(long articleVendu) {
-        return enchereDAO.read(articleVendu);
+    public void updateEnchere(Enchere enchere) {
+        enchereDAO.updateEnchere(enchere);
     }
 
     @Override
-    public void updateEnchere(Enchere enchere) {
-        enchereDAO.updateEnchere(enchere);
+    public Long consulterEnchereId(long id) {
+         return enchereDAO.read(id);
     }
 }

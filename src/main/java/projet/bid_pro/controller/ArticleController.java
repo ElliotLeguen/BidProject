@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import projet.bid_pro.bll.contexte.*;
@@ -56,7 +57,9 @@ public class ArticleController {
 		return "admin/gestionCategorie";
 	}
 	@GetMapping("/detail")
-	public String afficherUneEnchere(@RequestParam(name = "id", required = true) long id, Model model, Principal principal) {
+	public String afficherUneEnchere(@RequestParam(name = "id") long id,
+                                     Model model,
+                                     Principal principal) {
 		if (id > 0) {
 			ArticleVendu articleVendu = articleService.consulterArticleParId(id);
 			if (articleVendu != null) {

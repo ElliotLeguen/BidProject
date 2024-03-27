@@ -24,8 +24,8 @@ public class ArticleDAOImpl implements ArticleDAO{
 
     @Override
     public ArticleVendu creerArticle(ArticleVendu article) {
-        String sql = "INSERT INTO ARTICLES_VENDUS (nom_article, description, date_debut_encheres, date_fin_encheres, prix_initial, prix_vente, no_utilisateur, no_categorie, image) " +
-                "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO ARTICLES_VENDUS (nom_article, description, date_debut_encheres, date_fin_encheres, prix_initial, prix_vente, no_utilisateur, no_categorie) " +
+                "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
         KeyHolder keyHolder = new GeneratedKeyHolder();
         jdbcTemplate.update(
                 connection -> {
@@ -38,7 +38,6 @@ public class ArticleDAOImpl implements ArticleDAO{
             ps.setInt(6, article.getPrixVente() == null ? 0 : article.getPrixVente());
             ps.setInt(7, article.getUtilisateur().getNoUtilisateur());
             ps.setInt(8, article.getCategorie().getNoCategorie());
-            ps.setString(9, article.getImage());
                     return ps;
                 }, keyHolder);
         if (keyHolder.getKey() != null) {

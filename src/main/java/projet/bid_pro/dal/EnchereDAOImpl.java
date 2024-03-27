@@ -6,11 +6,8 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
-import org.springframework.jdbc.support.GeneratedKeyHolder;
-import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 import projet.bid_pro.bo.ArticleVendu;
-import projet.bid_pro.bo.Categorie;
 import projet.bid_pro.bo.Enchere;
 import projet.bid_pro.bo.Utilisateur;
 
@@ -18,7 +15,6 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.time.LocalDateTime;
 import java.util.List;
 
 @Repository
@@ -32,12 +28,29 @@ public class EnchereDAOImpl implements EnchereDAO{
     @Autowired
     private JdbcTemplate jdbcTemplate;
 
+
     @Override
-    public Enchere read(long id) {
-        String FIND_BY_ID = "SELECT * FROM ENCHERES INNER JOIN UTILISATEURS ON UTILISATEURS.no_utilisateur = ENCHERES.no_utilisateur \n" +
-                "INNER JOIN ARTICLES_VENDUS on ARTICLES_VENDUS.no_article = ENCHERES.no_article WHERE ENCHERES.no_article = ? ";
+    public Long read(long id) {
+        String  FIND_BY_IDD = "SELECT TOP (1) ENCHERES.no_utilisateur, MAX(ENCHERES.montant_enchere) SUM_QUANTITY\n" +
+                "FROM ENCHERES " +
+                "WHERE ENCHERES.no_utilisateur = ?" +
+                "GROUP BY ENCHERES.no_utilisateur " +
+                "ORDER BY SUM_QUANTITY";
         try {
-            return jdbcTemplate.queryForObject(FIND_BY_ID, new Object[]{id},new EnchereRowMapper());
+            return jdbcTemplate.queryForObject(FIND_BY_IDD, long.class, id);
+        } catch (EmptyResultDataAccessException e) {
+            return null;
+        }
+    }
+
+    @Override
+    public Enchere consulterEncheresParIdArticle(long id, long idUtil) {
+        String FIND_BY_ID = "SELECT * FROM ENCHERES " +
+                "INNER JOIN UTILISATEURS ON UTILISATEURS.no_utilisateur = ENCHERES.no_utilisateur " +
+                "INNER JOIN ARTICLES_VENDUS on ARTICLES_VENDUS.no_article = ENCHERES.no_article " +
+                "WHERE ENCHERES.no_article = ? and ENCHERES.no_utilisateur = ?";
+        try {
+            return jdbcTemplate.queryForObject(FIND_BY_ID, new Object[]{id, idUtil}, new EnchereRowMapper());
         } catch (EmptyResultDataAccessException e) {
             return null;
         }
@@ -68,9 +81,14 @@ public class EnchereDAOImpl implements EnchereDAO{
     }
 
     @Override
+    public Boolean newUtilisateurOnBid(Enchere enchere) {
+        return null;
+    }
+
+    @Override
     public Enchere updateEnchere(Enchere enchere) {
-        String sql = "UPDATE ENCHERES SET montant_enchere = ? WHERE no_article = ?";
-        jdbcTemplate.update(sql, enchere.getMontantEnchere(), enchere.getArticle().getNoArticle());
+        String sql = "UPDATE ENCHERES SET montant_enchere = ? WHERE no_article = ? and no_utilisateur = ?";
+        jdbcTemplate.update(sql, enchere.getMontantEnchere(), enchere.getArticle().getNoArticle(), enchere.getUtilisateur().getNoUtilisateur());
         return enchere;
     }
 

@@ -50,6 +50,11 @@
                 <p class="form-control" id="ville" name="ville"   th:text="${userEdit.ville}" type="text"/>
             </div>
         </div>
+        <div class="row">
+            <div class="col-md-6 mb-3">
+                <p class="form-control" id="credit" name="credit"  th:text="${userEdit.getCredit()}" type="text"/>
+            </div>
+        </div>
         <div class="form-group">
             <a th:href="@{/profilEdit}" class="btn btn-primary">Modifier</a>
         </div>

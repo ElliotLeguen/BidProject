@@ -29,16 +29,7 @@
                         <option th:each="categorie : ${categories}" th:value="${categorie.getNoCategorie()}"
                                 th:text="${categorie.getLibelle()}" th:field="*{categorie.noCategorie}"></option>
                     </select>
-                </label>
-                <br><br>
-
-                    <p th:text="${message}" th:if="${message ne null}" class="alert alert-primary"></p>
-                        <div class="form-group">
-                            <input type="file" name="image" id="image" accept="image/*" class="form-control-file">
-                        </div>
-                    <span th:if="${msg != null}" th:text="${msg}"></span>
-
-                <br>
+                </label>a
                 <label for="prix_initial">Prix initial:</label><br>
                 <select id="prix_initial" name="prix_initial" th:field="*{prixInitial}">
                     <!-- Options pour les prix initial générées dynamiquement par JavaScript -->

@@ -1,8 +1,11 @@
 package projet.bid_pro.controller;
 
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
 
 import projet.bid_pro.bll.contexte.ArticleService;
@@ -41,33 +44,51 @@ public class EnchereController {
     }
 
     @GetMapping("/profilEnchere")
-    public String afficherProfilEnchere( @RequestParam(name = "idUtilisateurEnchere", required = true) int idUtilisateurEnchere,Model model) {
-        Utilisateur uti =  utilisateurService.charger(idUtilisateurEnchere);
-        System.out.println(uti);
+    public String afficherProfilEnchere(
+            @RequestParam(name = "idUtilisateurEnchere") int idUtilisateurEnchere,
+            Model model) {
         model.addAttribute("utilisateur", utilisateurService.charger(idUtilisateurEnchere));
         return "profilEnchere";
     }
 
     @PostMapping("/encherir")
-    public String encherir(@ModelAttribute(name = "enchere") Enchere enchere,
+    public String encherir(@Valid @ModelAttribute(name = "enchere") Enchere enchere,
+                           BindingResult result,
                            @ModelAttribute(name = "articleVendu") ArticleVendu articleVendu,
-                           @ModelAttribute(name = "utilisateur") Utilisateur utilisateur){
-        consultaionEnchere(articleVendu, utilisateur, enchere);
-        return "encherir";
+                           Utilisateur utilisateur){
+        if (utilisateur.getCredit() < enchere.getMontantEnchere()){
+            result.rejectValue("montantEnchere", "'error.montantEnchere", "Solde insuffisant");
+        }else {
+            return consultaionEnchere(articleVendu, utilisateur, enchere, result);
+        }
+        if (result.hasErrors()) {
+            return "redirect:/detail?id="+articleVendu.getNoArticle();
+        }
+        return  "redirect:/encheres";
     }
 
-    private void consultaionEnchere(ArticleVendu articleVendu, Utilisateur utilisateur, Enchere enchere){
-        if (enchereService.isNotAlreadyExisting(articleVendu.getNoArticle()) == null){
-            enchere.setDateEnchere(new java.util.Date());
-            enchere.setMontantEnchere(enchere.getMontantEnchere());
-            enchere.setUtilisateur(utilisateurService.charger(utilisateur.getNoUtilisateur()));
-            enchere.setArticle(articleService.consulterArticleParId(articleVendu.getNoArticle()));
-            enchereService.creerEnchere(enchere);
-        }else{
-            Enchere enchereS = (enchereService.consulterEnchereParId(articleVendu.getNoArticle()));
-            enchereS.setMontantEnchere(enchere.getMontantEnchere());
-            enchereService.updateEnchere(enchereS);
+    private String consultaionEnchere(ArticleVendu articleVendu, Utilisateur utilisateur, Enchere enchere,BindingResult result) {
+        Enchere enchereNouvelle = new Enchere();
+        if (enchereService.consulterEnchereParId(articleVendu.getNoArticle(), utilisateur.getNoUtilisateur()) == null) {
+            enchereNouvelle.setDateEnchere(new java.util.Date());
+            enchereNouvelle.setMontantEnchere(enchere.getMontantEnchere());
+            enchereNouvelle.setUtilisateur(utilisateurService.charger(utilisateur.getNoUtilisateur()));
+            enchereNouvelle.setArticle(articleService.consulterArticleParId(articleVendu.getNoArticle()));
+            enchereService.creerEnchere(enchereNouvelle);
+        } else {
+            if (enchere.getMontantEnchere() > enchereService.consulterEnchereId(articleVendu.getNoArticle())) {
+                enchereNouvelle = (enchereService.consulterEnchereParId(articleVendu.getNoArticle(), utilisateur.getNoUtilisateur()));
+                enchereNouvelle.setUtilisateur(utilisateurService.charger(utilisateur.getNoUtilisateur()));
+                enchereNouvelle.setMontantEnchere(enchere.getMontantEnchere());
+                enchereService.updateEnchere(enchereNouvelle);
+            }else{
+                result.rejectValue("montantEnchere", "'error.montantEnchere", "Le montant de l'enchère doit être superieur à l'ancien");
+            }
         }
+        if (result.hasErrors()) {
+            return "redirect:/detail?id="+articleVendu.getNoArticle();
+        }
+        return "redirect:/encheres";
     }
 }
 
