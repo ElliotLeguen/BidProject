@@ -8,6 +8,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.*;
 import projet.bid_pro.bll.contexte.UtilisateurService;
 import projet.bid_pro.bo.Utilisateur;
@@ -56,29 +57,36 @@ public class UtilisateurController {
 
     @PostMapping("/profilEdit")
     public String profilEdit(@Valid @ModelAttribute("userEdit") Utilisateur userEdit,
-                             @ModelAttribute("motDePasseActuel") String motDePasseActuel,
-                             @ModelAttribute("motDePasseNouveau") String motDePasseNouveau,
-                             @ModelAttribute("motDePasseNouveauConfirm") String motDePasseNouveauConfirm,
                              BindingResult result,
+                             @RequestParam("motDePasseActuel") String motDePasseActuel,
+                             @RequestParam("motDePasseNouveau") String motDePasseNouveau,
+                             @RequestParam("motDePasseNouveauConfirm") String motDePasseNouveauConfirm,
                              Model model) {
-        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-        boolean matches = encoder.matches(motDePasseActuel, userEdit.getMotDePasse());
-        if(!matches){
-            model.addAttribute("userEdit", userEdit);
-            result.rejectValue("motDePasseActuel", "Incorrect", "Le mot de passe actuel est incorrect");
-            return "/profilEdit";
-        }
-        if(motDePasseNouveau.equals(motDePasseNouveauConfirm)){
-
-            userEdit.setMotDePasse(motDePasseNouveau);
-        }else {
-            result.rejectValue("motDePasseNouveauConfirm", "Mismatch", "Les nouveaux mots de passe ne correspondent pas");
-            return "/profilEdit";
-        }
         if (result.hasErrors()) {
             model.addAttribute("userEdit", userEdit);
+            return "profilEdit";
+        }
+        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+        boolean matches = encoder.matches(motDePasseActuel, userEdit.getMotDePasse());
+        if(matches){
+            if(motDePasseNouveau.equals(motDePasseNouveauConfirm)){
+
+                userEdit.setMotDePasse(motDePasseNouveau);
+            }else {
+                ObjectError error = new ObjectError("globalError", "Les nouveaux mots de passe ne correspondent pas");
+                result.addError(error);
+                return "/profilEdit";
+            }
+
+        }else{
+            model.addAttribute("userEdit", userEdit);
+            ObjectError error = new ObjectError("globalError", "Le mot de passe actuel est incorrect");
+            result.addError(error);
+
             return "/profilEdit";
         }
+
+
         utilisateurService.edit(userEdit);
         return "profil";
     }

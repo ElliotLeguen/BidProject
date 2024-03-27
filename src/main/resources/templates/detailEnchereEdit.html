@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:form="http://www.w3.org/1999/xhtml"
       data-th-replace="~{layouts/layout :: layout-encheres(
-					titrePage=~{:: title},
-					contenuPage=~{:: main},
-					ressourcesSupp=~{:: #resources-css})}">
+                titrePage=~{:: title},
+                contenuPage=~{:: main},
+                ressourcesSupp=~{:: #resources-css})}">
 <head>
     <title>Nouvelle Vente</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
@@ -19,7 +19,9 @@
                     <h1>Nouvelle Vente</h1>
                     <table>
                         <tbody>
-                        <form method="post" role="form" th:action="@{/soumettre}" th:object="${article}">
+                        <form method="post" role="form" th:action="@{/detailEdit}" th:object="${articleVendu}">
+
+                            <input class="form-control" id="no_article"  th:field="${articleVendu.noArticle}" type="hidden"/>
                             <label for="nomArticle">Nom de l'article:</label><br>
                             <input type="text" id="nomArticle" name="nomArticle" th:value="*{nomArticle}">
                             <p th:if="${#fields.hasErrors('nomArticle')}" th:errors="*{nomArticle}" class="error"></p>
@@ -59,20 +61,17 @@
 
                             <h1>Retrait :</h1>
                             <label for="rue">Rue:</label><br>
-                            <input type="text" id="rue" name="rue" th:field="${userEdit.rue}"><br>
+                            <input type="text" id="rue" name="rue"><br>
 
                             <label for="code_postal">Code postal:</label><br>
-                            <input type="text" id="code_postal" name="code_postal"
-                                   th:field="${userEdit.codePostal}"><br>
+                            <input type="text" id="code_postal" name="code_postal"><br>
 
                             <label for="ville">Ville:</label><br>
-                            <input type="text" id="ville" name="ville" th:field="${userEdit.ville}"><br>
-                            <div>
-                                <label for="file">Sélectionner le fichier à envoyer</label>
-                                <input type="file" id="file" name="file" th:field="${article.image}">
-                            </div>
+                            <input type="text" id="ville" name="ville" ><br>
+
                             <input type="submit" value="Enregistrer">&nbsp;
                             <input type="submit" value="Annuler">
+
                         </form>
 
                         <script>
@@ -105,4 +104,3 @@
     </div>
 </main>
 </html>
-

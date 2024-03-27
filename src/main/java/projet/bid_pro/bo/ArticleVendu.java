@@ -1,5 +1,7 @@
 package projet.bid_pro.bo;
 
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
@@ -7,15 +9,22 @@ import java.util.List;
 
 public class ArticleVendu {
     private int noArticle;
+
+    @NotBlank
+    @NotNull
     private String nomArticle;
+    @NotBlank
+    @NotNull
     private String description;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date dateDebutEncheres;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date dateFinEncheres;
+    @NotNull
     private Integer prixInitial;
     private Integer prixVente;
     private Utilisateur utilisateur;
+
     private Categorie categorie;
 
     public List<Enchere> getEnchereList() {
@@ -32,7 +41,7 @@ public class ArticleVendu {
     // Constructeur
     public ArticleVendu(int noArticle, String nomArticle, String description, Date dateDebutEncheres,
                         Date dateFinEncheres, Integer prixInitial, Integer prixVente,
-                        Utilisateur utilisateur, Categorie categorie) {
+                        Utilisateur utilisateur, Categorie categorie,String image) {
         this.noArticle = noArticle;
         this.nomArticle = nomArticle;
         this.description = description;
@@ -42,6 +51,7 @@ public class ArticleVendu {
         this.prixVente = prixVente;
         this.utilisateur = utilisateur;
         this.categorie = categorie;
+        this.image = image;
     }
 
     public ArticleVendu() {
@@ -145,6 +155,7 @@ public class ArticleVendu {
                 ", prixVente=" + prixVente +
                 ", Utilisateur=" + utilisateur +
                 ", Categorie=" + categorie +
+                ", image=" + image +
                 '}';
     }
 }

@@ -5,7 +5,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import projet.bid_pro.bll.contexte.*;
@@ -66,19 +65,54 @@ public class ArticleController {
                 Enchere enchere = new Enchere();
                 enchere.setMontantEnchere(articleVendu.getPrixInitial());
                 model.addAttribute("enchere", enchere);
-				model.addAttribute("articleVendu", articleVendu);
+                model.addAttribute("articleVendu", articleVendu);
                 model.addAttribute("utilisteur", (utilisateurService.charger(principal.getName())));
                 return "detailEnchere"; // Correction de l'alias de la vue
-			} else {
-				System.out.println("Enchère inconnue!!");
-			}
-		} else {
-			System.out.println("Identifiant inconnu");
-		}
-		return "redirect:/encheres/encheres"; // Redirection vers la page d'accueil des enchères
-	}
+            } else {
+                System.out.println("Enchère inconnue!!");
+            }
+        } else {
+            System.out.println("Identifiant inconnu");
+        }
+        return "redirect:/encheres/encheres"; // Redirection vers la page d'accueil des enchères
+    }
 
 
+    @GetMapping("/detailEdit")
+    public String afficherUneEnchereEdit(@RequestParam(name = "id", required = true) long id, Model model, Principal principal) {
+        if (id > 0) {
+            ArticleVendu articleVendu = articleService.consulterArticleParId(id);
+            if (articleVendu != null) {
+                Enchere enchere = new Enchere();
+                enchere.setMontantEnchere(articleVendu.getPrixInitial());
+                model.addAttribute("enchere", enchere);
+                model.addAttribute("articleVendu", articleVendu);
+                model.addAttribute("utilisateur", (utilisateurService.charger(principal.getName())));
+                List<Categorie> categories = categorieService.consulterCategories();
+                model.addAttribute("categories", categories);
+                return "detailEnchereEdit"; // Correction de l'alias de la vue
+            } else {
+                System.out.println("Enchère inconnue!!");
+            }
+        } else {
+            System.out.println("Identifiant inconnu");
+        }
+        return "/detailEdit"; // Redirection vers la page d'accueil des enchères
+    }
+    @PostMapping("/detailEdit")
+    public String EnchereEdit(@Valid @ModelAttribute("articleVendu") ArticleVendu articleVendu, BindingResult result, Model model, Principal principal) {
+
+        System.out.println(articleVendu);
+        if(result.hasErrors()){
+            model.addAttribute("articleVendu",articleVendu);
+            List<Categorie> categories = categorieService.consulterCategories();
+            model.addAttribute("categories", categories);
+            return "redirect:/detailEdit?id="+articleVendu.getNoArticle();
+        }
+
+        articleService.EditArticle(articleVendu);
+        return "redirect:/encheres"; // Redirection vers la page d'accueil des enchères
+    }
     @GetMapping("/encheres")
     public String afficherEncheres(HttpServletRequest request,
                                    @RequestParam(name = "nomArticle", required = false) String nomArticle,
@@ -156,6 +190,9 @@ public class ArticleController {
                         "AND ((prix_vente IS NULL AND date_debut_encheres <= GETDATE() AND date_fin_encheres >= GETDATE()) \n" +
                         "OR (prix_vente IS NOT NULL AND date_fin_encheres <= GETDATE()))";
             }
+        }
+        else if (request.getParameter("enchereOuverte") != null || request.getParameter("mesEncheres") != null || request.getParameter("mesEnchereRemportees") != null) {
+            rqt += " INNER JOIN  ENCHERES on ARTICLES_VENDUS.no_article = ENCHERES.no_article ";
             if (enchereOuverte) {
                 if (cate > 0) {
                     rqt += " AND date_debut_encheres > GETDATE() AND date_fin_encheres < GETDATE()";
@@ -170,7 +207,7 @@ public class ArticleController {
                 } else if (cpt > 0 || cate > 0) {
                     rqt += " ";
                 } else {
-                    rqt += " WHERE ARTICLES_VENDUS.no_utilisateur = " + user.getNoUtilisateur() + " AND date_debut_encheres > GETDATE() AND date_fin_encheres < GETDATE()"; // à faire avec l'id en session
+                    rqt += " WHERE ENCHERES.no_utilisateur = " + user.getNoUtilisateur() + " AND (date_debut_encheres <= GETDATE() AND date_fin_encheres >= GETDATE())"; // à faire avec l'id en session
                 }
                 cpt++;
             }

@@ -11,5 +11,7 @@ public interface ArticleService {
     List<ArticleVendu> consulterEncheresParCategorie(String categorie);
     void creerArticle(ArticleVendu articleVendu);
     ArticleVendu consulterArticleParId(long id);
+    ArticleVendu EditArticle(ArticleVendu articleVendu);
+
 
 }
