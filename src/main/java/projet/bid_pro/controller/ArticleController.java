@@ -46,7 +46,19 @@ public class ArticleController {
     }
 
     @PostMapping("/soumettre")
-    public String ajouterArticle(@ModelAttribute("article") ArticleVendu article, Principal principal) {
+    public String ajouterArticle(@Valid @ModelAttribute("article") ArticleVendu article,
+                                 BindingResult result,
+                                 Model model,
+                                 Principal principal
+                                ) {
+        System.out.println(article);
+        if (result.hasErrors()) {
+            model.addAttribute("article", article);
+            model.addAttribute("categories", categorieService.consulterCategories());
+            model.addAttribute("userEdit", utilisateurService.charger(principal.getName()));
+            return "/vendreArticle";
+        }
+
         article.setUtilisateur(utilisateurService.charger(principal.getName()));
         article.setCategorie(categorieService.consulterCategorieParId(article.getCategorie().getNoCategorie()));
         articleService.creerArticle(article);
@@ -190,7 +202,7 @@ public class ArticleController {
                 if (cate > 0 && cpt == 0) {
                     rqt += " WHERE CATEGORIES.no_categorie = " + categorie + " AND ENCHERES.no_utilisateur = " + user.getNoUtilisateur() + " AND (date_debut_encheres <= GETDATE() AND date_fin_encheres >= GETDATE()) ";
                 } else if (cate > 0 && cpt > 0) {
-                    rqt += " AND AND CATEGORIES.no_categorie = " + categorie + " AND (date_debut_encheres <= GETDATE() AND date_fin_encheres >= GETDATE())";
+                    rqt += " AND CATEGORIES.no_categorie = " + categorie + " AND (date_debut_encheres <= GETDATE() AND date_fin_encheres >= GETDATE())";
                 } else if (cate == 0 && cpt > 0) {
                     rqt += " OR (date_debut_encheres <= GETDATE() AND date_fin_encheres >= GETDATE())";
                 } else {
