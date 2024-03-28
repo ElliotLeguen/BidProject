@@ -29,18 +29,27 @@
             <td data-th-text="${categorie.getNoCategorie()}"></td>
             <td data-th-text="${categorie.getLibelle()}"></td>
             <td>
-                <a th:href="@{'/categorieCategorie?idCategorie=' + ${categorie.getNoCategorie()}}">
-                    <span>Modifier</span>
-                </a>
+                <!-- Créez un formulaire pour chaque catégorie avec un champ d'entrée pour le libellé -->
+                <form th:action="@{/gestionCategorieEdit}" th:object="${categorie}" method="post">
+                    <input type="hidden" name="noCategorie"th:value="${categorie.getNoCategorie()}">
+                    <input type="text" name="libelle" th:value="${categorie.getLibelle()}" required>
+                    <button type="submit">Modifier</button>
+                </form>
+                <form th:action="@{/gestionCategorieAdd}" th:object="${categorie}" method="post">
+                    <input type="text" name="libelle" th:value="${categorie.getLibelle()}" required>
+                    <button type="submit">Ajouter</button>
+                </form>
             </td>
             <td>
-                <a th:href="@{'/utilisateurSupprimer?idUtilisateur=' + ${categorie.getNoCategorie()}}">
+                <a th:href="@{'/categorieSupprimer?idCategorie=' + ${categorie.getNoCategorie()}}">
                     <span>Supprimer</span>
                 </a>
             </td>
         </tr>
         </tbody>
+
     </table>
+
 </main>
 
 </body>

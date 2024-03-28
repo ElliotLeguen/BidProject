@@ -33,6 +33,11 @@ public class CategorieServiceImpl implements CategorieService{
     }
 
     @Override
+    public Categorie add(Categorie categorie) {
+        return categoriesDAO.add(categorie);
+    }
+
+    @Override
     public void delete(int id) {
         categoriesDAO.delete(id);
     }

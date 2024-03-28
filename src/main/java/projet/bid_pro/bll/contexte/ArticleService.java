@@ -14,4 +14,10 @@ public interface ArticleService {
     ArticleVendu consulterArticleParId(long id);
     ArticleVendu EditArticle(ArticleVendu articleVendu);
     void SupprArticle(int idArticle);
+
+    List<ArticleVendu>  getAll();
+
+    void finEnchereArticle();
+
+
 }

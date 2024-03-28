@@ -12,6 +12,7 @@ import projet.bid_pro.bo.ArticleVendu;
 import projet.bid_pro.bo.Categorie;
 import projet.bid_pro.bo.Utilisateur;
 
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -20,6 +21,13 @@ import java.util.List;
 @Repository
 public class ArticleDAOImpl implements ArticleDAO{
     private final String FIND_ENCHERES_BY_ARTICLE = "SELECT * FROM ARTICLES_VENDUS inner join ENCHERES on ARTICLES_VENDUS.no_article = ENCHERES.no_article";
+    private final String FIND_ALL = "SELECT * FROM ARTICLES_VENDUS INNER JOIN UTILISATEURS on ARTICLES_VENDUS.no_utilisateur = UTILISATEURS.no_utilisateur INNER JOIN CATEGORIES on CATEGORIES.no_categorie = ARTICLES_VENDUS.no_categorie";
+    private final String FIND_ALL_FIN_ENCHERE = "select * from ARTICLES_VENDUS INNER JOIN UTILISATEURS on ARTICLES_VENDUS.no_utilisateur = UTILISATEURS.no_utilisateur INNER JOIN CATEGORIES on CATEGORIES.no_categorie = ARTICLES_VENDUS.no_categorie WHERE CONVERT(date, date_fin_encheres) = CONVERT(date, GETDATE());";
+    private final String MODIFIER_ARTICLE = "UPDATE ARTICLES_VENDUS SET nom_article = :nom_article, description = :description, date_debut_encheres = :date_debut_encheres, date_fin_encheres = :date_fin_encheres, prix_initial = :prix_initial, prix_vente = :prix_vente, no_utilisateur =:no_utilisateur , no_categorie = :no_categorie, image= :image WHERE no_article = :no_article";
+    private final String MODIFIER_ARTICLE_PRIX_VENTE = "UPDATE ARTICLES_VENDUS SET prix_vente = :prix_vente WHERE no_article = :no_article";
+    private final String MODIFIER_CREDIT_UTILISATEUR_ARTICLE = "UPDATE UTILISATEURS SET credit = :credit WHERE no_utilisateur = :no_utilisateur";
+    private final String FIND_UTILISATEUR = "SELECT credit FROM UTILISATEURS WHERE no_utilisateur = ?";
+    private final String AJOUTER_RETRAIT = "INSERT INTO RETRAITS (no_article,rue,code_postal,ville) VALUES (:no_article,:rue,:code_postal,:ville)";
     private final String MODIFIER_ARTICLE = "UPDATE ARTICLES_VENDUS SET nom_article = :nom_article, description = :description, date_debut_encheres = :date_debut_encheres, date_fin_encheres = :date_fin_encheres, prix_initial = :prix_initial, prix_vente = :prix_vente, no_categorie = :no_categorie, image= :image WHERE no_article = :no_article";
     private final String SUPPRIMER_ARTICLE = "DELETE FROM ENCHERES WHERE no_article = :no_article; " +
             "DELETE FROM ARTICLES_VENDUS WHERE no_article = :no_article";
@@ -32,6 +40,7 @@ public class ArticleDAOImpl implements ArticleDAO{
 
     @Autowired
     private NamedParameterJdbcTemplate jdbcTemplateNamedParameter;
+
 
     @Override
     public ArticleVendu creerArticle(ArticleVendu article) {
@@ -52,6 +61,13 @@ public class ArticleDAOImpl implements ArticleDAO{
             ps.setString(9, article.getImage());
             return ps;
                 }, keyHolder);
+        MapSqlParameterSource namedParameters = new MapSqlParameterSource();
+        namedParameters.addValue("no_article", article.getNoArticle());
+        namedParameters.addValue("rue", article);
+        namedParameters.addValue("code_postal", article);
+        namedParameters.addValue("ville", article);
+
+        jdbcTemplateNamedParameter.update(AJOUTER_RETRAIT, namedParameters);
         if (keyHolder.getKey() != null) {
             article.setNoArticle(keyHolder.getKey().intValue());
             }
@@ -79,6 +95,31 @@ public class ArticleDAOImpl implements ArticleDAO{
     }
 
     @Override
+    public void finEnchereArticle() {
+        List<ArticleVendu> listArticles = jdbcTemplate.query(FIND_ALL_FIN_ENCHERE, new ArticleRowMapper());
+        for (ArticleVendu article: listArticles){
+
+
+
+                MapSqlParameterSource namedParameters = new MapSqlParameterSource();
+                namedParameters.addValue("no_article", article.getNoArticle());
+                namedParameters.addValue("prix_vente", article.getActuelMeilleurPrix());
+
+                jdbcTemplateNamedParameter.update(MODIFIER_ARTICLE_PRIX_VENTE, namedParameters);
+
+                int credit = jdbcTemplate.queryForObject(FIND_UTILISATEUR, int.class,article.getUtilisateur().getNoUtilisateur());
+                MapSqlParameterSource namedParameters2 = new MapSqlParameterSource();
+                namedParameters2.addValue("no_utilisateur", article.getUtilisateur().getNoUtilisateur());
+                namedParameters2.addValue("credit", credit+article.getActuelMeilleurPrix());
+
+                 jdbcTemplateNamedParameter.update(MODIFIER_CREDIT_UTILISATEUR_ARTICLE, namedParameters2);
+
+
+        System.out.println(credit);
+        }
+    }
+
+    @Override
     public void supprArticle(int idArticle) {
         MapSqlParameterSource namedParameters = new MapSqlParameterSource();
         namedParameters.addValue("no_article", idArticle);
@@ -97,6 +138,11 @@ public class ArticleDAOImpl implements ArticleDAO{
     @Override
     public List<ArticleVendu> getArticles(String rqt) {
         return jdbcTemplate.query(rqt, new ArticleRowMapper());
+    }
+
+    @Override
+    public List<ArticleVendu> getAllArticles() {
+        return jdbcTemplate.query(FIND_ALL, new ArticleRowMapper());
     }
 
     @Override
@@ -129,6 +175,8 @@ public class ArticleDAOImpl implements ArticleDAO{
             articleVendu.setDateFinEncheres(rs.getDate("date_fin_encheres"));
             articleVendu.setPrixInitial(rs.getInt("prix_initial"));
             articleVendu.setPrixVente(rs.getInt("prix_vente"));
+            articleVendu.setActuelMeilleurPrix(rs.getInt("actuelMeilleurPrix"));
+            articleVendu.setIdUtilisateurGagnant(rs.getInt("idUtilisateurGagnant"));
             articleVendu.setImage(rs.getString("image"));
 
             utilisateur.setNoUtilisateur(rs.getInt("no_utilisateur"));

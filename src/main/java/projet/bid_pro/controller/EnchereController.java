@@ -20,6 +20,7 @@ import projet.bid_pro.bo.Utilisateur;
 import java.security.Principal;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Controller
 @SessionAttributes({"UtilisateurEnSession"})
@@ -38,10 +39,17 @@ public class EnchereController {
 
     @GetMapping("/")
     public String afficherAccueil(Model model) {
-        List<Enchere> encheres = enchereService.consulterEncheres();
+        articleService.finEnchereArticle();
+        List<ArticleVendu> articleVendus = articleService.getAll();
+        List<ArticleVendu> distinctArticles = articleVendus.stream()
+                .collect(Collectors.toMap(ArticleVendu::getNoArticle,
+                        article -> article,
+                        (existing, replacement) -> existing.getActuelMeilleurPrix() >= replacement.getActuelMeilleurPrix() ? existing : replacement))
+                .values().stream()
+                .toList();
         var categories = categorieService.consulterCategories();
         model.addAttribute("categorie", categories);
-        model.addAttribute("encheres", encheres);
+        model.addAttribute("articles", distinctArticles);
         return "index";
     }
 

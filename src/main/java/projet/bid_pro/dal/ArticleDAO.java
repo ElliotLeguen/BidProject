@@ -7,9 +7,11 @@ import java.util.List;
 public interface ArticleDAO {
     ArticleVendu read(long id);
     List<ArticleVendu> getArticles(String rqt);
+    List<ArticleVendu> getAllArticles();
     List<ArticleVendu> consulterEncheresParNomArticle(String nomArticle);
     List<ArticleVendu> consulterEncheresParCategorie(String categorie);
     ArticleVendu creerArticle(ArticleVendu articleVendu);
     ArticleVendu editArticle(ArticleVendu articleVendu);
     void supprArticle(int idArticle);
+    void finEnchereArticle();
 }

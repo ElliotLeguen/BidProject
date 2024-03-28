@@ -20,38 +20,47 @@
     <section class="center-section">
         <div class="row">
             <div class="col-md-6 mb-3">
+                <label th:text="Pseudo"></label>
                 <p class="form-control" id="pseudo" name="pseudo"  th:text="${userEdit.pseudo}" type="text"/>
             </div>
             <div class="col-md-6 mb-3">
+                <label th:text="Nom"></label>
                 <p class="form-control" id="nom" name="nom"  th:text="${userEdit.nom}" type="text"/>
             </div>
         </div>
         <div class="row">
             <div class="col-md-6 mb-3">
+                <label th:text="Prenom"></label>
                 <p class="form-control" id="prenom" name="prenom"  th:text="${userEdit.prenom}" type="text"/>
             </div>
             <div class="col-md-6 mb-3">
+                <label th:text="Email"></label>
                 <p class="form-control" id="email" name="email"  th:text="${userEdit.email}" type="text"/>
             </div>
         </div>
         <div class="row">
             <div class="col-md-6 mb-3">
+                <label th:text="Telephone"></label>
                 <p class="form-control" id="telephone" name="telephone"   th:text="${userEdit.telephone}" type="text"/>
             </div>
             <div class="col-md-6 mb-3">
+                <label th:text="Rue"></label>
                 <p class="form-control" id="rue" name="rue"  th:text="${userEdit.rue}" type="text"/>
             </div>
         </div>
         <div class="row">
             <div class="col-md-6 mb-3">
+                <label th:text="codePostal"></label>
                 <p class="form-control" id="codePostal" name="codePostal"  th:text="${userEdit.codePostal}" type="text"/>
             </div>
             <div class="col-md-6 mb-3">
+                <label th:text="ville"></label>
                 <p class="form-control" id="ville" name="ville"   th:text="${userEdit.ville}" type="text"/>
             </div>
         </div>
         <div class="row">
             <div class="col-md-6 mb-3">
+                <label th:text="Credit"></label>
                 <p class="form-control" id="credit" name="credit"  th:text="${userEdit.getCredit()}" type="text"/>
             </div>
         </div>
