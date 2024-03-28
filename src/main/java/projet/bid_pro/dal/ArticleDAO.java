@@ -10,6 +10,6 @@ public interface ArticleDAO {
     List<ArticleVendu> consulterEncheresParNomArticle(String nomArticle);
     List<ArticleVendu> consulterEncheresParCategorie(String categorie);
     ArticleVendu creerArticle(ArticleVendu articleVendu);
-
     ArticleVendu editArticle(ArticleVendu articleVendu);
+    void supprArticle(int idArticle);
 }
