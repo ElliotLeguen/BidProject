@@ -38,6 +38,9 @@ public class UtilisateurDAOImpl implements UtilisateurDAO {
     private final String CHANGER_ETAT_UTILISATEUR = "UPDATE UTILISATEURS set etat = :etat WHERE no_utilisateur = :no_utilisateur";
     private final String AJOUTER_CREDIT = "UPDATE UTILISATEURS set credit = :credit WHERE no_utilisateur = :no_utilisateur";
 
+    private final String ENLEVER_CREDIT = "UPDATE UTILISATEURS set credit = :credit WHERE no_utilisateur = :no_utilisateur";
+
+
     @Autowired
     private NamedParameterJdbcTemplate jdbcTemplate;
 
@@ -104,6 +107,7 @@ public class UtilisateurDAOImpl implements UtilisateurDAO {
         namedParameters.addValue("prenom", utilisateur.getPrenom());
         namedParameters.addValue("email", utilisateur.getEmail());
         namedParameters.addValue("telephone", utilisateur.getTelephone());
+        namedParameters.addValue("credit", utilisateur.getCredit());
         namedParameters.addValue("rue", utilisateur.getRue());
         namedParameters.addValue("codePostal", utilisateur.getCodePostal());
         namedParameters.addValue("ville", utilisateur.getVille());
@@ -151,8 +155,16 @@ public class UtilisateurDAOImpl implements UtilisateurDAO {
         namedParameters.addValue("no_utilisateur", utilisateur.getNoUtilisateur());
         namedParameters.addValue("credit", utilisateur.getCredit());
 
-
         jdbcTemplate.update(AJOUTER_CREDIT, namedParameters);
+    }
+
+    @Override
+    public void enleverCredit(Utilisateur utilisateur) {
+        MapSqlParameterSource namedParameters = new MapSqlParameterSource();
+        namedParameters.addValue("no_utilisateur", utilisateur.getNoUtilisateur());
+        namedParameters.addValue("credit", utilisateur.getCredit());
+
+        jdbcTemplate.update(ENLEVER_CREDIT, namedParameters);
     }
 
     @Override

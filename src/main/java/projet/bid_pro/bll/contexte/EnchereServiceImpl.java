@@ -60,4 +60,9 @@ public class EnchereServiceImpl implements EnchereService{
     public Long consulterEnchereId(long id) {
          return enchereDAO.read(id);
     }
+    @Override
+    public List<Enchere> consulterAncienEnchere(long idUtil, long id) {
+        return enchereDAO.consulterAncienEnchere(idUtil, id);
+    }
+
 }

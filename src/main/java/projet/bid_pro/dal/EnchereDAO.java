@@ -15,4 +15,5 @@ public interface EnchereDAO {
 
     Enchere updateEnchere(Enchere enchere);
     List<Enchere> consulterEncheresParNomArticle(String nomArticle);
+    List<Enchere> consulterAncienEnchere(long idUtil, long id);
 }

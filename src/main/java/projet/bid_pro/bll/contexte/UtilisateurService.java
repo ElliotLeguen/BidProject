@@ -26,4 +26,8 @@ public interface UtilisateurService {
 	public void updatePassword(Utilisateur utilisateur, String newPassword);
 
 	void updateResetPasswordToken(String token,String email);
+
+	void enleverCredit(Utilisateur utilisateur);
+
+	void consulterAncienEnchere(int noArticle, int noUtilisateur);
 }

@@ -14,4 +14,5 @@ public interface EnchereService {
     void creerArticle(ArticleVendu articleVendu);
     void updateEnchere(Enchere enchere);
     Long consulterEnchereId(long id);
+    List<Enchere> consulterAncienEnchere(long id, long idUtil);
 }

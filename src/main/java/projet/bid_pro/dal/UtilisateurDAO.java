@@ -30,5 +30,6 @@ public interface UtilisateurDAO {
 
 	void updateResetPasswordToken(String token,String email);
 
+	void enleverCredit(Utilisateur utilisateur);
 
 }

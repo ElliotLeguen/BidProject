@@ -2,6 +2,7 @@ package projet.bid_pro.controller;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -55,9 +56,24 @@ public class EnchereController {
     public String encherir(@Valid @ModelAttribute(name = "enchere") Enchere enchere,
                            BindingResult result,
                            @ModelAttribute(name = "articleVendu") ArticleVendu articleVendu,
-                           Utilisateur utilisateur,
+                           Principal principal,
                            Model model){
+        Utilisateur utilisateur = utilisateurService.charger(principal.getName());
+        if (utilisateur.getCredit() < enchere.getMontantEnchere()){
+            model.addAttribute("message","Solde insuffisant");
+            return "errorEnchere";
+        }else {
             return consultaionEnchere(articleVendu, utilisateur, enchere, result,model);
+        }
+
+    }
+    private void gestionCredit(Utilisateur utilisateur, Enchere enchere, ArticleVendu articleVendu){
+        int nouveauSolde = utilisateur.getCredit()-enchere.getMontantEnchere();
+        utilisateur.setCredit(nouveauSolde);
+        utilisateurService.enleverCredit(utilisateur);
+        Enchere enchereFinal = enchereService.consulterAncienEnchere(utilisateur.getNoUtilisateur(), articleVendu.getNoArticle()).get(0);
+        enchereFinal.getUtilisateur().setCredit(enchereFinal.getMontantEnchere());
+        utilisateurService.ajouterCredit(enchereFinal.getUtilisateur());
     }
 
     private String consultaionEnchere(ArticleVendu articleVendu, Utilisateur utilisateur, Enchere enchere,BindingResult result,Model model) {
@@ -68,15 +84,17 @@ public class EnchereController {
             enchereNouvelle.setUtilisateur(utilisateurService.charger(utilisateur.getNoUtilisateur()));
             enchereNouvelle.setArticle(articleService.consulterArticleParId(articleVendu.getNoArticle()));
             enchereService.creerEnchere(enchereNouvelle);
+            gestionCredit(utilisateur, enchere, articleVendu);
         } else {
             if (enchere.getMontantEnchere() > enchereService.consulterEnchereId(articleVendu.getNoArticle())) {
                 enchereNouvelle = (enchereService.consulterEnchereParId(articleVendu.getNoArticle(), utilisateur.getNoUtilisateur()));
                 enchereNouvelle.setUtilisateur(utilisateurService.charger(utilisateur.getNoUtilisateur()));
                 enchereNouvelle.setMontantEnchere(enchere.getMontantEnchere());
                 enchereService.updateEnchere(enchereNouvelle);
+                gestionCredit(utilisateur,enchere, articleVendu);
             }else{
                 model.addAttribute("message","Le montant de l'enchère doit être superieur à l'ancien");
-                return "error";
+                return "errorEnchere";
             }
         }
         return "redirect:/encheres";

@@ -75,5 +75,13 @@ public class UtilisateurServiceImpl implements UtilisateurService {
 		utilisateurDAO.updateResetPasswordToken(token,email);
 	}
 
+	@Override
+	public void enleverCredit(Utilisateur utilisateur){
+		utilisateurDAO.ajouterCredit(utilisateur);
+	}
 
+	@Override
+	public void consulterAncienEnchere(int noArticle, int noUtilisateur) {
+
+	}
 }

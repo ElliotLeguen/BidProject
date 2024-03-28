@@ -1,7 +1,9 @@
 package projet.bid_pro.dal;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.dao.IncorrectResultSizeDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
@@ -24,10 +26,12 @@ public class EnchereDAOImpl implements EnchereDAO{
     private final String FIND_ENCHERES_BY_ARTICLE = "SELECT * FROM ARTICLES_VENDUS inner join ENCHERES on ARTICLES_VENDUS.no_article = ENCHERES.no_article";
     private final String FIND_ENCHERES_BY_CATEGORIE = "SELECT * FROM CATEGORIES inner join ARTICLES_VENDUS on CATEGORIES.no_categorie = ARTICLES_VENDUS.no_categorie inner join ENCHERES on ARTICLES_VENDUS.no_article = ENCHERES.no_article";
     private final String FIND_VENTES_BY_ID = "SELECT * FROM ENCHERES inner join ARTICLES_VENDUS on ENCHERES.no_article = ARTICLES_VENDUS.no_article inner join UTILISATEURS on ENCHERES.no_utilisateur = UTILISATEURS.no_utilisateur WHERE ARTICLES_VENDUS.prix_vente IS NOT NULL";
+    private final String FIND_LAST_UTI = "select TOP(1) date_enchere,montant_enchere, UTILISATEURS.*, ARTICLES_VENDUS.* " +
+            "from ENCHERES E, UTILISATEURS, ARTICLES_VENDUS where E.no_utilisateur != ? " +
+            "and E.no_article = ? order by montant_enchere DESC";
 
     @Autowired
     private JdbcTemplate jdbcTemplate;
-
 
     @Override
     public Long read(long id) {
@@ -54,6 +58,11 @@ public class EnchereDAOImpl implements EnchereDAO{
         } catch (EmptyResultDataAccessException e) {
             return null;
         }
+    }
+
+    @Override
+    public List<Enchere> consulterAncienEnchere(long no_utilisateur, long no_article) {
+        return jdbcTemplate.query(FIND_LAST_UTI,new Object[]{no_utilisateur, no_article }, new EnchereRowMapper());
     }
     @Override
     public List<Enchere> findAll() {
