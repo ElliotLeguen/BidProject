@@ -48,4 +48,14 @@ public class ArticleServiceImpl implements ArticleService{
         return articleDAO.editArticle(articleVendu);
     }
 
+    @Override
+    public List<ArticleVendu> getAll() {
+        return articleDAO.getAllArticles();
+    }
+
+    @Override
+    public void finEnchereArticle() {
+        articleDAO.finEnchereArticle();
+    }
+
 }

@@ -13,5 +13,9 @@ public interface ArticleService {
     ArticleVendu consulterArticleParId(long id);
     ArticleVendu EditArticle(ArticleVendu articleVendu);
 
+    List<ArticleVendu>  getAll();
+
+    void finEnchereArticle();
+
 
 }

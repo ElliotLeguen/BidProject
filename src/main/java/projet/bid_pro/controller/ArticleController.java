@@ -15,10 +15,14 @@ import projet.bid_pro.bo.Enchere;
 
 import java.awt.print.Pageable;
 import java.security.Principal;
+import java.util.Comparator;
+import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.web.bind.annotation.*;
 import projet.bid_pro.bo.Categorie;
+import projet.bid_pro.bo.Utilisateur;
 import projet.bid_pro.dal.EnchereDAO;
 
 @Controller
@@ -69,17 +73,40 @@ public class ArticleController {
         model.addAttribute("categories", categories);
         return "admin/gestionCategorie";
     }
+    @PostMapping("/gestionCategorieEdit")
+    public String gestionCategorie(@Valid @ModelAttribute("categorie") Categorie categorie ,Model model) {
 
+        categorieService.edit(categorie);
+
+        return "redirect:/gestionCategorie";
+    }
+    @PostMapping("/gestionCategorieAdd")
+    public String gestionCategorieAdd(@Valid @ModelAttribute("categorie") Categorie categorie ,Model model) {
+
+        categorieService.add(categorie);
+
+        return "redirect:/gestionCategorie";
+    }
+    @GetMapping("/categorieSupprimer")
+    public String utilisateurSupprimer( @RequestParam(name = "idCategorie", required = true) int idCategorie,Model model) {
+        categorieService.delete(idCategorie);
+        return "redirect:/gestionCategorie";
+    }
     @GetMapping("/detail")
     public String afficherUneEnchere(@RequestParam(name = "id", required = true) long id, Model model, Principal principal) {
         if (id > 0) {
             ArticleVendu articleVendu = articleService.consulterArticleParId(id);
+
             if (articleVendu != null) {
                 Enchere enchere = new Enchere();
                 enchere.setMontantEnchere(articleVendu.getPrixInitial());
                 model.addAttribute("enchere", enchere);
                 model.addAttribute("articleVendu", articleVendu);
                 model.addAttribute("utilisteur", (utilisateurService.charger(principal.getName())));
+                if(articleVendu.getIdUtilisateurGagnant() != 0){
+                    model.addAttribute("utlisateurGagnant", (utilisateurService.charger(articleVendu.getIdUtilisateurGagnant())));
+                }
+
                 return "detailEnchere"; // Correction de l'alias de la vue
             } else {
                 System.out.println("Enchère inconnue!!");
@@ -95,6 +122,9 @@ public class ArticleController {
     public String afficherUneEnchereEdit(@RequestParam(name = "id", required = true) long id, Model model, Principal principal) {
         if (id > 0) {
             ArticleVendu articleVendu = articleService.consulterArticleParId(id);
+            if(articleVendu.getDateFinEncheres().before(new Date())){
+                return "redirect:/detail?id=" + articleVendu.getNoArticle();
+            }
             if (articleVendu != null) {
                 Enchere enchere = new Enchere();
                 enchere.setMontantEnchere(articleVendu.getPrixInitial());
@@ -114,7 +144,6 @@ public class ArticleController {
     }
     @PostMapping("/detailEdit")
     public String EnchereEdit(@Valid @ModelAttribute("articleVendu") ArticleVendu articleVendu, BindingResult result, Model model, Principal principal) {
-
         System.out.println(articleVendu);
         if(result.hasErrors()){
             model.addAttribute("articleVendu",articleVendu);
@@ -227,15 +256,22 @@ public class ArticleController {
                     rqt += " WHERE date_debut_encheres <= GETDATE() AND date_fin_encheres >= GETDATE() OR ENCHERES.no_utilisateur = " + user.getNoUtilisateur() + " AND (date_debut_encheres <= GETDATE() AND date_fin_encheres >= GETDATE()) OR ENCHERES.no_utilisateur = " + user.getNoUtilisateur() + " AND ARTICLES_VENDUS.prix_vente != 0";
                 }
             }
-
-        } else rqt= "SELECT * FROM ARTICLES_VENDUS inner join UTILISATEURS on ARTICLES_VENDUS.no_utilisateur = UTILISATEURS.no_utilisateur inner join CATEGORIES on ARTICLES_VENDUS.no_categorie = CATEGORIES.no_categorie INNER JOIN  ENCHERES on ARTICLES_VENDUS.no_article = ENCHERES.no_article";
+        } else rqt= "SELECT * FROM ARTICLES_VENDUS LEFT JOIN  ENCHERES on ARTICLES_VENDUS.no_article = ENCHERES.no_article  inner join UTILISATEURS on ARTICLES_VENDUS.no_utilisateur = UTILISATEURS.no_utilisateur inner join CATEGORIES on ARTICLES_VENDUS.no_categorie = CATEGORIES.no_categorie WHERE date_debut_encheres <= GETDATE() AND date_fin_encheres >= GETDATE() ORDER BY 1 ASC OFFSET 4 ROWS FETCH NEXT 6 ROWS ONLY";
 
         System.out.println(rqt);
 
-
+        List<ArticleVendu> list = articleService.getVentes(rqt);
+        System.out.println(list);
+        List<ArticleVendu> distinctArticles = list.stream()
+                .collect(Collectors.toMap(ArticleVendu::getNoArticle,
+                        article -> article,
+                        (existing, replacement) -> existing.getActuelMeilleurPrix() >= replacement.getActuelMeilleurPrix() ? existing : replacement))
+                .values().stream()
+                .toList();
+        System.out.println(distinctArticles);
         model.addAttribute("categories", categorieService.consulterCategories());
         model.addAttribute("userEdit", utilisateurService.charger(principal.getName()));
-        model.addAttribute("articles", articleService.getVentes(rqt));
+        model.addAttribute("articles", distinctArticles);
         return "encheres";
     }
 }
