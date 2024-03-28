@@ -55,19 +55,18 @@ public class EnchereController {
     public String encherir(@Valid @ModelAttribute(name = "enchere") Enchere enchere,
                            BindingResult result,
                            @ModelAttribute(name = "articleVendu") ArticleVendu articleVendu,
-                           Utilisateur utilisateur){
+                           Utilisateur utilisateur,
+                           Model model){
         if (utilisateur.getCredit() < enchere.getMontantEnchere()){
-            result.rejectValue("montantEnchere", "'error.montantEnchere", "Solde insuffisant");
+            model.addAttribute("message","Solde insuffisant");
+            return "error";
         }else {
-            return consultaionEnchere(articleVendu, utilisateur, enchere, result);
+            return consultaionEnchere(articleVendu, utilisateur, enchere, result,model);
         }
-        if (result.hasErrors()) {
-            return "redirect:/detail?id="+articleVendu.getNoArticle();
-        }
-        return  "redirect:/encheres";
+
     }
 
-    private String consultaionEnchere(ArticleVendu articleVendu, Utilisateur utilisateur, Enchere enchere,BindingResult result) {
+    private String consultaionEnchere(ArticleVendu articleVendu, Utilisateur utilisateur, Enchere enchere,BindingResult result,Model model) {
         Enchere enchereNouvelle = new Enchere();
         if (enchereService.consulterEnchereParId(articleVendu.getNoArticle(), utilisateur.getNoUtilisateur()) == null) {
             enchereNouvelle.setDateEnchere(new java.util.Date());
@@ -82,11 +81,9 @@ public class EnchereController {
                 enchereNouvelle.setMontantEnchere(enchere.getMontantEnchere());
                 enchereService.updateEnchere(enchereNouvelle);
             }else{
-                result.rejectValue("montantEnchere", "'error.montantEnchere", "Le montant de l'enchère doit être superieur à l'ancien");
+                model.addAttribute("message","Le montant de l'enchère doit être superieur à l'ancien");
+                return "error";
             }
-        }
-        if (result.hasErrors()) {
-            return "redirect:/detail?id="+articleVendu.getNoArticle();
         }
         return "redirect:/encheres";
     }

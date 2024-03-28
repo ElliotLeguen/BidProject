@@ -45,19 +45,13 @@
                             <span th:if="${#fields.hasErrors('prixInitial')}" th:errors="*{prixInitial}"
                                   class="error"></span><br>
 
+                            <label for="dateDebutEncheres">Date de début des enchères :</label>
+                            <input type="date" id="dateDebutEncheres" name="dateDebutEncheres" th:field="*{dateDebutEncheres}">
+                            <span th:if="${#fields.hasErrors('dateDebutEncheres')}" th:errors="*{dateDebutEncheres}" class="error"></span><br>
 
-                            <label for="dateDebutEncheres">Date de début des enchères:</label>
-                            <input type="date" id="dateDebutEncheres" name="date_debut_encheres"
-                                   th:field="*{dateDebutEncheres}">
-                            <span th:if="${#fields.hasErrors('dateDebutEncheres')}" th:errors="*{dateDebutEncheres}"
-                                  class="error"></span><br>
-
-                            <label for="dateFinEncheres">Date de fin des enchères:</label>
-                            <input type="date" id="dateFinEncheres" name="dateFinEncheres"
-                                   th:field="*{dateFinEncheres}">
-                            <span th:if="${#fields.hasErrors('dateFinEncheres')}" th:errors="*{dateFinEncheres}"
-                                  class="error"></span><br>
-
+                            <label for="dateFinEncheres">Date de fin des enchères :</label>
+                            <input type="date" id="dateFinEncheres" name="dateFinEncheres" th:field="*{dateFinEncheres}">
+                            <span th:if="${#fields.hasErrors('dateFinEncheres')}" th:errors="*{dateFinEncheres}" class="error"></span><br>
 
                             <h1>Retrait :</h1>
                             <label for="rue">Rue:</label><br>
@@ -71,30 +65,8 @@
 
                             <input type="submit" value="Enregistrer">&nbsp;
                             <input type="submit" value="Annuler">
-
+                            <a th:href="@{'/supprArticle?idArticle=' + ${articleVendu.noArticle}}" id="delete">Annuler la vente</a>
                         </form>
-
-                        <script>
-                            var currentDate = new Date();
-                            var currentDateString = currentDate.toISOString().split('T')[0]; // Format YYYY-MM-DD
-                            document.getElementById("dateDebutEncheres").value = currentDateString;
-                            document.getElementById("dateFinEncheres").value = currentDateString;
-
-                            dateDebutInput.addEventListener('change', function () {
-                                // Convertir la valeur de date de début en objet Date
-                                var dateDebut = new Date(dateDebutInput.value);
-
-                                // Ajouter un jour à la date de début pour obtenir la date de fin
-                                var dateFin = new Date(dateDebut);
-                                dateFin.setDate(dateDebut.getDate() + 1);
-
-                                // Formater la date de fin au format YYYY-MM-DD
-                                var dateFinString = dateFin.toISOString().split('T')[0];
-
-                                // Définir la valeur de la date de fin
-                                dateFinInput.value = dateFinString;
-                            });
-                        </script>
                         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
                         </tbody>
                     </table>

@@ -48,4 +48,9 @@ public class ArticleServiceImpl implements ArticleService{
         return articleDAO.editArticle(articleVendu);
     }
 
+    @Override
+    public void SupprArticle(int idArticle) {
+        articleDAO.supprArticle(idArticle);
+    }
+
 }
