@@ -7,7 +7,6 @@ import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Repository;
 import projet.bid_pro.bo.ArticleVendu;
 import projet.bid_pro.bo.Categorie;
@@ -21,7 +20,12 @@ import java.util.List;
 @Repository
 public class ArticleDAOImpl implements ArticleDAO{
     private final String FIND_ENCHERES_BY_ARTICLE = "SELECT * FROM ARTICLES_VENDUS inner join ENCHERES on ARTICLES_VENDUS.no_article = ENCHERES.no_article";
-    private final String MODIFIER_ARTICLE = "UPDATE ARTICLES_VENDUS SET nom_article = :nom_article, description = :description, date_debut_encheres = :date_debut_encheres, date_fin_encheres = :date_fin_encheres, prix_initial = :prix_initial, prix_vente = :prix_vente, no_utilisateur =:no_utilisateur , no_categorie = :no_categorie, image= :image WHERE no_article = :no_article";
+    private final String MODIFIER_ARTICLE = "UPDATE ARTICLES_VENDUS SET nom_article = :nom_article, description = :description, date_debut_encheres = :date_debut_encheres, date_fin_encheres = :date_fin_encheres, prix_initial = :prix_initial, prix_vente = :prix_vente, no_categorie = :no_categorie, image= :image WHERE no_article = :no_article";
+    private final String SUPPRIMER_ARTICLE = "DELETE FROM ENCHERES WHERE no_article = :no_article; " +
+            "DELETE FROM ARTICLES_VENDUS WHERE no_article = :no_article";
+
+//            "DELETE FROM ENCHERES WHERE no_article IN (SELECT no_article FROM ARTICLES_VENDUS WHERE no_article = ?); " +
+//            "DELETE FROM ARTICLES_VENDUS WHERE no_article = ?";
 
     @Autowired
     private JdbcTemplate jdbcTemplate;
@@ -31,8 +35,8 @@ public class ArticleDAOImpl implements ArticleDAO{
 
     @Override
     public ArticleVendu creerArticle(ArticleVendu article) {
-        String sql = "INSERT INTO ARTICLES_VENDUS (nom_article, description, date_debut_encheres, date_fin_encheres, prix_initial, prix_vente, no_utilisateur, no_categorie) " +
-                "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO ARTICLES_VENDUS (nom_article, description, date_debut_encheres, date_fin_encheres, prix_initial, prix_vente, no_utilisateur, no_categorie, image) " +
+                "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
         KeyHolder keyHolder = new GeneratedKeyHolder();
         jdbcTemplate.update(
                 connection -> {
@@ -45,6 +49,7 @@ public class ArticleDAOImpl implements ArticleDAO{
             ps.setInt(6, article.getPrixVente() == null ? 0 : article.getPrixVente());
             ps.setInt(7, article.getUtilisateur().getNoUtilisateur());
             ps.setInt(8, article.getCategorie().getNoCategorie());
+            ps.setString(9, article.getImage());
             return ps;
                 }, keyHolder);
         if (keyHolder.getKey() != null) {
@@ -65,13 +70,19 @@ public class ArticleDAOImpl implements ArticleDAO{
         namedParameters.addValue("date_fin_encheres", articleVendu.getDateFinEncheres());
         namedParameters.addValue("prix_initial", articleVendu.getPrixInitial());
         namedParameters.addValue("prix_vente", articleVendu.getPrixVente());
-        namedParameters.addValue("no_utilisateur",37);
-        namedParameters.addValue("no_categorie", 3);
-        namedParameters.addValue("image", null);
+        namedParameters.addValue("no_categorie", articleVendu.getCategorie().getNoCategorie());
+        namedParameters.addValue("image", articleVendu.getImage());
 
         jdbcTemplateNamedParameter.update(MODIFIER_ARTICLE, namedParameters);
 
         return articleVendu;
+    }
+
+    @Override
+    public void supprArticle(int idArticle) {
+        MapSqlParameterSource namedParameters = new MapSqlParameterSource();
+        namedParameters.addValue("no_article", idArticle);
+        jdbcTemplateNamedParameter.update(SUPPRIMER_ARTICLE, namedParameters);
     }
 
     @Override
@@ -118,6 +129,7 @@ public class ArticleDAOImpl implements ArticleDAO{
             articleVendu.setDateFinEncheres(rs.getDate("date_fin_encheres"));
             articleVendu.setPrixInitial(rs.getInt("prix_initial"));
             articleVendu.setPrixVente(rs.getInt("prix_vente"));
+            articleVendu.setImage(rs.getString("image"));
 
             utilisateur.setNoUtilisateur(rs.getInt("no_utilisateur"));
             utilisateur.setPseudo(rs.getString("pseudo"));

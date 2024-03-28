@@ -63,3 +63,16 @@ input[type="checkbox"][disabled] {
     opacity: 0.5;
     cursor: not-allowed;
 }
+
+.pagination-container {
+    text-align: center;
+}
+
+.pagination-container a {
+    display: inline-block;
+    margin: 0 5px; /* Ajustez la marge entre les liens */
+    text-align: center;
+}
+
+
+

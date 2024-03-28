@@ -149,7 +149,7 @@
                 <div class="row no-gutters">
                     <!-- Colonne pour l'image -->
                     <div class="col-md-4" style="padding: 1em">
-                        <img th:src="@{images/logoENI.png}" class="card-img" alt="Image">
+                        <img th:src="@{'images/' + ${article.image}}" class="card-img" alt="Image">
                     </div>
                     <!-- Colonne pour les informations -->
                     <div class="col-md-8">
@@ -174,9 +174,13 @@
                 </div>
             </div>
         </div>
+
         <!-- Fin de la boucle -->
     </div>
-
+    <div class="pagination-container">
+        <a th:href="@{encheres(page=${currentPage - 1})}">Page Précédente</a>
+        <a th:href="@{encheres(page=${currentPage + 1})}">Page Suivante</a>
+    </div>
         <!--<div class="card" data-th-each="article : ${article}" th:if="${param.nomArticle == null or article.nomArticle.contains(param.nomArticle)}">
             <u><a th:href="@{/detail(id=${article.toString()})}"><span data-th-text="${article.getNomArticle()}"></span></a></u>
             <div><span>Prix : </span><span><span data-th-text="${article.getPrixInitial()}"></span> points</span></div>

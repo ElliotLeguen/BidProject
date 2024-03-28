@@ -34,11 +34,6 @@
         <!--               </ul>-->
 
         <ul>
-
-            <li sec:authorize="isAuthenticated()">
-                <!-- Affiche le nom d'utilisateur -->
-                <span sec:authentication="name"></span>
-            </li>
             <!-- Affiche les liens uniquement si l'utilisateur est connecté -->
             <li sec:authorize="isAuthenticated()">
                 <a href="/encheres">Enchères</a>

@@ -4,16 +4,19 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import projet.bid_pro.bll.contexte.*;
 import projet.bid_pro.bo.ArticleVendu;
 import projet.bid_pro.bo.Enchere;
 
-import java.awt.print.Pageable;
 import java.security.Principal;
 import java.util.List;
 
@@ -24,16 +27,17 @@ import projet.bid_pro.dal.EnchereDAO;
 @Controller
 @SessionAttributes({"UtilisateurEnSession"})
 public class ArticleController {
-	private ArticleService articleService;
-	private UtilisateurService utilisateurService;
+    private ArticleService articleService;
+    private UtilisateurService utilisateurService;
     private CategorieService categorieService;
-    private  EnchereService enchereService;
+    private EnchereService enchereService;
+
     public ArticleController(ArticleService articleService, UtilisateurService utilisateurService, CategorieService categorieService, EnchereService enchereService) {
-		this.articleService = articleService;
-		this.utilisateurService = utilisateurService;
+        this.articleService = articleService;
+        this.utilisateurService = utilisateurService;
         this.categorieService = categorieService;
         this.enchereService = enchereService;
-	}
+    }
 
     @GetMapping("/article")
     public String afficherEncheres(Model model, Principal principal) {
@@ -47,16 +51,19 @@ public class ArticleController {
     public String ajouterArticle(@Valid @ModelAttribute("article") ArticleVendu article,
                                  BindingResult result,
                                  Model model,
-                                 Principal principal
-                                ) {
-        System.out.println(article);
-        if (result.hasErrors()) {
-            model.addAttribute("article", article);
+                                 Principal principal) {
+        if (article.getDateFinEncheres().compareTo(article.getDateDebutEncheres()) <= 0) {
+            ObjectError error = new ObjectError("globalError", "La date fin enchère doit être strictement supérieure à la date début enchère");
+            result.addError(error);
             model.addAttribute("categories", categorieService.consulterCategories());
             model.addAttribute("userEdit", utilisateurService.charger(principal.getName()));
-            return "/vendreArticle";
+            return "error";
         }
-
+        if (result.hasErrors()) {
+            model.addAttribute("categories", categorieService.consulterCategories());
+            model.addAttribute("userEdit", utilisateurService.charger(principal.getName()));
+            return "vendreArticle";
+        }
         article.setUtilisateur(utilisateurService.charger(principal.getName()));
         article.setCategorie(categorieService.consulterCategorieParId(article.getCategorie().getNoCategorie()));
         articleService.creerArticle(article);
@@ -90,7 +97,6 @@ public class ArticleController {
         return "redirect:/encheres/encheres"; // Redirection vers la page d'accueil des enchères
     }
 
-
     @GetMapping("/detailEdit")
     public String afficherUneEnchereEdit(@RequestParam(name = "id", required = true) long id, Model model, Principal principal) {
         if (id > 0) {
@@ -112,20 +118,26 @@ public class ArticleController {
         }
         return "/detailEdit"; // Redirection vers la page d'accueil des enchères
     }
+
     @PostMapping("/detailEdit")
     public String EnchereEdit(@Valid @ModelAttribute("articleVendu") ArticleVendu articleVendu, BindingResult result, Model model, Principal principal) {
-
         System.out.println(articleVendu);
-        if(result.hasErrors()){
-            model.addAttribute("articleVendu",articleVendu);
+        if (result.hasErrors()) {
+            model.addAttribute("articleVendu", articleVendu);
             List<Categorie> categories = categorieService.consulterCategories();
             model.addAttribute("categories", categories);
-            return "redirect:/detailEdit?id="+articleVendu.getNoArticle();
+            return "redirect:/detailEdit?id=" + articleVendu.getNoArticle();
         }
-
         articleService.EditArticle(articleVendu);
         return "redirect:/encheres"; // Redirection vers la page d'accueil des enchères
     }
+
+    @GetMapping("/supprArticle")
+    public String supprimerArticle(@RequestParam(name = "idArticle", required = true) int idArticle) {
+        articleService.SupprArticle(idArticle);
+        return "redirect:/encheres";
+    }
+
     @GetMapping("/encheres")
     public String afficherEncheres(HttpServletRequest request,
                                    @RequestParam(name = "nomArticle", required = false) String nomArticle,
@@ -136,6 +148,7 @@ public class ArticleController {
                                    @RequestParam(name = "enchereOuverte", required = false) boolean enchereOuverte,
                                    @RequestParam(name = "mesEncheres", required = false) boolean mesEncheres,
                                    @RequestParam(name = "mesEnchereRemportees", required = false) boolean mesEnchereRemportees,
+                                   @RequestParam(name = "page", defaultValue = "1") int page,
                                    Principal principal, Model model) throws JsonProcessingException {
         var user = utilisateurService.charger(principal.getName());
         List<ArticleVendu> articleVendus;
@@ -144,7 +157,6 @@ public class ArticleController {
         if (categorie != 0) {
             cate++;
             System.out.println(cate);
-
         }
         int cpt = 0;
         if (request.getParameter("mesVentesEnCours") != null || request.getParameter("ventesNonDebutees") != null || request.getParameter("ventesTerminees") != null) {
@@ -185,8 +197,7 @@ public class ArticleController {
                         "inner join UTILISATEURS on ARTICLES_VENDUS.no_utilisateur = UTILISATEURS.no_utilisateur \n" +
                         "inner join CATEGORIES on ARTICLES_VENDUS.no_categorie = CATEGORIES.no_categorie WHERE ARTICLES_VENDUS.no_utilisateur = " + user.getNoUtilisateur();
             }
-        }
-        else if (request.getParameter("enchereOuverte") != null || request.getParameter("mesEncheres") != null || request.getParameter("mesEnchereRemportees") != null) {
+        } else if (request.getParameter("enchereOuverte") != null || request.getParameter("mesEncheres") != null || request.getParameter("mesEnchereRemportees") != null) {
             rqt += " INNER JOIN  ENCHERES on ARTICLES_VENDUS.no_article = ENCHERES.no_article ";
             if (enchereOuverte) {
                 if (cate > 0) {
@@ -228,11 +239,13 @@ public class ArticleController {
                 }
             }
 
-        } else rqt= "SELECT * FROM ARTICLES_VENDUS inner join UTILISATEURS on ARTICLES_VENDUS.no_utilisateur = UTILISATEURS.no_utilisateur inner join CATEGORIES on ARTICLES_VENDUS.no_categorie = CATEGORIES.no_categorie INNER JOIN  ENCHERES on ARTICLES_VENDUS.no_article = ENCHERES.no_article";
+        } else
+            rqt = "SELECT * FROM ARTICLES_VENDUS inner join UTILISATEURS on ARTICLES_VENDUS.no_utilisateur = UTILISATEURS.no_utilisateur inner join CATEGORIES on ARTICLES_VENDUS.no_categorie = CATEGORIES.no_categorie INNER JOIN  ENCHERES on ARTICLES_VENDUS.no_article = ENCHERES.no_article ORDER BY 1 ASC OFFSET " + page*6 + " ROWS FETCH NEXT 6 ROWS ONLY";
 
+        model.addAttribute("currentPage", page);
         System.out.println(rqt);
-
-
+        List<ArticleVendu> e = articleService.getVentes(rqt);
+        System.out.println(e);
         model.addAttribute("categories", categorieService.consulterCategories());
         model.addAttribute("userEdit", utilisateurService.charger(principal.getName()));
         model.addAttribute("articles", articleService.getVentes(rqt));
