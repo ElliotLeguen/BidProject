@@ -35,8 +35,9 @@
     <input hidden id="articleVendu" name="articleVendu" th:field="*{articleVendu.noArticle}" />
         <input hidden id="utilisteur" name="utilisteur" th:field="*{utilisteur.noUtilisateur}" />
         <input id="ticketNum" type="number" name="ticketNum" th:field="*{enchere.montantEnchere}"/>
-        <span th:if="${#fields.hasErrors('enchere.montantEnchere')}" th:errors="*{enchere.montantEnchere}"
-           th:class="${#fields.hasErrors('enchere.montantEnchere')}? error"></span>
+        <div th:if="${message}" >
+            <p th:text="${message}"></p>
+        </div>
         <input type="submit" value="submit" />
     </form>
 </main>

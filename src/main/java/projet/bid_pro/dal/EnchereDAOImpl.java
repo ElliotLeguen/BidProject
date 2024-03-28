@@ -31,10 +31,10 @@ public class EnchereDAOImpl implements EnchereDAO{
 
     @Override
     public Long read(long id) {
-        String  FIND_BY_IDD = "SELECT TOP (1) ENCHERES.no_utilisateur, MAX(ENCHERES.montant_enchere) SUM_QUANTITY\n" +
+        String  FIND_BY_IDD = "SELECT MAX(ENCHERES.montant_enchere) SUM_QUANTITY " +
                 "FROM ENCHERES " +
-                "WHERE ENCHERES.no_utilisateur = ?" +
-                "GROUP BY ENCHERES.no_utilisateur " +
+                "WHERE ENCHERES.no_article = ? " +
+                "GROUP BY ENCHERES.no_article  " +
                 "ORDER BY SUM_QUANTITY";
         try {
             return jdbcTemplate.queryForObject(FIND_BY_IDD, long.class, id);
