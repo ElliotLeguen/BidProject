@@ -34,7 +34,6 @@ public class UtilisateurDAOImpl implements UtilisateurDAO {
     private final String SUPPRIMER_RETRAITS = "DELETE FROM RETRAITS WHERE no_article IN (SELECT no_article FROM ARTICLES_VENDUS WHERE no_utilisateur = :no_utilisateur)";
 
     private final String SUPPRIMER_ARTICLES_VENDUS = "DELETE FROM ARTICLES_VENDUS WHERE no_utilisateur = :no_utilisateur";
-
     private final String SUPPRIMER_UTILISATEUR = "DELETE FROM UTILISATEURS WHERE no_utilisateur = :no_utilisateur";
     private final String CHANGER_ETAT_UTILISATEUR = "UPDATE UTILISATEURS set etat = :etat WHERE no_utilisateur = :no_utilisateur";
     private final String AJOUTER_CREDIT = "UPDATE UTILISATEURS set credit = :credit WHERE no_utilisateur = :no_utilisateur";

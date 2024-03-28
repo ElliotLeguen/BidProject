@@ -34,8 +34,10 @@
         <p id="vendeur" name="prix_initial" th:text="*{articleVendu.getUtilisateur().getPseudo()}"></p><br>
     <input hidden id="articleVendu" name="articleVendu" th:field="*{articleVendu.noArticle}" />
         <input hidden id="utilisteur" name="utilisteur" th:field="*{utilisteur.noUtilisateur}" />
-        <input id="ticketNum" type="number" name="ticketNum" th:field="*{enchere.montantEnchere}" />
-        <input type="submit" value="articleVendu" />
+        <input id="ticketNum" type="number" name="ticketNum" th:field="*{enchere.montantEnchere}"/>
+        <span th:if="${#fields.hasErrors('enchere.montantEnchere')}" th:errors="*{enchere.montantEnchere}"
+           th:class="${#fields.hasErrors('enchere.montantEnchere')}? error"></span>
+        <input type="submit" value="submit" />
     </form>
 </main>
 </body>

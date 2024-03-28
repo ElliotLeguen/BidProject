@@ -8,11 +8,10 @@ import projet.bid_pro.bo.Enchere;
 import java.util.List;
 public interface EnchereService {
     List<Enchere> consulterEncheres();
-    Enchere consulterEnchereParId(long id);
+    Enchere consulterEnchereParId(long id, long idUtil);
     void creerEnchere(Enchere enchere);
     List<Enchere> consulterEncheresParNomArticle(String nomArticle);
     void creerArticle(ArticleVendu articleVendu);
-    Enchere isNotAlreadyExisting(long idArticleVendu);
-
     void updateEnchere(Enchere enchere);
+    Long consulterEnchereId(long id);
 }
