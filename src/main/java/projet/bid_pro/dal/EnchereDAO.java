@@ -4,8 +4,10 @@ import projet.bid_pro.bo.ArticleVendu;
 import projet.bid_pro.bo.Enchere;
 
 import java.util.List;
+import java.util.Map;
 
 public interface EnchereDAO {
+    Boolean readTopEnchere(int id, int idUser);
     Long read(long id);
     Enchere consulterEncheresParIdArticle(long id, long idUtil);
     List<Enchere> findAll();

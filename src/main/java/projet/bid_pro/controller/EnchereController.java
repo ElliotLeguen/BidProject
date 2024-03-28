@@ -18,6 +18,7 @@ import projet.bid_pro.bo.Enchere;
 import projet.bid_pro.bo.Utilisateur;
 
 import java.security.Principal;
+import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -57,33 +58,23 @@ public class EnchereController {
                            BindingResult result,
                            @ModelAttribute(name = "articleVendu") ArticleVendu articleVendu,
                            Principal principal,
-                           Model model){
+                           Model model) {
         Utilisateur utilisateur = utilisateurService.charger(principal.getName());
-        if (utilisateur.getCredit() < enchere.getMontantEnchere()){
-            model.addAttribute("message","Solde insuffisant");
+        if (utilisateur.getCredit() < enchere.getMontantEnchere()) {
+            model.addAttribute("message", "Solde insuffisant");
             return "errorEnchere";
-        }else {
-            return consultaionEnchere(articleVendu, utilisateur, enchere, result,model);
+        } else if (enchereService.readTopEnchere(articleVendu.getNoArticle(), utilisateur.getNoUtilisateur())) {
+            model.addAttribute("message", "Vous ne pouvez pas rencherir alors que vous êtes deja premier");
+            return "errorEnchere";
+        } else {
+            return consultaionEnchere(articleVendu, utilisateur, enchere, result, model);
         }
 
     }
-    private void gestionCredit(Utilisateur utilisateur, Enchere enchere, ArticleVendu articleVendu){
-        int nouveauSolde = utilisateur.getCredit()-enchere.getMontantEnchere();
-        utilisateur.setCredit(nouveauSolde);
-        utilisateurService.enleverCredit(utilisateur);
-        Enchere enchereFinal = enchereService.consulterAncienEnchere(utilisateur.getNoUtilisateur(), articleVendu.getNoArticle()).get(0);
-        enchereFinal.getUtilisateur().setCredit(enchereFinal.getMontantEnchere());
-        utilisateurService.ajouterCredit(enchereFinal.getUtilisateur());
-    }
-
     private String consultaionEnchere(ArticleVendu articleVendu, Utilisateur utilisateur, Enchere enchere,BindingResult result,Model model) {
         Enchere enchereNouvelle = new Enchere();
         if (enchereService.consulterEnchereParId(articleVendu.getNoArticle(), utilisateur.getNoUtilisateur()) == null) {
-            enchereNouvelle.setDateEnchere(new java.util.Date());
-            enchereNouvelle.setMontantEnchere(enchere.getMontantEnchere());
-            enchereNouvelle.setUtilisateur(utilisateurService.charger(utilisateur.getNoUtilisateur()));
-            enchereNouvelle.setArticle(articleService.consulterArticleParId(articleVendu.getNoArticle()));
-            enchereService.creerEnchere(enchereNouvelle);
+            newEnchere(enchereNouvelle, new java.util.Date(), enchere.getMontantEnchere(), utilisateurService.charger(utilisateur.getNoUtilisateur()), articleService.consulterArticleParId(articleVendu.getNoArticle()));
             gestionCredit(utilisateur, enchere, articleVendu);
         } else {
             if (enchere.getMontantEnchere() > enchereService.consulterEnchereId(articleVendu.getNoArticle())) {
@@ -98,6 +89,21 @@ public class EnchereController {
             }
         }
         return "redirect:/encheres";
+    }
+    private void newEnchere(Enchere enchereNouvelle, Date date, int MontantEnchere, Utilisateur utilisateur, ArticleVendu article){
+        enchereNouvelle.setDateEnchere(date);
+        enchereNouvelle.setMontantEnchere(MontantEnchere);
+        enchereNouvelle.setUtilisateur(utilisateurService.charger(utilisateur.getNoUtilisateur()));
+        enchereNouvelle.setArticle(articleService.consulterArticleParId(article.getNoArticle()));
+        enchereService.creerEnchere(enchereNouvelle);
+    }
+
+    private void gestionCredit(Utilisateur utilisateur, Enchere enchere, ArticleVendu articleVendu){
+        utilisateur.setCredit(utilisateur.getCredit()-enchere.getMontantEnchere());
+        utilisateurService.enleverCredit(utilisateur);
+        Enchere enchereFinal = enchereService.consulterAncienEnchere(utilisateur.getNoUtilisateur(), articleVendu.getNoArticle()).get(0);
+        enchereFinal.getUtilisateur().setCredit(enchereFinal.getMontantEnchere()+utilisateurService.charger(enchereFinal.getUtilisateur().getNoUtilisateur()).getCredit());
+        utilisateurService.ajouterCredit(enchereFinal.getUtilisateur());
     }
 }
 

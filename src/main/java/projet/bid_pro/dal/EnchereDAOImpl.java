@@ -18,6 +18,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Map;
+import java.util.Objects;
 
 @Repository
 public class EnchereDAOImpl implements EnchereDAO{
@@ -26,24 +28,28 @@ public class EnchereDAOImpl implements EnchereDAO{
     private final String FIND_ENCHERES_BY_ARTICLE = "SELECT * FROM ARTICLES_VENDUS inner join ENCHERES on ARTICLES_VENDUS.no_article = ENCHERES.no_article";
     private final String FIND_ENCHERES_BY_CATEGORIE = "SELECT * FROM CATEGORIES inner join ARTICLES_VENDUS on CATEGORIES.no_categorie = ARTICLES_VENDUS.no_categorie inner join ENCHERES on ARTICLES_VENDUS.no_article = ENCHERES.no_article";
     private final String FIND_VENTES_BY_ID = "SELECT * FROM ENCHERES inner join ARTICLES_VENDUS on ENCHERES.no_article = ARTICLES_VENDUS.no_article inner join UTILISATEURS on ENCHERES.no_utilisateur = UTILISATEURS.no_utilisateur WHERE ARTICLES_VENDUS.prix_vente IS NOT NULL";
-    private final String FIND_LAST_UTI = "select TOP(1) date_enchere,montant_enchere, UTILISATEURS.*, ARTICLES_VENDUS.* " +
-            "from ENCHERES E, UTILISATEURS, ARTICLES_VENDUS where E.no_utilisateur != ? " +
-            "and E.no_article = ? order by montant_enchere DESC";
+    private final String FIND_LAST_UTI = "select TOP(1) no_utilisateur,no_article, date_enchere,montant_enchere from ENCHERES where ENCHERES.no_utilisateur != ? and ENCHERES.no_article = ? order by montant_enchere DESC";
+
+    private final String FIND_TOP_UTI = "select TOP(1) no_utilisateur,no_article, date_enchere,montant_enchere from ENCHERES where ENCHERES.no_article = ? order by montant_enchere DESC";
+
+    String sql = "SELECT no_utilisateur FROM ENCHERES WHERE no_article = ? AND montant_enchere = (SELECT MAX(montant_enchere) FROM ENCHERES WHERE no_article = ?)";
 
     @Autowired
     private JdbcTemplate jdbcTemplate;
 
     @Override
+    public Boolean readTopEnchere(int id, int idUser) {
+        Enchere enchere = jdbcTemplate.queryForObject(FIND_TOP_UTI, new Object[]{id}, new EnchereRowMapperTest());
+        return enchere.getUtilisateur().getNoUtilisateur() == idUser;
+    }
     public Long read(long id) {
         String  FIND_BY_IDD = "SELECT MAX(ENCHERES.montant_enchere) SUM_QUANTITY " +
                 "FROM ENCHERES " +
-                "WHERE ENCHERES.no_article = ? " +
-                "GROUP BY ENCHERES.no_article  " +
-                "ORDER BY SUM_QUANTITY";
+                "WHERE ENCHERES.no_article = ?";
         try {
             return jdbcTemplate.queryForObject(FIND_BY_IDD, long.class, id);
         } catch (EmptyResultDataAccessException e) {
-            return null;
+            return null; // or throw an exception depending on your requirement
         }
     }
 
@@ -61,8 +67,8 @@ public class EnchereDAOImpl implements EnchereDAO{
     }
 
     @Override
-    public List<Enchere> consulterAncienEnchere(long no_utilisateur, long no_article) {
-        return jdbcTemplate.query(FIND_LAST_UTI,new Object[]{no_utilisateur, no_article }, new EnchereRowMapper());
+    public List<Enchere> consulterAncienEnchere(long no_article, long no_utilisateur) {
+        return jdbcTemplate.query(FIND_LAST_UTI,new Object[]{no_article, no_utilisateur}, new EnchereRowMapperTest());
     }
     @Override
     public List<Enchere> findAll() {
@@ -141,6 +147,25 @@ public class EnchereDAOImpl implements EnchereDAO{
 
             enchere.setDateEnchere(rs.getTimestamp("date_enchere"));
             enchere.setMontantEnchere(rs.getInt("montant_enchere"));
+            return enchere;
+        }
+    }
+
+    class EnchereRowMapperTest implements RowMapper<Enchere> {
+        @Override
+        public Enchere mapRow(ResultSet rs, int rowNum) throws SQLException {
+            Enchere enchere = new Enchere();
+            Utilisateur utilisateur = new Utilisateur();
+            ArticleVendu articleVendu = new ArticleVendu();
+
+            articleVendu.setNoArticle(rs.getInt("no_article"));
+            utilisateur.setNoUtilisateur(rs.getInt("no_utilisateur"));
+
+            enchere.setUtilisateur(utilisateur);
+            enchere.setArticle(articleVendu);
+            enchere.setDateEnchere(rs.getTimestamp("date_enchere"));
+            enchere.setMontantEnchere(rs.getInt("montant_enchere"));
+
             return enchere;
         }
     }

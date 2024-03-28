@@ -12,6 +12,7 @@ import projet.bid_pro.dal.CategoriesDAO;
 import projet.bid_pro.dal.EnchereDAO;
 
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class EnchereServiceImpl implements EnchereService{
@@ -64,5 +65,8 @@ public class EnchereServiceImpl implements EnchereService{
     public List<Enchere> consulterAncienEnchere(long idUtil, long id) {
         return enchereDAO.consulterAncienEnchere(idUtil, id);
     }
-
+    @Override
+    public Boolean readTopEnchere(int id, int idUser){
+        return enchereDAO.readTopEnchere(id, idUser);
+    }
 }
