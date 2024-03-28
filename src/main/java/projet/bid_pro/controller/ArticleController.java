@@ -100,7 +100,7 @@ public class ArticleController {
                 enchere.setMontantEnchere(articleVendu.getPrixInitial());
                 model.addAttribute("enchere", enchere);
                 model.addAttribute("articleVendu", articleVendu);
-                model.addAttribute("utilisateur", (utilisateurService.charger(principal.getName())));
+                    model.addAttribute("utilisateur", (utilisateurService.charger(principal.getName())));
                 List<Categorie> categories = categorieService.consulterCategories();
                 model.addAttribute("categories", categories);
                 return "detailEnchereEdit"; // Correction de l'alias de la vue

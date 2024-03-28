@@ -77,7 +77,12 @@ public class EnchereDAOImpl implements EnchereDAO{
                 ps.setInt(4, enchere.getMontantEnchere());
                 return ps;
             });
+        editActuelMeilleurPrix(enchere);
         return enchere;
+    }
+    public void editActuelMeilleurPrix(Enchere enchere){
+        String sql = "UPDATE ARTICLES_VENDUS set actuelMeilleurPrix = ? WHERE no_article = ?";
+        jdbcTemplate.update(sql, enchere.getMontantEnchere(), enchere.getArticle().getNoArticle());
     }
 
     @Override
@@ -89,6 +94,7 @@ public class EnchereDAOImpl implements EnchereDAO{
     public Enchere updateEnchere(Enchere enchere) {
         String sql = "UPDATE ENCHERES SET montant_enchere = ? WHERE no_article = ? and no_utilisateur = ?";
         jdbcTemplate.update(sql, enchere.getMontantEnchere(), enchere.getArticle().getNoArticle(), enchere.getUtilisateur().getNoUtilisateur());
+        editActuelMeilleurPrix(enchere);
         return enchere;
     }
 

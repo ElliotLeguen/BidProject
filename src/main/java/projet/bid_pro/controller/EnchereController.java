@@ -57,13 +57,7 @@ public class EnchereController {
                            @ModelAttribute(name = "articleVendu") ArticleVendu articleVendu,
                            Utilisateur utilisateur,
                            Model model){
-        if (utilisateur.getCredit() < enchere.getMontantEnchere()){
-            model.addAttribute("message","Solde insuffisant");
-            return "error";
-        }else {
             return consultaionEnchere(articleVendu, utilisateur, enchere, result,model);
-        }
-
     }
 
     private String consultaionEnchere(ArticleVendu articleVendu, Utilisateur utilisateur, Enchere enchere,BindingResult result,Model model) {
