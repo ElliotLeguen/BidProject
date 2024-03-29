@@ -25,7 +25,7 @@ public class ArticleDAOImpl implements ArticleDAO {
     private final String FIND_ENCHERES_BY_ARTICLE = "SELECT * FROM ARTICLES_VENDUS inner join ENCHERES on ARTICLES_VENDUS.no_article = ENCHERES.no_article";
     private final String FIND_ALL = "SELECT * FROM ARTICLES_VENDUS INNER JOIN UTILISATEURS on ARTICLES_VENDUS.no_utilisateur = UTILISATEURS.no_utilisateur INNER JOIN CATEGORIES on CATEGORIES.no_categorie = ARTICLES_VENDUS.no_categorie";
     private final String FIND_ALL_FIN_ENCHERE = "select * from ARTICLES_VENDUS INNER JOIN UTILISATEURS on ARTICLES_VENDUS.no_utilisateur = UTILISATEURS.no_utilisateur INNER JOIN CATEGORIES on CATEGORIES.no_categorie = ARTICLES_VENDUS.no_categorie WHERE CONVERT(date, date_fin_encheres) = CONVERT(date, GETDATE());";
-    private final String MODIFIER_ARTICLE_PRIX_VENTE = "UPDATE ARTICLES_VENDUS SET prix_vente = :prix_vente WHERE no_article = :no_article";
+    private final String MODIFIER_ARTICLE_PRIX_VENTE = "UPDATE ARTICLES_VENDUS SET prix_vente = :prix_vente, idUtilisateurGagnant = :idUtilisateurGagnant WHERE no_article = :no_article";
     private final String MODIFIER_CREDIT_UTILISATEUR_ARTICLE = "UPDATE UTILISATEURS SET credit = :credit WHERE no_utilisateur = :no_utilisateur";
     private final String FIND_UTILISATEUR = "SELECT credit FROM UTILISATEURS WHERE no_utilisateur = ?";
     private final String MODIFIER_ARTICLE = "UPDATE ARTICLES_VENDUS SET nom_article = :nom_article, description = :description, date_debut_encheres = :date_debut_encheres, date_fin_encheres = :date_fin_encheres, prix_initial = :prix_initial, prix_vente = :prix_vente, no_categorie = :no_categorie, image= :image WHERE no_article = :no_article";
@@ -100,6 +100,7 @@ public class ArticleDAOImpl implements ArticleDAO {
             MapSqlParameterSource namedParameters = new MapSqlParameterSource();
             namedParameters.addValue("no_article", article.getNoArticle());
             namedParameters.addValue("prix_vente", article.getActuelMeilleurPrix());
+            namedParameters.addValue("idUtilisateurGagnant", 37);
 
             jdbcTemplateNamedParameter.update(MODIFIER_ARTICLE_PRIX_VENTE, namedParameters);
 
