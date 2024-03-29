@@ -256,22 +256,17 @@ public class ArticleController {
                     rqt += " WHERE date_debut_encheres <= GETDATE() AND date_fin_encheres >= GETDATE() OR ENCHERES.no_utilisateur = " + user.getNoUtilisateur() + " AND (date_debut_encheres <= GETDATE() AND date_fin_encheres >= GETDATE()) OR ENCHERES.no_utilisateur = " + user.getNoUtilisateur() + " AND ARTICLES_VENDUS.prix_vente != 0";
                 }
             }
-        } else rqt= "SELECT * FROM ARTICLES_VENDUS LEFT JOIN  ENCHERES on ARTICLES_VENDUS.no_article = ENCHERES.no_article  inner join UTILISATEURS on ARTICLES_VENDUS.no_utilisateur = UTILISATEURS.no_utilisateur inner join CATEGORIES on ARTICLES_VENDUS.no_categorie = CATEGORIES.no_categorie WHERE date_debut_encheres <= GETDATE() AND date_fin_encheres >= GETDATE() ORDER BY 1 ASC OFFSET 4 ROWS FETCH NEXT 6 ROWS ONLY";
+        } else rqt= "SELECT * FROM ARTICLES_VENDUS  inner join UTILISATEURS on ARTICLES_VENDUS.no_utilisateur = UTILISATEURS.no_utilisateur inner join CATEGORIES on ARTICLES_VENDUS.no_categorie = CATEGORIES.no_categorie WHERE date_debut_encheres <= GETDATE() AND date_fin_encheres >= GETDATE()";
 
         System.out.println(rqt);
 
         List<ArticleVendu> list = articleService.getVentes(rqt);
         System.out.println(list);
-        List<ArticleVendu> distinctArticles = list.stream()
-                .collect(Collectors.toMap(ArticleVendu::getNoArticle,
-                        article -> article,
-                        (existing, replacement) -> existing.getActuelMeilleurPrix() >= replacement.getActuelMeilleurPrix() ? existing : replacement))
-                .values().stream()
-                .toList();
-        System.out.println(distinctArticles);
+
+
         model.addAttribute("categories", categorieService.consulterCategories());
         model.addAttribute("userEdit", utilisateurService.charger(principal.getName()));
-        model.addAttribute("articles", distinctArticles);
+        model.addAttribute("articles", list);
         return "encheres";
     }
 }
