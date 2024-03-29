@@ -61,7 +61,7 @@ public class ArticleController {
             result.addError(error);
             model.addAttribute("categories", categorieService.consulterCategories());
             model.addAttribute("userEdit", utilisateurService.charger(principal.getName()));
-            return "error";
+            return "errorEnchere";
         }
         if (result.hasErrors()) {
             model.addAttribute("article", article);
@@ -105,7 +105,6 @@ public class ArticleController {
     public String afficherUneEnchere(@RequestParam(name = "id", required = true) long id, Model model, Principal principal) {
         if (id > 0) {
             ArticleVendu articleVendu = articleService.consulterArticleParId(id);
-
             if (articleVendu != null) {
                 Enchere enchere = new Enchere();
                 enchere.setMontantEnchere(articleVendu.getPrixInitial());
@@ -168,7 +167,8 @@ public class ArticleController {
 
     @GetMapping("/supprArticle")
     public String supprimerArticle(@RequestParam(name = "idArticle", required = true) int idArticle) {
-        articleService.SupprArticle(idArticle);
+        ArticleVendu articleVendu = articleService.consulterArticleParId(idArticle);
+        articleService.SupprArticle(articleVendu);
         return "redirect:/encheres";
     }
 

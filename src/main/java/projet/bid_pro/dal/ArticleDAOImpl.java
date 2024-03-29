@@ -23,14 +23,15 @@ public class ArticleDAOImpl implements ArticleDAO{
     private final String FIND_ENCHERES_BY_ARTICLE = "SELECT * FROM ARTICLES_VENDUS inner join ENCHERES on ARTICLES_VENDUS.no_article = ENCHERES.no_article";
     private final String FIND_ALL = "SELECT * FROM ARTICLES_VENDUS INNER JOIN UTILISATEURS on ARTICLES_VENDUS.no_utilisateur = UTILISATEURS.no_utilisateur INNER JOIN CATEGORIES on CATEGORIES.no_categorie = ARTICLES_VENDUS.no_categorie";
     private final String FIND_ALL_FIN_ENCHERE = "select * from ARTICLES_VENDUS INNER JOIN UTILISATEURS on ARTICLES_VENDUS.no_utilisateur = UTILISATEURS.no_utilisateur INNER JOIN CATEGORIES on CATEGORIES.no_categorie = ARTICLES_VENDUS.no_categorie WHERE CONVERT(date, date_fin_encheres) = CONVERT(date, GETDATE());";
-    private final String MODIFIER_ARTICLE = "UPDATE ARTICLES_VENDUS SET nom_article = :nom_article, description = :description, date_debut_encheres = :date_debut_encheres, date_fin_encheres = :date_fin_encheres, prix_initial = :prix_initial, prix_vente = :prix_vente, no_utilisateur =:no_utilisateur , no_categorie = :no_categorie, image= :image WHERE no_article = :no_article";
     private final String MODIFIER_ARTICLE_PRIX_VENTE = "UPDATE ARTICLES_VENDUS SET prix_vente = :prix_vente WHERE no_article = :no_article";
     private final String MODIFIER_CREDIT_UTILISATEUR_ARTICLE = "UPDATE UTILISATEURS SET credit = :credit WHERE no_utilisateur = :no_utilisateur";
     private final String FIND_UTILISATEUR = "SELECT credit FROM UTILISATEURS WHERE no_utilisateur = ?";
-    private final String AJOUTER_RETRAIT = "INSERT INTO RETRAITS (no_article,rue,code_postal,ville) VALUES (:no_article,:rue,:code_postal,:ville)";
     private final String MODIFIER_ARTICLE = "UPDATE ARTICLES_VENDUS SET nom_article = :nom_article, description = :description, date_debut_encheres = :date_debut_encheres, date_fin_encheres = :date_fin_encheres, prix_initial = :prix_initial, prix_vente = :prix_vente, no_categorie = :no_categorie, image= :image WHERE no_article = :no_article";
     private final String SUPPRIMER_ARTICLE = "DELETE FROM ENCHERES WHERE no_article = :no_article; " +
-            "DELETE FROM ARTICLES_VENDUS WHERE no_article = :no_article";
+            "DELETE FROM ARTICLES_VENDUS WHERE no_article1 = :no_article";
+    private final String FIND_TOP_UTI = "select TOP(1) no_utilisateur,no_article, date_enchere,montant_enchere from ENCHERES where ENCHERES.no_article = :no_article order by montant_enchere DESC";
+    private final String FIND_UTILISATEURREMB = "select  * from UTILISATEUERS where no_utilisateur = :no_utilisateur";
+    private final String REMBOURSER_CREDIT = "UPDATE UTILSATEURS SET credit = :credit  WHERE no_utilisateur = :no_utilisateur";
 
 //            "DELETE FROM ENCHERES WHERE no_article IN (SELECT no_article FROM ARTICLES_VENDUS WHERE no_article = ?); " +
 //            "DELETE FROM ARTICLES_VENDUS WHERE no_article = ?";
@@ -61,13 +62,7 @@ public class ArticleDAOImpl implements ArticleDAO{
             ps.setString(9, article.getImage());
             return ps;
                 }, keyHolder);
-        MapSqlParameterSource namedParameters = new MapSqlParameterSource();
-        namedParameters.addValue("no_article", article.getNoArticle());
-        namedParameters.addValue("rue", article);
-        namedParameters.addValue("code_postal", article);
-        namedParameters.addValue("ville", article);
 
-        jdbcTemplateNamedParameter.update(AJOUTER_RETRAIT, namedParameters);
         if (keyHolder.getKey() != null) {
             article.setNoArticle(keyHolder.getKey().intValue());
             }
@@ -120,10 +115,27 @@ public class ArticleDAOImpl implements ArticleDAO{
     }
 
     @Override
-    public void supprArticle(int idArticle) {
+    public void supprArticle(ArticleVendu idArticle) {
+
+        MapSqlParameterSource namedParameters4 = new MapSqlParameterSource();
+        namedParameters4.addValue("no_utilisateur", idArticle.getNoArticle());
+
+        Utilisateur utilisateur =  jdbcTemplateNamedParameter.queryForObject(FIND_TOP_UTI,namedParameters4 , new UtilisateurRowMapper());
+
         MapSqlParameterSource namedParameters = new MapSqlParameterSource();
-        namedParameters.addValue("no_article", idArticle);
-        jdbcTemplateNamedParameter.update(SUPPRIMER_ARTICLE, namedParameters);
+        namedParameters.addValue("no_utilisateur", utilisateur.getNoUtilisateur());
+
+        Utilisateur utilisateurRemb = jdbcTemplateNamedParameter.queryForObject(FIND_UTILISATEURREMB, namedParameters,Utilisateur.class);
+        MapSqlParameterSource namedParameters3 = new MapSqlParameterSource();
+        namedParameters3.addValue("no_utilisateur", utilisateurRemb.getNoUtilisateur());
+        namedParameters3.addValue("credit", utilisateurRemb.getCredit()+idArticle.getActuelMeilleurPrix());
+
+        jdbcTemplateNamedParameter.update(REMBOURSER_CREDIT, namedParameters3);
+
+        MapSqlParameterSource namedParameters2 = new MapSqlParameterSource();
+        namedParameters2.addValue("no_article", idArticle.getNoArticle());
+        namedParameters2.addValue("no_article1", idArticle.getNoArticle());
+        jdbcTemplateNamedParameter.update(SUPPRIMER_ARTICLE, namedParameters2);
     }
 
     @Override
@@ -198,6 +210,26 @@ public class ArticleDAOImpl implements ArticleDAO{
             articleVendu.setUtilisateur(utilisateur);
             articleVendu.setCategorie(categorie);
             return articleVendu;
+        }
+    }
+    class UtilisateurRowMapper implements RowMapper<Utilisateur> {
+        @Override
+        public Utilisateur mapRow(ResultSet rs, int rowNum) throws SQLException {
+            Utilisateur utilisateur = new Utilisateur();
+            utilisateur.setNoUtilisateur(rs.getInt("no_utilisateur"));
+            utilisateur.setPseudo(rs.getString("pseudo"));
+            utilisateur.setNom(rs.getString("nom"));
+            utilisateur.setPrenom(rs.getString("prenom"));
+            utilisateur.setEmail(rs.getString("email"));
+            utilisateur.setTelephone(rs.getString("telephone"));
+            utilisateur.setRue(rs.getString("rue"));
+            utilisateur.setCodePostal(rs.getString("code_postal"));
+            utilisateur.setVille(rs.getString("ville"));
+            utilisateur.setMotDePasse(rs.getString("mot_de_passe"));
+            utilisateur.setCredit(rs.getInt("credit"));
+            utilisateur.setAdministrateur(rs.getString("administrateur"));
+            utilisateur.setEtat(rs.getByte("etat"));
+            return utilisateur;
         }
     }
 }

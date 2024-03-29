@@ -43,7 +43,8 @@
         <div th:if="${utlisateurGagnant} == null" >
             <input hidden id="articleVendu" name="articleVendu" th:field="*{articleVendu.noArticle}" />
             <input hidden id="utilisteur" name="utilisteur" th:field="*{utilisteur.noUtilisateur}" />
-            <input id="ticketNum" type="number" name="montantEnchere" th:value="*{articleVendu.actuelMeilleurPrix}"/>
+            <input id="ticketNum" type="number" name="montantEnchere"
+                   th:value="${articleVendu.actuelMeilleurPrix == 0 ? articleVendu.prixInitial : articleVendu.actuelMeilleurPrix}"/>
             <div th:if="${message}" >
                 <p th:text="${message}"></p>
             </div>

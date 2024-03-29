@@ -82,7 +82,11 @@ public class EnchereController {
     private String consultaionEnchere(ArticleVendu articleVendu, Utilisateur utilisateur, Enchere enchere,BindingResult result,Model model) {
         Enchere enchereNouvelle = new Enchere();
         if (enchereService.consulterEnchereParId(articleVendu.getNoArticle(), utilisateur.getNoUtilisateur()) == null) {
-            newEnchere(enchereNouvelle, new java.util.Date(), enchere.getMontantEnchere(), utilisateurService.charger(utilisateur.getNoUtilisateur()), articleService.consulterArticleParId(articleVendu.getNoArticle()));
+            enchereNouvelle.setDateEnchere(new java.util.Date());
+            enchereNouvelle.setMontantEnchere(enchere.getMontantEnchere());
+            enchereNouvelle.setUtilisateur(utilisateurService.charger(utilisateur.getNoUtilisateur()));
+            enchereNouvelle.setArticle(articleService.consulterArticleParId(articleVendu.getNoArticle()));
+            enchereService.creerEnchere(enchereNouvelle);
             gestionCredit(utilisateur, enchere, articleVendu);
         } else {
             if (enchere.getMontantEnchere() > enchereService.consulterEnchereId(articleVendu.getNoArticle())) {

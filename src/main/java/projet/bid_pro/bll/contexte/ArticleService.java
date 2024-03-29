@@ -13,7 +13,7 @@ public interface ArticleService {
     void creerArticle(ArticleVendu articleVendu);
     ArticleVendu consulterArticleParId(long id);
     ArticleVendu EditArticle(ArticleVendu articleVendu);
-    void SupprArticle(int idArticle);
+    void SupprArticle(ArticleVendu idArticle);
 
     List<ArticleVendu>  getAll();
 

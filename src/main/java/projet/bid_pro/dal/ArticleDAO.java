@@ -12,6 +12,6 @@ public interface ArticleDAO {
     List<ArticleVendu> consulterEncheresParCategorie(String categorie);
     ArticleVendu creerArticle(ArticleVendu articleVendu);
     ArticleVendu editArticle(ArticleVendu articleVendu);
-    void supprArticle(int idArticle);
+    void supprArticle(ArticleVendu idArticle);
     void finEnchereArticle();
 }
