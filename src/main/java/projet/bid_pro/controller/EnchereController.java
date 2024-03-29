@@ -68,11 +68,9 @@ public class EnchereController {
                            Principal principal,
                            Model model) {
         Utilisateur utilisateur = utilisateurService.charger(principal.getName());
+        Boolean enchereExiste = enchereService.readTopEnchere(articleVendu.getNoArticle(), utilisateur.getNoUtilisateur());
         if (utilisateur.getCredit() < enchere.getMontantEnchere()) {
             model.addAttribute("message", "Solde insuffisant");
-            return "errorEnchere";
-        } else if (enchereService.readTopEnchere(articleVendu.getNoArticle(), utilisateur.getNoUtilisateur())) {
-            model.addAttribute("message", "Vous ne pouvez pas rencherir alors que vous êtes deja premier");
             return "errorEnchere";
         } else {
             return consultaionEnchere(articleVendu, utilisateur, enchere, result, model);
@@ -89,15 +87,20 @@ public class EnchereController {
             enchereService.creerEnchere(enchereNouvelle);
             gestionCredit(utilisateur, enchere, articleVendu);
         } else {
-            if (enchere.getMontantEnchere() > enchereService.consulterEnchereId(articleVendu.getNoArticle())) {
-                enchereNouvelle = (enchereService.consulterEnchereParId(articleVendu.getNoArticle(), utilisateur.getNoUtilisateur()));
-                enchereNouvelle.setUtilisateur(utilisateurService.charger(utilisateur.getNoUtilisateur()));
-                enchereNouvelle.setMontantEnchere(enchere.getMontantEnchere());
-                enchereService.updateEnchere(enchereNouvelle);
-                gestionCredit(utilisateur,enchere, articleVendu);
-            }else{
-                model.addAttribute("message","Le montant de l'enchère doit être superieur à l'ancien");
+            if (enchereService.readTopEnchere(articleVendu.getNoArticle(), utilisateur.getNoUtilisateur())) {
+                model.addAttribute("message", "Vous ne pouvez pas rencherir alors que vous êtes deja premier");
                 return "errorEnchere";
+            }else {
+                if (enchere.getMontantEnchere() > enchereService.consulterEnchereId(articleVendu.getNoArticle())) {
+                    enchereNouvelle = (enchereService.consulterEnchereParId(articleVendu.getNoArticle(), utilisateur.getNoUtilisateur()));
+                    enchereNouvelle.setUtilisateur(utilisateurService.charger(utilisateur.getNoUtilisateur()));
+                    enchereNouvelle.setMontantEnchere(enchere.getMontantEnchere());
+                    enchereService.updateEnchere(enchereNouvelle);
+                    gestionCredit(utilisateur, enchere, articleVendu);
+                } else {
+                    model.addAttribute("message", "Le montant de l'enchère doit être superieur à l'ancien");
+                    return "errorEnchere";
+                }
             }
         }
         return "redirect:/encheres";

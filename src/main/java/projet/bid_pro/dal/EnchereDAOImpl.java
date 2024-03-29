@@ -39,8 +39,12 @@ public class EnchereDAOImpl implements EnchereDAO{
 
     @Override
     public Boolean readTopEnchere(int id, int idUser) {
-        Enchere enchere = jdbcTemplate.queryForObject(FIND_TOP_UTI, new Object[]{id}, new EnchereRowMapperTest());
-        return enchere.getUtilisateur().getNoUtilisateur() == idUser;
+        try {
+            Enchere enchere = jdbcTemplate.queryForObject(FIND_TOP_UTI, new Object[]{id}, new EnchereRowMapperTest());
+            return enchere.getUtilisateur().getNoUtilisateur() == idUser;
+        } catch (EmptyResultDataAccessException e) {
+            return null;
+        }
     }
     public Long read(long id) {
         String  FIND_BY_IDD = "SELECT MAX(ENCHERES.montant_enchere) SUM_QUANTITY " +
