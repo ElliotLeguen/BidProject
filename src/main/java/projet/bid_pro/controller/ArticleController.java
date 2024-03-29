@@ -278,18 +278,18 @@ public class ArticleController {
         model.addAttribute("currentPage", page);
         System.out.println(rqt);
 
-        List<ArticleVendu> list = articleService.getVentes(rqt);
-        System.out.println(list);
-        List<ArticleVendu> distinctArticles = list.stream()
-                .collect(Collectors.toMap(ArticleVendu::getNoArticle,
-                        article -> article,
-                        (existing, replacement) -> existing.getActuelMeilleurPrix() >= replacement.getActuelMeilleurPrix() ? existing : replacement))
-                .values().stream()
-                .toList();
-        System.out.println(distinctArticles);
+          List<ArticleVendu> list = articleService.getVentes(rqt);
+//        System.out.println(list);
+//        List<ArticleVendu> distinctArticles = list.stream()
+//                .collect(Collectors.toMap(ArticleVendu::getNoArticle,
+//                        article -> article,
+//                        (existing, replacement) -> existing.getActuelMeilleurPrix() >= replacement.getActuelMeilleurPrix() ? existing : replacement))
+//                .values().stream()
+//                .toList();
+//        System.out.println(distinctArticles);
         model.addAttribute("categories", categorieService.consulterCategories());
         model.addAttribute("userEdit", utilisateurService.charger(principal.getName()));
-        model.addAttribute("articles", distinctArticles);
+        model.addAttribute("articles", list);
         return "encheres";
     }
 }
