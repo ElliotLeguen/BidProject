@@ -1,48 +1,44 @@
 package projet.bid_pro.bo;
 
+import org.springframework.format.annotation.DateTimeFormat;
 import projet.bid_pro.dal.UtilisateurDAO;
 
 import java.util.Date;
 
 public class Enchere {
-    private Utilisateur noUtilisateur;
-    private ArticleVendu noArticle;
+    private Utilisateur Utilisateur;
+    private ArticleVendu Article;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date dateEnchere;
     private int montantEnchere;
 
     // Constructeur
-    public Enchere(int noUtilisateur, int noArticle, Date dateEnchere, int montantEnchere) {
-        this.dateEnchere = dateEnchere;
-        this.montantEnchere = montantEnchere;
+    public Enchere(){
     }
 
-    public Enchere(Utilisateur noUtilisateur, ArticleVendu noArticle, Date dateEnchere, int montantEnchere) {
-        this.noUtilisateur = noUtilisateur;
-        this.noArticle = noArticle;
+    public Enchere(Utilisateur utilisateur, ArticleVendu article, Date dateEnchere, int montantEnchere) {
+        this.Utilisateur = utilisateur;
+        this.Article = article;
         this.dateEnchere = dateEnchere;
         this.montantEnchere = montantEnchere;
-    }
-
-    public Enchere() {
-
     }
 
     // Getters et Setters
 
-    public Utilisateur getNoUtilisateur() {
-        return noUtilisateur;
+    public Utilisateur getUtilisateur() {
+        return Utilisateur;
     }
 
-    public void setNoUtilisateur(Utilisateur noUtilisateur) {
-        this.noUtilisateur = noUtilisateur;
+    public void setUtilisateur(Utilisateur Utilisateur) {
+        this.Utilisateur = Utilisateur;
     }
 
-    public ArticleVendu getNoArticle() {
-        return noArticle;
+    public ArticleVendu getArticle() {
+        return Article;
     }
 
-    public void setNoArticle(ArticleVendu noArticle) {
-        this.noArticle = noArticle;
+    public void setArticle(ArticleVendu article) {
+        this.Article = article;
     }
 
     public Date getDateEnchere() {
@@ -64,8 +60,8 @@ public class Enchere {
     @Override
     public String toString() {
         return "Enchere{" +
-                "noUtilisateur=" + noUtilisateur +
-                ", noArticle=" + noArticle +
+                "Utilisateur=" + Utilisateur +
+                ", Article=" + Article +
                 ", dateEnchere=" + dateEnchere +
                 ", montantEnchere=" + montantEnchere +
                 '}';

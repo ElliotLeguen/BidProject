@@ -1,117 +1,126 @@
 package projet.bid_pro.controller;
 
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.validation.Valid;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
+import org.springframework.web.bind.annotation.*;
 
-import org.springframework.web.bind.annotation.SessionAttributes;
+import projet.bid_pro.bll.contexte.ArticleService;
+import projet.bid_pro.bll.contexte.CategorieService;
 import projet.bid_pro.bll.contexte.EnchereService;
+import projet.bid_pro.bll.contexte.UtilisateurService;
+import projet.bid_pro.bo.ArticleVendu;
 import projet.bid_pro.bo.Enchere;
+import projet.bid_pro.bo.Utilisateur;
 
+import java.security.Principal;
+import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Controller
-@SessionAttributes({ "UtilisateurEnSession" })
+@SessionAttributes({"UtilisateurEnSession"})
 public class EnchereController {
+    private EnchereService enchereService;
+    private CategorieService categorieService;
+    private UtilisateurService utilisateurService;
+    private ArticleService articleService;
 
-	private EnchereService enchereService;
-  
-	public EnchereController(EnchereService enchereService) {
-		this.enchereService = enchereService;
-	}
+    public EnchereController(EnchereService enchereService,  CategorieService categorieService, UtilisateurService utilisateurService,  ArticleService articleService) {
+        this.enchereService = enchereService;
+        this.categorieService = categorieService;
+        this.utilisateurService = utilisateurService;
+        this.articleService = articleService;
+    }
 
-  	@GetMapping("/encheres")
-	public String afficherEncheres(Model model) {
-		List<Enchere> encheres = enchereService.consulterEncheres();
-		var categories = enchereService.consulterCategories();
-		model.addAttribute("categorie", categories);
-		model.addAttribute("encheres", encheres);
-		System.out.println(encheres);
-		return "encheres";
-	}
+    @GetMapping("/")
+    public String afficherAccueil(
+                                    @RequestParam(name = "categorie", required = false, defaultValue = "0") int categorie,
+                                    Model model) {
+        articleService.finEnchereArticle();
+        List<ArticleVendu> articleVendus;
+        if(categorie == 0){
+            articleVendus = articleService.getAll();
+        }else {
+            String rqt = "SELECT * FROM ARTICLES_VENDUS INNER JOIN UTILISATEURS ON ARTICLES_VENDUS.no_utilisateur = UTILISATEURS.no_utilisateur  INNER JOIN CATEGORIES ON ARTICLES_VENDUS.no_categorie = CATEGORIES.no_categorie WHERE ARTICLES_VENDUS.no_categorie =" + categorie;
+            articleVendus = articleService.getVentes(rqt);
+        }
 
-	/*
+        var categories = categorieService.consulterCategories();
+        model.addAttribute("categorie", categories);
+        model.addAttribute("articles", articleVendus);
+        return "index";
+    }
 
-	@GetMapping("/detail")
-	public String afficherUneEnchere(@RequestParam(name = "id", required = true) long id, Model model) {
-		if (id > 0) {
-			Enchere enchere = enchereService.consulterEnchereParId(id);
-			if (enchere != null) {
-				model.addAttribute("encheres", enchere); // Correction de la variable ajoutée au modèle
-				return "detailEnchere"; // Correction de l'alias de la vue
-			} else {
-				System.out.println("Enchère inconnue!!");
-			}
-		} else {
-			System.out.println("Identifiant inconnu");
-		}
-		return "redirect:/encheres/encheres"; // Redirection vers la page d'accueil des enchères
-	}
+    @GetMapping("/profilEnchere")
+    public String afficherProfilEnchere(
+            @RequestParam(name = "idUtilisateurEnchere") int idUtilisateurEnchere,
+            Model model) {
+        model.addAttribute("utilisateur", utilisateurService.charger(idUtilisateurEnchere));
+        return "profilEnchere";
+    }
 
-	 */
+    @PostMapping("/encherir")
+    public String encherir(@Valid @ModelAttribute(name = "enchere") Enchere enchere,
+                           BindingResult result,
+                           @ModelAttribute(name = "articleVendu") ArticleVendu articleVendu,
+                           Principal principal,
+                           Model model) {
+        Utilisateur utilisateur = utilisateurService.charger(principal.getName());
+        Boolean enchereExiste = enchereService.readTopEnchere(articleVendu.getNoArticle(), utilisateur.getNoUtilisateur());
+        if (utilisateur.getCredit() < enchere.getMontantEnchere()) {
+            model.addAttribute("message", "Solde insuffisant");
+            return "errorEnchere";
+        } else {
+            return consultaionEnchere(articleVendu, utilisateur, enchere, result, model);
+        }
 
-	/*
+    }
+    private String consultaionEnchere(ArticleVendu articleVendu, Utilisateur utilisateur, Enchere enchere,BindingResult result,Model model) {
+        Enchere enchereNouvelle = new Enchere();
+        if (enchereService.consulterEnchereParId(articleVendu.getNoArticle(), utilisateur.getNoUtilisateur()) == null) {
+            enchereNouvelle.setDateEnchere(new java.util.Date());
+            enchereNouvelle.setMontantEnchere(enchere.getMontantEnchere());
+            enchereNouvelle.setUtilisateur(utilisateurService.charger(utilisateur.getNoUtilisateur()));
+            enchereNouvelle.setArticle(articleService.consulterArticleParId(articleVendu.getNoArticle()));
+            enchereService.creerEnchere(enchereNouvelle);
+            utilisateur.setCredit(utilisateur.getCredit()-enchere.getMontantEnchere());
+            utilisateurService.enleverCredit(utilisateur);
+        } else {
+            if (enchereService.readTopEnchere(articleVendu.getNoArticle(), utilisateur.getNoUtilisateur())) {
+                model.addAttribute("message", "Vous ne pouvez pas rencherir alors que vous êtes deja premier");
+                return "errorEnchere";
+            }else {
+                if (enchere.getMontantEnchere() > enchereService.consulterEnchereId(articleVendu.getNoArticle())) {
+                    enchereNouvelle = (enchereService.consulterEnchereParId(articleVendu.getNoArticle(), utilisateur.getNoUtilisateur()));
+                    enchereNouvelle.setUtilisateur(utilisateurService.charger(utilisateur.getNoUtilisateur()));
+                    enchereNouvelle.setMontantEnchere(enchere.getMontantEnchere());
+                    enchereService.updateEnchere(enchereNouvelle);
+                    gestionCredit(utilisateur, enchere, articleVendu);
+                } else {
+                    model.addAttribute("message", "Le montant de l'enchère doit être superieur à l'ancien");
+                    return "errorEnchere";
+                }
+            }
+        }
+        return "redirect:/encheres";
+    }
+    private void newEnchere(Enchere enchereNouvelle, Date date, int MontantEnchere, Utilisateur utilisateur, ArticleVendu article){
+        enchereNouvelle.setDateEnchere(date);
+        enchereNouvelle.setMontantEnchere(MontantEnchere);
+        enchereNouvelle.setUtilisateur(utilisateurService.charger(utilisateur.getNoUtilisateur()));
+        enchereNouvelle.setArticle(articleService.consulterArticleParId(article.getNoArticle()));
+        enchereService.creerEnchere(enchereNouvelle);
+    }
 
-	@ModelAttribute("genresEnSession")
-	public List<Genre> chargerGenres() {
-		System.out.println("Chargement en Session - GENRES");
-		return filmService.consulterGenres();
-	}
-
-
-	@GetMapping("/creer")
-	public String creerFilm(Model model, @ModelAttribute("membreEnSession") Membre membreEnSession) {
-		if (membreEnSession != null && membreEnSession.getId() >= 1 && membreEnSession.isAdmin()) {
-			// Il y a un membre en session et c'est un administrateur
-			// Ajout de l'instance dans le modèle
-			model.addAttribute("film", new Film());
-			return "view-film-form";
-		} else {
-			// redirection vers la page des films
-			return "redirect:/films";
-		}
-	}
-
-	// Création d'un nouveau film
-	@PostMapping("/creer")
-	public String creerFilm(@Valid @ModelAttribute("film") Film film, BindingResult bindingResult,
-			@ModelAttribute("membreEnSession") Membre membreEnSession) {
-
-		if (membreEnSession != null && membreEnSession.getId() > 1 && membreEnSession.isAdmin()) {
-			// Il y a un membre en session et c'est un administrateur
-			if (!bindingResult.hasErrors()) {
-				try {
-					filmService.creerFilm(film);
-					return "redirect:/films";
-				} catch (BusinessException e) {
-					System.err.println(e.getClefsExternalisations());
-					// Afficher les messages d’erreur - il faut les injecter dans le contexte de
-					// BindingResult
-					e.getClefsExternalisations().forEach(key -> {
-						ObjectError error = new ObjectError("globalError", key);
-						bindingResult.addError(error);
-					});
-				}
-			}
-		} else {
-			// Gestion d'une exception à afficher dans le cas où aucun membre administrateur
-			// en session
-			// Afficher les messages d’erreur - il faut les injecter dans le contexte de
-			// BindingResult
-			System.out.println("Aucun administrateur en session");
-			ObjectError error = new ObjectError("globalError", BusinessCode.VALIDATION_MEMBRE_ADMIN);
-			bindingResult.addError(error);
-		}
-		// Il y a des erreurs sur le formulaire
-		return "view-film-form";
-	}
-
-	// Injection en session des listes représentant les participants
-	@ModelAttribute("participantsEnSession")
-	public List<Participant> chargerParticipants() {
-		System.out.println("Chargement en Session - PARTICIPANTS");
-		return filmService.consulterParticipants();
-	}
-	 */
-
+    private void gestionCredit(Utilisateur utilisateur, Enchere enchere, ArticleVendu articleVendu){
+        Enchere enchereFinal = enchereService.consulterAncienEnchere(utilisateur.getNoUtilisateur(), articleVendu.getNoArticle()).get(0);
+        enchereFinal.getUtilisateur().setCredit(enchereFinal.getMontantEnchere()+utilisateurService.charger(enchereFinal.getUtilisateur().getNoUtilisateur()).getCredit());
+        utilisateurService.ajouterCredit(enchereFinal.getUtilisateur());
+    }
 }
+

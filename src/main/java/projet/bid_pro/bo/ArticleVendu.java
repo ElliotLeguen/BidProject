@@ -1,22 +1,52 @@
 package projet.bid_pro.bo;
 
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.util.Date;
+import java.util.List;
 
 public class ArticleVendu {
     private int noArticle;
+
+    @NotBlank
+    @NotNull
     private String nomArticle;
+    @NotBlank
+    @NotNull
     private String description;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date dateDebutEncheres;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date dateFinEncheres;
+    @NotNull
     private Integer prixInitial;
     private Integer prixVente;
-    private Utilisateur noUtilisateur;
-    private int noCategorie;
+
+    private Integer actuelMeilleurPrix;
+    private Utilisateur utilisateur;
+
+    private Categorie categorie;
+
+
+    public List<Enchere> getEnchereList() {
+        return enchereList;
+    }
+
+    public void setEnchereList(List<Enchere> enchereList) {
+        this.enchereList = enchereList;
+    }
+
+    private List<Enchere> enchereList;
+    private String image;
+
+    private int idUtilisateurGagnant;
 
     // Constructeur
     public ArticleVendu(int noArticle, String nomArticle, String description, Date dateDebutEncheres,
                         Date dateFinEncheres, Integer prixInitial, Integer prixVente,
-                        Utilisateur noUtilisateur, int noCategorie) {
+                        Utilisateur utilisateur, Categorie categorie,String image,Retrait retrait) {
         this.noArticle = noArticle;
         this.nomArticle = nomArticle;
         this.description = description;
@@ -24,12 +54,17 @@ public class ArticleVendu {
         this.dateFinEncheres = dateFinEncheres;
         this.prixInitial = prixInitial;
         this.prixVente = prixVente;
-        this.noUtilisateur = noUtilisateur;
-        this.noCategorie = noCategorie;
+        this.utilisateur = utilisateur;
+        this.categorie = categorie;
+        this.image = image;
     }
 
     public ArticleVendu() {
 
+    }
+
+    public ArticleVendu(String image) {
+        this.image = image;
     }
 
     // Getters et Setters
@@ -89,21 +124,46 @@ public class ArticleVendu {
         this.prixVente = prixVente;
     }
 
-    public Utilisateur getNoUtilisateur() {
-        return noUtilisateur;
+    public Utilisateur getUtilisateur() {
+        return utilisateur;
     }
 
-    public void setNoUtilisateur(Utilisateur noUtilisateur) {
-        this.noUtilisateur = noUtilisateur;
+    public void setUtilisateur(Utilisateur utilisateur) {
+        this.utilisateur = utilisateur;
     }
 
-    public int getNoCategorie() {
-        return noCategorie;
+    public Categorie getCategorie() {
+        return categorie;
     }
 
-    public void setNoCategorie(int noCategorie) {
-        this.noCategorie = noCategorie;
+    public void setCategorie(Categorie Categorie) {
+        this.categorie = Categorie;
     }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
+    public Integer getActuelMeilleurPrix() {
+        return actuelMeilleurPrix;
+    }
+
+    public void setActuelMeilleurPrix(Integer actuelMeilleurPrix) {
+        this.actuelMeilleurPrix = actuelMeilleurPrix;
+    }
+
+    public int getIdUtilisateurGagnant() {
+        return idUtilisateurGagnant;
+    }
+
+    public void setIdUtilisateurGagnant(int idUtilisateurGagnant) {
+        this.idUtilisateurGagnant = idUtilisateurGagnant;
+    }
+
 
     @Override
     public String toString() {
@@ -115,8 +175,11 @@ public class ArticleVendu {
                 ", dateFinEncheres=" + dateFinEncheres +
                 ", prixInitial=" + prixInitial +
                 ", prixVente=" + prixVente +
-                ", noUtilisateur=" + noUtilisateur +
-                ", noCategorie=" + noCategorie +
+                ", Utilisateur=" + utilisateur +
+                ", Categorie=" + categorie +
+                ", image=" + image +
+                ", actuelMeilleurPrix=" + actuelMeilleurPrix +
+                ", idUtilisateurGagnant=" + idUtilisateurGagnant +
                 '}';
     }
 }

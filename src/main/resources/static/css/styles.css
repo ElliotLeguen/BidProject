@@ -1,1 +1,62 @@
-/* styles.css */
+/* Apply some basic styles to the form elements */
+.custom-form label {
+    font-weight: bold;
+}
+
+.custom-form input[type="text"],
+.custom-form input[type="date"],
+.custom-form select,
+.custom-form textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ced4da;
+    border-radius: 5px;
+    box-sizing: border-box;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.custom-form input[type="text"]:focus,
+.custom-form input[type="date"]:focus,
+.custom-form select:focus,
+.custom-form textarea:focus {
+    border-color: #007bff;
+    outline: none; /* Use "none" instead of "0" */
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+.custom-form select {
+    height: 45px;
+}
+
+.custom-form input[type="submit"] {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 12px 24px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 16px;
+    transition: background-color 0.3s ease-in-out;
+}
+
+.custom-form input[type="submit"]:hover {
+    background-color: #0056b3;
+}
+
+.custom-form input[type="submit"]:not(:last-child) { /* Change to "not(:last-child)" */
+    margin-right: 10px; /* Use "margin-right" instead of "margin-left" */
+}
+
+/* Style error messages */
+.custom-form .error {
+    color: #dc3545;
+    font-size: 15px;
+    margin-top: -10px;
+}
+
+/* Center the form horizontally */
+.custom-form {
+    margin: auto;
+    max-width: 500px;
+}

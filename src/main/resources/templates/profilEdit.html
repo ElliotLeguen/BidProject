@@ -21,51 +21,80 @@
         <form method="post" role="form" th:action="@{/profilEdit}" th:object="${userEdit}">
             <div class="row">
                 <div class="col-md-6 mb-3">
+                    <label th:text="Pseudo"></label>
                     <input class="form-control" id="pseudo" name="pseudo"  th:value="${userEdit.pseudo}" type="text"/>
                     <p th:errors="*{pseudo}" class="text-danger" th:if="${#fields.hasErrors('pseudo')}"></p>
                 </div>
                 <div class="col-md-6 mb-3">
+                    <label th:text="Nom"></label>
                     <input class="form-control" id="nom" name="nom"  th:value="${userEdit.nom}" type="text"/>
                     <p th:errors="*{nom}" class="text-danger" th:if="${#fields.hasErrors('nom')}"></p>
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-6 mb-3">
+                    <label th:text="Prenom"></label>
                     <input class="form-control" id="prenom" name="prenom"  th:value="${userEdit.prenom}" type="text"/>
                     <p th:errors="*{prenom}" class="text-danger" th:if="${#fields.hasErrors('prenom')}"></p>
                 </div>
                 <div class="col-md-6 mb-3">
+                    <label th:text="Email"></label>
                     <input class="form-control" id="email" name="email"  th:value="${userEdit.email}" type="text"/>
                     <p th:errors="*{email}" class="text-danger" th:if="${#fields.hasErrors('email')}"></p>
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-6 mb-3">
+                    <label th:text="Telephone"></label>
                     <input class="form-control" id="telephone" name="telephone"   th:value="${userEdit.telephone}" type="text"/>
                     <p th:errors="*{telephone}" class="text-danger" th:if="${#fields.hasErrors('telephone')}"></p>
                 </div>
                 <div class="col-md-6 mb-3">
+                    <label th:text="Rue"></label>
                     <input class="form-control" id="rue" name="rue"  th:value="${userEdit.rue}" type="text"/>
                     <p th:errors="*{rue}" class="text-danger" th:if="${#fields.hasErrors('rue')}"></p>
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-6 mb-3">
+                    <label th:text="codePostal"></label>
                     <input class="form-control" id="codePostal" name="codePostal"  th:value="${userEdit.codePostal}" type="text"/>
                     <p th:errors="*{codePostal}" class="text-danger" th:if="${#fields.hasErrors('codePostal')}"></p>
                 </div>
                 <div class="col-md-6 mb-3">
+                    <label th:text="Ville"></label>
                     <input class="form-control" id="ville" name="ville"   th:value="${userEdit.ville}" type="text"/>
                     <p th:errors="*{ville}" class="text-danger" th:if="${#fields.hasErrors('ville')}"></p>
                 </div>
             </div>
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label>Mot de passe actuel</label>
+                    <input class="form-control" name="motDePasseActuel" type="password"/>
+
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label>Nouveau mot de passe</label>
+                    <input class="form-control" id="motDePasseNouveau" name="motDePasseNouveau"  type="password"/>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label>Confirmer mot de passe</label>
+                    <input class="form-control" id="motDePasseNouveauConfirm" name="motDePasseNouveauConfirm" type="password"/>
+                </div>
+            </div>
             <label for="credit">Crédit :</label>
             <p name="credit" id="credit" th:text="${userEdit.credit}" ></p>
-
+            <div th:if="${#fields.hasErrors('global')}">
+                <p th:each="err : ${#fields.errors('global')}" th:text="${err}" style="color: red" />
+            </div>
             <input class="form-control" id="noUtilisateur" name="noUtilisateur"  th:value="${userEdit.noUtilisateur}" type="hidden"/>
             <input class="form-control" id="motDePasse" name="motDePasse"  th:value="${userEdit.motDePasse}" type="hidden"/>
             <div class="form-group">
-                <button class="btn btn-primary" type="submit">Modifier</button>
+                <a th:href="@{'/acheterCredits'}" class="btn btn-primary" >Acheter des crédits</a>
+                <button class="btn btn-primary" type="submit">Modifier mes informations</button>
+                <a th:href="@{'/deleteUtilisateur?idUtilisateur=' + ${userEdit.noUtilisateur}}" class="btn btn-primary" id="delete" >Supprimer mon compte</a>
             </div>
         </form>
     </section>

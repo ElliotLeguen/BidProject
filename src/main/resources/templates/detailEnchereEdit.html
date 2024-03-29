@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:form="http://www.w3.org/1999/xhtml"
+      data-th-replace="~{layouts/layout :: layout-encheres(
+                titrePage=~{:: title},
+                contenuPage=~{:: main},
+                ressourcesSupp=~{:: #resources-css})}">
+<head>
+    <title>Nouvelle Vente</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<th:block id="resources-css">
+    <link rel="stylesheet" data-th-href="@{/css/styles.css}"/>
+</th:block>
+<main>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="custom-form">
+                    <h1>Nouvelle Vente</h1>
+                    <table>
+                        <tbody>
+                        <form method="post" role="form" th:action="@{/detailEdit}" th:object="${articleVendu}">
+
+                            <input class="form-control" id="no_article"  th:field="${articleVendu.noArticle}" type="hidden"/>
+                            <label for="nomArticle">Nom de l'article:</label><br>
+                            <input type="text" id="nomArticle" name="nomArticle" th:value="*{nomArticle}">
+                            <p th:if="${#fields.hasErrors('nomArticle')}" th:errors="*{nomArticle}" class="error"></p>
+                            <br>
+
+                            <label for="description">Description:</label><br>
+                            <textarea id="description" name="description" rows="4" cols="50"
+                                      th:field="*{description}"></textarea>
+                            <span th:if="${#fields.hasErrors('description')}" th:errors="*{description}"
+                                  class="error"></span><br>
+
+                            <select id="categorie" name="categorie" th:field="*{categorie.noCategorie}">
+                                <option th:each="categorie : ${categories}" th:value="${categorie.noCategorie}"
+                                        th:text="${categorie.libelle}"></option>
+                            </select>
+                            <span th:if="${#fields.hasErrors('categorie.noCategorie')}"
+                                  th:errors="*{categorie.noCategorie}"
+                                  class="error"></span><br>
+                            <label for="prixInitial">Prix initial:</label><br>
+                            <input type=text id="prixInitial" name="prixInitial" th:field="*{prixInitial}">
+                            <span th:if="${#fields.hasErrors('prixInitial')}" th:errors="*{prixInitial}"
+                                  class="error"></span><br>
+
+                            <label for="dateDebutEncheres">Date de début des enchères :</label>
+                            <input type="date" id="dateDebutEncheres" name="dateDebutEncheres" th:field="*{dateDebutEncheres}">
+                            <span th:if="${#fields.hasErrors('dateDebutEncheres')}" th:errors="*{dateDebutEncheres}" class="error"></span><br>
+
+                            <label for="dateFinEncheres">Date de fin des enchères :</label>
+                            <input type="date" id="dateFinEncheres" name="dateFinEncheres" th:field="*{dateFinEncheres}">
+                            <span th:if="${#fields.hasErrors('dateFinEncheres')}" th:errors="*{dateFinEncheres}" class="error"></span><br>
+
+                            <h1>Retrait :</h1>
+                            <label for="rue">Rue:</label><br>
+                            <input type="text" id="rue" name="rue"><br>
+
+                            <label for="code_postal">Code postal:</label><br>
+                            <input type="text" id="code_postal" name="code_postal"><br>
+
+                            <label for="ville">Ville:</label><br>
+                            <input type="text" id="ville" name="ville" ><br>
+
+                            <input type="submit" value="Enregistrer">&nbsp;
+                            <input type="submit" value="Annuler">
+                            <a th:href="@{'/supprArticle?idArticle=' + ${articleVendu.noArticle}}" id="delete">Annuler la vente</a>
+                        </form>
+                        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+</html>

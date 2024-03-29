@@ -4,9 +4,9 @@
 <!-- la balise main définit par la classe de CSS 'center-main' comme paramètre contenuPage -->
 <html xmlns:th="http://www.thymeleaf.org"
       data-th-replace="~{layouts/layout :: layout-encheres(
-					titrePage=~{:: title},
-					contenuPage=~{:: main},
-					ressourcesSupp=~{::#resources-css})}">
+                titrePage=~{:: title},
+                contenuPage=~{:: main},
+                ressourcesSupp=~{::#resources-css})}">
 
 <head>
     <!-- Accueil comme titre de page -->
@@ -30,13 +30,25 @@
                     <label for="inputPassword">Mot de passe :</label>
                     <input class="form-control" type="password" name="password" id="inputPassword" required placeholder="Votre Mot de passe" />
                 </div>
-                <div th:if="${errorMessage}" class="error-message">
-                    <p th:text="${errorMessage}"></p>
+                <div class="form-group">
+                    <input type="checkbox" name="remember-me" /> Remember Me
+                </div>
+                <div class="form-group">
+                    <span>Mot de passe oublié ? <a th:href="@{/forgot_password}">Changer ici</a></span>
+                </div>
+                <div class="form-group">
+                    <span>Pas encore inscrit ? <a th:href="@{/register}">S'inscrire ici</a></span>
+                </div>
+
+                <div th:if="${errorMessage}" class="error-message"><p th:text="${errorMessage}"></p></div>
+                <div th:if="${message}" >
+                    <p th:text="${message}"></p>
                 </div>
                 <p th:if="${loginError}" class="error" style="color: red">Informations incorrectes</p>
                 <button type="submit" name="SeConnecter" class="btn btn-primary">Se Connecter</button>
 
-                <span>Pas encore inscrit ? <a th:href="@{/register}">S'inscrire ici</a></span>
+
+
             </div>
         </form>
 

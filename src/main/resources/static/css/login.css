@@ -1,4 +1,7 @@
 .center-main {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     max-width: 600px; /* Ajustez la largeur du conteneur selon vos besoins */
     margin: 0 auto;
     padding: 120px;
@@ -7,6 +10,12 @@
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
+@media screen and (max-width: 767px) {
+    .center-main {
+        max-width: 300px;
+        padding: 80px;
+    }
+}
 .row {
     display: flex;
     margin: 20px;
@@ -16,15 +25,15 @@
     flex: 0 0 calc(50% - 10px); /* 50% de largeur - 10px d'espacement */
     max-width: calc(50% - 10px); /* 50% de largeur - 10px d'espacement */
     padding: 2px 40px 2px 2px;
-
 }
+
 .form-group {
     margin-bottom: 20px;
 }
 
 .form-control {
     width: 100%;
-    padding: 10px;
+    padding: 15px;
     font-size: 16px;
     border: 1px solid #ccc;
     border-radius: 5px;
@@ -45,9 +54,25 @@
 .btn-primary:hover {
     background-color: #0056b3;
 }
+#delete {
+    background-color: red;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+/* Si vous souhaitez ajouter des styles supplémentaires ou des pseudo-classes */
+#delete:hover {
+    background-color: darkred;
+}
 
 .text-danger {
     color: #dc3545;
+}
+.error-message{
+    color: red;
 }
 
 .form-group span {

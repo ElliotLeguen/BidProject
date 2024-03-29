@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      data-th-replace="~{layouts/layout :: layout-encheres(
+					titrePage=~{:: title},
+					contenuPage=~{:: main},
+					ressourcesSupp=~{:: #resources-css})}">
+
+<head>
+    <!-- Accueil comme titre de page -->
+    <title data-th-text="#{index.title}"></title>
+    <th:block id="resources-css">
+        <link rel="stylesheet" data-th-href="@{/css/gestionUtilisateur.css}"/>
+    </th:block>
+</head>
+<body>
+<main>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Prénom</th>
+            <th>Nom</th>
+            <th>Email</th>
+            <th>Désactiver/Activer</th>
+            <th>Supprimer</th>
+            <!-- Ajoutez d'autres en-têtes de colonne si nécessaire -->
+        </tr>
+        </thead>
+        <tbody>
+        <tr data-th-each="utilisateur : ${utilisateurs}">
+            <td data-th-text="${utilisateur.prenom}"></td>
+            <td data-th-text="${utilisateur.nom}"></td>
+            <td data-th-text="${utilisateur.email}"></td>
+            <td>
+                <a th:href="@{'/utilisateurEtat?idUtilisateur=' + ${utilisateur.noUtilisateur}}">
+                    <span th:text="${utilisateur.etat == 1 ? 'Activer' : 'Désactiver'}"></span>
+                </a>
+            </td>
+            <td>
+                <a th:href="@{'/utilisateurSupprimer?idUtilisateur=' + ${utilisateur.noUtilisateur}}">
+                    <span>Supprimer</span>
+                </a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</main>
+
+</body>
+</html>

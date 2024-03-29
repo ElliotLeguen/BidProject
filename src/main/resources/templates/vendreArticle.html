@@ -1,86 +1,112 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"
+<html xmlns:th="http://www.thymeleaf.org" xmlns:form="http://www.w3.org/1999/xhtml"
       data-th-replace="~{layouts/layout :: layout-encheres(
 					titrePage=~{:: title},
 					contenuPage=~{:: main},
-					ressourcesSupp=~{})}">
-<title>Nouvelle Vente</title>
-<link rel="stylesheet" th:href="@{/css/styles.css}">
-
-<th:block id="ressources-css">
-    <link rel="stylesheet" data-th-href="@{/css/demo-form.css}" />
-    <link rel="stylesheet" data-th-href="@{/css/demo-error.css}" />
-    <link rel="stylesheet" data-th-href="@{/css/styles.css}">
+					ressourcesSupp=~{:: #resources-css})}">
+<head>
+    <title>Nouvelle Vente</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<th:block id="resources-css">
+    <link rel="stylesheet" data-th-href="@{/css/styles.css}"/>
 </th:block>
 <main>
-    <div class="custom-form">
-        <h1>Nouvelle Vente</h1>
-        <table>
-            <tbody>
-        <form action="/soumettre-article" method="post"
-            <label for="nom_article">Nom de l'article:</label><br>
-            <input type="text" id="nom_article" name="nom_article" required><br>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="custom-form">
+                    <h1>Nouvelle Vente</h1>
+                    <table>
+                        <tbody>
+                        <form method="post" role="form" th:action="@{/soumettre}" th:object="${article}">
+                            <input type="hidden" id="noArticle" name="noArticle" th:value="*{noArticle}">
+                            <label for="nomArticle">Nom de l'article:</label><br>
+                            <input type="text" id="nomArticle" name="nomArticle" th:value="*{nomArticle}">
+                            <p th:if="${#fields.hasErrors('nomArticle')}" th:errors="*{nomArticle}" class="error"></p>
+                            <br>
 
-            <label for="description">Description:</label><br>
-            <textarea id="description" name="description" rows="4" cols="50" required></textarea><br>
+                            <label for="description">Description:</label><br>
+                            <textarea id="description" name="description" rows="4" cols="50"
+                                      th:field="*{description}"></textarea>
+                            <span th:if="${#fields.hasErrors('description')}" th:errors="*{description}"
+                                  class="error"></span><br>
 
-        <select>
-            <option th:each="category : ${categorie}" th:value="${category.noCategorie}" th:text="${category.libelle}"></option>
-        </select>
-        <br>
-        <br>
+                            <select id="categorie" name="categorie" th:field="*{categorie.noCategorie}">
+                                <option th:each="categorie : ${categories}" th:value="${categorie.noCategorie}"
+                                        th:text="${categorie.libelle}"></option>
+                            </select>
+                            <span th:if="${#fields.hasErrors('categorie.noCategorie')}"
+                                  th:errors="*{categorie.noCategorie}"
+                                  class="error"></span><br>
+                            <label for="prixInitial">Prix initial:</label><br>
+                            <input type=text id="prixInitial" name="prixInitial" th:field="*{prixInitial}">
+                            <span th:if="${#fields.hasErrors('prixInitial')}" th:errors="*{prixInitial}"
+                                  class="error"></span><br>
 
-            <label for="prix_initial">Prix initial:</label><br>
-            <select id="prix_initial" name="prix_initial">
-                <!-- Options pour les prix initial générées dynamiquement par JavaScript -->
-            </select><br>
+                            <label for="dateDebutEncheres">Date de début des enchères :</label>
+                            <input type="date" id="dateDebutEncheres" name="dateDebutEncheres"
+                                   th:field="*{dateDebutEncheres}">
+                            <span th:if="${#fields.hasErrors('dateDebutEncheres')}" th:errors="*{dateDebutEncheres}"
+                                  class="error"></span><br>
 
-            <label for="date_debut_encheres">Date de début des enchères:</label><br>
-            <input type="date" id="date_debut_encheres" name="date_debut_encheres" required><br>
+                            <label for="dateFinEncheres">Date de fin des enchères :</label>
+                            <input type="date" id="dateFinEncheres" name="dateFinEncheres"
+                                   th:field="*{dateFinEncheres}">
+                            <span th:if="${#fields.hasErrors('dateFinEncheres')}" th:errors="*{dateFinEncheres}"
+                                  class="error"></span><br>
 
-            <label for="date_fin_encheres">Date de fin des enchères:</label><br>
-            <input type="date" id="date_fin_encheres" name="date_fin_encheres" required><br>
+                            <div th:if="${#fields.hasErrors('global')}">
+                                <p th:each="err : ${#fields.errors('global')}" th:text="${err}" style="color: red" />
+                            </div>
 
-            <br>
+                            <h1>Retrait :</h1>
+                            <label for="rue">Rue:</label><br>
+                            <input type="text" id="rue" name="rue" th:field="${userEdit.rue}"><br>
 
-            <h3>Informations de retrait</h3>
-            <label for="rue">Rue:</label><br>
-            <input type="text" id="rue" name="rue" required><br>
+                            <label for="code_postal">Code postal:</label><br>
+                            <input type="text" id="code_postal" name="code_postal"
+                                   th:field="${userEdit.codePostal}"><br>
 
-            <label for="code_postal">Code postal:</label><br>
-            <input type="text" id="code_postal" name="code_postal" required><br>
+                            <label for="ville">Ville:</label><br>
+                            <input type="text" id="ville" name="ville" th:field="${userEdit.ville}"><br>
+                            <div>
+                                <label for="file">Sélectionner le fichier à envoyer</label>
+                                <input type="file" id="file" name="file" th:field="${article.image}">
+                            </div>
 
-            <label for="ville">Ville:</label><br>
-            <input type="text" id="ville" name="ville" required><br><br>
+                            <input type="submit" value="Enregistrer">&nbsp;
+                            <input type="submit" value="Annuler">
+                        </form>
 
-            <input type="submit" value="Soumettre">
-        <div>
-            <!-- Affichage des informations de l'utilisateur -->
-            <p>Nom: <span th:text="${UtilisateurEnSession.nom}"></span></p>
-            <p>Prénom: <span th:text="${UtilisateurEnSession.prenom}"></span></p>
-            <p>Email: <span th:text="${UtilisateurEnSession.email}"></span></p>
-            <!-- Ajoutez d'autres informations de l'utilisateur si nécessaire -->
+                        <script>
+                            var currentDate = new Date();
+                            var currentDateString = currentDate.toISOString().split('T')[0]; // Format YYYY-MM-DD
+                            document.getElementById("dateDebutEncheres").value = currentDateString;
+                            document.getElementById("dateFinEncheres").value = currentDateString;
+
+                            dateDebutEncheres.addEventListener('change', function () {
+                                // Convertir la valeur de date de début en objet Date
+                                var dateDebut = new Date(dateDebutEncheres.value);
+
+                                // Ajouter un jour à la date de début pour obtenir la date de fin
+                                var dateFin = new Date(dateDebut+1);
+                                dateFin.setDate(dateDebut.getDate() + 1);
+
+                                // Formater la date de fin au format YYYY-MM-DD
+                                var dateFinString = dateFin.toISOString().split('T')[0];
+
+                                // Définir la valeur de la date de fin
+                                dateFinEncheres.value = dateFinString;
+                            });
+                        </script>
+                        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </div>
-        </form>
-        <script>
-            // Générer les options pour la liste déroulante du prix initial
-            var selectPrixInitial = document.getElementById("prix_initial");
-
-            for (var prix = 0; prix <= 100000; prix += 5 ) {
-                var option = document.createElement("option");
-                option.text = prix;
-                option.value = prix;
-                selectPrixInitial.appendChild(option);
-
-                var currentDate = new Date();
-                var currentDateString = currentDate.toISOString().split('T')[0]; // Format YYYY-MM-DD
-
-                document.getElementById("date_debut_encheres").value = currentDateString;
-                document.getElementById("date_fin_encheres").value = currentDateString;
-            }
-        </script>
-            </tbody>
-        </table>
     </div>
 </main>
 </html>
+
