@@ -36,18 +36,21 @@ public class EnchereController {
     }
 
     @GetMapping("/")
-    public String afficherAccueil(Model model) {
+    public String afficherAccueil(
+                                    @RequestParam(name = "categorie", required = false, defaultValue = "0") int categorie,
+                                    Model model) {
         articleService.finEnchereArticle();
-        List<ArticleVendu> articleVendus = articleService.getAll();
-        List<ArticleVendu> distinctArticles = articleVendus.stream()
-                .collect(Collectors.toMap(ArticleVendu::getNoArticle,
-                        article -> article,
-                        (existing, replacement) -> existing.getActuelMeilleurPrix() >= replacement.getActuelMeilleurPrix() ? existing : replacement))
-                .values().stream()
-                .toList();
+        List<ArticleVendu> articleVendus;
+        if(categorie == 0){
+            articleVendus = articleService.getAll();
+        }else {
+            String rqt = "SELECT * FROM ARTICLES_VENDUS INNER JOIN UTILISATEURS ON ARTICLES_VENDUS.no_utilisateur = UTILISATEURS.no_utilisateur  INNER JOIN CATEGORIES ON ARTICLES_VENDUS.no_categorie = CATEGORIES.no_categorie WHERE ARTICLES_VENDUS.no_categorie =" + categorie;
+            articleVendus = articleService.getVentes(rqt);
+        }
+
         var categories = categorieService.consulterCategories();
         model.addAttribute("categorie", categories);
-        model.addAttribute("articles", distinctArticles);
+        model.addAttribute("articles", articleVendus);
         return "index";
     }
 
