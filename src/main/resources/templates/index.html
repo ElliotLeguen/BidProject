@@ -38,14 +38,14 @@
                 <div class="row no-gutters">
                     <!-- Colonne pour l'image -->
                     <div class="col-md-4" style="padding: 1em">
-                        <img th:src="@{images/logoENI.png}" class="card-img" alt="Image">
+                        <img th:src="@{'images/' + ${article.image}}" class="card-img" alt="Image">
                     </div>
                     <!-- Colonne pour les informations -->
                     <div class="col-md-8">
                         <div class="card-body">
 
                             <span th:text="${article.nomArticle}"></span>
-                            <p class="card-text">Prix : <span data-th-text="${article.actuelMeilleurPrix != null ? article.actuelMeilleurPrix : article.getPrixInitial()}"></span> Points</p>
+                            <p class="card-text">Prix : <span data-th-text="${article.actuelMeilleurPrix != 0 ? article.actuelMeilleurPrix : article.getPrixInitial()}"></span> Points</p>
                             <p class="card-text">Début de l'enchère: <span data-th-text="${article.dateDebutEncheres}"></span></p>
                             <p class="card-text">Fin de l'enchère: <span data-th-text="${article.dateFinEncheres}"></span></p>
                             <span>Vendeur: </span>
