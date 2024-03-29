@@ -29,18 +29,105 @@
             <td data-th-text="${categorie.getNoCategorie()}"></td>
             <td data-th-text="${categorie.getLibelle()}"></td>
             <td>
-                <a th:href="@{'/categorieCategorie?idCategorie=' + ${categorie.getNoCategorie()}}">
-                    <span>Modifier</span>
-                </a>
+                <!-- Créez un formulaire pour chaque catégorie avec un champ d'entrée pour le libellé -->
+                <form th:action="@{/gestionCategorieEdit}" th:object="${categorie}" method="post">
+                    <input type="hidden" name="noCategorie"th:value="${categorie.getNoCategorie()}">
+                    <input type="text" name="libelle" th:value="${categorie.getLibelle()}" required>
+                    <button type="submit">Modifier</button>
+                </form>
             </td>
             <td>
-                <a th:href="@{'/utilisateurSupprimer?idUtilisateur=' + ${categorie.getNoCategorie()}}">
+                <a th:href="@{'/categorieSupprimer?idCategorie=' + ${categorie.getNoCategorie()}}">
                     <span>Supprimer</span>
                 </a>
             </td>
         </tr>
         </tbody>
+
     </table>
+    <form th:action="@{/gestionCategorieAdd}" th:object="${categorie}" method="post">
+        <input type="text" name="libelle"  required>
+        <button type="submit">Ajouter</button>
+    </form>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            margin: 0;
+            padding: 0;
+        }
+
+        main {
+            margin: 20px;
+        }
+
+        .table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: #fff;
+        }
+
+        .table th, .table td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .table th {
+            background-color: #f2f2f2;
+            font-weight: bold;
+        }
+
+        .table td {
+            vertical-align: middle;
+        }
+
+        .table input[type="text"] {
+            padding: 5px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .table button {
+            padding: 8px 12px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .table button:hover {
+            background-color: #45a049;
+        }
+
+        .table a {
+            text-decoration: none;
+            color: #4CAF50;
+        }
+
+        .table a:hover {
+            text-decoration: underline;
+        }
+
+        .form-container {
+            margin-top: 20px;
+        }
+
+        .form-container input[type="text"],
+        .form-container button {
+            margin-right: 10px;
+        }
+
+        .form-container button {
+            background-color: #008CBA;
+        }
+
+        .form-container button:hover {
+            background-color: #005f6b;
+        }
+
+    </style>
 </main>
 
 </body>

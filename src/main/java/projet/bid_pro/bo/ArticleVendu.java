@@ -23,9 +23,12 @@ public class ArticleVendu {
     @NotNull
     private Integer prixInitial;
     private Integer prixVente;
+
+    private Integer actuelMeilleurPrix;
     private Utilisateur utilisateur;
 
     private Categorie categorie;
+
 
     public List<Enchere> getEnchereList() {
         return enchereList;
@@ -38,10 +41,12 @@ public class ArticleVendu {
     private List<Enchere> enchereList;
     private String image;
 
+    private int idUtilisateurGagnant;
+
     // Constructeur
     public ArticleVendu(int noArticle, String nomArticle, String description, Date dateDebutEncheres,
                         Date dateFinEncheres, Integer prixInitial, Integer prixVente,
-                        Utilisateur utilisateur, Categorie categorie,String image) {
+                        Utilisateur utilisateur, Categorie categorie,String image,Retrait retrait) {
         this.noArticle = noArticle;
         this.nomArticle = nomArticle;
         this.description = description;
@@ -143,6 +148,23 @@ public class ArticleVendu {
         this.image = image;
     }
 
+    public Integer getActuelMeilleurPrix() {
+        return actuelMeilleurPrix;
+    }
+
+    public void setActuelMeilleurPrix(Integer actuelMeilleurPrix) {
+        this.actuelMeilleurPrix = actuelMeilleurPrix;
+    }
+
+    public int getIdUtilisateurGagnant() {
+        return idUtilisateurGagnant;
+    }
+
+    public void setIdUtilisateurGagnant(int idUtilisateurGagnant) {
+        this.idUtilisateurGagnant = idUtilisateurGagnant;
+    }
+
+
     @Override
     public String toString() {
         return "ArticleVendu{" +
@@ -156,6 +178,8 @@ public class ArticleVendu {
                 ", Utilisateur=" + utilisateur +
                 ", Categorie=" + categorie +
                 ", image=" + image +
+                ", actuelMeilleurPrix=" + actuelMeilleurPrix +
+                ", idUtilisateurGagnant=" + idUtilisateurGagnant +
                 '}';
     }
 }

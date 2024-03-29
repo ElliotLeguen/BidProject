@@ -12,5 +12,7 @@ public interface CategorieService {
     List<Categorie> consulterCategories();
 
     Categorie edit(Categorie categorie);
+    Categorie add(Categorie categorie);
     void delete(int id);
+
 }

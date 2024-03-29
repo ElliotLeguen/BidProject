@@ -162,7 +162,7 @@
                                th:href="@{'/detail?id=' + ${article.noArticle}}">
                                 <span th:text="${article.nomArticle}"></span>
                             </a>
-                            <p class="card-text">Prix : <span data-th-text="${article.prixInitial}"></span> Points</p>
+                            <p class="card-text">Prix : <span data-th-text="${article.actuelMeilleurPrix != null ? article.actuelMeilleurPrix : article.getPrixInitial()}"></span> Points</p>
                             <p class="card-text">Début de l'enchère: <span data-th-text="${article.dateDebutEncheres}"></span></p>
                             <p class="card-text">Fin de l'enchère: <span data-th-text="${article.dateFinEncheres}"></span></p>
                             <span>Vendeur: </span>

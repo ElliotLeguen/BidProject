@@ -49,8 +49,18 @@ public class ArticleServiceImpl implements ArticleService{
     }
 
     @Override
-    public void SupprArticle(int idArticle) {
+    public void SupprArticle(ArticleVendu idArticle) {
         articleDAO.supprArticle(idArticle);
+    }
+
+    @Override
+    public List<ArticleVendu> getAll() {
+        return articleDAO.getAllArticles();
+    }
+
+    @Override
+    public void finEnchereArticle() {
+        articleDAO.finEnchereArticle();
     }
 
 }

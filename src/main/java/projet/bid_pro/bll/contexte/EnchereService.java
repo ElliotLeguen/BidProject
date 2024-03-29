@@ -6,6 +6,8 @@ import projet.bid_pro.bo.Categorie;
 import projet.bid_pro.bo.Enchere;
 
 import java.util.List;
+import java.util.Map;
+
 public interface EnchereService {
     List<Enchere> consulterEncheres();
     Enchere consulterEnchereParId(long id, long idUtil);
@@ -14,4 +16,6 @@ public interface EnchereService {
     void creerArticle(ArticleVendu articleVendu);
     void updateEnchere(Enchere enchere);
     Long consulterEnchereId(long id);
+    List<Enchere> consulterAncienEnchere(long id, long idUtil);
+    Boolean readTopEnchere(int id, int idUser);
 }

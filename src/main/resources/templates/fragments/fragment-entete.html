@@ -34,6 +34,8 @@
         <!--               </ul>-->
 
         <ul>
+
+
             <!-- Affiche les liens uniquement si l'utilisateur est connecté -->
             <li sec:authorize="isAuthenticated()">
                 <a href="/encheres">Enchères</a>
@@ -47,6 +49,10 @@
             <li sec:authorize="hasRole('ROLE_ADMIN')">
                 <a href="/gestionUtilisateur">Gestion Utilisateur</a>
             </li>
+            <li sec:authorize="hasRole('ROLE_ADMIN')">
+                <a href="/gestionCategorie">Gestion Categorie</a>
+            </li>
+
             <li sec:authorize="!isAuthenticated()"><a href="/login" >Se connecter</a></li>
             <li sec:authorize="!isAuthenticated()"><a href="/register" >S'inscrire</a></li>
             <li sec:authorize="isAuthenticated()"><a href="/logout" >Déconnexion</a></li>

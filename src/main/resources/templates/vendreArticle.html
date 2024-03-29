@@ -90,7 +90,7 @@
                                 var dateDebut = new Date(dateDebutEncheres.value);
 
                                 // Ajouter un jour à la date de début pour obtenir la date de fin
-                                var dateFin = new Date(dateDebut);
+                                var dateFin = new Date(dateDebut+1);
                                 dateFin.setDate(dateDebut.getDate() + 1);
 
                                 // Formater la date de fin au format YYYY-MM-DD
