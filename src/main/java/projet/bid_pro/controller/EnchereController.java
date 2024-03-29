@@ -85,7 +85,8 @@ public class EnchereController {
             enchereNouvelle.setUtilisateur(utilisateurService.charger(utilisateur.getNoUtilisateur()));
             enchereNouvelle.setArticle(articleService.consulterArticleParId(articleVendu.getNoArticle()));
             enchereService.creerEnchere(enchereNouvelle);
-            gestionCredit(utilisateur, enchere, articleVendu);
+            utilisateur.setCredit(utilisateur.getCredit()-enchere.getMontantEnchere());
+            utilisateurService.enleverCredit(utilisateur);
         } else {
             if (enchereService.readTopEnchere(articleVendu.getNoArticle(), utilisateur.getNoUtilisateur())) {
                 model.addAttribute("message", "Vous ne pouvez pas rencherir alors que vous êtes deja premier");
@@ -114,8 +115,6 @@ public class EnchereController {
     }
 
     private void gestionCredit(Utilisateur utilisateur, Enchere enchere, ArticleVendu articleVendu){
-        utilisateur.setCredit(utilisateur.getCredit()-enchere.getMontantEnchere());
-        utilisateurService.enleverCredit(utilisateur);
         Enchere enchereFinal = enchereService.consulterAncienEnchere(utilisateur.getNoUtilisateur(), articleVendu.getNoArticle()).get(0);
         enchereFinal.getUtilisateur().setCredit(enchereFinal.getMontantEnchere()+utilisateurService.charger(enchereFinal.getUtilisateur().getNoUtilisateur()).getCredit());
         utilisateurService.ajouterCredit(enchereFinal.getUtilisateur());
