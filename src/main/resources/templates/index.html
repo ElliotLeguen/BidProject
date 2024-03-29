@@ -33,7 +33,7 @@
         </form>
     <div class="row card-container"  style="margin-bottom: 40px; width: 1580px">
         <!-- Boucle sur chaque article pour créer une carte -->
-        <div class="col-4" data-th-each="article : ${articles}"   th:if="${param.nomArticle == null or article.noArticle.contains(param.nomArticle)}" style="margin-bottom: 40px; width: 100px" >
+        <div class="col-4" data-th-each="article : ${articles}"  th:if="${param.nomArticle == null or article.nomArticle.contains(param.nomArticle)}" style="margin-bottom: 40px; width: 100px" >
             <div class="card">
                 <div class="row no-gutters">
                     <!-- Colonne pour l'image -->
@@ -43,12 +43,13 @@
                     <!-- Colonne pour les informations -->
                     <div class="col-md-8">
                         <div class="card-body">
-                            <p class="card-text"><span data-th-text="${article.nomArticle}"></span></p>
-                            <p class="card-text">Prix : <span data-th-text="${article.actuelMeilleurPrix != null && article.actuelMeilleurPrix != 0 ? article.actuelMeilleurPrix : article.prixInitial}"></span> Points</p>
+
+                            <span th:text="${article.nomArticle}"></span>
+                            <p class="card-text">Prix : <span data-th-text="${article.actuelMeilleurPrix != null ? article.actuelMeilleurPrix : article.getPrixInitial()}"></span> Points</p>
                             <p class="card-text">Début de l'enchère: <span data-th-text="${article.dateDebutEncheres}"></span></p>
                             <p class="card-text">Fin de l'enchère: <span data-th-text="${article.dateFinEncheres}"></span></p>
-                            <p class="card-text">Vendeur: <span data-th-text="${article.utilisateur.prenom}"></span></p>
-
+                            <span>Vendeur: </span>
+                             <span data-th-text="${article.utilisateur.prenom}"></span>
 
                         </div>
                     </div>
